@@ -60,7 +60,7 @@ class Battle::Scene::PokemonDataBox < Sprite
     if onPlayerSide
       @spriteX = Graphics.width - 248
       @spriteY = Graphics.height - 192
-      @spriteBaseX = 10
+      @spriteBaseX = 16
       @show_hp_numbers = true
     else
       @spriteX = -16
@@ -122,7 +122,7 @@ class Battle::Scene::PokemonDataBox < Sprite
 
   def y=(value)
     super
-    @hpBar.y     = value + 22
+    @hpBar.y     = value + 20
     @expBar.y    = value + 66
     @hpNumbers.y = value + 14
   end
@@ -224,7 +224,7 @@ class Battle::Scene::PokemonDataBox < Sprite
     nameWidth = self.bitmap.text_size(@battler.name).width
     nameOffset = 0
     nameOffset = nameWidth - 116 if nameWidth > 116
-    pbDrawTextPositions(self.bitmap, [[@battler.name, @spriteBaseX + 94 - nameOffset, 40, :left,
+    pbDrawTextPositions(self.bitmap, [[@battler.name, @spriteBaseX + 96 - nameOffset, 40, :left,
                                        NAME_BASE_COLOR, NAME_SHADOW_COLOR]]
     )
   end
@@ -233,7 +233,7 @@ class Battle::Scene::PokemonDataBox < Sprite
     # "Lv" graphic
     pbDrawImagePositions(self.bitmap, [[_INTL("Graphics/UI/Battle/overlay_lv"), @spriteBaseX + 140, 16]])
     # Level number
-    pbDrawNumber(@battler.level, self.bitmap, @spriteBaseX + 48, 58)
+    pbDrawNumber(@battler.level, self.bitmap, @spriteBaseX + 52, 58)
   end
 
   def draw_gender
@@ -242,7 +242,7 @@ class Battle::Scene::PokemonDataBox < Sprite
     gender_text  = (gender == 0) ? _INTL("♂") : _INTL("♀")
     base_color   = (gender == 0) ? MALE_BASE_COLOR : FEMALE_BASE_COLOR
     shadow_color = (gender == 0) ? MALE_SHADOW_COLOR : FEMALE_SHADOW_COLOR
-    pbDrawTextPositions(self.bitmap, [[gender_text, @spriteBaseX + 202, 40, :left, base_color, shadow_color]])
+    pbDrawTextPositions(self.bitmap, [[gender_text, @spriteBaseX + 208, 40, :left, base_color, shadow_color]])
   end
 
   def draw_status
