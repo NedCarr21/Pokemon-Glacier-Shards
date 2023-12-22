@@ -1,0 +1,40 @@
+#-------------------------------
+#-------------------------------
+#---------GLACIER-SHARD---------
+#-------------------------------
+#-------------------------------
+[ICYGLARE]
+Name = Icy Glare
+Description = Lowers the foe's Speed stat.
+#-------------------------------
+[FIRESTARTER]
+Name = Fire Starter
+Description = Burns the target if attacks on the first turn.
+#-------------------------------
+[ENRAGED]
+Name = Enraged
+Description = Its Attack stat is gradually boosted.
+#-------------------------------
+[ROOMOFDOOM]
+Name = Room of Doom
+Description = Switches the effects of Trick Room.
+#-------------------------------
+[SPIRITTRAIN]
+Name = Spirit Train
+Description = Boosts itself if there are other ghost types nearby.
+#-------------------------------
+#-------------------------------
+#-------UNKNOWN-STARTERS--------
+#-------------------------------
+#-------------------------------
+[THORNYWILDS]
+Name = Thorny Wilds
+Description = Boosts it's highest stat if hit by a Grass type move.
+#-------------------------------
+[FIERYMAGIC]
+Name = Fiery Magic
+Description = Boosts it's highest stat if hit by a Fire type move.
+#-------------------------------
+[ROUGHWAVES]
+Name = Rough Waves
+Description = Boosts it's highest stat if hit by a Water type move.

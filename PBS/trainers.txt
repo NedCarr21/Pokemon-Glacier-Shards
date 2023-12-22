@@ -1,0 +1,451 @@
+# See the documentation on the wiki to learn how to edit this file.
+#-------------------------------
+[HIKER,Ford]
+LoseText = "A very strong trainer indeed."
+Pokemon = GROWLITHE,4
+#-------------------------------
+[GAMBLER,Howie]
+LoseText = "I guess, money ain't my thing."
+Pokemon = MEOWTH,7
+Pokemon = MEOWTH,8
+#-------------------------------
+[PSYCHIC_F,Georgia]
+LoseText = "My psychic powers weren't enough."
+Pokemon = RALTS,7
+Pokemon = ABRA,7
+#-------------------------------
+[WORKER,Patrick]
+LoseText = "Time to get back to work."
+Pokemon = GEODUDE,7
+Pokemon = STARLY,8
+#-------------------------------
+[BLACKBELT,Dwayne]
+LoseText = "Time to get back to work."
+Pokemon = GEODUDE,7
+Pokemon = STARLY,8
+#-------------------------------
+[HIKER,Barry]
+LoseText = "A very strong trainer indeed."
+Pokemon = GEODUDE,8
+Pokemon = GROWLITHE,9
+#-------------------------------
+[SKIER_F2,Kelsey]
+LoseText = "I love skiing down these slopes."
+Pokemon = GASTLY,9
+Pokemon = DELIBIRD,10
+#-------------------------------
+[YOUNGSTER2,Joey]
+LoseText = "Noww...w...w it's...s...s even colderrr...r...r."
+Pokemon = VULPIX,11
+    Form = 1
+Pokemon = STARLY,12
+#-------------------------------
+[YOUNGSTER,Jason]
+LoseText = "Man, I can't believe I lost with my burning attitude."
+Pokemon = PICHU,11
+Pokemon = STARLY,12
+#-------------------------------
+[FISHERMAN,Paul]
+LoseText = "Fishing here keeps me going strong!"
+Pokemon = MAGIKARP,12
+Pokemon = CHINCHOU,12
+#-------------------------------
+[RUINMANIAC,Jonah]
+LoseText = "A very strong trainer indeed."
+Pokemon = PICHU,12
+Pokemon = BULBASAUR,13
+#-------------------------------
+[BLACKBELT,Dwayne]
+LoseText = "Running around this rock is what gives me strength!"
+Pokemon = MACHOP,13
+#-------------------------------
+[CYCLIST_F,Betty]
+LoseText = "Cycling here is very limited without my snow tires."
+Pokemon = SNOVER,14
+#-------------------------------
+[JOGGER,Henry]
+LoseText = "Ruuning in this cave gives me joy!"
+Pokemon = SQUIRTLE,13
+Pokemon = VULPIX,14
+Pokemon = MAREEP,14
+#-------------------------------
+[MEDIUM,Hilga]
+LoseText = "My ghosts will always see youuu..."
+Pokemon = GASTLY,14
+Pokemon = SANDYGAST,15
+#-------------------------------
+[BATTLEGIRL,Marissa]
+LoseText = "Huuu, haaa!"
+Pokemon = SCRAGGY,15
+Pokemon = MACHOP,16
+#-------------------------------
+[SCIENTIST_M,Steve]
+LoseText = "I lost all my electricity..."
+Pokemon = PIKACHU,16
+Pokemon = ARON,17
+Pokemon = HELIOPTILE,17
+#-------------------------------
+[DOCTOR,Greg]
+LoseText = "What an interesting fight."
+Pokemon = AUDINO,18
+	Moves = ZENHEADBUTT,POUND,DISARMINGVOICE,GROWL
+Pokemon = GYARADOS,20
+	Moves = ICEFANG,BITE,SCARYFACE,TACKLE
+#-------------------------------
+[LASS,Abigail]
+LoseText = "I love this atmosphere!"
+Pokemon = CUTIEFLY,18
+Pokemon = BIDOOF,19
+#-------------------------------
+[YOUNGSTER,Kevin]
+LoseText = "I can't believe I lost."
+Pokemon = BULBASAUR,18
+Pokemon = HONEDGE,19
+#-------------------------------
+[HIKER,Mason]
+LoseText = "Hike, hike, hiking around!"
+Pokemon = GOLETT,19
+Pokemon = ROLYCOLY,19
+#-------------------------------
+[RUINMANIAC,John]
+LoseText = "Hopefully I find something rare."
+Pokemon = GRAVELER,20
+Pokemon = ROLYCOLY,19
+Pokemon = SABLEYE,19
+#-------------------------------
+[POKEMANIAC,Don]
+LoseText = "Pokemon are still the best."
+Pokemon = SLOWPOKE,20
+Pokemon = PIKACHU,20
+#-------------------------------
+[YOUNGSTER,David]
+LoseText = "Always comfy!"
+Pokemon = SNOVER,20
+Pokemon = IVYSAUR,21
+#-------------------------------
+[GENTLEMAN2,Frank]
+LoseText = "You've earned my trust."
+Pokemon = BIBAREL,21
+Pokemon = SANDILE,21
+Pokemon = FLAAFFY,21
+#-------------------------------
+[BATTLEGIRL,Julia]
+LoseText = "Run. Run. Run."
+Pokemon = SCRAGGY,20
+Pokemon = HERACROSS,21
+#-------------------------------
+[POLICEMAN,Grant]
+LoseText = "You don't seem sketchy, but who knows?"
+Pokemon = GROWLITHE,21
+Pokemon = DURANT,22
+#-------------------------------
+[DRAGONTAMER,Brisk]
+LoseText = "Dragons still rule the world."
+Pokemon = GIBLE,22
+Pokemon = DRATINI,22
+#-------------------------------
+[FISHERMAN,Benjamin]
+LoseText = "Fish, fish, fish."
+Pokemon = GYARADOS,22
+Pokemon = FEEBAS,23
+Pokemon = CHINCHOU,24
+#-------------------------------
+[BUGCATCHER,Phillip]
+LoseText = "Aww, my bugs."
+Pokemon = DUSTOX,24
+Pokemon = DWEBBLE,24
+#-------------------------------
+[BUGCATCHER,Oliver]
+LoseText = "My net only sometimes catches the good bugs though."
+Pokemon = BEAUTIFLY,24
+Pokemon = DWEBBLE,24
+#-------------------------------
+[LASS,Emma]
+LoseText = "Even after a battle, the peacefulness doesn't stop."
+Pokemon = SUNFLORA,25
+Pokemon = SHROOMISH,25
+#-------------------------------
+[SCHOOLKID_F,Mona]
+LoseText = "Maybe next time I explore, I won't lose in a battle."
+Pokemon = KADABRA,25
+Pokemon = WARTORTLE,26
+#-------------------------------
+[LASS2,Olivia]
+LoseText = "My net only sometimes catches the good bugs though."
+Pokemon = SNEASEL,26
+Pokemon = POLIWHIRL,27
+#-------------------------------
+[TUBER_M,Adam]
+LoseText = "The sand on my feet made me lose."
+Pokemon = LOMBRE,27
+Pokemon = SANDYGAST,27
+#-------------------------------
+#---[096] Pinoidae City---------
+#-------------------------------
+[GANGSTER,Tony]
+LoseText = "The boss won't be happy..."
+Pokemon = RATTATA,29
+    Form = 1
+Pokemon = SANDYGAST,30
+#-------------------------------
+#---[105] Gangster HQ-----------
+#-------------------------------
+[GANGSTER,Sandy]
+LoseText = "The boss for sure won't be happy."
+Pokemon = HAUNTER,29
+Pokemon = RATTATA,30
+    Form = 1
+#-------------------------------
+[GANGSTER,Noah]
+LoseText = "Uh oh, I'm so screwed if the boss finds out"
+Pokemon = CORSOLA,31
+    Form = 1
+#-------------------------------
+[GANGSTER,Cameron]
+LoseText = "Oh well, this is only my part time job anyways."
+Pokemon = LARVITAR,30
+Pokemon = SANDYGAST,30
+#-------------------------------
+[GANGSTER,Pipsqueak]
+LoseText = "We're in trouble now."
+Pokemon = RATTATA,30
+    Form = 1
+Pokemon = HAUNTER,30
+Pokemon = CORSOLA,31
+    Form = 1
+#-------------------------------
+[GANGSTER,George]
+LoseText = "I think we screwed up..."
+Pokemon = SANDYGAST,30
+Pokemon = RATTATA,30
+    Form = 1
+Pokemon = HAUNTER,31
+#-------------------------------
+[GANGSTER,Boss]
+LoseText = "Oh no, you're a lot stronger than I thought."
+Pokemon = PALOSSAND,31
+Pokemon = CURSOLA,32
+Pokemon = GENGAR,32
+Pokemon = RATICATE,34
+    Form = 1
+#-------------------------------
+#---[115] Pinoidae Pokemon Center
+#-------------------------------
+[FIREBREATHER,Owen]
+LoseText = "I'll be waiting for our rematch!"
+Pokemon = LARVESTA,28
+Pokemon = SALANDIT,29
+#-------------------------------
+[POKEMONBREEDER_M,Justin]
+LoseText = "Rematch again soon!"
+Pokemon = AUDINO,28
+Pokemon = SLOWPOKE,29
+#-------------------------------
+[COOLTRAINER_M2,Gerard]
+LoseText = "I won't lose next time!"
+Pokemon = MISDREAVUS,28
+Pokemon = MURKROW,28
+#-------------------------------
+[JUGGLER,Jeremy]
+LoseText = "Come back whenever for a rematch!"
+Pokemon = DITTO,30
+Pokemon = DUNSPARCE,30
+#-------------------------------
+#---[079] Wooded Hill-----------
+#-------------------------------
+[FOSSIL_MANIAC,Alfred]
+LoseText = "I guess you win then!"
+Pokemon = GRAVELER,31
+Pokemon = FLAREON,31
+Pokemon = POLIWRATH,32
+	Item = LEFTOVERS
+	Moves = SCALD,CIRCLETHROW,PROTECT,ICEBEAM
+    AbilityIndex = 0
+    IV = 31,31,31,31,31,31
+	  EV = 252,0,252,0,4,0
+#-------------------------------
+[YOUNGSTER2,Harry]
+LoseText = "That was fun!"
+Pokemon = GOLBAT,33
+Pokemon = SCRAGGY,33
+#-------------------------------
+[SAILOR,Sherman]
+LoseText = "I think I'm better suited at sea."
+Pokemon = WINGULL,32
+Pokemon = POLIWHIRL,33
+Pokemon = VAPOREON,33
+#-------------------------------
+[COOLTRAINER_M2,Bart]
+LoseText = "I'm not that cool, I guess."
+Pokemon = LARVITAR,33
+Pokemon = ARCANINE,34
+#-------------------------------
+#---[085] Wooded Hill-----------
+#-------------------------------
+[CYCLIST_M,Billy]
+LoseText = "I'll find a way off."
+Pokemon = ABSOL,34
+Pokemon = HELIOPTILE,35
+#-------------------------------
+[LADY,Lily]
+LoseText = "Now it's even colder."
+Pokemon = CUTIEFLY,34
+Pokemon = SUNFLORA,34
+Pokemon = AUDINO,34
+#-------------------------------
+#---[080] The Deep Dark---------
+#-------------------------------
+[POKEFAN_F,Hayley]
+LoseText = "I still love them."
+Pokemon = PIKACHU,35
+Pokemon = SLOWBRO,35
+#-------------------------------
+[BUGCATCHER,Samuel]
+LoseText = "I guess some pokemon are better than bugs.."
+Pokemon = SCYTHER,34
+Pokemon = DURANT,34
+Pokemon = DEWPIDER,34
+#-------------------------------
+[BIRDKEEPER_F,Lesley]
+LoseText = "Hmm, maybe my team doesn't work against trainers."
+Pokemon = STARAVIA,34
+Pokemon = TOGETIC,34
+Pokemon = GLIGAR,34
+#-------------------------------
+[SCHOOLKID_F,Bertha]
+LoseText = "Hmm, maybe my team doesn't work against trainers."
+Pokemon = KADABRA,34
+Pokemon = SABLEYE,35
+#-------------------------------
+[SCHOOLKID_M,Brendan]
+LoseText = "Hmm, maybe my team doesn't work against trainers."
+Pokemon = KADABRA,34
+Pokemon = MAWILE,35
+#-------------------------------
+[FISHERMAN,Fishdog]
+LoseText = "Fish, fish, fish."
+Pokemon = MAGIKARP,5
+Pokemon = MAGIKARP,10
+Pokemon = MAGIKARP,15
+Pokemon = MAGIKARP,20
+Pokemon = MAGIKARP,25
+Pokemon = MAGIKARP,30
+#-------------------------------
+[SAILOR,Wyatt]
+LoseText = "Maybe I should be going back to the sea soon."
+Pokemon = PELIPPER,36
+Pokemon = WAILMER,36
+#-------------------------------
+[BLACKBELT,Johnson]
+LoseText = "I must train even more!"
+Pokemon = SCRAGGY,37
+Pokemon = MACHOKE,37
+#-------------------------------
+[BIKER,Greg]
+LoseText = "Maybe I should go somewhere with more bikes, a cycling road perhaps?"
+Pokemon = CHARCADET,37
+Pokemon = CUTIEFLY,38
+#-------------------------------
+[COOLTRAINER_F,Nora]
+LoseText = "I must train even more!"
+Pokemon = GALLADE,38
+Pokemon = GLACEON,38
+#-------------------------------
+[COOLTRAINER_M,Bart]
+LoseText = "I must train even more!"
+Pokemon = GARDEVOIR,38
+Pokemon = LEAFEON,38
+#-------------------------------
+#---[111] Apex Cavern BF2-------
+#-------------------------------
+[HIKER,Angus]
+LoseText = "I guess my sense of direction still doesn't help me win."
+Pokemon = MINIOR,30
+Pokemon = GRAVELER,30
+  Form = 1
+#-------------------------------
+[HIKER,EMANUEL]
+LoseText = "It's still fun even when I lose."
+Pokemon = STEELIX,30
+Pokemon = SUDOWOODO,31
+#-------------------------------
+[COOLTRAINER_M,Bart]
+LoseText = "I must train even more!"
+Pokemon = GARDEVOIR,36
+Pokemon = LEAFEON,36
+#-------------------------------
+[COOLTRAINER_M,Bart]
+LoseText = "I must train even more!"
+Pokemon = GARDEVOIR,36
+Pokemon = LEAFEON,36
+
+#-------------------------------
+[RUSTY_ADMIN_M,Tyson,1]
+Pokemon = CAMERUPT,40
+Pokemon = STEELIX,40
+Pokemon = CROBAT,41
+Pokemon = EMBOAR,43
+#-------------------------------
+[RUSTY_ADMIN_F,Tana,1]
+Pokemon = CACTURNE,40
+Pokemon = HOUNDOOM,40
+Pokemon = MINIOR,41
+Pokemon = BLAZIKEN,43
+#-------------------------------End of Brisk Caverns, Rock Smash
+[PKMN_THEO,Theo,1]
+LoseText = "That was a good battle, next time it won't be so easy."
+Pokemon = SNOVER,10
+Pokemon = ONIX,10
+Pokemon = CHARMANDER,12
+    Gender = male
+    Item = CHARCOAL
+    Ace = yes
+#-------------------------------Blizmoor Town, Avalance/Cave-In
+[PKMN_THEO,Theo,2]
+LoseText = "That was a good battle, next time it won't be so easy."
+Pokemon = SNOVER,20
+Pokemon = ONIX,20
+Pokemon = SLOWPOKE,21
+    Form = 1
+Pokemon = CHARMELEON,22
+    Gender = male
+    Item = CHARCOAL
+    Ace = yes
+#-------------------------------Pinoidae City, after Gangster quest
+[PKMN_THEO,Theo,3]
+LoseText = "That was a good battle, next time it won't be so easy."
+Pokemon = SNOVER,32
+Pokemon = ONIX,33
+Pokemon = SLOWPOKE,33
+    Form = 1
+Pokemon = LOMBRE,33
+Pokemon = CHARMELEON,35
+    Gender = male
+    Item = CHARCOAL
+    Ace = yes
+#-------------------------------The Deep Dark
+[PKMN_THEO,Theo,4]
+LoseText = "That was a good battle, next time it won't be so easy."
+Pokemon = SNOVER,36
+Pokemon = STEELIX,36
+Pokemon = SLOWBRO,37
+    Form = 1
+Pokemon = LOMBRE,37
+Pokemon = CHARIZARD,39
+    Gender = male
+    Item = CHARCOAL
+    Ace = yes
+#-------------------------------
+[PKMN_THEO,Theo,5]
+LoseText = "That was a good battle, next time it won't be so easy."
+Pokemon = ABOMASNOW,44
+Pokemon = STEELIX,44
+Pokemon = SLOWBRO,45
+    Form = 1
+Pokemon = LUDICOLO,45
+Pokemon = DURALUDON,45
+Pokemon = CHARIZARD,47
+    Gender = male
+    Item = CHARCOAL
+    Ace = yes
+#-------------------------------

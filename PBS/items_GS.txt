@@ -1,0 +1,309 @@
+#-------------------------------
+#----------Swine-Items----------
+#-------------------------------
+[QUESTLOG]
+Name = Quest Log
+NamePlural = Quest Logs
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A log for documenting all current and completed quests.
+#-------------------------------
+[GOLDENBALL]
+Name = Golden Poké Ball
+NamePlural = Golden Poké Balls
+Pocket = 3
+Price = 1800
+BattleUse = OnFoe
+Flags = PokeBall
+Description = A device for catching wild Pokémon. It is made almost purely of gold and only used for aesthetics. It has a surprisingly low catch rate.
+#-------------------------------
+[BASICBAIT]
+Name = Basic Bait
+NamePlural = Basic Bait
+Pocket = 6
+Price = 100
+Flags = Fling_30
+Description = A basic style bait, used to lure in water Pokémon when used in a rippling water spot.
+#-------------------------------
+[SWEETBAIT]
+Name = Sweet Bait
+NamePlural = Sweet Bait
+Pocket = 6
+Price = 450
+Flags = Fling_50
+Description = A sweet flavoured bait, used to lure in rare water Pokémon when used in a rippling water spot.
+#-------------------------------
+[SPECIALTYBAIT]
+Name = Specialty Bait
+NamePlural = Specialty Bait
+Pocket = 6
+Price = 1200
+Flags = Fling_70
+Description = A special kind of bait, used to lure in rare sought-after Pokémon when used in a rippling water spot.
+#-------------------------------
+[BRONZETIEREDLEAF]
+Name = Bronze Tiered Leaf
+NamePlural = Bronze Tiered Leaves
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A specialized leaf that symbolizes the first tier of the Swine Exploration Guild.
+#-------------------------------
+[SILVERTIEREDLEAF]
+Name = Silver Tiered Leaf
+NamePlural = Silver Tiered Leaves
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A specialized leaf that symbolizes the second tier of the Swine Exploration Guild.
+#-------------------------------
+[GOLDTIEREDLEAF]
+Name = Gold Tiered Leaf
+NamePlural = Gold Tiered Leaves
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A specialized leaf that symbolizes the third tier of the Swine Exploration Guild.
+#-------------------------------
+[PLATINUMTIEREDLEAF]
+Name = Gold Tiered Leaf
+NamePlural = Gold Tiered Leaves
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A specialized leaf that symbolizes the final tier of the Swine Exploration Guild.
+#-------------------------------
+[OMEGABALL]
+Name = Omega Poké Ball
+NamePlural = Omega Poké Balls
+Pocket = 3
+Price = 1200
+BattleUse = OnFoe
+Flags = PokeBall
+Description = An omega-performance Ball that provides a higher Pokémon catch rate than an Ultra Ball.
+#-------------------------------
+[SNOWBALLBALL]
+Name = Snowball Ball
+NamePlural = Snowball Balls
+Pocket = 3
+Price = 350
+BattleUse = OnFoe
+Flags = PokeBall
+Description = A special type of Ball that is especially effective towards ice types.
+#-------------------------------
+[MONOBALL]
+Name = Mono Ball
+NamePlural = Mono Balls
+Pocket = 3
+Price = 850
+BattleUse = OnFoe
+Flags = PokeBall
+Description = A special type of Ball that is especially effective against Pokémon with only one type.
+#-------------------------------
+[DUELBALL]
+Name = Duel Ball
+NamePlural = Duel Balls
+Pocket = 3
+Price = 850
+BattleUse = OnFoe
+Flags = PokeBall
+Description = A special type of Ball that is especially effective against Pokémon with two types.
+#-------------------------------
+[UNOWNBALL]
+Name = Unown Ball
+NamePlural = Unown Balls
+Pocket = 3
+Price = 280
+BattleUse = OnFoe
+Flags = PokeBall
+Description = A bizarre Poké Ball that excels at catching Unown.
+#-------------------------------
+[LUCKBALL]
+Name = Luck Ball
+NamePlural = Luck Balls
+Pocket = 3
+Price = 1000
+BattleUse = OnFoe
+Flags = PokeBall
+Description = A bizarre Poké Ball with a Pokémon catch rate left entirely to chance.
+#-------------------------------
+[LINKSTONE]
+Name = Link Stone
+NamePlural = Link Stones
+Pocket = 1
+Price = 3000
+FieldUse = OnPokemon
+Flags = EvolutionStone,Fling_30
+Description = A peculiar stone that makes certain species of Pokémon evolve. It works with pokemon that would normally need to be traded.
+#-------------------------------
+[EXPALL]
+Name = EXP All
+NamePlural = EXP Alls
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = Currently ON. Use to toggle. This item allows all Pokémon in the party to gain experience from battles.
+#-------------------------------
+[EXPALLOFF]
+Name = EXP All
+NamePlural = EXP Alls
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = Currently OFF. Use to toggle. This item allows all Pokémon in the party to gain experience from battles.
+#-------------------------------
+[SECRETSPRAY]
+Name = Secret Spray
+NamePlural = Secret Spray
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A spray bottle filled with many scents and aromas, will cause most pokemon to make a hasty retreat.
+#-------------------------------
+[MUD]
+Name = Pile of Mud
+NamePlural = Piles of Mud
+Pocket = 1
+Price = 10
+Flags = Fling_20
+Description = A normal pile of mud, there is nothing special about this.
+#-------------------------------
+[ORE]
+Name = Ore
+NamePlural = Ore
+Pocket = 6
+Price = 10
+Flags = Fling_20
+Description = Some generic ore, can be used in many crafting recipes.
+#-------------------------------
+[MININGKIT]
+Name = Mining Kit
+NamePlural = Mining Kits
+Pocket = 1
+Price = 500
+Flags = Fling_40
+Description = A specialized mining kit, used to dig in rocky areas for minerals and fossils.
+#-------------------------------
+#-------FOODS-AND-BERRIES-------
+#-------------------------------
+[MOLTENSTAGHORN]
+Name = Molten Staghorn
+NamePlural = Molten Staghorn
+Pocket = 5
+Price = 0
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Berry,Fling_60
+Description = It may be used or held by a Pokémon. A rare berry used in cooking to enhance a Pokémon's attack stat.
+#-------------------------------
+[SNOWMULBERRY]
+Name = Snow Mulberry
+NamePlural = Snow Mulberries
+Pocket = 5
+Price = 0
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Berry,Fling_60
+Description = It may be used or held by a Pokémon. A rare berry used in cooking to enhance a Pokémon's defense stat.
+#-------------------------------
+[FAIRYLILY]
+Name = Fairy Lily
+NamePlural = Fairy Lillies
+Pocket = 5
+Price = 0
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Berry,Fling_60
+Description = It may be used or held by a Pokémon. A rare berry used in cooking to enhance a Pokémon's special attack stat.
+#-------------------------------
+[INKBONNET]
+Name = Ink Bonnet
+NamePlural = Ink Bonnets
+Pocket = 5
+Price = 0
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Berry,Fling_60
+Description = It may be used or held by a Pokémon. A rare berry used in cooking to enhance a Pokémon's special defense stat.
+#-------------------------------
+[SUNNYJOLTFRUIT]
+Name = Sunny Joltfruit
+NamePlural = Sunny Joltfruit
+Pocket = 5
+Price = 0
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Berry,Fling_60
+Description = It may be used or held by a Pokémon. A rare berry used in cooking to enhance a Pokémon's speed stat.
+#-------------------------------
+[RAINBOWDRAGONFRUIT]
+Name = Rainbow Dragonfruit
+NamePlural = Rainbow Dragonfruit
+Pocket = 5
+Price = 0
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Berry,Fling_60
+Description = It may be used or held by a Pokémon. A rare berry used in cooking to enhance all of a Pokémon's stats.
+#-------------------------------
+[MOLTENLONGJOHN]
+Name = Molten Long John
+NamePlural = Molten Long Johns
+Pocket = 5
+Price = 0
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Fling_60
+Description = It may be used or held by a Pokémon. A well-crafted pastry used to enhance a Pokémon's attack stat.
+#-------------------------------
+[MULBERRYTART]
+Name = Mulberry Tart
+NamePlural = Mulberry Tarts
+Pocket = 5
+Price = 0
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Fling_60
+Description = It may be used or held by a Pokémon. A well-crafted pastry used to enhance a Pokémon's defense stat.
+#-------------------------------
+[LILYCORDIAL]
+Name = Lily Cordial
+NamePlural = Lily Cordial
+Pocket = 5
+Price = 0
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Fling_60
+Description = It may be used or held by a Pokémon. A well-concocted fermented beverage used to enhance a Pokémon's special attack stat.
+#-------------------------------
+[BONNETROLL]
+Name = Bonnet Roll
+NamePlural = Bonnet Rolls
+Pocket = 5
+Price = 0
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Fling_60
+Description = It may be used or held by a Pokémon. A well-crafted pastry used to enhance a Pokémon's special defense stat.
+#-------------------------------
+[JOLTFRUITSOUP]
+Name = Joltfruit Soup
+NamePlural = Joltfruit Soup
+Pocket = 5
+Price = 0
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Fling_60
+Description = It may be used or held by a Pokémon. A well-cooked soup used to enhance a Pokémon's speed stat.
+#-------------------------------
+[DRAGONPOP]
+Name = Dragon Pop
+NamePlural = Dragon Pops
+Pocket = 5
+Price = 0
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Fling_60
+Description = It may be used or held by a Pokémon. A well-created candy used to enhance all of a Pokémon's stats.
+#-------------------------------

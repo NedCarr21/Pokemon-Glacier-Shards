@@ -1,0 +1,4 @@
+[LIST]
+[*]Added Gen 9 TM item PBS files as an OPTIONAL
+[*]Fixed Mind's Eye effectiveness_of_type_against_single_battler_type error
+[/LIST]

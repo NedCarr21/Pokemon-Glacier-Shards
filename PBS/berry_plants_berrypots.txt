@@ -1,0 +1,41 @@
+﻿# Apricorn data
+#-------------------------------
+[REDAPRICORN]
+HoursPerStage = 12
+DryingPerHour = 8
+Yield = 1,4
+#-------------------------------
+[YELLOWAPRICORN]
+HoursPerStage = 12
+DryingPerHour = 8
+Yield = 1,4
+#-------------------------------
+[BLUEAPRICORN]
+HoursPerStage = 12
+DryingPerHour = 8
+Yield = 1,4
+#-------------------------------
+[GREENAPRICORN]
+HoursPerStage = 12
+DryingPerHour = 8
+Yield = 1,4
+#-------------------------------
+[PINKAPRICORN]
+HoursPerStage = 12
+DryingPerHour = 8
+Yield = 1,4
+#-------------------------------
+[WHITEAPRICORN]
+HoursPerStage = 12
+DryingPerHour = 8
+Yield = 1,4
+#-------------------------------
+[BLACKAPRICORN]
+HoursPerStage = 12
+DryingPerHour = 8
+Yield = 1,4
+#-------------------------------
+[HISUIAPRICORN]
+HoursPerStage = 14
+DryingPerHour = 8
+Yield = 1,4

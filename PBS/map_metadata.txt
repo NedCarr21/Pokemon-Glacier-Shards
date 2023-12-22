@@ -1,0 +1,361 @@
+﻿# See the documentation on the wiki to learn how to edit this file.
+#-------------------------------
+[001]   # Intro
+Name = Intro
+#-------------------------------
+[002]   # Pinoidae Mayor's Building
+Name = Pinoidae Indoors
+Outdoor = false
+ShowArea = true
+MapPosition = 0,14,14
+#-------------------------------
+[005]   # Tunnel Cave
+Name = Tunnel Cave
+Outdoor = false
+ShowArea = true
+Bicycle = false
+BicycleAlways = false
+MapPosition = 0,16,9
+DarkMap = true
+Environment = Cave
+#-------------------------------
+[006]   # Tunnel Cave (Snow)
+Name = Tunnel Cave (Snow)
+Outdoor = false
+ShowArea = false
+Bicycle = false
+BicycleAlways = false
+MapPosition = 0,16,9
+DarkMap = true
+Environment = Ice
+#-------------------------------
+[007]   # Tunnel Cave (Fire)
+Name = Tunnel Cave (Fire)
+Outdoor = false
+ShowArea = false
+Bicycle = false
+BicycleAlways = false
+MapPosition = 0,16,9
+DarkMap = true
+Environment = Volcano
+#-------------------------------
+[008]   # Tunnel Cave (Sand)
+Name = Tunnel Cave (Sand)
+Outdoor = false
+ShowArea = false
+Bicycle = false
+BicycleAlways = false
+MapPosition = 0,16,9
+DarkMap = true
+Environment = Sand
+#-------------------------------
+[009]   # Hidden Grotto
+Name = Hidden Grotto
+Outdoor = true
+ShowArea = true
+Weather = Snow,20
+MapPosition = 0,11,8
+BattleBack = 
+#-------------------------------
+[010]   # Safeway Path
+Name = Safeway Path
+Outdoor = true
+ShowArea = true
+MapPosition = 0,17,10
+#-------------------------------
+[013]   # Switchback Slateway
+Name = Switchback Slateway
+Outdoor = true
+ShowArea = true
+Bicycle = true
+BicycleAlways = false
+Weather = Sun,50
+MapPosition = 0,11,4
+MapSize = 2,11
+#-------------------------------
+[022]   # Glaciet Town
+Name = Glaciet Town
+Outdoor = true
+ShowArea = true
+Weather = Snow,35
+MapPosition = 0,12,8
+BattleBack = [GAME]snowymountain
+#-------------------------------
+[032]   # Mountain Pass
+Name = Mountain Pass
+Outdoor = true
+ShowArea = true
+Weather = Snow,50
+MapPosition = 0,12,9
+BattleBack = [GAME]snowymountain
+#-------------------------------
+[033]   # Passway Cave
+Name = Passway Cave
+Outdoor = false
+ShowArea = true
+MapPosition = 0,13,9
+BattleBack = [GAME]icycave
+#-------------------------------
+[042]   # Passway Cave BF1
+Name = Passway Cave BF1
+Outdoor = false
+ShowArea = true
+MapPosition = 0,13,9
+BattleBack = [GAME]icycave
+#-------------------------------
+[043]   # Glaciet Town Indoor
+Name = Glaciet Town Indoor
+Outdoor = false
+ShowArea = false
+MapPosition = 0,12,8
+#-------------------------------
+[048]   # Brisk Caverns
+Name = Brisk Caverns
+ShowArea = true
+MapPosition = 0,13,8
+BattleBack = [GAME]icycave
+#-------------------------------
+[076]   # The Glacier Climb
+Name = The Glacier Climb
+Outdoor = true
+Weather = Snow,20
+MapPosition = 0,12,10
+BattleBack = [GAME]snowymountain
+Environment = Grass
+#-------------------------------
+[077]   # Brisk Caverns BF1
+Name = Brisk Caverns BF1
+ShowArea = true
+MapPosition = 0,13,8
+BattleBack = [GAME]icycave
+#-------------------------------
+[078]   # Summit Trail
+Name = Summit Trail
+Outdoor = true
+ShowArea = true
+Weather = Snow,60
+MapPosition = 0,14,5
+BattleBack = [GAME]snowymountain
+Environment = Grass
+#-------------------------------
+[079]   # Wooded Hill
+Name = Wooded Hill
+Outdoor = true
+ShowArea = true
+Weather = Snow,50
+MapPosition = 0,15,5
+BattleBack = [GAME]snowymountain
+Environment = Snow
+#-------------------------------
+[080]   # The Deep Dark
+Name = The Deep Dark
+Outdoor = true
+ShowArea = true
+Weather = Rain,40
+MapPosition = 0,16,9
+BattleBack = [GAME]forest
+Environment = ForestGrass
+#-------------------------------
+[081]   # Apex Ridge
+Name = Apex Ridge
+Outdoor = true
+ShowArea = true
+Weather = Snow,70
+MapPosition = 0,14,4
+BattleBack = [GAME]snowymountain
+Environment = Snow
+#-------------------------------
+[082]   # Apex Ridge Indoor
+Name = Apex Ridge Indoor
+Outdoor = false
+ShowArea = false
+MapPosition = 0,14,4
+#-------------------------------
+[083]   # Apex Cavern
+Name = Apex Cavern
+Outdoor = false
+ShowArea = true
+MapPosition = 0,13,4
+BattleBack = [GAME]cave
+Environment = Cave
+#-------------------------------
+[084]   # Apex Cavern BF1
+Name = Apex Cavern BF1
+Outdoor = false
+ShowArea = true
+MapPosition = 0,13,4
+BattleBack = [GAME]cave
+Environment = Cave
+#-------------------------------
+[085]   # Wooded Hill
+Name = Wooded Hill
+Outdoor = true
+ShowArea = true
+Weather = Snow,25
+MapPosition = 0,16,6
+BattleBack = [GAME]snowymountain
+#-------------------------------
+[086]   # Shulk Caverns F4
+Name = Shulk Caverns F4
+Outdoor = false
+ShowArea = true
+MapPosition = 0,10,11
+BattleBack = [GAME]icycave
+Environment = Cave
+#-------------------------------
+[087]   # Shulk Caverns F3
+Name = Shulk Caverns F3
+Outdoor = false
+ShowArea = true
+MapPosition = 0,10,11
+BattleBack = [GAME]cave
+Environment = Cave
+#-------------------------------
+[089]   # Shulk Caverns F2
+Name = Shulk Caverns F2
+Outdoor = false
+ShowArea = true
+MapPosition = 0,10,11
+BattleBack = [GAME]cave
+Environment = Cave
+#-------------------------------
+[090]   # Blizmoor Town
+Name = Blizmoor Town
+Outdoor = true
+ShowArea = true
+Weather = Snow,20
+MapPosition = 0,10,12
+BattleBack = [GAME]snowymountain
+Environment = Snow
+#-------------------------------
+[091]   # Merchant's Grotto
+Name = Merchant's Grotto
+Outdoor = true
+ShowArea = true
+MapPosition = 0,14,12
+BattleBack = [GAME]forest
+Environment = ForestGrass
+#-------------------------------
+[092]   # Icy Plains
+Name = Icy Plains
+Outdoor = true
+ShowArea = true
+Weather = Snow,10
+MapPosition = 0,10,13
+BattleBack = [GAME]snowymountain
+Environment = Snow
+#-------------------------------
+[093]   # Icy Plains
+Name = Icy Plains
+Outdoor = true
+ShowArea = true
+Weather = Snow,10
+MapPosition = 0,10,13
+BattleBack = [GAME]snowymountain
+Environment = Snow
+#-------------------------------
+[094]   # Shulk Caverns F1
+Name = Shulk Caverns F1
+Outdoor = false
+ShowArea = true
+MapPosition = 0,10,11
+BattleBack = [GAME]cave
+Environment = Cave
+#-------------------------------
+[096]   # Pinoidae City
+Name = Pinoidae City
+Outdoor = true
+ShowArea = true
+MapPosition = 0,14,14
+BattleBack = [GAME]forest
+#-------------------------------
+[097]   # Blizmoor Town Indoor
+Name = Blizmoor Town Indoor
+Outdoor = false
+ShowArea = false
+MapPosition = 0,10,12
+#-------------------------------
+[098]   # Lacebark Woods
+Name = Lacebark Woods
+Outdoor = true
+ShowArea = true
+MapPosition = 0,14,14
+BattleBack = [GAME]forest
+#-------------------------------
+[099]   # Sunflower Plains
+Name = Sunflower Plains
+Outdoor = true
+ShowArea = true
+Weather = Rain,10
+MapPosition = 0,13,13
+BattleBack = [GAME]forest
+#-------------------------------
+[100]   # Sunflower Plains
+Name = Sunflower Plains
+Outdoor = true
+ShowArea = true
+Weather = Rain,10
+MapPosition = 0,14,13
+BattleBack = [GAME]forest
+#-------------------------------
+[101]   # Sunflower Coast
+Name = Sunflower Coast
+Outdoor = true
+ShowArea = true
+Weather = Rain,30
+MapPosition = 0,14,13
+BattleBack = [GAME]forest
+#-------------------------------
+[102]   # Wooded Cave
+Name = Wooded Cave
+Outdoor = false
+ShowArea = true
+MapPosition = 0,16,5
+#-------------------------------
+[103]   # Pinoidae City Indoor
+Name = Pinoidae City Indoor
+Outdoor = false
+ShowArea = false
+MapPosition = 0,14,14
+#-------------------------------
+[104]   # Sunflower Day Care
+Name = Sunflower Day Care
+Outdoor = false
+ShowArea = true
+MapPosition = 0,14,13
+#-------------------------------
+[107]   # Fossil Excavation Cave
+Name = Fossil Excavation Cave
+Name = 
+#-------------------------------
+[108]   # Guild Hall
+Name = Guild Hall
+Outdoor = false
+ShowArea = true
+MapPosition = 0,12,8
+#-------------------------------
+[110]   # Rusty Channel
+Name = Rusty Channel
+Outdoor = true
+ShowArea = true
+Weather = Rain,30
+MapPosition = 0,14,15
+Environment = MovingWater
+#-------------------------------
+[111]   # Apex Cavern BF2
+Name = Apex Cavern BF2
+Outdoor = false
+ShowArea = true
+MapPosition = 0,13,4
+#-------------------------------
+[112]   # Apex Cavern BF3
+Name = Apex Cavern BF3
+Outdoor = false
+ShowArea = true
+MapPosition = 0,13,4
+#-------------------------------
+[113]   # Wooded Cave BF1
+Name = Wooded Cave BF1
+Outdoor = false
+ShowArea = true
+MapPosition = 0,16,5

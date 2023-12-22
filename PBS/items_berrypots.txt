@@ -1,0 +1,10 @@
+﻿# Berry Pots
+#-------------------------------
+[BERRYPOTS]
+Name = Berry Pots
+NamePlural = Berry Pots
+Pocket = 8
+Price = 0
+FieldUse = Direct
+Flags = KeyItem
+Description = Handy containers for cultivating Berries wherever you go.
