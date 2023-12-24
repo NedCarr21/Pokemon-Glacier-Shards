@@ -1,0 +1,75 @@
+Name         = Wonder Trade
+Version      = 1.0
+Essentials   = 20, 20.1, 21, 21.1
+Website      = https://reliccastle.com/resources/1428/
+Credits      = Dr.Doom76
+#===============================================================================
+# Installation
+#===============================================================================
+# To install this plugin, extract the folders file into your game root folder.
+# 
+#===============================================================================
+# How to use
+#===============================================================================
+# Main method is "pbWonderTrade"
+# Use this to call on the trade to start.
+# If you would like to use optional arguments, call is:
+# "pbWonderTrade(nickName, trainerName, trainerGender)"
+# How It Works:
+# - Map Scanning: The script comprehensively scans all maps in your game to gather
+#   encounter data. For each encounter, it creates lists that track the available
+#   Pokémon species and how often each of them can be encountered in your game.
+#
+# - Assigning "Weight": Every Pokémon is assigned a "weight" based on its availability
+#   within the game. These weights play a crucial role in probability calculations.
+#
+# - Sorting by Rarity: The script categorizes Pokémon species into six rarity levels,
+#   determined by their respective weights. It then proceeds to randomly select a rarity,
+#   considering predefined rarity probabilities.
+#
+# - Selecting a Pokémon: Within the chosen rarity level, the script selects a random number.
+#   It iterates through the list of Pokémon until it finds one whose weight meets or
+#   exceeds the selected number. This chosen Pokémon becomes the selected trade option.
+#
+# Optional Blocklist and Allowlist Options:
+# - Blocklist: This feature enables you to exclude specific Pokémon from being considered
+#   for trade. The format is simple: [:POKEMON1, :POKEMON2].
+#
+# - Allowlist: You can use the Allowlist to increase the chances of encountering specific
+#   Pokémon during trades. The format is as follows:
+#   ALLOWLIST_POKEMON = {
+#     :MELOETTA => 5,
+#     :RATTATA => 10,
+#     :PIKACHU => 30
+#   }
+#   The numbers represent the number of "chances" each Pokémon has for trade, which is
+#   equivalent to their encounter frequency in the game.
+#
+# Optional Customization:
+# - In the script, you'll find optional arguments to fine-tune the trading process:
+#   - Nickname: You can specify a unique nickname for the traded Pokémon.
+#   - Trainer Name: If desired, you can define the Trainer's name.
+#   - Trainer Gender: Customizing the Trainer's gender is also an option.
+# Please Note: If you provide specific arguments, these values will be used for all
+# NPC-initiated trades. Alternatively, you can leave them blank, and the script will
+# generate random values for you.
+#
+# - Additionally, the script includes male and female name lists for Trainers in the
+#   settings file. If you don't specify a Trainer name, the script will randomly select
+#   one from these lists and determine the Trainer's gender accordingly.
+#
+# - You can enable or disable Pokémon nicknames using the script. When enabled, a random
+# name from the list is assigned as the Pokémon's nickname. When disabled, the Pokémon
+# retains its original name unless a nickname is defined within the method call.
+#
+# Additional Features:
+# - Trade operations occur within the PC interface, offering access to your party, just
+#   like the standard PC screen.
+# - Full compatibility with the Charm Case and Trading Charm is integrated into the script.
+# - The script includes a default greeting message, which adapts to the Trainer's gender
+# and modifies the text color accordingly.
+#
+# How to Use:
+# Simply initiate the Wonder Trade by calling the pbWonderTrade method. Customize the trade
+# using optional arguments: pbWonderTrade(nickName, trainerName, trainerGender)
+#===============================================================================

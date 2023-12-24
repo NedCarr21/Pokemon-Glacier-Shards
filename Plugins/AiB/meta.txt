@@ -1,0 +1,6 @@
+Name       = Always inside Bushes
+Version    = 1.1.0
+Essentials = 21.1
+Optional   = Following Pokemon EX,2.2.2
+Link       = https://reliccastle.com/resources/931/
+Credits    = Kotaro,Titania318,KleinStudio,derFischae

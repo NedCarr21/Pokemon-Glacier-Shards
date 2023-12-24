@@ -203,54 +203,6 @@ MenuHandlers.add(:pause_menu, :bag, {
   }
 })
 
-MenuHandlers.add(:pause_menu, :pokegear, {
-  "name"      => _INTL("Pokégear"),
-  "order"     => 40,
-  "condition" => proc { next $player.has_pokegear },
-  "effect"    => proc { |menu|
-    pbPlayDecisionSE
-    pbFadeOutIn do
-      scene = PokemonPokegear_Scene.new
-      screen = PokemonPokegearScreen.new(scene)
-      screen.pbStartScreen
-      ($game_temp.fly_destination) ? menu.pbEndScene : menu.pbRefresh
-    end
-    next pbFlyToNewLocation
-  }
-})
-
-MenuHandlers.add(:pause_menu, :town_map, {
-  "name"      => _INTL("Town Map"),
-  "order"     => 40,
-  "condition" => proc { next !$player.has_pokegear && $bag.has?(:TOWNMAP) },
-  "effect"    => proc { |menu|
-    pbPlayDecisionSE
-    pbFadeOutIn do
-      scene = PokemonRegionMap_Scene.new(-1, false)
-      screen = PokemonRegionMapScreen.new(scene)
-      ret = screen.pbStartScreen
-      $game_temp.fly_destination = ret if ret
-      ($game_temp.fly_destination) ? menu.pbEndScene : menu.pbRefresh
-    end
-    next pbFlyToNewLocation
-  }
-})
-
-MenuHandlers.add(:pause_menu, :trainer_card, {
-  "name"      => proc { next $player.name },
-  "order"     => 50,
-  "effect"    => proc { |menu|
-    pbPlayDecisionSE
-    pbFadeOutIn do
-      scene = PokemonTrainerCard_Scene.new
-      screen = PokemonTrainerCardScreen.new(scene)
-      screen.pbStartScreen
-      menu.pbRefresh
-    end
-    next false
-  }
-})
-
 MenuHandlers.add(:pause_menu, :save, {
   "name"      => _INTL("Save"),
   "order"     => 60,
