@@ -466,7 +466,7 @@ GameData::Nature.register({
 # Player Coordinate Check
 #-------------------------------------------------------------------------------
 
-EventHandlers.add(:on_frame_UPdate, :player_x_y,
+EventHandlers.add(:on_frame_Update, :player_x_y,
   proc {
     if $game_player
       $game_variables[51] = $game_player.x
@@ -495,7 +495,7 @@ end
 # Shiny Chance based on Guild Tier
 #-------------------------------------------------------------------------------
 
-EventHandlers.add(:on_frame_UPdate, :shiny_chance_guild_tier,
+EventHandlers.add(:on_frame_Update, :shiny_chance_guild_tier,
   proc {
     case $game_variables[90]
       when 0; Settings::SHINY_POKEMON_CHANCE = 16 # No Tier       = 1/4096     (with charm 1/2048)
