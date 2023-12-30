@@ -1,0 +1,138 @@
+#-------------------------------
+[DIRTKICK]
+Name = Dirt Kick
+Type = GROUND
+Category = Physical
+Power = 20
+Accuracy = 90
+TotalPP = 20
+Target = NearOther
+FunctionCode = HitTwoToFiveTimes
+Flags = CanProtect,CanMirrorMove
+Description = The user digs its feet into the ground, kicking up dirt towards the foe. It hits the Pokémon two to five times in a row.
+#-------------------------------
+[MISTYSNOUT]
+Name = Misty Snout
+Type = ICE
+Category = Special
+Power = 35
+Accuracy = 100
+TotalPP = 20
+Target = NearOther
+FunctionCode = None
+Flags = CanProtect,CanMirrorMove
+Description = The user makes a grunt with their snout, shooting the foe with an icy mist.
+#-------------------------------
+[PHASE]
+Name = Phase
+Type = GHOST
+Category = Special
+Power = 40
+Accuracy = 100
+TotalPP = 20
+Target = NearOther
+FunctionCode = FlinchTarget
+Flags = CanProtect,CanMirrorMove
+EffectChance = 30
+Description = The user phases in and out, firing a ghostly projectile at the foe that may make it flinch.
+#-------------------------------
+[PSYTACKLE]
+Name = Psy-Tackle
+Type = PSYCHIC
+Category = Physical
+Power = 40
+Accuracy = 100
+TotalPP = 20
+Target = NearOther
+FunctionCode = None
+Flags = Contact,CanProtect,CanMirrorMove
+Description = A physical attack in which the user empowers their body with psychic energy, charging towards the foe.
+#-------------------------------
+[SHADOWSEEKER]
+Name = Shadow Seeker
+Type = DARK
+Category = Physical
+Power = 40
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = DoublePowerIfTargetDarkType
+Flags = CanProtect,CanMirrorMove
+Description = The user seeks our members of the shadow, this moves deals double the damage to opposing Dark types.
+#-------------------------------
+[SHADYSTAMP]
+Name = Shady Stamp
+Type = PSYCHIC
+Category = Physical
+Power = 30
+Accuracy = 100
+TotalPP = 30
+Target = NearOther
+FunctionCode = ConfuseTarget
+Flags = Contact,CanProtect,CanMirrorMove
+EffectChance = 30
+Description = The user stamps the target with its body, this might make the target confused.
+#-------------------------------
+[HAILBLADE]
+Name = Hail Blade
+Type = ICE
+Category = Physical
+Power = 60
+Accuracy = 90
+TotalPP = 15
+Target = NearOther
+FunctionCode = DoubleDamageInHail
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The user slashes the target with an icy blade, this attack deals double damage in hail and snowy weather.
+#-------------------------------
+[ENERGYBURST]
+Name = Energy Burst
+Type = FIRE
+Category = Special
+Power = 1
+Accuracy = 100
+TotalPP = 15
+Target = NearOther
+FunctionCode = DamageBasedOnTargetAtkAndSpAtk
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The user expands and explodes the targets energy, this attack deals more damage the stronger the target is.
+#-------------------------------
+[LINEFORCE]
+Name = Line Force
+Type = GRASS
+Category = Special
+Power = 1
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = HitOncePerUserTeamMember
+Flags = CanProtect,CanMirrorMove
+Description = The user gets all party Pokemon to attack the target. The more party Pokemon, the greater the number of attacks.
+#-------------------------------
+[CHAINOFSPIRITS]
+Name = Chain of Spirits
+Type = GHOST
+Category = Special
+Power = 60
+Accuracy = 100
+TotalPP = 15
+Target = NearOther
+FunctionCode = DamageIfGhostAlly
+Flags = CanProtect,CanMirrorMove
+Description = The user links itself to neaby ghost types, this attack deals double damage if there are other ghost types aiding in battle.
+#-------------------------------
+
+
+#-------------------------------
+[THUNDEROUSBOLT]
+Name = Thunderous Bolt
+Type = ELECTRIC
+Category = Special
+Power = 160
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = CantSelectConsecutiveTurns
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The user summons a bolt of immense electrical power. This move can't be used twice in a row.
+#-------------------------------

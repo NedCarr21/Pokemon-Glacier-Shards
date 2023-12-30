@@ -1,3 +1,5 @@
+
+
 Battle::AbilityEffects::MoveImmunity.add(:THORNYWILDS,
   proc { |ability, user, target, move, type, battle, show_message|
     targetStats = target.plainStats
@@ -69,6 +71,26 @@ Battle::AbilityEffects::OnSwitchIn.add(:SPIRITTRAIN,
         battle.pbHideAbilitySplash(battler)
         break
       end
+    end
+  }
+)
+
+Battle::AbilityEffects::OnSwitchIn.add(:ABSOLUTEZERO,
+  proc { |ability, battler, battle, switch_in|
+    battle.pbStartWeatherAbility(:Hail, battler)
+  }
+)
+
+Battle::AbilityEffects::DamageCalcFromUser.add(:ABSOLUTEZERO,
+  proc { |ability, user, target, move, mults, baseDmg, type|
+    mults[:attack_multiplier] *= 1.5 if [:Hail].include?(user.effectiveWeather)
+  }
+)
+
+Battle::AbilityEffects::DamageCalcFromUser.add(:GETAWAY,
+  proc { |ability, user, target, move, mults, baseDmg, type|
+    if (move.function_code == "SwitchOutUserDamagingMove" || move.function_code == "SwitchOutTargetDamagingMove")
+      mults[:attack_multiplier] *= 2.0
     end
   }
 )

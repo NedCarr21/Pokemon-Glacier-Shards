@@ -23,6 +23,14 @@ Description = Switches the effects of Trick Room.
 Name = Spirit Train
 Description = Boosts itself if there are other ghost types nearby.
 #-------------------------------
+[ABSOLUTEZERO]
+Name = Absolute Zero
+Description = Summons hail when the Pokémon enters the battle, boosts all offensive stats in hail.
+#-------------------------------
+[GETAWAY]
+Name = Getaway
+Description = Doubles the power of switching moves.
+#-------------------------------
 #-------------------------------
 #-------UNKNOWN-STARTERS--------
 #-------------------------------

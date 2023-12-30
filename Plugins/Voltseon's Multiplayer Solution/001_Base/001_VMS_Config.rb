@@ -5,7 +5,7 @@ module VMS
   # Whether or not to log messages to the console.
   LOG_TO_CONSOLE = true
   # Whether or not to show yourself from the server's perspective. This is useful for testing.
-  SHOW_SELF = false
+  SHOW_SELF = true
 
   # ===========
   # Server
@@ -29,7 +29,7 @@ module VMS
   # Messages
   # ===========
   # The message to show when you are disconnected from the server. (set to "" to disable)
-  DISCONNECTED_MESSAGE = _INTL("You have been disconnected.")
+  DISCONNECTED_MESSAGE = _INTL("Your connection to the online server has ended.")
 
   # ===========
   # Events
