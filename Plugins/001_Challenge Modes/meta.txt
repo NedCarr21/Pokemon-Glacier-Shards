@@ -1,0 +1,4 @@
+Name         = Ned's Challenge Modes
+Version      = 1.0
+Essentials   = 21, 21.1
+Credits      = Ned
