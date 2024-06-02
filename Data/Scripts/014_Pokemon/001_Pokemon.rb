@@ -106,7 +106,7 @@ class Pokemon
     :BERRYJUICE, :FRESHWATER, :SODAPOP, :LEMONADE, :MOOMOOMILK,
     :POTION, :SUPERPOTION, :HYPERPOTION,
     :EXPCANDYXS, :EXPCANDYS, :EXPCANDYM, :EXPCANDYL, :EXPCANDYXL, :RARECANDY
-  ].sample(2)
+  ]
 
   def self.play_cry(species, form = 0, volume = 90, pitch = 100)
     GameData::Species.play_cry_from_species(species, form, volume, pitch)
@@ -1247,8 +1247,11 @@ class Pokemon
     @personalID       = rand(2**16) | (rand(2**16) << 16)
     @hp               = 1
     @totalhp          = 1
-    @likeditem        = GameData::Item.get(LIKED_ITEMS[0])
-    @dislikeditem     = GameData::Item.get(LIKED_ITEMS[1])
+    @likeditem        = GameData::Item.get(LIKED_ITEMS.sample)
+    @dislikeditem     = GameData::Item.get(LIKED_ITEMS.sample)
+    while (@likeditem == @dislikeditem)
+      @dislikeditem = GameData::Item.get(LIKED_ITEMS.sample)
+    end
     calc_stats
     if @form == 0 && recheck_form
       f = MultipleForms.call("getFormOnCreation", self)
