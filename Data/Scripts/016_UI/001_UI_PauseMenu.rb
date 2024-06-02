@@ -133,31 +133,31 @@ end
 MenuHandlers.add(:pause_menu, :pokedex, {
   "name"      => _INTL("Pokédex"),
   "order"     => 10,
-  "condition" => proc { next $player.has_pokedex && $player.pokedex.accessible_dexes.length > 0 },
+  "condition" => proc { next $player.has_pokedex && $player.pokedex.accessible_dexes.length > 0 && !$player.has_poke_nav },
   "effect"    => proc { |menu|
     pbPlayDecisionSE
     if Settings::USE_CURRENT_REGION_DEX
-      pbFadeOutIn do
+      pbFadeOutIn {
         scene = PokemonPokedex_Scene.new
         screen = PokemonPokedexScreen.new(scene)
         screen.pbStartScreen
         menu.pbRefresh
-      end
+      }
     elsif $player.pokedex.accessible_dexes.length == 1
       $PokemonGlobal.pokedexDex = $player.pokedex.accessible_dexes[0]
-      pbFadeOutIn do
+      pbFadeOutIn {
         scene = PokemonPokedex_Scene.new
         screen = PokemonPokedexScreen.new(scene)
         screen.pbStartScreen
         menu.pbRefresh
-      end
+      }
     else
-      pbFadeOutIn do
+      pbFadeOutIn {
         scene = PokemonPokedexMenu_Scene.new
         screen = PokemonPokedexMenuScreen.new(scene)
         screen.pbStartScreen
         menu.pbRefresh
-      end
+      }
     end
     next false
   }
@@ -170,12 +170,12 @@ MenuHandlers.add(:pause_menu, :party, {
   "effect"    => proc { |menu|
     pbPlayDecisionSE
     hidden_move = nil
-    pbFadeOutIn do
+    pbFadeOutIn {
       sscene = PokemonParty_Scene.new
       sscreen = PokemonPartyScreen.new(sscene, $player.party)
       hidden_move = sscreen.pbPokemonScreen
       (hidden_move) ? menu.pbEndScene : menu.pbRefresh
-    end
+    }
     next false if !hidden_move
     $game_temp.in_menu = false
     pbUseHiddenMove(hidden_move[0], hidden_move[1])
@@ -190,12 +190,12 @@ MenuHandlers.add(:pause_menu, :bag, {
   "effect"    => proc { |menu|
     pbPlayDecisionSE
     item = nil
-    pbFadeOutIn do
+    pbFadeOutIn {
       scene = PokemonBag_Scene.new
       screen = PokemonBagScreen.new(scene, $bag)
       item = screen.pbStartScreen
       (item) ? menu.pbEndScene : menu.pbRefresh
-    end
+    }
     next false if !item
     $game_temp.in_menu = false
     pbUseKeyItemInField(item)
@@ -203,12 +203,44 @@ MenuHandlers.add(:pause_menu, :bag, {
   }
 })
 
+MenuHandlers.add(:pause_menu, :pokegear, {
+  "name"      => _INTL("Pokégear"),
+  "order"     => 40,
+  "condition" => proc { next $player.has_pokegear },
+  "effect"    => proc { |menu|
+    pbPlayDecisionSE
+    pbFadeOutIn {
+      scene = PokemonPokegear_Scene.new
+      screen = PokemonPokegearScreen.new(scene)
+      screen.pbStartScreen
+      ($game_temp.fly_destination) ? menu.pbEndScene : menu.pbRefresh
+    }
+    next pbFlyToNewLocation
+  }
+})
+
+=begin
+MenuHandlers.add(:pause_menu, :trainer_card, {
+  "name"      => proc { next $player.name },
+  "order"     => 50,
+  "effect"    => proc { |menu|
+    pbPlayDecisionSE
+    pbFadeOutIn {
+      scene = PokemonTrainerCard_Scene.new
+      screen = PokemonTrainerCardScreen.new(scene)
+      screen.pbStartScreen
+      menu.pbRefresh
+    }
+    next false
+  }
+})
+=end
+
 MenuHandlers.add(:pause_menu, :save, {
   "name"      => _INTL("Save"),
   "order"     => 60,
-  "condition" => proc {
-    next $game_system && !$game_system.save_disabled && !pbInSafari? && !pbInBugContest?
-  },
+  "condition" => proc { next $game_system && !$game_system.save_disabled &&
+                             !pbInSafari? && !pbInBugContest? },
   "effect"    => proc { |menu|
     menu.pbHideMenu
     scene = PokemonSave_Scene.new
@@ -228,13 +260,13 @@ MenuHandlers.add(:pause_menu, :options, {
   "order"     => 70,
   "effect"    => proc { |menu|
     pbPlayDecisionSE
-    pbFadeOutIn do
+    pbFadeOutIn {
       scene = PokemonOption_Scene.new
       screen = PokemonOptionScreen.new(scene)
       screen.pbStartScreen
       pbUpdateSceneMap
       menu.pbRefresh
-    end
+    }
     next false
   }
 })
@@ -245,10 +277,10 @@ MenuHandlers.add(:pause_menu, :debug, {
   "condition" => proc { next $DEBUG },
   "effect"    => proc { |menu|
     pbPlayDecisionSE
-    pbFadeOutIn do
+    pbFadeOutIn {
       pbDebugMenu
       menu.pbRefresh
-    end
+    }
     next false
   }
 })

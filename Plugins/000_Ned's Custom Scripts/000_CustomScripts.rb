@@ -139,10 +139,22 @@ ITEMARR = [ #[:ITEM,MAXQUANTITY,WEIGHT]
     end
 
 #-------------------------------------------------------------------------------
+# Give the player if they don't have many of this item.
+#-------------------------------------------------------------------------------
+    def notEnough(item=:ORANBERRY, count=5, enoughText="")
+      if !$bag.has?(item, count)
+        pbMessage(_INTL("Oh no, you don't seem to have many {1}, here, you can have some of mine!", item.name_plural))
+        pbReceiveItem(item, count)
+      else
+        pbMessage(_INTL(enoughText))
+      end
+    end
+
+#-------------------------------------------------------------------------------
 # Special Shiny Rate Static Pokémon
 #-------------------------------------------------------------------------------
 
-  def gsShinyStatic(pkmn1=:BULBASAUR,level=5,shinychance=10)
+  def gsShinyStatic(pkmn1=:BULBASAUR, level=5, shinychance=10)
       pkmn = Pokemon.new(pkmn1,level)
       if rand(0..shinychance) == 1
         pkmn.shiny = true
@@ -152,7 +164,7 @@ ITEMARR = [ #[:ITEM,MAXQUANTITY,WEIGHT]
         pbMessage(_INTL("The TV lights flickered."))
         $game_switches[75] = true
         Pokemon.play_cry(pkmn1)
-        pbWait(8);
+        pbWait(0.2);
         WildBattle.start(pkmn)
       end # end of if :ROTOM
     end # end of def
@@ -168,7 +180,7 @@ ITEMARR = [ #[:ITEM,MAXQUANTITY,WEIGHT]
 
 EventHandlers.add(:on_wild_pokemon_created, :gs_randomizer,
   proc { |pkmn|
-    if $game_switches[61] # if randomizer
+    if $game_switches[61] || ChallengeModes.on?(:RANDOMIZER) # if randomizer
       gsRegionalArray = pbAllRegionalSpecies(0)
       pkmn.species = gsRegionalArray.sample
       if Settings::GS_ALTERNATE_FORMS.include?(pkmn)
@@ -186,7 +198,7 @@ EventHandlers.add(:on_wild_pokemon_created, :gs_randomizer,
 
 EventHandlers.add(:on_trainer_load, :gs_randomizer,
   proc { |trainer|
-    if trainer && $game_switches[61] # if randomizer
+    if trainer && ($game_switches[61] || ChallengeModes.on?(:RANDOMIZER)) # if randomizer
       gsRegionalArray = pbAllRegionalSpecies(0)
       trainer.party.each { |pkmn|
         pkmn.species = gsRegionalArray.sample
@@ -510,3 +522,26 @@ EventHandlers.add(:on_frame_Update, :shiny_chance_guild_tier,
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
+=begin
+EventHandlers.add(:on_frame_update, :glitch_title,
+  proc {
+    next if !$scene.is_a?(Scene_Map)
+    next unless rand(800) == 1
+    title = System.game_title
+    weird = "S̵͉͝p̶͓͋a̸͍̽c̷͓̊e̶̬̽ ̷̬̆T̶̫̍r̷̙̋ȃ̷̲ḯ̶̞n̶̯̑e̷̗͠ȑ̶ͅŝ̴̝"
+    jibberish = title.split("").map { |c| rand(2) == 1 ? c : rand(2) == 1 ? c.upcase : c.downcase }.join
+    rand(1..5).times do
+      index = rand(jibberish.size)
+      jibberish[index] = weird[index]
+    end
+    jibberish = "code: titlename" if rand(200) == 1
+    System.set_window_title(jibberish)
+    rand(5..20).times do
+      Graphics.update
+      Input.update
+      $scene.update
+    end
+    System.set_window_title(title)
+  }
+)
+=end

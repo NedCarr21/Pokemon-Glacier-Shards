@@ -22,7 +22,7 @@ module VMS
       VMS.sync_seed
     rescue
       VMS.log("An error occurred whilst battling.", true)
-      pbMessage(_INTL("An error occurred."))
+      VMS.message(VMS::BASIC_ERROR_MESSAGE)
     end
   end
 end
@@ -56,8 +56,16 @@ class Battle
   def pbConsumeItemInBag(item, idxBattler)
     return if !item
     return if !GameData::Item.get(item).consumed_after_use?
-    return if VMS.is_connected? && !pbOwnedByPlayer?(idxBattler)
+    return if VMS.is_connected? && @battleAI.is_a?(Battle::VMS_AI)
     vms_pbConsumeItemInBag(item, idxBattler)
+  end
+
+  alias vms_pbItemMenu pbItemMenu unless method_defined?(:vms_pbItemMenu)
+  def pbItemMenu(idxBattler, firstAction)
+    @internalBattle = true if VMS.is_connected? && @battleAI.is_a?(Battle::VMS_AI)
+    ret = vms_pbItemMenu(idxBattler, firstAction)
+    @internalBattle = false if VMS.is_connected? && @battleAI.is_a?(Battle::VMS_AI)
+    return ret
   end
 
   # For choosing a replacement Pokémon when prompted in the middle of other

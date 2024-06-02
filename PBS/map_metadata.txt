@@ -5,46 +5,30 @@ Name = Intro
 #-------------------------------
 [002]   # Pinoidae Mayor's Building
 Name = Pinoidae Indoors
-Outdoor = false
 ShowArea = true
 MapPosition = 0,14,14
 #-------------------------------
 [005]   # Tunnel Cave
 Name = Tunnel Cave
-Outdoor = false
 ShowArea = true
-Bicycle = false
-BicycleAlways = false
 MapPosition = 0,16,9
 DarkMap = true
 Environment = Cave
 #-------------------------------
 [006]   # Tunnel Cave (Snow)
 Name = Tunnel Cave (Snow)
-Outdoor = false
-ShowArea = false
-Bicycle = false
-BicycleAlways = false
 MapPosition = 0,16,9
 DarkMap = true
 Environment = Ice
 #-------------------------------
 [007]   # Tunnel Cave (Fire)
 Name = Tunnel Cave (Fire)
-Outdoor = false
-ShowArea = false
-Bicycle = false
-BicycleAlways = false
 MapPosition = 0,16,9
 DarkMap = true
 Environment = Volcano
 #-------------------------------
 [008]   # Tunnel Cave (Sand)
 Name = Tunnel Cave (Sand)
-Outdoor = false
-ShowArea = false
-Bicycle = false
-BicycleAlways = false
 MapPosition = 0,16,9
 DarkMap = true
 Environment = Sand
@@ -55,7 +39,6 @@ Outdoor = true
 ShowArea = true
 Weather = Snow,20
 MapPosition = 0,11,8
-BattleBack = 
 #-------------------------------
 [010]   # Safeway Path
 Name = Safeway Path
@@ -68,7 +51,6 @@ Name = Switchback Slateway
 Outdoor = true
 ShowArea = true
 Bicycle = true
-BicycleAlways = false
 Weather = Sun,50
 MapPosition = 0,11,4
 MapSize = 2,11
@@ -91,22 +73,19 @@ BattleBack = [GAME]snowymountain
 #-------------------------------
 [033]   # Passway Cave
 Name = Passway Cave
-Outdoor = false
 ShowArea = true
 MapPosition = 0,13,9
 BattleBack = [GAME]icycave
+Environment = Cave
 #-------------------------------
 [042]   # Passway Cave BF1
 Name = Passway Cave BF1
-Outdoor = false
 ShowArea = true
 MapPosition = 0,13,9
 BattleBack = [GAME]icycave
 #-------------------------------
 [043]   # Glaciet Town Indoor
 Name = Glaciet Town Indoor
-Outdoor = false
-ShowArea = false
 MapPosition = 0,12,8
 #-------------------------------
 [048]   # Brisk Caverns
@@ -167,13 +146,10 @@ Environment = Snow
 #-------------------------------
 [082]   # Apex Ridge Indoor
 Name = Apex Ridge Indoor
-Outdoor = false
-ShowArea = false
 MapPosition = 0,14,4
 #-------------------------------
 [083]   # Apex Cavern
 Name = Apex Cavern
-Outdoor = false
 ShowArea = true
 MapPosition = 0,13,4
 BattleBack = [GAME]cave
@@ -181,7 +157,6 @@ Environment = Cave
 #-------------------------------
 [084]   # Apex Cavern BF1
 Name = Apex Cavern BF1
-Outdoor = false
 ShowArea = true
 MapPosition = 0,13,4
 BattleBack = [GAME]cave
@@ -197,7 +172,6 @@ BattleBack = [GAME]snowymountain
 #-------------------------------
 [086]   # Shulk Caverns F4
 Name = Shulk Caverns F4
-Outdoor = false
 ShowArea = true
 MapPosition = 0,10,11
 BattleBack = [GAME]icycave
@@ -205,7 +179,6 @@ Environment = Cave
 #-------------------------------
 [087]   # Shulk Caverns F3
 Name = Shulk Caverns F3
-Outdoor = false
 ShowArea = true
 MapPosition = 0,10,11
 BattleBack = [GAME]cave
@@ -213,7 +186,6 @@ Environment = Cave
 #-------------------------------
 [089]   # Shulk Caverns F2
 Name = Shulk Caverns F2
-Outdoor = false
 ShowArea = true
 MapPosition = 0,10,11
 BattleBack = [GAME]cave
@@ -256,7 +228,6 @@ Environment = Snow
 #-------------------------------
 [094]   # Shulk Caverns F1
 Name = Shulk Caverns F1
-Outdoor = false
 ShowArea = true
 MapPosition = 0,10,11
 BattleBack = [GAME]cave
@@ -271,8 +242,6 @@ BattleBack = [GAME]forest
 #-------------------------------
 [097]   # Blizmoor Town Indoor
 Name = Blizmoor Town Indoor
-Outdoor = false
-ShowArea = false
 MapPosition = 0,10,12
 #-------------------------------
 [098]   # Lacebark Woods
@@ -308,29 +277,23 @@ BattleBack = [GAME]forest
 #-------------------------------
 [102]   # Wooded Cave
 Name = Wooded Cave
-Outdoor = false
 ShowArea = true
 MapPosition = 0,16,5
 #-------------------------------
 [103]   # Pinoidae City Indoor
 Name = Pinoidae City Indoor
-Outdoor = false
-ShowArea = false
 MapPosition = 0,14,14
 #-------------------------------
 [104]   # Sunflower Day Care
 Name = Sunflower Day Care
-Outdoor = false
 ShowArea = true
 MapPosition = 0,14,13
 #-------------------------------
 [107]   # Fossil Excavation Cave
 Name = Fossil Excavation Cave
-Name = 
 #-------------------------------
 [108]   # Guild Hall
 Name = Guild Hall
-Outdoor = false
 ShowArea = true
 MapPosition = 0,12,8
 #-------------------------------
@@ -344,18 +307,15 @@ Environment = MovingWater
 #-------------------------------
 [111]   # Apex Cavern BF2
 Name = Apex Cavern BF2
-Outdoor = false
 ShowArea = true
 MapPosition = 0,13,4
 #-------------------------------
 [112]   # Apex Cavern BF3
 Name = Apex Cavern BF3
-Outdoor = false
 ShowArea = true
 MapPosition = 0,13,4
 #-------------------------------
 [113]   # Wooded Cave BF1
 Name = Wooded Cave BF1
-Outdoor = false
 ShowArea = true
 MapPosition = 0,16,5

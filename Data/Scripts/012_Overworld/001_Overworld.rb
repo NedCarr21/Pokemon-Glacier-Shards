@@ -710,26 +710,31 @@ def pbReceiveItem(item, quantity = 1)
   pocket = item.pocket
   move = item.move
   meName = (item.is_key_item?) ? "Key item get" : "Item get"
-  if item == :DNASPLICERS
-    pbMessage("\\me[#{meName}]" + _INTL("You obtained \\c[1]{1}\\c[0]!", itemname) + "\\wtnp[40]")
-  elsif item.is_machine?   # TM or HM
-    if quantity > 1
-      pbMessage("\\me[Machine get]" + _INTL("You obtained {1} \\c[1]{2} {3}\\c[0]!",
+  if !$game_switches[63]
+    if item == :DNASPLICERS
+      pbMessage("\\me[#{meName}]" + _INTL("You obtained \\c[1]{1}\\c[0]!", itemname) + "\\wtnp[40]")
+    elsif item.is_machine?   # TM or HM
+      if quantity > 1
+        pbMessage("\\me[Machine get]" + _INTL("You obtained {1} \\c[1]{2} {3}\\c[0]!",
                                             quantity, itemname, GameData::Move.get(move).name) + "\\wtnp[70]")
-    else
-      pbMessage("\\me[Machine get]" + _INTL("You obtained \\c[1]{1} {2}\\c[0]!",
+      else
+        pbMessage("\\me[Machine get]" + _INTL("You obtained \\c[1]{1} {2}\\c[0]!",
                                             itemname, GameData::Move.get(move).name) + "\\wtnp[70]")
+      end
+    elsif quantity > 1
+      pbMessage("\\me[#{meName}]" + _INTL("You obtained {1} \\c[1]{2}\\c[0]!", quantity, itemname) + "\\wtnp[40]")
+    elsif itemname.starts_with_vowel?
+      pbMessage("\\me[#{meName}]" + _INTL("You obtained an \\c[1]{1}\\c[0]!", itemname) + "\\wtnp[40]")
+    else
+      pbMessage("\\me[#{meName}]" + _INTL("You obtained a \\c[1]{1}\\c[0]!", itemname) + "\\wtnp[40]")
     end
-  elsif quantity > 1
-    pbMessage("\\me[#{meName}]" + _INTL("You obtained {1} \\c[1]{2}\\c[0]!", quantity, itemname) + "\\wtnp[40]")
-  elsif itemname.starts_with_vowel?
-    pbMessage("\\me[#{meName}]" + _INTL("You obtained an \\c[1]{1}\\c[0]!", itemname) + "\\wtnp[40]")
-  else
-    pbMessage("\\me[#{meName}]" + _INTL("You obtained a \\c[1]{1}\\c[0]!", itemname) + "\\wtnp[40]")
-  end
-  if $bag.add(item, quantity)   # If item can be added
-    pbMessage(_INTL("You put the {1} in\\nyour Bag's <icon=bagPocket{2}>\\c[1]{3}\\c[0] pocket.",
+    if $bag.add(item, quantity)   # If item can be added
+      pbMessage(_INTL("You put the {1} in\\nyour Bag's <icon=bagPocket{2}>\\c[1]{3}\\c[0] pocket.",
                     itemname, pocket, PokemonBag.pocket_names[pocket - 1]))
+      return true
+    end
+  else
+    pbNotify(_INTL("Item got!"), _INTL("{1} {2}", quantity, (quantity > 1 ? GameData::Item.try_get(item).name_plural : GameData::Item.try_get(item).name)), 1, [GameData::Item.icon_filename(item),256,20])
     return true
   end
   return false   # Can't add the item

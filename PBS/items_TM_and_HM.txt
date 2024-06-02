@@ -86,8 +86,8 @@ Pocket = 4
 Price = 2000
 FieldUse = TM
 Flags = Fling_25
-Move = BULLETSEED
-Description = The user forcefully shoots seeds at the target two to five times in a row.
+Move = TRAILBLAZE
+Description = The user attacks suddenly as if leaping out from tall grass. This boosts the user's Speed stat.
 #-------------------------------
 [TM10]
 Name = TM10
@@ -416,8 +416,8 @@ Pocket = 4
 Price = 3000
 FieldUse = TM
 Flags = Fling_70
-Move = FACADE
-Description = This attack move doubles its power if the user is poisoned, burned, or paralyzed.
+Move = TERRAINPULSE
+Description = Utilizes the power of the terrain to attack. This move's type and power vary with the terrain.
 #-------------------------------
 [TM43]
 Name = TM43
@@ -526,8 +526,8 @@ Pocket = 4
 Price = 3000
 FieldUse = TM
 Flags = Fling_90
-Move = ENERGYBALL
-Description = The user draws power from nature and fires it at the target. This may also lower the target's Sp. Def stat.
+Move = LINEFORCE
+Description = The user gets all party Pokemon to attack the target. The more party Pokemon, the greater the number of attacks.
 #-------------------------------
 [TM54]
 Name = TM54
@@ -656,8 +656,8 @@ Pocket = 4
 Price = 3000
 FieldUse = TM
 Flags = Fling_50
-Move = PAYBACK
-Description = The user stores power, then attacks. If the user moves after the target, this attack's power will be doubled.
+Move = SPREADINGFLAMES
+Description = The user spreads flames across the battlefield, burning every nearby Pokemon.
 #-------------------------------
 [TM67]
 Name = TM67
@@ -928,6 +928,10 @@ FieldUse = TM
 Flags = Fling_10
 Move = DEFOG
 Description = A strong wind blows away the target's barriers, such as Reflect, and lowers their evasiveness.
+#-------------------------------
+#-------------------------------
+#-------------------------------
+#-------------------------------
 #-------------------------------
 [HM01]
 Name = HM01

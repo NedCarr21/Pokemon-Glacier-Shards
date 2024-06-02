@@ -7,7 +7,7 @@ class Battle::Scene
   USE_ABILITY_SPLASH   = (Settings::MECHANICS_GENERATION >= 5)
   MESSAGE_PAUSE_TIME   = 1.0   # In seconds
   # Text colors
-  MESSAGE_BASE_COLOR   = Color.new(80, 80, 88)
+  MESSAGE_BASE_COLOR   = Color.new(240, 240, 255)
   MESSAGE_SHADOW_COLOR = Color.new(160, 160, 168)
   # The number of party balls to show in each side's lineup.
   NUM_BALLS            = Settings::MAX_PARTY_SIZE
@@ -16,7 +16,7 @@ class Battle::Scene
   PLAYER_BASE_Y        = Settings::SCREEN_HEIGHT - 80
   # Centre middle of the foe's side base graphic
   FOE_BASE_X           = Settings::SCREEN_WIDTH - 128
-  FOE_BASE_Y           = (Settings::SCREEN_HEIGHT * 3 / 4) - 112
+  FOE_BASE_Y           = (Settings::SCREEN_HEIGHT * 3 / 4) - 92
   # Default focal points of user and target in animations - do not change!
   # Is the centre middle of each sprite
   FOCUSUSER_X          = 128

@@ -3,7 +3,7 @@ def checkCode
   codeBank = [
   "HIPPY","VORTEX","FISHHEAD","NED",
   "EASTER***","HALLOWEEN***","CHRISTMAS***",
-  "V0.9",
+  "V0.9", "TITLENAME",
   "UNKNOWNGRASS","UNKNOWNFIRE","UNKNOWNWATER"
   ]
 
@@ -61,12 +61,16 @@ def checkCode
           when "UNKNOWNWATER"; pkmn = Pokemon.new(:HYDRARK,5)
             pkmn.owner.name = "???"
             pkmn.shiny = false
+          when "TITLENAME"; item = "Ability Patch"
         end
 
         if pkmn
           pkmn.owner.id = 00000
           pkmn.poke_ball = :CHERISHBALL
           pbAddPokemon(pkmn)
+        end
+        if item
+          vRI(item, 1)
         end
 
         $usedCodes.push(code.upcase)

@@ -560,7 +560,7 @@ class PokemonBag_Scene
     @choosing   = choosing
     @filterproc = filterproc
     @party      = party
-    
+
     pbRefreshFilter
     lastpocket = @bag.last_viewed_pocket
     numfilledpockets = @bag.pockets.length - 1
@@ -590,10 +590,10 @@ class PokemonBag_Scene
       end
     end
     @bag.last_viewed_pocket = lastpocket
-    
+
     @sliderbitmap = AnimatedBitmap.new(_INTL("Graphics/UI/Bag Screen with Party/icon_slider"))
     @pocketbitmap = AnimatedBitmap.new(_INTL("Graphics/UI/Bag Screen with Party/icon_pocket"))
-    
+
     @sprites = {}
     @sprites["background"] = IconSprite.new(0, 0, @viewport)
     @sprites["background"].setBitmap("Graphics/UI/Bag Screen with Party/bg")
@@ -601,7 +601,7 @@ class PokemonBag_Scene
     @sprites["gradient"].setBitmap("Graphics/UI/Bag Screen with Party/grad")
     @sprites["panorama"] = IconSprite.new(0, 0, @viewport)
     @sprites["panorama"].setBitmap("Graphics/UI/Bag Screen with Party/panorama")
-    
+
     if BagScreenWiInParty::BGSTYLE == 1 # BW Style
       if $player.female?
         @sprites["background"].color = Color.new(231, 101, 137)
@@ -619,7 +619,7 @@ class PokemonBag_Scene
     @sprites["ui1"].setBitmap("Graphics/UI/Bag Screen with Party/ui1")
     @sprites["ui2"] = IconSprite.new(0, 0, @viewport)
     @sprites["ui2"].setBitmap("Graphics/UI/Bag Screen with Party/ui2")
-    
+
     for i in 0...Settings::MAX_PARTY_SIZE
       if @party[i]
         @sprites["pokemon#{i}"] = PokemonBagPartyPanel.new(@party[i], i, @viewport)
@@ -627,11 +627,11 @@ class PokemonBag_Scene
         @sprites["pokemon#{i}"] = PokemonBagPartyBlankPanel.new(@party[i], i, @viewport)
       end
     end
-    
+
     @sprites["overlay"] = BitmapSprite.new(Graphics.width, Graphics.height, @viewport)
     pbSetSystemFont(@sprites["overlay"].bitmap)
     rbvar = 0
-    
+
     @sprites["pocketicon"] = BitmapSprite.new(130, 52, @viewport)
     @sprites["pocketicon"].x = 372
     @sprites["pocketicon"].y = 0
@@ -640,7 +640,7 @@ class PokemonBag_Scene
     @sprites["currentpocket"].x = 372
     @sprites["currentpocket"].y = 26
     @sprites["currentpocket"].src_rect = Rect.new(0, 0, 28, 28)
-    
+
     @sprites["itemlist"] = Window_PokemonBag.new(@bag, @filterlist, lastpocket, 204, 40, 314, 72 + ITEMSVISIBLE * 32)
     @sprites["itemlist"].viewport    = @viewport
     @sprites["itemlist"].pocket      = lastpocket
@@ -664,9 +664,9 @@ class PokemonBag_Scene
     @sprites["msgwindow"].viewport = @viewport
     @sprites["msgwindow"].letterbyletter = true
     pbBottomLeftLines(@sprites["msgwindow"], 2)
-    
+
     pbUpdateAnnotation
-    
+
     pbDeactivateWindows(@sprites)
     pbRefresh
     pbFadeInAndShow(@sprites)
@@ -708,7 +708,7 @@ class PokemonBag_Scene
       @sprites["panorama"].color = Color.new(144, 72, 216)
     end
   end
-  
+
   def pbFadeOutScene
     @oldsprites = pbFadeOutAndHide(@sprites)
     @oldtext = []
@@ -717,7 +717,7 @@ class PokemonBag_Scene
       @sprites["pokemon#{i}"].dispose
     end
   end
-  
+
   def pbFadeInScene
     for i in 0...Settings::MAX_PARTY_SIZE
       if @party[i]
@@ -768,7 +768,7 @@ class PokemonBag_Scene
   def update
     pbUpdateSpriteHash(@sprites)
   end
-  
+
   def pbConfirm(msg)
     UIHelper.pbConfirm(@sprites["msgwindow"], msg) { pbUpdate }
   end
@@ -815,7 +815,7 @@ class PokemonBag_Scene
     pbRefreshParty
     pbPocketColor if BagScreenWiInParty::BGSTYLE == 2
   end
-  
+
   def pbRefreshParty
     for i in 0...Settings::MAX_PARTY_SIZE
       if @party[i]
@@ -824,7 +824,7 @@ class PokemonBag_Scene
       end
     end
   end
-  
+
   def pbRefreshIndexChanged
     itemlist = @sprites["itemlist"]
     overlay = @sprites["overlay"].bitmap
@@ -912,7 +912,7 @@ class PokemonBag_Scene
       end
     end
   end
-  
+
   def pbUpdateAnnotation
     itemwindow = @sprites["itemlist"]
     item       = itemwindow.item
@@ -973,11 +973,11 @@ class PokemonBag_Scene
       end
     else #Others, only show HP
       for i in 0...Settings::MAX_PARTY_SIZE
-        @sprites["pokemon#{i}"].text = nil if @sprites["pokemon#{i}"].text 
+        @sprites["pokemon#{i}"].text = nil if @sprites["pokemon#{i}"].text
       end
     end
   end
-      
+
   # Called when the item screen wants an item to be chosen from the screen
   def pbChooseItem
     @sprites["helpwindow"].visible = false
@@ -1018,7 +1018,7 @@ class PokemonBag_Scene
           end
         else
           # Plays SE when scrolling the item list
-          if Input.repeat?(Input::UP) && thispocket.length   > 0 || 
+          if Input.repeat?(Input::UP) && thispocket.length   > 0 ||
              Input.repeat?(Input::DOWN) && thispocket.length > 0
             pbSEPlay("GUI bag cursor") if itemwindow.index != oldindex
           end
@@ -1124,7 +1124,7 @@ class PokemonBag_Scene
         currentsel -= 1
         while currentsel > 0 && currentsel < numsprites && !@party[currentsel]
           currentsel -= 1
-        end 
+        end
       else
         begin
           currentsel -= 2
@@ -1149,7 +1149,7 @@ class PokemonBag_Scene
     end
     return currentsel
   end
-  
+
   def pbChangeCursor(number)
     # 1 for using/giving an item to a Pokémon; 2 for exiting; 3 for interacting
     itemwindow = @sprites["itemlist"]
@@ -1163,7 +1163,7 @@ class PokemonBag_Scene
     end
     pbRefresh
   end
-  
+
   def pbChoosePoke(option, switching = false)
     # 0 to choose a Pokémon; 1 to hold an item; 2 to use an item; 3 to interact; 4 to switch party items
     for i in 0...Settings::MAX_PARTY_SIZE
@@ -1225,7 +1225,7 @@ class PokemonBag_Scene
           pbPlayDecisionSE
           loop do
             cmdSummary     = -1
-            cmdTake        = -1 
+            cmdTake        = -1
             cmdMove        = -1
             commands = []
             # Generate command list
@@ -1256,12 +1256,12 @@ class PokemonBag_Scene
                 newpkmn = pbChoosePoke(4, true)
                 if newpkmn < 0
                   pbClearSwitching
-                  break 
+                  break
                 end
                 newpkmn = @party[newpkmn]
                 if newpkmn == oldpkmn
                   pbClearSwitching
-                  break 
+                  break
                 end
                 if newpkmn.egg?
                   pbDisplay(_INTL("Eggs can't hold items."))
@@ -1323,7 +1323,7 @@ class PokemonBag_Scene
       break if ret == 2 && option == 2  # End screen
     end
   end
-  
+
   def pbChoosePokemon(text = nil)
     # For fusing/unfusing Pokemon
     fusioncmd  = @activecmd
@@ -1363,7 +1363,7 @@ class PokemonBag_Scene
       end
     end
   end
-  
+
   def pbSummary(pkmnid, inbattle=false)
     oldsprites = pbFadeOutAndHide(@sprites)
     scene = PokemonSummary_Scene.new
@@ -1380,7 +1380,7 @@ class PokemonBag_Scene
       @sprites["pokemon#{i}"].selected = (i == @activecmd)
     end
   end
-  
+
   def pbPreSelect(item)
     @othercmd = item
   end
@@ -1391,7 +1391,7 @@ class PokemonBag_Scene
       @sprites["pokemon#{i}"].switching   = false
     end
   end
-  
+
   def pbChooseMove(pokemon, helptext, index = 0)
     movenames = []
     pokemon.moves.each do |i|
@@ -1770,6 +1770,15 @@ ItemHandlers::UseInField.add(:SACREDASH, proc { |item|
 #=============================================================================
 class Battle::Scene
   def pbItemMenu(idxBattler, _firstAction)
+
+    if ChallengeModes.on?(:NO_TRAINER_BATTLE_ITEMS) && @battle.opponent
+      rule_name = _INTL(ChallengeModes::RULES[:NO_TRAINER_BATTLE_ITEMS][:name])
+      pbSEStop
+      pbSEPlay("GUI sel buzzer")
+      pbDisplayPausedMessage(_INTL("The \"{1}\" rule prevents item usage in Trainer Battles!", rule_name))
+      return [0, -1]
+    end
+
     # Fade out and hide all sprites
     visibleSprites = pbFadeOutAndHide(@sprites)
     # Set Bag starting positions

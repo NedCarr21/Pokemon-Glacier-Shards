@@ -3,7 +3,7 @@
 Name = Dirt Kick
 Type = GROUND
 Category = Physical
-Power = 20
+Power = 15
 Accuracy = 90
 TotalPP = 20
 Target = NearOther
@@ -109,6 +109,68 @@ FunctionCode = HitOncePerUserTeamMember
 Flags = CanProtect,CanMirrorMove
 Description = The user gets all party Pokemon to attack the target. The more party Pokemon, the greater the number of attacks.
 #-------------------------------
+[ADAMANTINEPRESS]
+Name = Adamantine Press
+Type = STEEL
+Category = Physical
+Power = 90
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = RaiseUserDefense1
+Flags = Contact,CanProtect,CanMirrorMove,CannotMetronome
+Description = The user hardens and presses its body into the opponent, this attack raises the user's defense stat.
+#-------------------------------
+[ELECTRICRIOT]
+Name = Electric Riot
+Type = ELECTRIC
+Category = Special
+Power = 90
+Accuracy = 90
+TotalPP = 10
+Target = NearOther
+FunctionCode = DoublePowerIfTargetPoisoned
+Flags = CanProtect,CanMirrorMove,Sound
+Description = The user charges a poisonous electric bolt, this attack deals double damage to poisoned targets.
+#-------------------------------
+[SPREADINGFLAMES]
+Name = Spreading Flames
+Type = FIRE
+Category = Status
+Accuracy = 75
+TotalPP = 20
+Target = AllNearOthers
+FunctionCode = BurnTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user spreads flames across the battlefield, burning every nearby Pokemon.
+#-------------------------------
+[FALLINGDOWN]
+Name = Falling Down
+Type = NORMAL
+Category = Physical
+Power = 150
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = BurnTarget
+Flags = CanProtect,CanMirrorMove
+Description = The user launches into the air, falling asleep and landing on the target.
+#-------------------------------
+[AQUAREPORT]
+Name = Aqua Report
+Type = WATER
+Category = Special
+Power = 120
+Accuracy = 90
+TotalPP = 5
+Target = NearOther
+FunctionCode = AttackRevealHeldItem
+Flags = CanProtect,CanMirrorMove
+Description = The user guides water towards the target, revealing the target's held item.
+
+
+
+#-------------------------------
 [CHAINOFSPIRITS]
 Name = Chain of Spirits
 Type = GHOST
@@ -119,7 +181,19 @@ TotalPP = 15
 Target = NearOther
 FunctionCode = DamageIfGhostAlly
 Flags = CanProtect,CanMirrorMove
-Description = The user links itself to neaby ghost types, this attack deals double damage if there are other ghost types aiding in battle.
+Description = The user links itself to nearby ghost types, this attack deals double damage if there are other ghost types aiding in battle.
+#-------------------------------
+[SCRAPSHOT]
+Name = Scrap Shot
+Type = STEEL
+Category = Special
+Power = 60
+Accuracy = 95
+TotalPP = 20
+Target = NearOther
+FunctionCode =
+Flags = CanProtect,CanMirrorMove
+Description = The user gathers scrap parts to launch at the target, this might leave the target paralyzed.
 #-------------------------------
 
 
@@ -135,4 +209,88 @@ Target = NearOther
 FunctionCode = CantSelectConsecutiveTurns
 Flags = Contact,CanProtect,CanMirrorMove
 Description = The user summons a bolt of immense electrical power. This move can't be used twice in a row.
+#-------------------------------
+[WRACKDOWN]
+Name = Wrack Down
+Type = STEEL
+Category = Physical
+Power = 160
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = CantSelectConsecutiveTurns
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The user slams the target with an immense force. This move can't be used twice in a row.
+#-------------------------------
+[OCEANLOOP]
+Name = Ocean Loop
+Type = WATER
+Category = Special
+Power = 160
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = CantSelectConsecutiveTurns
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The user creates an immense whirlpool of water around the target. This move can't be used twice in a row.
+#-------------------------------
+[ROCKYTACKLE]
+Name = Rocky Tackle
+Type = ROCK
+Category = Physical
+Power = 160
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = CantSelectConsecutiveTurns
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The user slams the target with an immense boulderous tackle. This move can't be used twice in a row.
+#-------------------------------
+[SOLARTYPHOON]
+Name = Solar Typhoon
+Type = GRASS
+Category = Special
+Power = 160
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = CantSelectConsecutiveTurns
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The user creates an immense forceful typhoon. This move can't be used twice in a row.
+#-------------------------------
+[BUSTERTAIL]
+Name = Buster Tail
+Type = DRAGON
+Category = Special
+Power = 160
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = CantSelectConsecutiveTurns
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The user strikes the target with an immense force gathered into its tail. This move can't be used twice in a row.
+#-------------------------------
+[GLAMOROUSLIGHT]
+Name = Glamorous Light
+Type = FAIRY
+Category = Special
+Power = 160
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = CantSelectConsecutiveTurns
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The user summons an immense shining light. This move can't be used twice in a row.
+#-------------------------------
+[CALAMITYSTORM]
+Name = Calamity Storm
+Type = DARK
+Category = Special
+Power = 160
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = CantSelectConsecutiveTurns
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The user summons a storm of immense evil. This move can't be used twice in a row.
 #-------------------------------

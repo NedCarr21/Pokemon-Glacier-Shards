@@ -40,3 +40,16 @@ class Battle::Move::FixedDamage100 < Battle::Move::FixedDamageMove # Sonic Edge
     return 100
   end
 end
+
+class Battle::Move::AttackRevealHeldItem < Battle::Move # Aqua Report
+  def pbEffectAfterAllHits(user, target)
+    return if user.fainted?
+    return if target.damageState.unaffected || target.damageState.substitute
+    return if !target.item
+    return if target.unlosableItem?(target.item)
+    return if !@battle.moldBreaker
+    itemName = target.itemName
+    # Permanently steal the item from wild Pokémon
+    @battle.pbDisplay(_INTL("{1} reported on {2} and found its {3}!", user.pbThis, target.pbThis(true), itemName))
+  end
+end

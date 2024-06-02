@@ -410,18 +410,34 @@ ItemHandlers::UseOnPokemon.addIf(:evolution_stones,
 )
 
 ItemHandlers::UseOnPokemon.add(:POTION, proc { |item, qty, pkmn, scene|
-  next pbHPItem(pkmn, 20, scene)
+  amt = 20
+  amt = 40 if pkmn.likeditem.id == :POTION
+  amt = 10 if pkmn.dislikeditem.id == :POTION
+  next pbHPItem(pkmn, amt, scene)
 })
 
-ItemHandlers::UseOnPokemon.copy(:POTION, :BERRYJUICE, :SWEETHEART)
+ItemHandlers::UseOnPokemon.add(:BERRYJUICE, proc { |item, qty, pkmn, scene|
+  amt = 20
+  amt = 40 if pkmn.likeditem.id == :BERRYJUICE
+  amt = 10 if pkmn.dislikeditem.id == :BERRYJUICE
+  next pbHPItem(pkmn, amt, scene)
+})
+
+ItemHandlers::UseOnPokemon.copy(:POTION, :SWEETHEART)
 ItemHandlers::UseOnPokemon.copy(:POTION, :RAGECANDYBAR) if !Settings::RAGE_CANDY_BAR_CURES_STATUS_PROBLEMS
 
 ItemHandlers::UseOnPokemon.add(:SUPERPOTION, proc { |item, qty, pkmn, scene|
-  next pbHPItem(pkmn, (Settings::REBALANCED_HEALING_ITEM_AMOUNTS) ? 60 : 50, scene)
+  amt = 60
+  amt = 120 if pkmn.likeditem.id == :SUPERPOTION
+  amt = 30 if pkmn.dislikeditem.id == :SUPERPOTION
+  next pbHPItem(pkmn, amt, scene)
 })
 
 ItemHandlers::UseOnPokemon.add(:HYPERPOTION, proc { |item, qty, pkmn, scene|
-  next pbHPItem(pkmn, (Settings::REBALANCED_HEALING_ITEM_AMOUNTS) ? 120 : 200, scene)
+  amt = 120
+  amt = 240 if pkmn.likeditem.id == :HYPERPOTION
+  amt = 60 if pkmn.dislikeditem.id == :HYPERPOTION
+  next pbHPItem(pkmn, amt, scene)
 })
 
 ItemHandlers::UseOnPokemon.add(:MAXPOTION, proc { |item, qty, pkmn, scene|
@@ -429,27 +445,45 @@ ItemHandlers::UseOnPokemon.add(:MAXPOTION, proc { |item, qty, pkmn, scene|
 })
 
 ItemHandlers::UseOnPokemon.add(:FRESHWATER, proc { |item, qty, pkmn, scene|
-  next pbHPItem(pkmn, (Settings::REBALANCED_HEALING_ITEM_AMOUNTS) ? 30 : 50, scene)
+  amt = 30
+  amt = 60 if pkmn.likeditem.id == :FRESHWATER
+  amt = 15 if pkmn.dislikeditem.id == :FRESHWATER
+  next pbHPItem(pkmn, amt, scene)
 })
 
 ItemHandlers::UseOnPokemon.add(:SODAPOP, proc { |item, qty, pkmn, scene|
-  next pbHPItem(pkmn, (Settings::REBALANCED_HEALING_ITEM_AMOUNTS) ? 50 : 60, scene)
+  amt = 50
+  amt = 100 if pkmn.likeditem.id == :SODAPOP
+  amt = 25 if pkmn.dislikeditem.id == :SODAPOP
+  next pbHPItem(pkmn, amt, scene)
 })
 
 ItemHandlers::UseOnPokemon.add(:LEMONADE, proc { |item, qty, pkmn, scene|
-  next pbHPItem(pkmn, (Settings::REBALANCED_HEALING_ITEM_AMOUNTS) ? 70 : 80, scene)
+  amt = 70
+  amt = 140 if pkmn.likeditem.id == :LEMONADE
+  amt = 35 if pkmn.dislikeditem.id == :LEMONADE
+  next pbHPItem(pkmn, amt, scene)
 })
 
 ItemHandlers::UseOnPokemon.add(:MOOMOOMILK, proc { |item, qty, pkmn, scene|
-  next pbHPItem(pkmn, 100, scene)
+  amt = 100
+  amt = 200 if pkmn.likeditem.id == :MOOMOOMILK
+  amt = 50 if pkmn.dislikeditem.id == :MOOMOOMILK
+  next pbHPItem(pkmn, amt, scene)
 })
 
 ItemHandlers::UseOnPokemon.add(:ORANBERRY, proc { |item, qty, pkmn, scene|
-  next pbHPItem(pkmn, 10, scene)
+  amt = 10
+  amt = 20 if pkmn.likeditem.id == :ORANBERRY
+  amt = 5 if pkmn.dislikeditem.id == :ORANBERRY
+  next pbHPItem(pkmn, amt, scene)
 })
 
 ItemHandlers::UseOnPokemon.add(:SITRUSBERRY, proc { |item, qty, pkmn, scene|
-  next pbHPItem(pkmn, pkmn.totalhp / 4, scene)
+  amt = 4
+  amt = 2 if pkmn.likeditem.id == :SITRUSBERRY
+  amt = 8 if pkmn.dislikeditem.id == :SITRUSBERRY
+  next pbHPItem(pkmn, pkmn.totalhp / amt, scene)
 })
 
 ItemHandlers::UseOnPokemon.add(:AWAKENING, proc { |item, qty, pkmn, scene|
@@ -940,6 +974,11 @@ ItemHandlers::UseOnPokemon.add(:RARECANDY, proc { |item, qty, pkmn, scene|
     end
     next true
   end
+  if pkmn.dislikeditem == :RARECANDY
+    scene.pbDisplay(_INTL("{1} doesn't like this, it won't have any effect.", pkmn.name))
+    next false
+  end
+  qty *= 2 if pkmn.likeditem = :RARECANDY
   # Level up
   pbSEPlay("Pkmn level up")
   pbChangeLevel(pkmn, pkmn.level + qty, scene)
@@ -949,47 +988,72 @@ ItemHandlers::UseOnPokemon.add(:RARECANDY, proc { |item, qty, pkmn, scene|
 
 ItemHandlers::UseOnPokemonMaximum.add(:EXPCANDYXS, proc { |item, pkmn|
   gain_amount = 100
+  gain_amount = 200 if pkmn.likeditem == :EXPCANDYXS
+  gain_amount = 50 if pkmn.dislikeditem == :EXPCANDYXS
   next ((pkmn.growth_rate.maximum_exp - pkmn.exp) / gain_amount.to_f).ceil
 })
 
 ItemHandlers::UseOnPokemon.add(:EXPCANDYXS, proc { |item, qty, pkmn, scene|
-  next pbGainExpFromExpCandy(pkmn, 100, qty, scene)
+  gain_amount = 100
+  gain_amount = 200 if pkmn.likeditem == :EXPCANDYXS
+  gain_amount = 50 if pkmn.dislikeditem == :EXPCANDYXS
+  next pbGainExpFromExpCandy(pkmn, gain_amount, qty, scene)
 })
 
 ItemHandlers::UseOnPokemonMaximum.add(:EXPCANDYS, proc { |item, pkmn|
-  gain_amount = 800
+  gain_amount = 100
+  gain_amount = 200 if pkmn.likeditem == :EXPCANDYS
+  gain_amount = 50 if pkmn.dislikeditem == :EXPCANDYS
   next ((pkmn.growth_rate.maximum_exp - pkmn.exp) / gain_amount.to_f).ceil
 })
 
 ItemHandlers::UseOnPokemon.add(:EXPCANDYS, proc { |item, qty, pkmn, scene|
+  gain_amount = 800
+  gain_amount = 1600 if pkmn.likeditem == :EXPCANDYS
+  gain_amount = 400 if pkmn.dislikeditem == :EXPCANDYS
   next pbGainExpFromExpCandy(pkmn, 800, qty, scene)
 })
 
 ItemHandlers::UseOnPokemonMaximum.add(:EXPCANDYM, proc { |item, pkmn|
-  gain_amount = 3_000
+  gain_amount = 3000
+  gain_amount = 6000 if pkmn.likeditem == :EXPCANDYM
+  gain_amount = 1500 if pkmn.dislikeditem == :EXPCANDYM
   next ((pkmn.growth_rate.maximum_exp - pkmn.exp) / gain_amount.to_f).ceil
 })
 
 ItemHandlers::UseOnPokemon.add(:EXPCANDYM, proc { |item, qty, pkmn, scene|
-  next pbGainExpFromExpCandy(pkmn, 3_000, qty, scene)
+  gain_amount = 3000
+  gain_amount = 6000 if pkmn.likeditem == :EXPCANDYM
+  gain_amount = 1500 if pkmn.dislikeditem == :EXPCANDYM
+  next pbGainExpFromExpCandy(pkmn, gain_amount, qty, scene)
 })
 
 ItemHandlers::UseOnPokemonMaximum.add(:EXPCANDYL, proc { |item, pkmn|
-  gain_amount = 10_000
+  gain_amount = 10000
+  gain_amount = 20000 if pkmn.likeditem == :EXPCANDYL
+  gain_amount = 5000 if pkmn.dislikeditem == :EXPCANDYL
   next ((pkmn.growth_rate.maximum_exp - pkmn.exp) / gain_amount.to_f).ceil
 })
 
 ItemHandlers::UseOnPokemon.add(:EXPCANDYL, proc { |item, qty, pkmn, scene|
-  next pbGainExpFromExpCandy(pkmn, 10_000, qty, scene)
+  gain_amount = 10000
+  gain_amount = 20000 if pkmn.likeditem == :EXPCANDYL
+  gain_amount = 5000 if pkmn.dislikeditem == :EXPCANDYL
+  next pbGainExpFromExpCandy(pkmn, gain_amount, qty, scene)
 })
 
 ItemHandlers::UseOnPokemonMaximum.add(:EXPCANDYXL, proc { |item, pkmn|
-  gain_amount = 30_000
+  gain_amount = 30000
+  gain_amount = 60000 if pkmn.likeditem == :EXPCANDYXL
+  gain_amount = 15000 if pkmn.dislikeditem == :EXPCANDYXL
   next ((pkmn.growth_rate.maximum_exp - pkmn.exp) / gain_amount.to_f).ceil
 })
 
 ItemHandlers::UseOnPokemon.add(:EXPCANDYXL, proc { |item, qty, pkmn, scene|
-  next pbGainExpFromExpCandy(pkmn, 30_000, qty, scene)
+  gain_amount = 30000
+  gain_amount = 60000 if pkmn.likeditem == :EXPCANDYXL
+  gain_amount = 15000 if pkmn.dislikeditem == :EXPCANDYXL
+  next pbGainExpFromExpCandy(pkmn, gain_amount, qty, scene)
 })
 
 ItemHandlers::UseOnPokemonMaximum.add(:POMEGBERRY, proc { |item, pkmn|

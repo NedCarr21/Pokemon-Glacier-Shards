@@ -10,9 +10,9 @@ module MessageConfig
   MALE_TEXT_SHADOW_COLOR   = Color.new(208, 208, 200)
   FEMALE_TEXT_MAIN_COLOR   = Color.new(224, 8, 8)   # Used by message tag "\r"
   FEMALE_TEXT_SHADOW_COLOR = Color.new(208, 208, 200)
-  FONT_NAME                = "Power Green"
+  FONT_NAME                = "Power Red and Green"
   FONT_SIZE                = 27
-  FONT_Y_OFFSET            = 8
+  FONT_Y_OFFSET            = 1
   SMALL_FONT_NAME          = "Power Green Small"
   SMALL_FONT_SIZE          = 21
   SMALL_FONT_Y_OFFSET      = 8

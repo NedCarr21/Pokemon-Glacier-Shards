@@ -58,7 +58,7 @@ class Battle::Scene::PokemonDataBox < Sprite
     @databoxBitmap = AnimatedBitmap.new(bgFilename)
     # Determine the co-ordinates of the data box and the left edge padding width
     if onPlayerSide
-      @spriteX = Graphics.width - 248
+      @spriteX = Graphics.width - 262
       @spriteY = Graphics.height - 192
       @spriteBaseX = 16
       @show_hp_numbers = true
@@ -116,7 +116,7 @@ class Battle::Scene::PokemonDataBox < Sprite
   def x=(value)
     super
     @hpBar.x     = value + @spriteBaseX + 12
-    @expBar.x    = value + @spriteBaseX + 88
+    @expBar.x    = value + @spriteBaseX + 94
     @hpNumbers.x = value + @spriteBaseX + 124
   end
 
@@ -224,7 +224,7 @@ class Battle::Scene::PokemonDataBox < Sprite
     nameWidth = self.bitmap.text_size(@battler.name).width
     nameOffset = 0
     nameOffset = nameWidth - 116 if nameWidth > 116
-    pbDrawTextPositions(self.bitmap, [[@battler.name, @spriteBaseX + 96 - nameOffset, 40, :left,
+    pbDrawTextPositions(self.bitmap, [[@battler.name, @spriteBaseX + 98 - nameOffset, 40, :left,
                                        NAME_BASE_COLOR, NAME_SHADOW_COLOR]]
     )
   end
@@ -242,7 +242,7 @@ class Battle::Scene::PokemonDataBox < Sprite
     gender_text  = (gender == 0) ? _INTL("♂") : _INTL("♀")
     base_color   = (gender == 0) ? MALE_BASE_COLOR : FEMALE_BASE_COLOR
     shadow_color = (gender == 0) ? MALE_SHADOW_COLOR : FEMALE_SHADOW_COLOR
-    pbDrawTextPositions(self.bitmap, [[gender_text, @spriteBaseX + 208, 40, :left, base_color, shadow_color]])
+    pbDrawTextPositions(self.bitmap, [[gender_text, @spriteBaseX + 216, 40, :left, base_color, shadow_color]])
   end
 
   def draw_status

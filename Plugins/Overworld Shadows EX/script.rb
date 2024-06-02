@@ -17,11 +17,6 @@ class Sprite_OWShadow
     if !defined?(Game_FollowingPkmn) || !@event.is_a?(Game_FollowingPkmn)
       if @event != $game_player
         name = $~[1] if @event.name[/shdw\((.*?)\)/]
-        if OWShadowSettings::CASE_SENSITIVE_BLACKLISTS
-          @remove = true if OWShadowSettings::SHADOWLESS_EVENT_NAME.any? {|e| @event.name[/#{e}/]}
-        else
-          @remove = true if OWShadowSettings::SHADOWLESS_EVENT_NAME.any? {|e| @event.name[/#{e}/i]}
-        end
       else
         name = OWShadowSettings::PLAYER_SHADOW_FILENAME
       end
@@ -65,38 +60,30 @@ class Sprite_OWShadow
   #-----------------------------------------------------------------------------
   def jump_sprite
     return unless @sprite
-    if @event.jump_distance_left >= 1 && @event.jump_distance_left < @event.jump_peak
-      @sprite.zoom_x += 0.1
-      @sprite.zoom_y += 0.1
-    elsif @event.jump_distance_left >= @event.jump_peak
-      @sprite.zoom_x -= 0.05
-      @sprite.zoom_y -= 0.05
-    end
-    @sprite.zoom_x = 1 if @sprite.zoom_x > 1
-    @sprite.zoom_x = 0 if @sprite.zoom_x < 0
-    @sprite.zoom_y = 1 if @sprite.zoom_y > 1
-    @sprite.zoom_y = 0 if @sprite.zoom_y < 0
-    if @event.jump_count == 1
-      @sprite.zoom_x = 1.0
-      @sprite.zoom_y = 1.0
-    end
+    zoom_level = -Math.sin(Math::PI * @event.jump_fraction) + 1
+    @sprite.zoom_x = zoom_level
+    @sprite.zoom_y = zoom_level
     @sprite.x = @event.screen_x
     @sprite.y = @event.screen_y
     @sprite.z = @rsprite.z - 1
-  end
-  #-----------------------------------------------------------------------------
-  # Check whether the shadow should be shown or not
-  #-----------------------------------------------------------------------------
-  def show_shadow?
-    return false if nil_or_empty?(@event.character_name) || @event.transparent || @remove
-    if OWShadowSettings::CASE_SENSITIVE_BLACKLISTS
-      return false if OWShadowSettings::SHADOWLESS_CHARACTER_NAME.any?{ |e| @event.character_name[/#{e}/] }
-    else
-      return false if OWShadowSettings::SHADOWLESS_CHARACTER_NAME.any?{ |e| @event.character_name[/#{e}/i] }
-    end
-    terrain = $game_map.terrain_tag(@event.x, @event.y)
-    return false if OWShadowSettings::SHADOWLESS_TERRAIN_NAME.any? { |e| terrain == e } if terrain
-    return true
+    #if @event.jump_fraction >= 1 && @event.jump_fraction < @event.jump_peak
+    #  @sprite.zoom_x += 0.1
+    #  @sprite.zoom_y += 0.1
+    #elsif @event.jump_fraction >= @event.jump_peak
+    #  @sprite.zoom_x -= 0.05
+    #  @sprite.zoom_y -= 0.05
+    #end
+    #@sprite.zoom_x = 1 if @sprite.zoom_x > 1
+    #@sprite.zoom_x = 0 if @sprite.zoom_x < 0
+    #@sprite.zoom_y = 1 if @sprite.zoom_y > 1
+    #@sprite.zoom_y = 0 if @sprite.zoom_y < 0
+    #if @event.jump_fraction == 1
+    #  @sprite.zoom_x = 1.0
+    #  @sprite.zoom_y = 1.0
+    #end
+    #@sprite.x = @event.screen_x
+    #@sprite.y = @event.screen_y
+    #@sprite.z = @rsprite.z - 1
   end
   #-----------------------------------------------------------------------------
   # Calculation of shadow size when jumping
@@ -115,7 +102,7 @@ class Sprite_OWShadow
     @sprite.zoom_x  = @rsprite.zoom_x
     @sprite.zoom_y  = @rsprite.zoom_y
     @sprite.opacity = @rsprite.opacity
-    @sprite.visible = @rsprite.visible && show_shadow?
+    @sprite.visible = @rsprite.visible && @event.shows_shadow?
   end
   #-----------------------------------------------------------------------------
 end
@@ -140,24 +127,27 @@ end
 #-------------------------------------------------------------------------------
 class Sprite_Character
   attr_accessor :ow_shadow
-
-# Initializing Shadow with Character
- alias __ow_shadow__initialize initialize unless private_method_defined?(:__ow_shadow__initialize)
-  def initialize(viewport, character = nil)
-    __ow_shadow__initialize(viewport, character)
-    @ow_shadow = Sprite_OWShadow.new(self, character, viewport)
+  #-----------------------------------------------------------------------------
+  # Initializing Shadow with Character
+  #-----------------------------------------------------------------------------
+  alias __ow_shadow__initialize initialize unless private_method_defined?(:__ow_shadow__initialize)
+  def initialize(*args)
+    __ow_shadow__initialize(*args)
+    @ow_shadow = Sprite_OWShadow.new(self, args[1], args[0])
     update
   end
-
-# Disposing Shadow with Character
+  #-----------------------------------------------------------------------------
+  # Disposing Shadow with Character
+  #-----------------------------------------------------------------------------
   alias __ow_shadow__dispose dispose unless method_defined?(:__ow_shadow__dispose)
   def dispose(*args)
     __ow_shadow__dispose(*args)
     @ow_shadow.dispose if @ow_shadow
     @ow_shadow = nil
   end
-
-# Updating Shadow with Character
+  #-----------------------------------------------------------------------------
+  # Updating Shadow with Character
+  #-----------------------------------------------------------------------------
   alias __ow_shadow__update update unless method_defined?(:__ow_shadow__update)
   def update(*args)
     __ow_shadow__update(*args)
@@ -167,13 +157,80 @@ class Sprite_Character
 end
 
 #-------------------------------------------------------------------------------
-# Adding accessors to the Game_Character class
+# Adding shadow checking method to Game_Event
 #-------------------------------------------------------------------------------
 class Game_Character
-  attr_reader :jump_count
+  attr_reader :jump_fraction
   attr_reader :jump_distance
-  attr_reader :jump_distance_left
+  attr_reader :jump_fraction
   attr_reader :jump_peak
+  #-----------------------------------------------------------------------------
+  # Initializing Shadow with event
+  #-----------------------------------------------------------------------------
+  alias __ow_shadow__initialize initialize unless private_method_defined?(:__ow_shadow__initialize)
+  def initialize(*args)
+    __ow_shadow__initialize(*args)
+    @shows_shadow = false
+  end
+  #-----------------------------------------------------------------------------
+  # Updating Shadow with Character
+  #-----------------------------------------------------------------------------
+  alias __ow_shadow__calculate_bush_depth calculate_bush_depth unless method_defined?(:__ow_shadow__calculate_bush_depth)
+  def calculate_bush_depth(*args)
+    __ow_shadow__calculate_bush_depth(*args)
+    @shows_shadow = shows_shadow?(true)
+  end
+  #-----------------------------------------------------------------------------
+  # Check whether the character should have a shadow
+  #-----------------------------------------------------------------------------
+  def shows_shadow?(recalc = false)
+    return @shows_shadow if !recalc
+    return false if nil_or_empty?(self.character_name) || self.transparent
+    if OWShadowSettings::CASE_SENSITIVE_BLACKLISTS
+      return false if OWShadowSettings::SHADOWLESS_CHARACTER_NAME.any?{ |e| self.character_name[/#{e}/] }
+      return false if self.respond_to?(:name) && OWShadowSettings::SHADOWLESS_EVENT_NAME.any? { |e| self.name[/#{e}/]}
+    else
+      return false if OWShadowSettings::SHADOWLESS_CHARACTER_NAME.any?{ |e| self.character_name[/#{e}/i] }
+      return false if self.respond_to?(:name) && OWShadowSettings::SHADOWLESS_EVENT_NAME.any? { |e| self.name[/#{e}/]}
+    end
+    terrain = $game_map.terrain_tag(self.x, self.y)
+    return false if OWShadowSettings::SHADOWLESS_TERRAIN_NAME.any? { |e| terrain == e } if terrain
+    return true
+  end
+  #-----------------------------------------------------------------------------
+  # Updating Shadows when transparency is changed
+  #-----------------------------------------------------------------------------
+  alias __ow_shadow__transparent_set transparent= unless method_defined?(:__ow_shadow__transparent_set)
+  def transparent=(*args)
+    __ow_shadow__transparent_set(*args)
+    @shows_shadow = shows_shadow?(true)
+  end
+  #-----------------------------------------------------------------------------
+end
+
+#-------------------------------------------------------------------------------
+# Updating Shadow with Character
+#-------------------------------------------------------------------------------
+class Game_Event
+  alias __ow_shadow__refresh refresh unless method_defined?(:__ow_shadow__refresh)
+  def refresh(*args)
+    ret = __ow_shadow__refresh(*args)
+    @shows_shadow = shows_shadow?(true)
+    return ret
+  end
+end
+
+class Game_Player
+  #-----------------------------------------------------------------------------
+  # Updating Shadow with Player's Movement
+  #-----------------------------------------------------------------------------
+  alias __ow_shadow__set_movement_type set_movement_type unless method_defined?(:__ow_shadow__set_movement_type)
+  def set_movement_type(*args)
+    ret = __ow_shadow__set_movement_type(*args)
+    @shows_shadow = shows_shadow?(true)
+    return ret
+  end
+  #-----------------------------------------------------------------------------
 end
 
 #-------------------------------------------------------------------------------

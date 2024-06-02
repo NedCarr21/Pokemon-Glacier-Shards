@@ -42,8 +42,4 @@ module Settings
     :TOXTRICITY # to allow for Low-Key and High-Key forms
   ]
 
-
-
-
-
 end

@@ -42,7 +42,7 @@ Pokemon = STARLY,12
 #-------------------------------
 [YOUNGSTER,Jason]
 LoseText = "Man, I can't believe I lost with my burning attitude."
-Pokemon = PICHU,11
+Pokemon = PAWMI,11
 Pokemon = STARLY,12
 #-------------------------------
 [FISHERMAN,Paul]
@@ -52,7 +52,7 @@ Pokemon = CHINCHOU,12
 #-------------------------------
 [RUINMANIAC,Jonah]
 LoseText = "A very strong trainer indeed."
-Pokemon = PICHU,12
+Pokemon = PAWMI,12
 Pokemon = BULBASAUR,13
 #-------------------------------
 [BLACKBELT,Dwayne]
@@ -81,7 +81,7 @@ Pokemon = MACHOP,16
 #-------------------------------
 [SCIENTIST_M,Steve]
 LoseText = "I lost all my electricity..."
-Pokemon = PIKACHU,16
+Pokemon = PAWMI,16
 Pokemon = ARON,17
 Pokemon = HELIOPTILE,17
 #-------------------------------
@@ -116,7 +116,7 @@ Pokemon = SABLEYE,19
 [POKEMANIAC,Don]
 LoseText = "Pokemon are still the best."
 Pokemon = SLOWPOKE,20
-Pokemon = PIKACHU,20
+Pokemon = PAWMO,20
 #-------------------------------
 [YOUNGSTER,David]
 LoseText = "Always comfy!"
@@ -297,7 +297,7 @@ Pokemon = AUDINO,34
 #-------------------------------
 [POKEFAN_F,Hayley]
 LoseText = "I still love them."
-Pokemon = PIKACHU,35
+Pokemon = PAWMO,35
 Pokemon = SLOWBRO,35
 #-------------------------------
 [BUGCATCHER,Samuel]
@@ -378,7 +378,6 @@ Pokemon = LEAFEON,36
 LoseText = "I must train even more!"
 Pokemon = GARDEVOIR,36
 Pokemon = LEAFEON,36
-
 #-------------------------------
 [RUSTY_ADMIN_M,Tyson,1]
 Pokemon = CAMERUPT,40

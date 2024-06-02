@@ -1,5 +1,21 @@
 module VMS
   # ====================
+  # Online variables
+  # ====================
+
+  # Usage: VMS.get_variable(id #<Integer>) (returns the value of the specified variable)
+  def self.get_variable(id)
+    return nil if !VMS.is_connected? || VMS.get_self.nil?
+    return $game_temp.vms[:online_variables][id]
+  end
+
+  # Usage: VMS.set_variable(id #<Integer>, value #<Object>) (sets the value of the specified variable)
+  def self.set_variable(id, value)
+    return if !VMS.is_connected? || VMS.get_self.nil?
+    $game_temp.vms[:online_variables][id] = value
+  end
+
+  # ====================
   # Methodical functions
   # ====================
 
@@ -33,6 +49,22 @@ module VMS
       sscreen = PokemonPartyScreen.new(sscene, party)
       sscreen.pbPokemonScreen
     end
+  end
+
+  # Usage: VMS.teleport_to(id #<Integer>) (teleports the player to the player with the specified ID)
+  def self.teleport_to(id)
+    return if !VMS.is_connected?
+    player = VMS.get_player(id)
+    return if player.nil?
+    pbCancelVehicles
+    Followers.clear
+    $game_temp.player_new_map_id = player.map_id
+    $game_temp.player_new_x = player.x
+    $game_temp.player_new_y = player.y
+    $game_temp.player_new_direction = player.direction
+    pbDismountBike
+    $scene.transfer_player if $scene.is_a?(Scene_Map)
+    $game_map.refresh
   end
 
   # ====================

@@ -1,7 +1,5 @@
 #-------------------------------
-#-------------------------------
 #---------GLACIER-SHARD---------
-#-------------------------------
 #-------------------------------
 [ICYGLARE]
 Name = Icy Glare
@@ -31,9 +29,7 @@ Description = Summons hail when the Pokémon enters the battle, boosts all offen
 Name = Getaway
 Description = Doubles the power of switching moves.
 #-------------------------------
-#-------------------------------
 #-------UNKNOWN-STARTERS--------
-#-------------------------------
 #-------------------------------
 [THORNYWILDS]
 Name = Thorny Wilds

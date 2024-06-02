@@ -22,6 +22,18 @@ class Player < Trainer
   attr_accessor :has_pokedex
   # @return [Boolean] whether the PokéNav has been obtained
   attr_accessor :has_poke_nav
+  # @return [Boolean] whether the PokéNav has been obtained and the Pokédex attachment has been obtained.
+  attr_accessor :has_poke_nav_pokedex
+  # @return [Boolean] whether the PokéNav has been obtained and the Dex Nav attachment has been obtained.
+  attr_accessor :has_poke_nav_dex_nav
+  # @return [Boolean] whether the PokéNav has been obtained and the Map attachment has been obtained.
+  attr_accessor :has_poke_nav_map
+  # @return [Boolean] whether the PokéNav has been obtained and the Online attachment has been obtained.
+  attr_accessor :has_poke_nav_online
+  # @return [Boolean] whether the PokéNav has been obtained and the Quests attachment has been obtained.
+  attr_accessor :has_poke_nav_quests
+  # @return [Boolean] whether the PokéNav has been obtained and the Wonder attachment has been obtained.
+  attr_accessor :has_poke_nav_wonder
   # @return [Boolean] whether the Pokégear has been obtained
   attr_accessor :has_pokegear
   # @return [Boolean] whether the player has running shoes (i.e. can run)
@@ -48,7 +60,7 @@ class Player < Trainer
     @soot                  = 0
     @pokedex               = Pokedex.new
     @has_pokedex           = false
-    @has_pokenav           = false
+    @has_poke_nav          = false
     @has_pokegear          = false
     @has_running_shoes     = false
     @has_box_link          = false

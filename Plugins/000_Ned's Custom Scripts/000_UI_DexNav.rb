@@ -21,6 +21,15 @@ class PokeNav_Scene
     drawTime
 
     map = $game_map.map_id
+
+    case $game_screen.weather_type
+        when :Rain,:HeavyRain
+          @sprites["weather"].setBitmap("Graphics/Pictures/PokeNav/weather_rain")
+        when :Snow,:Blizzard
+          @sprites["weather"].setBitmap("Graphics/Pictures/PokeNav/weather_snow")
+      else
+        @sprites["weather"].setBitmap("Graphics/Pictures/PokeNav/weather_sun")
+    end
   end
 
   def pbStartScene()
@@ -39,37 +48,43 @@ class PokeNav_Scene
     @sprites["base"].z = 0
 
     @sprites["dex"] = IconSprite.new(0, 0, @viewport)
-    @sprites["dex"].setBitmap("Graphics/Pictures/PokeNav/dex_icon")
+    @sprites["dex"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
+    @sprites["dex"].setBitmap("Graphics/Pictures/PokeNav/dex_icon") if $player.has_poke_nav_pokedex
     @sprites["dex"].x = 72
     @sprites["dex"].y = 96
     @sprites["dex"].z = 1
 
     @sprites["map"] = IconSprite.new(0, 0, @viewport)
-    @sprites["map"].setBitmap("Graphics/Pictures/PokeNav/map_icon")
+    @sprites["map"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
+    @sprites["map"].setBitmap("Graphics/Pictures/PokeNav/map_icon") if $player.has_poke_nav_map
     @sprites["map"].x = 200
     @sprites["map"].y = 96
     @sprites["map"].z = 1
 
     @sprites["nav"] = IconSprite.new(0, 0, @viewport)
-    @sprites["nav"].setBitmap("Graphics/Pictures/PokeNav/nav_icon")
+    @sprites["nav"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
+    @sprites["nav"].setBitmap("Graphics/Pictures/PokeNav/nav_icon") if $player.has_poke_nav_dex_nav
     @sprites["nav"].x = 328
     @sprites["nav"].y = 96
     @sprites["nav"].z = 1
 
     @sprites["quests"] = IconSprite.new(0, 0, @viewport)
-    @sprites["quests"].setBitmap("Graphics/Pictures/PokeNav/quest_icon")
+    @sprites["quests"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
+    @sprites["quests"].setBitmap("Graphics/Pictures/PokeNav/quest_icon") if $player.has_poke_nav_quests
     @sprites["quests"].x = 72
     @sprites["quests"].y = 204
     @sprites["quests"].z = 1
 
     @sprites["online"] = IconSprite.new(0, 0, @viewport)
-    @sprites["online"].setBitmap("Graphics/Pictures/PokeNav/online_icon")
+    @sprites["online"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
+    @sprites["online"].setBitmap("Graphics/Pictures/PokeNav/online_icon") if $player.has_poke_nav_online
     @sprites["online"].x = 200
     @sprites["online"].y = 204
     @sprites["online"].z = 1
 
     @sprites["wonder"] = IconSprite.new(0, 0, @viewport)
-    @sprites["wonder"].setBitmap("Graphics/Pictures/PokeNav/wonder_icon")
+    @sprites["wonder"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
+    @sprites["wonder"].setBitmap("Graphics/Pictures/PokeNav/wonder_icon") if $player.has_poke_nav_wonder
     @sprites["wonder"].x = 328
     @sprites["wonder"].y = 204
     @sprites["wonder"].z = 1
@@ -96,14 +111,16 @@ class PokeNav_Scene
       pbUpdate
       if(Input.trigger?(Input::ACTION) || Input.trigger?(Input::USE))
         pbPlayDecisionSE
-          if(@nav_selected == 1) # Pokedex ----------------------------------------------------------------------
+          # Pokedex ----------------------------------------------------------------------
+          if(@nav_selected == 1 && $player.has_poke_nav_pokedex)
             pbFadeOutIn {
               scene = PokemonPokedexMenu_Scene.new
               screen = PokemonPokedexMenuScreen.new(scene)
               screen.pbStartScreen
             }
           end
-          if(@nav_selected == 2) # Town Map ---------------------------------------------------------------------
+          # Town Map ---------------------------------------------------------------------
+          if(@nav_selected == 2 && $player.has_poke_nav_map)
             pbFadeOutIn {
               scene = PokemonRegionMap_Scene.new(-1, false)
               screen = PokemonRegionMapScreen.new(scene)
@@ -112,7 +129,8 @@ class PokeNav_Scene
               next 99999 if ret   # Ugly hack to make Bag scene not reappear if flying
             }
           end
-          if(@nav_selected == 3) # Dex Nav ----------------------------------------------------------------------
+          # Dex Nav ----------------------------------------------------------------------
+          if(@nav_selected == 3 && $player.has_poke_nav_dex_nav)
             place = $game_map.map_id
             range = []
             pbMessage(_INTL("Searching for nearby Pokémon..."))
@@ -146,17 +164,20 @@ class PokeNav_Scene
               pbMessage(_INTL("No Pokémon was found..."))
             end
           end
-          if(@nav_selected == 4) # Quests -----------------------------------------------------------------------
+          # Quests -----------------------------------------------------------------------
+          if(@nav_selected == 4 && $player.has_poke_nav_quests)
             pbFadeOutIn {
               scene = QuestList_Scene.new
               screen = QuestList_Screen.new(scene)
               screen.pbStartScreen
             }
           end
-          if(@nav_selected == 5) # Online -----------------------------------------------------------------------
+          # Online -----------------------------------------------------------------------
+          if(@nav_selected == 5 && $player.has_poke_nav_online)
             pbCableClub
           end
-          if(@nav_selected == 6) # Wonder Trade -----------------------------------------------------------------
+          # Wonder Trade -----------------------------------------------------------------
+          if(@nav_selected == 6 && $player.has_poke_nav_wonder)
             pbWonderTrade
           end
       elsif Input.trigger?(Input::BACK)

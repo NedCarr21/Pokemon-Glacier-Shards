@@ -1,0 +1,33 @@
+# Audio, Graphics and Plugins folders
+Audio/
+Graphics/
+Plugins/
+Server/
+
+# Data folder, but not Data/Scripts folder or messages_core.dat
+Data/*
+!Data/Scripts.rxdata
+!Data/Scripts/
+!Data/messages_core.dat
+
+# Files in the main project folder
+Game.ini
+Game.rxproj
+RGSS*.dll
+
+# Common code editor folders & files
+.vscode/
+*.code-workspace
+.idea/
+*.mkproj
+
+# Operating system generated files & folders
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+
+# Temp files
+
+~*

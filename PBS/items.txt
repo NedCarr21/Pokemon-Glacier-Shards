@@ -325,7 +325,7 @@ Description = A black Apricorn. It has an indescribable scent.
 [HELIXFOSSIL]
 Name = Helix Fossil
 NamePlural = Helix Fossils
-Pocket = 1
+Pocket = 6
 Price = 7000
 Flags = Fossil,Fling_100
 Description = A fossil of an ancient Pokémon that lived in the sea. It appears to be part of a seashell.
@@ -333,7 +333,7 @@ Description = A fossil of an ancient Pokémon that lived in the sea. It appears 
 [DOMEFOSSIL]
 Name = Dome Fossil
 NamePlural = Dome Fossils
-Pocket = 1
+Pocket = 6
 Price = 7000
 Flags = Fossil,Fling_100
 Description = A fossil of an ancient Pokémon that lived in the sea. It appears to be part of a shell.
@@ -341,7 +341,7 @@ Description = A fossil of an ancient Pokémon that lived in the sea. It appears 
 [OLDAMBER]
 Name = Old Amber
 NamePlural = Old Ambers
-Pocket = 1
+Pocket = 6
 Price = 1000
 Flags = Fossil,Fling_100
 Description = A piece of amber that contains the genes of an ancient Pokémon. It is clear with a reddish tint.
@@ -349,7 +349,7 @@ Description = A piece of amber that contains the genes of an ancient Pokémon. I
 [ROOTFOSSIL]
 Name = Root Fossil
 NamePlural = Root Fossils
-Pocket = 1
+Pocket = 6
 Price = 7000
 Flags = Fossil,Fling_100
 Description = A fossil of an ancient Pokémon that lived in the sea. It appears to be part of a plant root.
@@ -357,7 +357,7 @@ Description = A fossil of an ancient Pokémon that lived in the sea. It appears 
 [CLAWFOSSIL]
 Name = Claw Fossil
 NamePlural = Claw Fossils
-Pocket = 1
+Pocket = 6
 Price = 7000
 Flags = Fossil,Fling_100
 Description = A fossil of an ancient Pokémon that lived in the sea. It appears to be part of a claw.
@@ -365,7 +365,7 @@ Description = A fossil of an ancient Pokémon that lived in the sea. It appears 
 [SKULLFOSSIL]
 Name = Skull Fossil
 NamePlural = Skull Fossils
-Pocket = 1
+Pocket = 6
 Price = 7000
 Flags = Fossil,Fling_100
 Description = A fossil from a prehistoric Pokémon that lived on the land. It appears to be part of a head.
@@ -373,7 +373,7 @@ Description = A fossil from a prehistoric Pokémon that lived on the land. It ap
 [ARMORFOSSIL]
 Name = Armor Fossil
 NamePlural = Armor Fossils
-Pocket = 1
+Pocket = 6
 Price = 7000
 Flags = Fossil,Fling_100
 Description = A fossil from a prehistoric Pokémon that lived on the land. It appears to be part of a collar.
@@ -381,7 +381,7 @@ Description = A fossil from a prehistoric Pokémon that lived on the land. It ap
 [COVERFOSSIL]
 Name = Cover Fossil
 NamePlural = Cover Fossils
-Pocket = 1
+Pocket = 6
 Price = 7000
 Flags = Fossil,Fling_100
 Description = A fossil of an ancient Pokémon that lived in the sea in ancient times. It appears to be part of its back.
@@ -389,7 +389,7 @@ Description = A fossil of an ancient Pokémon that lived in the sea in ancient t
 [PLUMEFOSSIL]
 Name = Plume Fossil
 NamePlural = Plume Fossils
-Pocket = 1
+Pocket = 6
 Price = 7000
 Flags = Fossil,Fling_100
 Description = A fossil of an ancient Pokémon that flew in the sky in ancient times. It appears to be part of its wing.
@@ -397,7 +397,7 @@ Description = A fossil of an ancient Pokémon that flew in the sky in ancient ti
 [JAWFOSSIL]
 Name = Jaw Fossil
 NamePlural = Jaw Fossils
-Pocket = 1
+Pocket = 6
 Price = 7000
 Flags = Fossil,Fling_100
 Description = A fossil from a prehistoric Pokémon that once lived on the land. It appears to be part of a large jaw.
@@ -405,7 +405,7 @@ Description = A fossil from a prehistoric Pokémon that once lived on the land. 
 [SAILFOSSIL]
 Name = Sail Fossil
 NamePlural = Sail Fossils
-Pocket = 1
+Pocket = 6
 Price = 7000
 Flags = Fossil,Fling_100
 Description = A fossil from a prehistoric Pokémon that once lived on the land. It looks like the impression from a skin sail.
@@ -413,7 +413,7 @@ Description = A fossil from a prehistoric Pokémon that once lived on the land. 
 [FOSSILIZEDBIRD]
 Name = Fossilized Bird
 NamePlural = Fossilized Birds
-Pocket = 1
+Pocket = 6
 Price = 5000
 Flags = Fling_100
 Description = The fossil of an ancient Pokémon that once soared through the sky. What it looked like is a mystery.
@@ -421,7 +421,7 @@ Description = The fossil of an ancient Pokémon that once soared through the sky
 [FOSSILIZEDFISH]
 Name = Fossilized Fish
 NamePlural = Fossilized Fish
-Pocket = 1
+Pocket = 6
 Price = 5000
 Flags = Fling_100
 Description = The fossil of an ancient Pokémon that once lived in the sea. What it looked like is a mystery.
@@ -429,7 +429,7 @@ Description = The fossil of an ancient Pokémon that once lived in the sea. What
 [FOSSILIZEDDRAKE]
 Name = Fossilized Drake
 NamePlural = Fossilized Drakes
-Pocket = 1
+Pocket = 6
 Price = 5000
 Flags = Fling_100
 Description = The fossil of an ancient Pokémon that once roamed the land. What it looked like is a mystery.
@@ -437,7 +437,7 @@ Description = The fossil of an ancient Pokémon that once roamed the land. What 
 [FOSSILIZEDDINO]
 Name = Fossilized Dino
 NamePlural = Fossilized Dinos
-Pocket = 1
+Pocket = 6
 Price = 5000
 Flags = Fling_100
 Description = The fossil of an ancient Pokémon that once lived in the sea. What it looked like is a mystery.
@@ -445,7 +445,7 @@ Description = The fossil of an ancient Pokémon that once lived in the sea. What
 [PRETTYFEATHER]
 Name = Pretty Feather
 NamePlural = Pretty Feathers
-Pocket = 1
+Pocket = 6
 Price = 1000
 Flags = Fling_20
 Description = Though this feather is beautiful, it's just a regular feather and has no effect on Pokémon.
@@ -453,7 +453,7 @@ Description = Though this feather is beautiful, it's just a regular feather and 
 [TINYMUSHROOM]
 Name = Tiny Mushroom
 NamePlural = Tiny Mushrooms
-Pocket = 1
+Pocket = 6
 Price = 500
 Flags = Fling_30
 Description = A small and rare mushroom. It is sought after by collectors.
@@ -461,7 +461,7 @@ Description = A small and rare mushroom. It is sought after by collectors.
 [BIGMUSHROOM]
 Name = Big Mushroom
 NamePlural = Big Mushrooms
-Pocket = 1
+Pocket = 6
 Price = 5000
 Flags = Fling_30
 Description = A large and rare mushroom. It is sought after by collectors.
@@ -469,7 +469,7 @@ Description = A large and rare mushroom. It is sought after by collectors.
 [BALMMUSHROOM]
 Name = Balm Mushroom
 NamePlural = Balm Mushrooms
-Pocket = 1
+Pocket = 6
 Price = 15000
 Flags = Fling_30
 Description = A rare mushroom which gives off a nice fragrance. A maniac will buy it for a high price.
@@ -477,7 +477,7 @@ Description = A rare mushroom which gives off a nice fragrance. A maniac will bu
 [PEARL]
 Name = Pearl
 NamePlural = Pearls
-Pocket = 1
+Pocket = 6
 Price = 2000
 Flags = Fling_30
 Description = A somewhat-small pearl that sparkles in a pretty silver color. It can be sold cheaply to shops.
@@ -485,7 +485,7 @@ Description = A somewhat-small pearl that sparkles in a pretty silver color. It 
 [BIGPEARL]
 Name = Big Pearl
 NamePlural = Big Pearls
-Pocket = 1
+Pocket = 6
 Price = 8000
 Flags = Fling_30
 Description = A quite-large pearl that sparkles in a pretty silver color. It can be sold at a high price to shops.
@@ -493,7 +493,7 @@ Description = A quite-large pearl that sparkles in a pretty silver color. It can
 [PEARLSTRING]
 Name = Pearl String
 NamePlural = Pearl Strings
-Pocket = 1
+Pocket = 6
 Price = 20000
 Flags = Fling_30
 Description = Very large pearls that sparkle in a pretty silver color. A maniac will buy them for a high price.
@@ -503,7 +503,7 @@ Name = Stardust
 NamePlural = Stardusts
 PortionName = bag of Stardust
 PortionNamePlural = bags of Stardust
-Pocket = 1
+Pocket = 6
 Price = 3000
 Flags = Fling_30
 Description = Lovely, red-colored sand with a loose, silky feel. It can be sold at a high price to shops.
@@ -511,7 +511,7 @@ Description = Lovely, red-colored sand with a loose, silky feel. It can be sold 
 [STARPIECE]
 Name = Star Piece
 NamePlural = Star Pieces
-Pocket = 1
+Pocket = 6
 Price = 12000
 Flags = Fling_30
 Description = A shard of a pretty gem that sparkles in a red color. It can be sold at a high price to shops.
@@ -519,7 +519,7 @@ Description = A shard of a pretty gem that sparkles in a red color. It can be so
 [COMETSHARD]
 Name = Comet Shard
 NamePlural = Comet Shards
-Pocket = 1
+Pocket = 6
 Price = 25000
 Flags = Fling_30
 Description = A shard which fell to the ground when a comet approached. A maniac will buy it for a high price.
@@ -527,7 +527,7 @@ Description = A shard which fell to the ground when a comet approached. A maniac
 [NUGGET]
 Name = Nugget
 NamePlural = Nuggets
-Pocket = 1
+Pocket = 6
 Price = 10000
 Flags = Fling_30
 Description = A nugget of pure gold that gives off a lustrous gleam. It can be sold at a high price to shops.
@@ -535,7 +535,7 @@ Description = A nugget of pure gold that gives off a lustrous gleam. It can be s
 [BIGNUGGET]
 Name = Big Nugget
 NamePlural = Big Nuggets
-Pocket = 1
+Pocket = 6
 Price = 40000
 Flags = Fling_130
 Description = A big nugget of pure gold that gives off a lustrous gleam. A maniac will buy it for a high price.
@@ -543,7 +543,7 @@ Description = A big nugget of pure gold that gives off a lustrous gleam. A mania
 [HEARTSCALE]
 Name = Heart Scale
 NamePlural = Heart Scales
-Pocket = 1
+Pocket = 6
 Price = 100
 Flags = Fling_30
 Description = A pretty, heart-shaped scale that is extremely rare. It glows faintly in the colors of the rainbow.
@@ -551,14 +551,14 @@ Description = A pretty, heart-shaped scale that is extremely rare. It glows fain
 [SLOWPOKETAIL]
 Name = Slowpoke Tail
 NamePlural = Slowpoke Tails
-Pocket = 1
+Pocket = 6
 Price = 10000
 Description = A very tasty tail of something. It can be sold at a high price to shops.
 #-------------------------------
 [RAREBONE]
 Name = Rare Bone
 NamePlural = Rare Bones
-Pocket = 1
+Pocket = 6
 Price = 5000
 Flags = Fling_100
 Description = A bone that is extremely valuable for Pokémon archaeology. It can be sold for a high price to shops.
@@ -568,7 +568,7 @@ Name = Relic Copper
 NamePlural = Relic Coppers
 PortionName = Relic Copper coin
 PortionNamePlural = Relic Copper coins
-Pocket = 1
+Pocket = 6
 Price = 0
 Flags = Fling_30
 Description = A copper coin used in a civilization about 3,000 years ago. A maniac will buy it for a high price.
@@ -578,7 +578,7 @@ Name = Relic Silver
 NamePlural = Relic Silvers
 PortionName = Relic Silver coin
 PortionNamePlural = Relic Silver coins
-Pocket = 1
+Pocket = 6
 Price = 0
 Flags = Fling_30
 Description = A silver coin used in a civilization about 3,000 years ago. A maniac will buy it for a high price.
@@ -588,15 +588,15 @@ Name = Relic Gold
 NamePlural = Relic Golds
 PortionName = Relic Gold coin
 PortionNamePlural = Relic Gold coins
-Pocket = 1
-Price = 60000
+Pocket = 6
+Price = 0
 Flags = Fling_30
 Description = A gold coin used in a civilization about 3,000 years ago. A maniac will buy it for a high price.
 #-------------------------------
 [RELICVASE]
 Name = Relic Vase
 NamePlural = Relic Vases
-Pocket = 1
+Pocket = 6
 Price = 0
 Flags = Fling_30
 Description = A vase made in a civilization about 3,000 years ago. A maniac will buy it for a high price.
@@ -604,7 +604,7 @@ Description = A vase made in a civilization about 3,000 years ago. A maniac will
 [RELICBAND]
 Name = Relic Band
 NamePlural = Relic Bands
-Pocket = 1
+Pocket = 6
 Price = 0
 Flags = Fling_30
 Description = A bracelet made in a civilization about 3,000 years ago. A maniac will buy it for a high price.
@@ -612,7 +612,7 @@ Description = A bracelet made in a civilization about 3,000 years ago. A maniac 
 [RELICSTATUE]
 Name = Relic Statue
 NamePlural = Relic Statues
-Pocket = 1
+Pocket = 6
 Price = 0
 Flags = Fling_30
 Description = A stone figure made in a civilization about 3,000 years ago. A maniac will buy it for a high price.
@@ -620,7 +620,7 @@ Description = A stone figure made in a civilization about 3,000 years ago. A man
 [RELICCROWN]
 Name = Relic Crown
 NamePlural = Relic Crowns
-Pocket = 1
+Pocket = 6
 Price = 0
 Flags = Fling_30
 Description = A crown made in a civilization about 3,000 years ago. A maniac will buy it for a high price.
@@ -670,7 +670,7 @@ Name = Shoal Salt
 NamePlural = Shoal Salts
 PortionName = pile of Shoal Salt
 PortionNamePlural = piles of Shoal Salt
-Pocket = 1
+Pocket = 6
 Price = 20
 Flags = Fling_30
 Description = Pure salt that can be discovered deep inside the Shoal Cave. A maniac will buy it for a high price.
@@ -678,7 +678,7 @@ Description = Pure salt that can be discovered deep inside the Shoal Cave. A man
 [SHOALSHELL]
 Name = Shoal Shell
 NamePlural = Shoal Shells
-Pocket = 1
+Pocket = 6
 Price = 20
 Flags = Fling_30
 Description = A pretty seashell that can be found deep inside the Shoal Cave. A maniac will buy it for a high price.
@@ -686,7 +686,7 @@ Description = A pretty seashell that can be found deep inside the Shoal Cave. A 
 [ODDKEYSTONE]
 Name = Odd Keystone
 NamePlural = Odd Keystones
-Pocket = 1
+Pocket = 6
 Price = 1050
 Flags = Fling_80
 Description = A vital item that is needed to keep a stone tower from collapsing. Voices can be heard from it occasionally.

@@ -4,9 +4,9 @@ class Game_Temp
   alias vms_initialize initialize
 
   def initialize
+    Kernel.at_exit() { VMS.leave }
     vms_initialize
     @vms = {
-      last_message: {},
       socket: nil,
       cluster: -1,
       players: {},
@@ -15,8 +15,25 @@ class Game_Temp
       ping_log: [],
       state: [:idle, nil],
       seed: 0,
-      battle_player: nil
+      battle_player: nil,
+      online_variables: {}
     }
+  end
+end
+
+module Graphics
+  class << self
+    alias vms_update update unless method_defined?(:vms_update)
+
+    def update(update_vms = true)
+      vms_update
+      if update_vms && VMS.is_connected?
+        # Update VMS
+        VMS.update
+        # Clear events if necessary
+        VMS.clean_up_events
+      end
+    end
   end
 end
 
@@ -37,6 +54,40 @@ class AnimationSprite < RPG::Sprite
   def tileY;        return @tileY;         end
   def tinting;      return @tinting;       end
   def height;       return @height;        end
+end
+
+module VMS
+  def self.set_all_vms_events_through(through)
+    return if !VMS.is_connected?
+    return if through.nil?
+    return if !through.is_a?(TrueClass) && !through.is_a?(FalseClass)
+    return if $game_map.nil?
+    $game_map.events.each_value do |event|
+      next if event.nil?
+      next if event.erased?
+      next if event.name.nil?
+      next if !event.name.include?("vms_player")
+      next if event.through == through
+      event.through = through
+    end
+  end
+end
+
+alias vms_pbEventCanReachPlayer? pbEventCanReachPlayer?
+def pbEventCanReachPlayer?(event, player, distance)
+  VMS.set_all_vms_events_through(true)
+  ret = vms_pbEventCanReachPlayer?(event, player, distance)
+  VMS.set_all_vms_events_through(VMS::THROUGH)
+  return ret
+end
+
+class Interpreter
+  alias vms_update update unless method_defined?(:vms_update)
+  def update
+    VMS.set_all_vms_events_through(true)
+    vms_update
+    VMS.set_all_vms_events_through(VMS::THROUGH)
+  end
 end
 
 class Spriteset_Map
@@ -207,25 +258,11 @@ end
 
 module VMS
   class Player
+    attr_accessor :is_new
+
     def party
       @party = VMS.update_party(self)
       return @party
-    end
-  end
-end
-
-module Graphics
-  class << self
-    alias vms_update update unless method_defined?(:vms_update)
-
-    def update(update_vms = true)
-      vms_update
-      if update_vms
-        # Update VMS
-        VMS.update
-        # Clear events if necessary
-        VMS.clean_up_events
-      end
     end
   end
 end
@@ -267,6 +304,14 @@ module Transitions
     def update
       VMS.update if VMS.is_connected? && !disposed?
       vms_update
+    end
+  end
+end
+
+module RPG
+  class Sprite < ::Sprite
+    def frame
+      return @_animation_frame || 0
     end
   end
 end
@@ -328,16 +373,16 @@ MenuHandlers.add(:pause_menu, :vms, {
   "effect"    => proc { |menu|
     menu.pbHideMenu
     choices = ["Create cluster", "Join cluster", "Cancel"]
-    choice = pbMessage(_INTL("What would you like to do?"), choices)
+    choice = VMS.message(VMS::MENU_CHOICES_MESSAGE, choices)
     case choice
     when 0 # Create cluster
       VMS.join(rand(10000...99999))
     when 1 # Join cluster
       id = "0"
       loop do
-        id = pbMessageFreeText(_INTL("Enter the cluster ID:"), "", false, 5)
+        id = pbMessageFreeText(VMS::MENU_ENTER_CLUSTER_ID_MESSAGE, "", false, 5)
         if id.length != 5 || id.to_i.to_s != id
-          pbMessage(_INTL("Invalid cluster ID."))
+          VMS.message(VMS::MENU_INVALID_CLUSTER_MESSAGE)
         else
           break
         end
@@ -348,7 +393,7 @@ MenuHandlers.add(:pause_menu, :vms, {
         end
       end
       VMS.join(id.to_i)
-      pbMessage(_INTL("Cluster was not found, created new cluster instead.")) if VMS.is_connected? && VMS.get_player_count == 1
+      VMS.message(VMS::MENU_CLUSTER_NOT_FOUND_MESSAGE) if VMS.is_connected? && VMS.get_player_count == 1
     when 2 # Cancel
       menu.pbShowMenu
       menu.pbRefresh
@@ -365,7 +410,7 @@ MenuHandlers.add(:pause_menu, :vms_disconnect, {
   "condition" => proc { VMS::ACCESSIBLE_PROC.call && VMS::ACCESSIBLE_FROM_PAUSE_MENU && VMS.is_connected? },
   "effect"    => proc { |menu|
     menu.pbHideMenu
-    if pbConfirmMessage(_INTL("Are you sure you want to disconnect?"))
+    if pbConfirmMessage(VMS::DISCONNECT_CONFIRMATION_MESSAGE)
       VMS.leave
       menu.pbEndScene
       next true

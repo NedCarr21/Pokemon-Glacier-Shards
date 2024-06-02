@@ -42,16 +42,17 @@ Cave,12
 #-------------------------------
 [009] # Hidden Grotto
 Land,15
-    40,SHROOMISH,2,4
-    30,SNOVER,2,3
+    30,SHROOMISH,2,4
+    25,SNOVER,2,3
     20,WURMPLE,2,3
-    10,MURKROW,2,4
+    15,MURKROW,2,4
+    10,SMOLIV,3,4
 PhenomenonGrass,1
-    35,AUDINO,2,4
-    30,PIKACHU,3,4
-    20,DELIBIRD,3,5
+    50,AUDINO,2,4
+    20,PAWMI,3,4
+    15,DELIBIRD,3,5
     10,SHELLDER,3,5
-    5,RAICHU,4,5
+    5,PAWMI,4,5
 #-------------------------------
 [010] # Safeway Path
 Land,15
@@ -100,16 +101,18 @@ DexNav,1
 [014] # Frosty Forest
 Land,15
     30,DELIBIRD,35,38
-    30,SNOVER,35,38
+    20,SNOVER,35,38
     20,SNEASEL,35,38
+    10,DOLLIV,35,37
     10,MINIOR,37,38
     5,PHANTUMP,36,38
     5,PUMPKABOO,36,38
 PhenomenonGrass,1
-    65,AUDINO,36,38
+    60,AUDINO,36,38
     15,GOURGEIST,37,38
     15,TREVENANT,37,38
     5,WEAVILE,37,38
+    5,ARBOLIVA,38
 #-------------------------------
 [015] # Wonder Trade
 Land,1
@@ -158,9 +161,19 @@ Land,1
     1,POIPOLE,5
     1,NAGANADEL,5
 #-------------------------------
+[017] # Dragon Fang Cave
+Land,15
+    25,PAWMI,2,4
+PhenomenonCave,1
+    35,AUDINO,2,4
+DexNav,1
+    33,MANKEY,2,4
+    33,NIDORANfE,2,4
+    33,NIDORANmA,2,4
+#-------------------------------
 [032] # Mountain Pass
 Land,15
-    25,PICHU,2,4
+    25,PAWMI,2,4
     15,GROWLITHE,3,4
     15,SLOWPOKE,2,4
     15,SNOVER,2,4
@@ -169,10 +182,10 @@ Land,15
     8,SHELLDER,3,5
 PhenomenonGrass,1
     35,AUDINO,2,4
-    30,PIKACHU,3,4
+    30,PAWMI,3,4
     20,DELIBIRD,3,5
     10,SHELLDER,3,5
-    5,RAICHU,4,5
+    5,PAWMI,4,5
 DexNav,1
     33,MANKEY,2,4
     33,NIDORANfE,2,4
@@ -181,16 +194,16 @@ DexNav,1
 [033] # Passway Cave
 Cave,12
     30,GEODUDE,3,5
-    30,SNOVER,3,5
+    30,GASTLY_1,3,5
     15,ARON,3,5
     15,SHELLDER,3,5
     5,DELIBIRD,4,5
     5,SLOWPOKE,4,5
 PhenomenonCave,1
-    45,DRILBUR,3,5
+    60,DRILBUR,3,5
     25,GEODUDE_1,4,5
-    25,SANDILE,4,5
-    5,ARON,4,5
+    10,ARON,4,5
+    5,SANDILE,4,5
 #-------------------------------
 [042] # Passway Cave BF1
 Cave,12
@@ -231,13 +244,13 @@ Land,15
     10,ABRA,10,13
     10,MACHOP,10,13
     10,SLOWPOKE,11,13
-    5,PIKACHU,11,13
+    5,PAWMI,11,13
 PhenomenonGrass,1
     40,AUDINO,10,12
-    25,PIKACHU,10,12
+    25,PAWMI,10,12
     20,DELIBIRD,10,13
     10,SLOWPOKE,11,13
-    5,RAICHU,11,13
+    5,PAWMI,11,13
 DexNav,1
     33,MAREEP,10,12
     33,SENTRET,10,12
@@ -270,14 +283,13 @@ Land,15
     10,SLOWPOKE,8,10
     10,SNOVER,8,11
     5,MINUN,9,11
-    5,PICHU,8,10
+    5,PAWMI,8,10
     5,PLUSLE,9,11
 PhenomenonGrass,1
     50,AUDINO,8,10
     20,MINUN,8,9
     20,PLUSLE,8,9
-    5,RAICHU,9,10
-    5,RAICHU_1,9,10
+    10,PAWMI,9,10
 #-------------------------------
 [079] # Wooded Hill
 Land,15
@@ -354,7 +366,7 @@ Land,15
     20,DELIBIRD,31,34
     20,DUNSPARCE,31,34
     15,EEVEE,31,34
-    15,PIKACHU,31,34
+    15,PAWMO,31,34
     15,SNOVER,31,34
     5,BIDOOF,31,34
     5,BONSLY,31,34
@@ -364,8 +376,7 @@ PhenomenonGrass,1
     15,BIBAREL,31,34
     15,HELIOLISK,31,34
     15,SUDOWOODO,31,34
-    3,RAICHU,31,34
-    2,RAICHU_1,31,34
+    5,PAWMOT,31,34
 #-------------------------------
 [086] # Shulk Caverns F4
 Cave,12
@@ -449,7 +460,7 @@ PhenomenonCave,1
 [092] # Icy Plains
 Land,15
     25,SNOVER,18,20
-    20,PIKACHU,18,20
+    20,PAWMO,18,20
     15,WINGULL,18,20
     10,RATTATA,18,20
     10,SLOWPOKE,18,20
@@ -458,14 +469,14 @@ Land,15
     5,SNEASEL,18,20
 PhenomenonGrass,1
     60,AUDINO,18,20
-    20,PIKACHU,18,20
+    20,PAWMO,18,20
     15,LOTAD,18,20
     5,WEAVILE,18,20
 #-------------------------------
 [093] # Icy Plains
 Land,15
     25,SNOVER,19,21
-    20,PICHU,19,21
+    20,PAWMI,19,21
     15,WINGULL,19,21
     10,RATTATA,19,21
     10,SLOWPOKE,19,21
@@ -474,7 +485,7 @@ Land,15
     5,SNEASEL,19,21
 PhenomenonGrass,1
     60,AUDINO,18,20
-    20,PIKACHU,18,20
+    20,PAWMO,18,20
     15,LOTAD,18,20
     5,WEAVILE,18,20
 #-------------------------------
@@ -516,7 +527,7 @@ Land,15
     5,WINGULL,24,27
 PhenomenonGrass,1
     40,AUDINO,24,27
-    20,PIKACHU,24,27
+    20,PAWMO,24,27
     10,CUTIEFLY,24,27
     10,GIBLE,24,27
     10,HONEDGE,24,27

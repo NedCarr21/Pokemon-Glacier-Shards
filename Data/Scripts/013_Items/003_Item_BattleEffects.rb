@@ -366,11 +366,17 @@ ItemHandlers::BattleUseOnPokemon.add(:MOOMOOMILK, proc { |item, pokemon, battler
 })
 
 ItemHandlers::BattleUseOnPokemon.add(:ORANBERRY, proc { |item, pokemon, battler, choices, scene|
-  pbBattleHPItem(pokemon, battler, 10, scene)
+  amt = 10
+  amt = 20 if pkmn.likeditem.id == :ORANBERRY
+  amt = 5 if pkmn.dislikeditem.id == :ORANBERRY
+  pbBattleHPItem(pokemon, battler, amt, scene)
 })
 
 ItemHandlers::BattleUseOnPokemon.add(:SITRUSBERRY, proc { |item, pokemon, battler, choices, scene|
-  pbBattleHPItem(pokemon, battler, pokemon.totalhp / 4, scene)
+  amt = 4
+  amt = 2 if pkmn.likeditem.id == :SITRUSBERRY
+  amt = 8 if pkmn.dislikeditem.id == :SITRUSBERRY
+  pbBattleHPItem(pokemon, battler, pokemon.totalhp / amt, scene)
 })
 
 ItemHandlers::BattleUseOnPokemon.add(:AWAKENING, proc { |item, pokemon, battler, choices, scene|

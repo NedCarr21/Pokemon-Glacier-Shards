@@ -147,11 +147,10 @@ GameData::TerrainTag.register({
 GameData::TerrainTag.register({
   :id                     => :TallGrass,
   :id_number              => 10,
-  :deep_bush              => true,
+  :shows_grass_rustle     => true,
   :land_wild_encounters   => true,
   :double_wild_encounters => true,
-  :battle_environment     => :TallGrass,
-  :must_walk              => true
+  :battle_environment     => :TallGrass
 })
 
 GameData::TerrainTag.register({

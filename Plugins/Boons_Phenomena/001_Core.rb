@@ -135,7 +135,7 @@ class Phenomenon
       $scene.spriteset.addUserAnimation(animation[0], x, y, true, animation[2])
       pbSEPlay(animation[1], [75, 65, 55, 40, 27, 22, 15][dist]) if sound
     end
-    pbWait(1)
+    pbWait(0.025)
     self.instance.drawing = false if (self.instance)
   end
 

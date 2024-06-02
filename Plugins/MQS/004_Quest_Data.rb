@@ -5,15 +5,75 @@ module QuestModule
     :Name => "Find Theo",
     :QuestGiver => "Garrett",
     :Stage1 => "Travel South of Glaciet Town.",
-	:Stage2 => "Return to the Guild.",
+  	:Stage2 => "Return to the Guild.",
     :Location1 => "Passway Cave BF1",
-	:Location2 => "Guild Hall",
+  	:Location2 => "Guild Hall",
     :QuestDescription => "Theo went into Passway Cave, but hasn't returned yet, travel south through Mountain Pass to find Passway Cave and to find Theo.",
     :RewardString => "???"
   }
 
-  SILKENSCARF = {
+  OLDFRIEND = {
     :ID => "101",
+    :Name => "Old Friend",
+    :QuestGiver => "Garrett",
+    :Stage1 => "Search for someone in Apex Ridge.",
+	  :Stage2 => "Help Camphor find Rare Pokémon.",
+    :Location1 => "Apex Ridge",
+	  :Location2 => "Guild Hall",
+    :QuestDescription => "An old friend of Garrett's needs some assistance, travel up to Apex Ridge and find her to offer your help.",
+    :RewardString => "???"
+  }
+
+  PINOIDAEGANSTERS = {
+    :ID => "102",
+    :Name => "Pinoidae Gansters",
+    :QuestGiver => "Garrett",
+    :Stage1 => "Find the mayor of Pinoidae City.",
+	  :Stage2 => "Raid the Gangster HQ.",
+	  :Stage3 => "Return to the Mayor.",
+    :Location1 => "Pinoidae City",
+  	:Location2 => "Gangster HQ",
+	  :Location3 => "Mayor's Office",
+    :QuestDescription => "Pinoidae City is having troubles with ruffians around the city, travel down to the city, and help the mayor track them down.",
+    :RewardString => "???"
+  }
+
+  BRONZETIER = {
+    :ID => "103",
+    :Name => "The Bronze Tier",
+    :QuestGiver => "Theo",
+    :Stage1 => "Battle Theo for the Bronze Tier.",
+	  :Stage2 => "Return to the Guild Hall.",
+    :Location1 => "Blizmoor Town",
+  	:Location2 => "Guild Hall",
+    :QuestDescription => "After battling with Theo, a rock slide blocked off Shulk Caverns, travel to Pinoidae City to use the Staraptor Quick Travel System to return to the guild.",
+    :RewardString => "The Bronze Tier"
+  }
+
+  FROZENCOAST = {
+    :ID => "104",
+    :Name => "Frozen Coast Trouble",
+    :QuestGiver => "Garrett",
+    :Stage1 => "Travel to Frozen Coast.",
+	  :Stage2 => "Explore Frozen Coast.",
+    :Stage3 => "Explore Trito Village.",
+    :Stage4 => "Track the Gimmighoul.",
+    :Stage5 => "Defeat the Gholdengo.",
+    :Location1 => "Frozen Coast",
+	  :Location2 => "Frozen Coast",
+    :Location3 => "Trito Village",
+    :Location4 => "Frozen Coast",
+	  :Location5 => "Gholdengo Den",
+    :QuestDescription => "There's reports of some troubled Pokémon causing issues around Frozen Coast, travel there and see what's going on.",
+    :RewardString => "???"
+  }
+
+#-------------------------------------------------------------------------------
+# SIDE QUESTS
+#-------------------------------------------------------------------------------
+
+  SILKENSCARF = {
+    :ID => "201",
     :Name => "[SQ 01] A Silken Scarf",
     :QuestGiver => "Old Man",
     :Stage1 => "Find someone with a scarf in Glaciet Town.",
@@ -22,21 +82,19 @@ module QuestModule
     :RewardString => "A handsome reward."
   }
 
-  OLDFRIEND = {
-    :ID => "102",
-    :Name => "Old Friend",
-    :QuestGiver => "Garrett",
-    :Stage1 => "Search for someone in Apex Ridge.",
-	:Stage2 => "Help Camphor find Rare Pokémon.",
-    :Location1 => "Apex Ridge",
-	:Location2 => "Guild Hall",
-    :QuestDescription => "An old friend of Garrett's needs some assistance, travel up to Apex Ridge and find her to offer your help.",
-    :RewardString => "???"
+  BERRYCOLLECTOR = {
+    :ID => "202",
+    :Name => "[SQ 02] Berry Collector",
+    :QuestGiver => "Farmer",
+    :Stage1 => "Collect berries for the farmer.",
+    :Location1 => "Summit Trail",
+    :QuestDescription => "A farmer at Summit Trail is obsessed with berries, he wants you to collect some for him.",
+    :RewardString => "Berry Pots"
   }
 
   TVTHUMPING = {
-    :ID => "103",
-    :Name => "[SQ 02] TV Thumping",
+    :ID => "203",
+    :Name => "[SQ 03] TV Thumping",
     :QuestGiver => "Hiker",
     :Stage1 => "Attempt to fix the Hiker's TV.",
     :Location1 => "Apex Ridge",
@@ -44,45 +102,9 @@ module QuestModule
     :RewardString => "???"
   }
 
-  PINOIDAEGANSTERS = {
-    :ID => "104",
-    :Name => "Pinoidae Gansters",
-    :QuestGiver => "Garrett",
-    :Stage1 => "Find the mayor of Pinoidae City.",
-	:Stage2 => "Raid the Gangster HQ.",
-	:Stage3 => "Return to the Mayor.",
-    :Location1 => "Pinoidae City",
-	:Location2 => "Gangster HQ",
-	:Location3 => "Mayor's Office",
-    :QuestDescription => "Pinoidae City is having troubles with ruffians around the city, travel down to the city, and help the mayor track them down.",
-    :RewardString => "???"
-  }
-
-  BRONZETIER = {
-    :ID => "105",
-    :Name => "The Bronze Tier",
-    :QuestGiver => "Theo",
-    :Stage1 => "Battle Theo for the Bronze Tier.",
-	:Stage2 => "Return to the Guild Hall.",
-    :Location1 => "Blizmoor Town",
-	:Location2 => "Guild Hall",
-    :QuestDescription => "After battling with Theo, a rock slide blocked off Shulk Caverns, travel to Pinoidae City to use the Staraptor Quick Travel System to return to the guild.",
-    :RewardString => "The Bronze Tier"
-  }
-
-  LOSTBROTHER = {
-    :ID => "106",
-    :Name => "[SQ 05] Lost Brother",
-    :QuestGiver => "Little Girl",
-    :Stage1 => "Track down the little girls brother.",
-    :Location1 => "Wooded Cave",
-    :QuestDescription => "A little girl and her brother were exploring a cave, travel into the cave to find her lost younger brother.",
-    :RewardString => "???"
-  }
-
   LIVINGSANDCASTLE = {
-    :ID => "107",
-    :Name => "[SQ 03] Living Sandcastle",
+    :ID => "204",
+    :Name => "[SQ 04] Living Sandcastle",
     :QuestGiver => "Kimono Girl",
     :Stage1 => "Find a living sandcastle pokemon.",
     :Location1 => "Blizmoor Town",
@@ -91,8 +113,8 @@ module QuestModule
   }
 
   ROGUESANDCASTLE = {
-    :ID => "108",
-    :Name => "[SQ 04] Rogue Sandcastle",
+    :ID => "205",
+    :Name => "[SQ 05] Rogue Sandcastle",
     :QuestGiver => "???",
     :Stage1 => "Save the man from the Sandcastle, and calm it down.",
     :Location1 => "Sunflower Coast",
@@ -100,9 +122,19 @@ module QuestModule
     :RewardString => "???"
   }
 
+  LOSTBROTHER = {
+    :ID => "206",
+    :Name => "[SQ 06] Lost Brother",
+    :QuestGiver => "Little Girl",
+    :Stage1 => "Track down the little girls brother.",
+    :Location1 => "Wooded Cave",
+    :QuestDescription => "A little girl and her brother were exploring a cave, travel into the cave to find her lost younger brother.",
+    :RewardString => "???"
+  }
+
   ROGUEBAT = {
-    :ID => "109",
-    :Name => "[SQ 06] Rogue Bat",
+    :ID => "207",
+    :Name => "[SQ 07] Rogue Bat",
     :QuestGiver => "???",
     :Stage1 => "A Crobat has gone rogue, battle it, and calm it down.",
     :Location1 => "Shulk Caverns BF1",
@@ -111,8 +143,8 @@ module QuestModule
   }
 
   SCYTHERSEARCHER = {
-    :ID => "110",
-    :Name => "[SQ 07] Scyther Searcher",
+    :ID => "208",
+    :Name => "[SQ 08] Scyther Searcher",
     :QuestGiver => "Bug Catcher",
     :Stage1 => "Show a scyther caught in The Deep Dark to the bug catcher.",
     :Location1 => "The Deep Dark",
@@ -121,8 +153,8 @@ module QuestModule
   }
 
   EXTRABERRIES = {
-    :ID => "111",
-    :Name => "[SQ 08] Extra Berries",
+    :ID => "209",
+    :Name => "[SQ 09] Extra Berries",
     :QuestGiver => "???",
     :Stage1 => "A berry farmer is looking to grow some new berries.",
     :Location1 => "Trito Village",

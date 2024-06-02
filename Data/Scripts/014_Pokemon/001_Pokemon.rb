@@ -84,6 +84,10 @@ class Pokemon
   attr_accessor :cannot_release
   # Whether this Pokémon can be traded
   attr_accessor :cannot_trade
+  # The Pokémon's liked item
+  attr_accessor :likeditem
+  # The Pokémon's disliked item
+  attr_accessor :dislikeditem
 
   # Max total IVs
   IV_STAT_LIMIT = 31
@@ -95,6 +99,14 @@ class Pokemon
   MAX_NAME_SIZE = 10
   # Maximum number of moves a Pokémon can know at once
   MAX_MOVES     = 4
+
+  LIKED_ITEMS = [
+    :ORANBERRY, :SITRUSBERRY,
+    :AGUAVBERRY, :ENIGMABERRY, :FIGYBERRY, :IAPAPABERRY, :MAGOBERRY, :POMEGBERRY, :WIKIBERRY,
+    :BERRYJUICE, :FRESHWATER, :SODAPOP, :LEMONADE, :MOOMOOMILK,
+    :POTION, :SUPERPOTION, :HYPERPOTION,
+    :EXPCANDYXS, :EXPCANDYS, :EXPCANDYM, :EXPCANDYL, :EXPCANDYXL, :RARECANDY
+  ].sample(2)
 
   def self.play_cry(species, form = 0, volume = 90, pitch = 100)
     GameData::Species.play_cry_from_species(species, form, volume, pitch)
@@ -1127,6 +1139,26 @@ class Pokemon
   end
 
   #=============================================================================
+  # Liked and Disliked Items
+  #=============================================================================
+
+  def likeditem
+    return @likeditem
+  end
+
+  def dislikeditem
+    return @dislikeditem
+  end
+
+  def likeditem=(value)
+    @likeditem = (value) ? GameData::Item.get(value).id : value
+  end
+
+  def dislikeditem=(value)
+    @dislikeditem = (value) ? GameData::Item.get(value).id : value
+  end
+
+  #=============================================================================
   # Pokémon creation
   #=============================================================================
 
@@ -1215,6 +1247,8 @@ class Pokemon
     @personalID       = rand(2**16) | (rand(2**16) << 16)
     @hp               = 1
     @totalhp          = 1
+    @likeditem        = GameData::Item.get(LIKED_ITEMS[0])
+    @dislikeditem     = GameData::Item.get(LIKED_ITEMS[1])
     calc_stats
     if @form == 0 && recheck_form
       f = MultipleForms.call("getFormOnCreation", self)

@@ -19,7 +19,7 @@ class Quest
     self.color    = color
     self.story    = story
   end
-  
+
   def stage=(value)
     if value > $quest_data.getMaxStagesForQuest(self.id)
       value = $quest_data.getMaxStagesForQuest(self.id)
@@ -36,16 +36,16 @@ class Player_Quests
   attr_accessor :completed_quests
   attr_accessor :failed_quests
   attr_accessor :selected_quest_id
-  
+
   def initialize
     @active_quests     = []
     @completed_quests  = []
     @failed_quests     = []
     @selected_quest_id = 0
   end
-  
+
   # questID should be the symbolic name of the quest, e.g. :Quest1
-  def activateQuest(quest,color,story)
+  def activateQuest(quest,color = colorQuest("orange"),story = true)
     if !quest.is_a?(Symbol)
       raise _INTL("The 'quest' argument should be a symbol, e.g. ':Quest1'.")
     end
@@ -68,9 +68,9 @@ class Player_Quests
       end
     end
     @active_quests.push(Quest.new(quest,color,story))
-    pbMessage(_INTL("\\se[{1}]<ac><c2=#{colorQuest("red")}>New quest discovered!</c2>\nCheck your quest log for more details!</ac>",QUEST_JINGLE))
+    pbMessage(_INTL("\\se[{1}]<ac><c2=#{colorQuest("red")}>New quest discovered!</c2>\nCheck the quest app in your PokéNav for more details!</ac>",QUEST_JINGLE))
   end
-  
+
   def failQuest(quest,color,story)
     if !quest.is_a?(Symbol)
       raise _INTL("The 'quest' argument should be a symbol, e.g. ':Quest1'.")
@@ -87,7 +87,7 @@ class Player_Quests
         pbMessage("You have already failed this quest.")
         return
       end
-    end 
+    end
     for i in 0...@active_quests.length
       if @active_quests[i].id == quest
         temp_quest = @active_quests[i]
@@ -106,7 +106,7 @@ class Player_Quests
       @failed_quests.push(Quest.new(quest,color,story))
     end
   end
-  
+
   def completeQuest(quest,color,story)
     if !quest.is_a?(Symbol)
       raise _INTL("The 'quest' argument should be a symbol, e.g. ':Quest1'.")
@@ -123,7 +123,7 @@ class Player_Quests
         pbMessage("You have already failed this quest.")
         return
       end
-    end  
+    end
     for i in 0...@active_quests.length
       if @active_quests[i].id == quest
         temp_quest = @active_quests[i]
@@ -142,7 +142,7 @@ class Player_Quests
       @completed_quests.push(Quest.new(quest,color,story))
     end
   end
-  
+
   def advanceQuestToStage(quest,stageNum,color,story)
     if !quest.is_a?(Symbol)
       raise _INTL("The 'quest' argument should be a symbol, e.g. ':Quest1'.")
@@ -177,7 +177,7 @@ class PokemonGlobalMetadata
     @quests = Player_Quests.new if !@quests
     return @quests
   end
-  
+
   alias quest_init initialize
   def initialize
     quest_init
@@ -286,26 +286,26 @@ class QuestData
   def getStageLocation(quest,stage)
     loc = ("Location" + "#{stage}").to_sym
     return "#{QuestModule.const_get(quest)[loc]}"
-  end  
+  end
 
   # Get summary of current task
   def getStageDescription(quest,stage)
     stg = ("Stage" + "#{stage}").to_sym
     return "#{QuestModule.const_get(quest)[stg]}"
-  end 
+  end
 ### Code for Percy
   # Get current stage label
   def getStageLabel(quest,stage)
     lab = ("StageLabel" + "#{stage}").to_sym
     return "#{QuestModule.const_get(quest)[lab]}"
-  end 
+  end
 ###
   # Get maximum number of tasks for quest
   def getMaxStagesForQuest(quest)
     quests = getQuestStages(quest)
     return quests.length
   end
-  
+
 end
 
 # Global variable to make it easier to refer to methods in above class
@@ -317,12 +317,12 @@ $quest_data = QuestData.new
 
 # Utility function to check whether the player current has any quests
 def hasAnyQuests?
-  if $PokemonGlobal.quests.active_quests.length >0 || 
+  if $PokemonGlobal.quests.active_quests.length >0 ||
     $PokemonGlobal.quests.completed_quests.length >0 ||
     $PokemonGlobal.quests.failed_quests.length >0
     return true
   end
-  return false      
+  return false
 end
 
 def getCurrentStage(quest)
