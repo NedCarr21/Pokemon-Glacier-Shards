@@ -15,6 +15,7 @@ class Battle::Battler
     paldea_pbInitEffects(batonPass)
     @effects[PBEffects::AllySwitch]      = false
     @effects[PBEffects::BoosterEnergy]   = false
+    @effects[PBEffects::BurningBulwark]  = false
     @effects[PBEffects::Commander]       = nil
     @effects[PBEffects::CudChew]         = 0
     @effects[PBEffects::DoubleShock]     = false
@@ -27,7 +28,13 @@ class Battle::Battler
     @effects[PBEffects::SilkTrap]        = false
     @effects[PBEffects::SuccessiveMove]  = nil
     @effects[PBEffects::SupremeOverlord] = 0
-	@effects[PBEffects::Syrupy]          = 0
+    @effects[PBEffects::Syrupy]          = 0
+    @effects[PBEffects::SyrupyUser]      = -1
+    @battle.allBattlers.each do |b|
+      next if b.effects[PBEffects::SyrupyUser] != @index
+      b.effects[PBEffects::Syrupy] = 0
+      b.effects[PBEffects::SyrupyUser] = -1
+    end
     @proteanTrigger  = false
     @mirrorHerbUsed  = false
     @legendPlateType = nil
@@ -200,11 +207,9 @@ class Battle::Battler
     abil = GameData::Ability.try_get(abil)
     return false if !abil
     return true if paldea_unstoppableAbility?(abil)
-    return [
-      :COMMANDER,
-      :PROTOSYNTHESIS,
-      :QUARKDRIVE,	  
-      :ZEROTOHERO
+    return [  
+      :ZEROTOHERO,
+      :TERASHIFT
     ].include?(abil.id)
   end
   
@@ -219,6 +224,7 @@ class Battle::Battler
     return true if paldea_ungainableAbility?(abil)
     return [
       :WONDERGUARD,
+      :HUNGERSWITCH,
       :COMMANDER,
       :PROTOSYNTHESIS,
       :QUARKDRIVE,	  
@@ -226,7 +232,10 @@ class Battle::Battler
       :EMBODYASPECT,
       :EMBODYASPECT_1,
       :EMBODYASPECT_2,
-      :EMBODYASPECT_3
+      :EMBODYASPECT_3,
+      :TERASHIFT,
+      :TERAFORMZERO,
+      :POISONPUPPETEER
     ].include?(abil.id)
   end
   
@@ -280,7 +289,6 @@ class Battle::Battler
   #-----------------------------------------------------------------------------
   # Aliased for new continuous ability checks.
   #-----------------------------------------------------------------------------
-  alias paldea_pbContinualAbilityChecks pbContinualAbilityChecks
   def pbContinualAbilityChecks(onSwitchIn = false)
     @battle.pbEndPrimordialWeather
     if hasActiveAbility?(:COMMANDER)
@@ -289,12 +297,28 @@ class Battle::Battler
     @proteanTrigger = false
     plateType = pbGetJudgmentType(@legendPlateType)
     @legendPlateType = plateType
-    if hasActiveAbility?(:TRACE) && hasActiveItem?(:ABILITYSHIELD)
-      @battle.pbShowAbilitySplash(self)
-      @battle.pbDisplay(_INTL("{1}'s Ability is protected by the effects of its Ability Shield!", pbThis))
-      @battle.pbHideAbilitySplash(self)
-    else
-      paldea_pbContinualAbilityChecks(onSwitchIn)
+    if hasActiveAbility?(:TRACE)
+      if hasActiveItem?(:ABILITYSHIELD) # Trace failed by its own Ability Shield
+        if onSwitchIn
+          @battle.pbShowAbilitySplash(self)
+          @battle.pbDisplay(_INTL("{1}'s Ability is protected by the effects of its Ability Shield!", pbThis))
+          @battle.pbHideAbilitySplash(self)
+        end
+      else
+        choices = @battle.allOtherSideBattlers(@index).select do |b|
+          next !b.hasActiveItem?(:ABILITYSHIELD) && (b.ability_id == :WONDERGUARD || !b.uncopyableAbility?)
+        end
+        if choices.length > 0
+          choice = choices[@battle.pbRandom(choices.length)]
+          @battle.pbShowAbilitySplash(self)
+          self.ability = choice.ability
+          @battle.pbDisplay(_INTL("{1} traced {2}'s {3}!", pbThis, choice.pbThis(true), choice.abilityName))
+          @battle.pbHideAbilitySplash(self)
+          if !onSwitchIn && (unstoppableAbility? || abilityActive?)
+            Battle::AbilityEffects.triggerOnSwitchIn(self.ability, self, @battle)
+          end
+        end
+      end
     end
     pbMirrorStatUpsOpposing
   end
@@ -311,6 +335,22 @@ class Battle::Battler
   end
   
   #-----------------------------------------------------------------------------
+  # Aliased to include Terapagos's Tera Shift form change.
+  #-----------------------------------------------------------------------------
+  alias paldea_pbCheckForm pbCheckForm
+  def pbCheckForm(endOfRound = false)
+    return if fainted? || @effects[PBEffects::Transform]
+    if isSpecies?(:TERAPAGOS) && self.ability == :TERASHIFT
+      if @form == 0
+        @battle.pbShowAbilitySplash(self, true)
+        @battle.pbHideAbilitySplash(self)
+        pbChangeForm(1, _INTL("{1} transformed!", pbThis))
+      end
+    end
+    paldea_pbCheckForm(endOfRound)
+  end
+  
+  #-----------------------------------------------------------------------------
   # Commander utilities.
   #-----------------------------------------------------------------------------
   def isCommander?
@@ -321,7 +361,7 @@ class Battle::Battler
   def isCommanderHost?
     commander = @effects[PBEffects::Commander]
     return commander && commander.length == 2
-  end
+  end  
   
   #-----------------------------------------------------------------------------
   # Aliased to prevent Pokemon under the effects of Commander from switching.
@@ -341,17 +381,20 @@ class Battle::Battler
     commanderMsg = nil
     if @effects[PBEffects::Commander]
       pairedBattler = @battle.battlers[@effects[PBEffects::Commander][0]]
-      batSprite = @battle.scene.sprites["pokemon_#{pairedBattler.index}"]
-      if isCommander?
-        order = [pbThis, pairedBattler.pbThis(true)]
-      else
-        order = [pairedBattler.pbThis, pbThis(true)]
-        pairedBattler.effects[PBEffects::Commander] = nil
+      if pairedBattler&.effects[PBEffects::Commander]
+        if isCommander?
+          order = [pbThis, pairedBattler.pbThis(true)]
+        else
+          order = [pairedBattler.pbThis, pbThis(true)]
+          pairedBattler.effects[PBEffects::Commander] = nil
+        end
+        commanderMsg = _INTL("{1} comes out of {2}'s mouth!", *order)
+        batSprite = @battle.scene.sprites["pokemon_#{pairedBattler.index}"]
       end
-      commanderMsg = _INTL("{1} comes out of {2}'s mouth!", *order)
     end
-    paldea_pbFaint(showMessage) 
-    @battle.pbAddFaintedAlly(self)
+    isFainted = @fainted
+    paldea_pbFaint(showMessage)
+    @battle.pbAddFaintedAlly(self) if !isFainted && @fainted
     if commanderMsg
       @battle.pbDisplay(commanderMsg)
       batSprite.visible = true
@@ -381,7 +424,23 @@ class Battle::Battler
     return targets
   end
   
+  ##############################################################################
+  # Related to battler item usage.
+  ##############################################################################
   
+  #-----------------------------------------------------------------------------
+  # -Aliased so flung berry can triggered Cud Chew Ability.
+  #-----------------------------------------------------------------------------
+  alias paldea_pbHeldItemTriggered pbHeldItemTriggered
+  def pbHeldItemTriggered(item_to_use, own_item = true, fling = false)
+    paldea_pbHeldItemTriggered(item_to_use, own_item, fling)
+    # Cud Chew
+    if hasActiveAbility?(:CUDCHEW) && GameData::Item.get(item_to_use).is_berry? && 
+       fling && !own_item
+      setRecycleItem(item_to_use)
+    end
+  end
+
   ##############################################################################
   # Related to battler move usage.
   ##############################################################################
@@ -466,7 +525,8 @@ class Battle::Battler
     @battle.moldBreaker = user.hasMoldBreaker? || (move.statusMove? && user.hasActiveAbility?(:MYCELIUMMIGHT)) if !@battle.moldBreaker
     @battle.moldBreaker = false if target.hasActiveItem?(:ABILITYSHIELD)
     if !(user.hasActiveAbility?(:UNSEENFIST) && move.contactMove?)
-      if move.canProtectAgainst?
+      if move.canProtectAgainst? && !user.effects[PBEffects::TwoTurnAttack]
+        # Silk Trap
         if target.effects[PBEffects::SilkTrap] && move.damagingMove?
           if move.pbShowFailMessages?(targets)
             @battle.pbCommonAnimation("SilkTrap", target)
@@ -480,9 +540,28 @@ class Battle::Battler
           end
           return false
         end
+        # Burning Bulwark
+        if target.effects[PBEffects::BurningBulwark] && move.damagingMove?
+          if move.pbShowFailMessages?(targets)
+            @battle.pbCommonAnimation("BurningBulwark", target)
+            @battle.pbDisplay(_INTL("{1} protected itself!", target.pbThis))
+          end
+          target.damageState.protected = true
+          @battle.successStates[user.index].protected = true
+          if move.pbContactMove?(user) && user.affectedByContactEffect? &&
+             user.pbCanBurn?(target, false)
+            user.pbBurn(target)
+          end
+          return false
+        end
       end
     end
-    return paldea_pbSuccessCheckAgainstTarget(move, user, target, targets)
+    ret = paldea_pbSuccessCheckAgainstTarget(move, user, target, targets)
+    if ret
+      Battle::AbilityEffects.triggerOnMoveSuccessCheck(
+        target.ability, user, target, move, @battle)
+    end
+    return ret
   end
 end
 

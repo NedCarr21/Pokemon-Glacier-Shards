@@ -155,3 +155,19 @@ Description = The user's shining mask raises its Attack stat.
 [EMBODYASPECT_3]
 Name = Embody Aspect
 Description = The user's shining mask raises its Defense stat.
+#-------------------------------
+[POISONPUPPETEER]
+Name = Poison Puppeteer
+Description = Moves that inflict poison also cause confusion.
+#-------------------------------
+[TERASHIFT]
+Name = Tera Shift
+Description = Enters Terastal Form when sent out.
+#-------------------------------
+[TERASHELL]
+Name = Tera Shell
+Description = Resists all types when HP is full.
+#-------------------------------
+[TERAFORMZERO]
+Name = Teraform Zero
+Description = Eliminates all weather and terrain.

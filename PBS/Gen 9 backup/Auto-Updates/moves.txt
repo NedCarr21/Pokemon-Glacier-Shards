@@ -59,8 +59,14 @@ Flags = CanProtect,CanMirrorMove,Wind
 [LEAFBLADE]
 Flags = Contact,CanProtect,CanMirrorMove,HighCriticalHitRate,Slicing
 #-------------------------------
+[LUSTERPURGE]
+Power = 95
+#-------------------------------
 [MILKDRINK]
 TotalPP = 5
+#-------------------------------
+[MISTBALL]
+Power = 95
 #-------------------------------
 [NIGHTSLASH]
 Flags = Contact,CanProtect,CanMirrorMove,HighCriticalHitRate,Slicing

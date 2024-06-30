@@ -337,7 +337,7 @@ ShadowX = 0
 ShadowSize = 2
 #-------------------------------
 [VULPIX,1]
-BackSprite = 0,71
+BackSprite = -2,56
 FrontSprite = 0,28
 ShadowX = 0
 ShadowSize = 2
@@ -613,8 +613,8 @@ ShadowX = 0
 ShadowSize = 2
 #-------------------------------
 [GRAVELER,1]
-BackSprite = 0,52
-FrontSprite = -1,28
+BackSprite = 3,56
+FrontSprite = -2,28
 ShadowX = 0
 ShadowSize = 2
 #-------------------------------
@@ -1331,8 +1331,6 @@ BackSprite = 0,8
 FrontSprite = 2,24
 ShadowX = 0
 ShadowSize = 1
-FrontSpriteScale = 1
-BackSpriteScale = 1
 #-------------------------------
 [CLEFFA]
 BackSprite = 0,58
@@ -6223,3 +6221,21 @@ BackSprite = 0,47
 FrontSprite = -5,9
 ShadowX = 0
 ShadowSize = 3
+#-------------------------------
+[ARCEUS,9]
+BackSprite = 0,0
+FrontSprite = 2,6
+ShadowX = 0
+ShadowSize = 3
+#-------------------------------
+[GASTRODON,1]
+BackSprite = 4,49
+FrontSprite = 0,25
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[MAGEARNA,1]
+BackSprite = 3,50
+FrontSprite = 1,17
+ShadowX = 0
+ShadowSize = 1

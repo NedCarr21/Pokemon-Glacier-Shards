@@ -1,0 +1,1012 @@
+#-------------------------------
+[TR741]
+Name = TR741
+NamePlural = TR741s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = DIRECLAW
+Description = The user may critically hit with its ruinous claws. May also leave the target poisoned, paralyzed, or asleep.
+#-------------------------------
+[TR742]
+Name = TR742
+NamePlural = TR742s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = SPRINGTIDESTORM
+Description = The user wraps winds of fierce emotion around opponents. This may lower their Attack stats.
+#-------------------------------
+[TR743]
+Name = TR743
+NamePlural = TR743s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = RAGINGFURY
+Description = The user rampages around spewing flames for two to three turns. The user then becomes confused.
+#-------------------------------
+[TR744]
+Name = TR744
+NamePlural = TR744s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = WAVECRASH
+Description = The user shrouds itself in water and slams into the target. This also damages the user.
+#-------------------------------
+[TR745]
+Name = TR745
+NamePlural = TR745s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = CHLOROBLAST
+Description = The user launches its amassed chlorophyll to inflict damage on the target. This also damages the user.
+#-------------------------------
+[TR746]
+Name = TR746
+NamePlural = TR746s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = MOUNTAINGALE
+Description = The user hurls giant chunks of ice at the target. This may also make the target flinch.
+#-------------------------------
+[TR747]
+Name = TR747
+NamePlural = TR747s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = HEADLONGRUSH
+Description = The user rams into the target in a full-body tackle. This lowers the user’s Defense and Sp. Def stats.
+#-------------------------------
+[TR748]
+Name = TR748
+NamePlural = TR748s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = BARBBARRAGE
+Description = Fires toxic barbs which may poison the target. Power is doubled if the target is poisoned.
+#-------------------------------
+[TR749]
+Name = TR749
+NamePlural = TR749s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = ESPERWING
+Description = The user slashes with aura-enriched wings which boosts its Speed stat. Critical hits land more easily.
+#-------------------------------
+[TR750]
+Name = TR750
+NamePlural = TR750s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = BITTERMALICE
+Description = The user attacks the target with spine-chilling resentment. This also lowers the target’s Attack stat.
+#-------------------------------
+[TR751]
+Name = TR751
+NamePlural = TR751s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = TRIPLEARROWS
+Description = The user fires arrows which may lower the target’s Defense or make it flinch. Critical hits land more easily.
+#-------------------------------
+[TR752]
+Name = TR752
+NamePlural = TR752s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = BLEAKWINDSTORM
+Description = The user attacks with cold winds that cause opposing Pokémon to tremble. This may lower their Speed stats.
+#-------------------------------
+[TR753]
+Name = TR753
+NamePlural = TR753s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = WILDBOLTSTORM
+Description = The user attacks opposing Pokémon with a thunderous tempest. This may also leave them paralyzed.
+#-------------------------------
+[TR754]
+Name = TR754
+NamePlural = TR754s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = SANDSEARSTORM
+Description = The user wraps fierce winds and hot sand around opponents. This may leave them with a burn.
+#-------------------------------
+[TR755]
+Name = TR755
+NamePlural = TR755s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = LUNARBLESSING
+Description = The user is blessed by the moon, restoring HP and curing status conditions of itself and allies.
+#-------------------------------
+[TR756]
+Name = TR756
+NamePlural = TR756s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = PSYSHIELDBASH
+Description = Cloaking itself in psychic energy, the user slams into the target. This raises the user’s Defense.
+#-------------------------------
+[TR757]
+Name = TR757
+NamePlural = TR757s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = POWERSHIFT
+Description = The user swaps its Attack and Defense stats.
+#-------------------------------
+[TR758]
+Name = TR758
+NamePlural = TR758s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = STONEAXE
+Description = The user swings at the opponent with its stone axes. May leave floating rocks around the target.
+#-------------------------------
+[TR759]
+Name = TR759
+NamePlural = TR759s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = MYSTICALPOWER
+Description = The user attacks by emitting a mysterious power. This also boosts the user’s Sp. Atk stat.
+#-------------------------------
+[TR760]
+Name = TR760
+NamePlural = TR760s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = VICTORYDANCE
+Description = The user performs an intense dance to usher in victory, raising its Attack, Defense, and Speed.
+#-------------------------------
+[TR761]
+Name = TR761
+NamePlural = TR761s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = SHELTER
+Description = The user makes its skin as hard as an iron shield, sharply boosting its Defense stat.
+#-------------------------------
+[TR762]
+Name = TR762
+NamePlural = TR762s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = INFERNALPARADE
+Description = Hurls fireballs which may cause burns. Power is doubled if the target has a status condition.
+#-------------------------------
+[TR763]
+Name = TR763
+NamePlural = TR763s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = CEASELESSEDGE
+Description = The user slashes the opponent with its shell blade. May leave spikes around the target.
+#-------------------------------
+[TR764]
+Name = TR764
+NamePlural = TR764s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = TAKEHEART
+Description = The user lifts its spirits, curing its own status conditions and boosting its Sp. Atk and Sp. Def stats.
+#-------------------------------
+[TR765]
+Name = TR765
+NamePlural = TR765s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = AQUACUTTER
+Description = The user expels pressurized water to cut at the target like a blade. Critical hits land more easily.
+#-------------------------------
+[TR766]
+Name = TR766
+NamePlural = TR766s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = AQUASTEP
+Description = The user attacks the target using light and fluid dance steps. This also boosts the user’s Speed stat.
+#-------------------------------
+[TR767]
+Name = TR767
+NamePlural = TR767s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = ARMORCANNON
+Description = The user shoots its own armor out as blazing projectiles. This lowers the user’s Defense and Sp. Def.
+#-------------------------------
+[TR768]
+Name = TR768
+NamePlural = TR768s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = AXEKICK
+Description = Performs a downward kick which may confuse the target. The user takes damage if it misses.
+#-------------------------------
+[TR769]
+Name = TR769
+NamePlural = TR769s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = BITTERBLADE
+Description = A spiteful slashing attack. The user’s HP is restored by up to half the damage taken by the target.
+#-------------------------------
+[TR770]
+Name = TR770
+NamePlural = TR770s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = BLAZINGTORQUE
+Description = This move is only used by a Starmobile. It may leave the target with a burn.
+#-------------------------------
+[TR771]
+Name = TR771
+NamePlural = TR771s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = CHILLINGWATER
+Description = The user showers the target with frigid water. This also lowers the target's Attack stat.
+#-------------------------------
+[TR772]
+Name = TR772
+NamePlural = TR772s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = CHILLYRECEPTION
+Description = The user tells a chillingly bad joke and switches out. This summons a snowstorm lasting five turns.
+#-------------------------------
+[TR773]
+Name = TR773
+NamePlural = TR773s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = COLLISIONCOURSE
+Description = A massive prehistoric explosion. This move’s power is boosted more than usual if it’s a supereffective hit.
+#-------------------------------
+[TR774]
+Name = TR774
+NamePlural = TR774s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = COMBATTORQUE
+Description = This move is only used by a Starmobile. It may paralyze the target.
+#-------------------------------
+[TR775]
+Name = TR775
+NamePlural = TR775s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = COMEUPPANCE
+Description = The user retaliates with much greater force against the opponent that last inflicted damage on it.
+#-------------------------------
+[TR776]
+Name = TR776
+NamePlural = TR776s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = DOODLE
+Description = The user captures a quick sketch, changing the Abilities of the user and its allies to the target's.
+#-------------------------------
+[TR777]
+Name = TR777
+NamePlural = TR777s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = DOUBLESHOCK
+Description = The user attacks by discharging all of its electricity. The user will no longer be Electric type.
+#-------------------------------
+[TR778]
+Name = TR778
+NamePlural = TR778s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = ELECTRODRIFT
+Description = A futuristic electric strike. This move’s power is boosted more than usual if it’s a supereffective hit.
+#-------------------------------
+[TR779]
+Name = TR779
+NamePlural = TR779s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = FILLETAWAY
+Description = The user sharply boosts its Attack, Sp. Atk, and Speed stats by using its own HP.
+#-------------------------------
+[TR780]
+Name = TR780
+NamePlural = TR780s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = FLOWERTRICK
+Description = The user throws a rigged bouquet of flowers at the target, which always hits and lands a critical hit.
+#-------------------------------
+[TR781]
+Name = TR781
+NamePlural = TR781s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = GIGATONHAMMER
+Description = The user attacks with its huge hammer. This move can’t be used twice in a row.
+#-------------------------------
+[TR782]
+Name = TR782
+NamePlural = TR782s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = GLAIVERUSH
+Description = The user becomes highly vulnerable to attacks until its next turn after using this move.
+#-------------------------------
+[TR783]
+Name = TR783
+NamePlural = TR783s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = HYPERDRILL
+Description = The user spins the pointed part of its body at high speed to pierce the target, ignoring protections.
+#-------------------------------
+[TR784]
+Name = TR784
+NamePlural = TR784s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = ICESPINNER
+Description = The user spins into the target with feet covered in thin ice. This also destroys the terrain.
+#-------------------------------
+[TR785]
+Name = TR785
+NamePlural = TR785s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = JETPUNCH
+Description = The user summons a torrent around its fist and punches at blinding speed. Always goes first.
+#-------------------------------
+[TR786]
+Name = TR786
+NamePlural = TR786s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = KOWTOWCLEAVE
+Description = The user kowtows to make the target lower its guard, then slashes. This attack never misses.
+#-------------------------------
+[TR787]
+Name = TR787
+NamePlural = TR787s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = LASTRESPECTS
+Description = The user attacks to avenge its allies. The move’s power increases for each defeated ally.
+#-------------------------------
+[TR788]
+Name = TR788
+NamePlural = TR788s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = LUMINACRASH
+Description = The user attacks by unleashing a peculiar, mind-bending light that harshly lowers the target’s Sp. Def.
+#-------------------------------
+[TR789]
+Name = TR789
+NamePlural = TR789s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = MAGICALTORQUE
+Description = This move is only used by a Starmobile. It may confuse the target.
+#-------------------------------
+[TR790]
+Name = TR790
+NamePlural = TR790s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = MAKEITRAIN
+Description = The user throws out a huge mass of coins, lowering its Sp. Atk stat. Money is earned after the battle.
+#-------------------------------
+[TR791]
+Name = TR791
+NamePlural = TR791s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = MORTALSPIN
+Description = Performs a spin that eliminates certain traps and hazards. This also poisons opposing Pokémon.
+#-------------------------------
+[TR792]
+Name = TR792
+NamePlural = TR792s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = NOXIOUSTORQUE
+Description = This move is only used by a Starmobile. It may poison the target.
+#-------------------------------
+[TR793]
+Name = TR793
+NamePlural = TR793s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = ORDERUP
+Description = If used when the user has a Tatsugiri in its mouth, a boost occurs based on its form.
+#-------------------------------
+[TR794]
+Name = TR794
+NamePlural = TR794s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = POPULATIONBOMB
+Description = The user’s fellows gather in droves to perform a combo attack that hits one to ten times in a row.
+#-------------------------------
+[TR795]
+Name = TR795
+NamePlural = TR795s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = POUNCE
+Description = The user attacks by pouncing on the target. This also lowers the target’s Speed stat.
+#-------------------------------
+[TR796]
+Name = TR796
+NamePlural = TR796s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = RAGEFIST
+Description = The user converts its rage into energy to attack. The move’s power increases every time the user is hit.
+#-------------------------------
+[TR797]
+Name = TR797
+NamePlural = TR797s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = RAGINGBULL
+Description = The user charges and destroys enemy barriers. This move’s type depends on the user’s form.
+#-------------------------------
+[TR798]
+Name = TR798
+NamePlural = TR798s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = REVIVALBLESSING
+Description = The user revives a party Pokémon that has fainted and restores half their max HP.
+#-------------------------------
+[TR799]
+Name = TR799
+NamePlural = TR799s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = RUINATION
+Description = The user summons a ruinous disaster. This cuts the target’s HP in half.
+#-------------------------------
+[TR800]
+Name = TR800
+NamePlural = TR800s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = SALTCURE
+Description = The user salt cures the target, inflicting damage every turn. Steel and Water types take more damage.
+#-------------------------------
+[TR801]
+Name = TR801
+NamePlural = TR801s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = SHEDTAIL
+Description = The user creates a substitute and switches places with a party Pokémon in waiting.
+#-------------------------------
+[TR802]
+Name = TR802
+NamePlural = TR802s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = SILKTRAP
+Description = User spins a silken trap to protect itself. Lowers the Speed of any that make direct contact.
+#-------------------------------
+[TR803]
+Name = TR803
+NamePlural = TR803s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = SNOWSCAPE
+Description = Summons a five-turn snowstorm that boosts the Defense of Ice-type Pokémon.
+#-------------------------------
+[TR804]
+Name = TR804
+NamePlural = TR804s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = SPICYEXTRACT
+Description = Emits a spicy extract which raises the target’s Attack and lowers Defense by two stages each.
+#-------------------------------
+[TR805]
+Name = TR805
+NamePlural = TR805s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = SPINOUT
+Description = The user inflicts damage on the target with a furious spin. This harshly lowers the user’s Speed.
+#-------------------------------
+[TR806]
+Name = TR806
+NamePlural = TR806s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = TIDYUP
+Description = Clears hazards and substitutes from the field. This also boosts the user’s Attack and Speed.
+#-------------------------------
+[TR807]
+Name = TR807
+NamePlural = TR807s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = TORCHSONG
+Description = The user blows out raging flames as if singing a song. This also boosts the user’s Sp. Atk stat.
+#-------------------------------
+[TR808]
+Name = TR808
+NamePlural = TR808s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = TRAILBLAZE
+Description = The user attacks suddenly as if leaping out from tall grass. This boosts the user's Speed stat.
+#-------------------------------
+[TR809]
+Name = TR809
+NamePlural = TR809s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = TRIPLEDIVE
+Description = The user performs a perfectly timed triple dive, hitting the target three times in a row.
+#-------------------------------
+[TR810]
+Name = TR810
+NamePlural = TR810s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = TWINBEAM
+Description = The user shoots mystical beams from its eyes to inflict damage. The target is hit twice in a row.
+#-------------------------------
+[TR811]
+Name = TR811
+NamePlural = TR811s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = WICKEDTORQUE
+Description = This move is only used by a Starmobile. It may put the target to sleep.
+#-------------------------------
+[TR812]
+Name = TR812
+NamePlural = TR812s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = HYDROSTEAM
+Description = The user blasts the target with boiling-hot water whose power is boosted in harsh sunlight.
+#-------------------------------
+[TR813]
+Name = TR813
+NamePlural = TR813s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = PSYBLADE
+Description = The user rends the target with an ethereal blade whose power is boosted on Electric Terrain.
+#-------------------------------
+[TR814]
+Name = TR814
+NamePlural = TR814s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = BLOODMOON
+Description = The user unleashes the full brunt of its spirit from a blood moon. This move can't be used twice in a row.
+#-------------------------------
+[TR815]
+Name = TR815
+NamePlural = TR815s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = MATCHAGOTCHA
+Description = Blasts opponents with hot tea. Heals the user by half the damage dealt and may also burn targets.
+#-------------------------------
+[TR816]
+Name = TR816
+NamePlural = TR816s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = SYRUPBOMB
+Description = An explosion of sticky candy syrup, which drop the target's Speed stat each turn for three turns.
+#-------------------------------
+[TR817]
+Name = TR817
+NamePlural = TR817s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = IVYCUDGEL
+Description = An ivy-wrapped cudgel strike with a high critical-hit ratio. Type changes based on the user's Mask.
+#-------------------------------
+[TR818]
+Name = TR818
+NamePlural = TR818s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = ELECTROSHOT
+Description = A two-turn attack. The user boosts its Sp. Atk and then fires a high-voltage shot.
+#-------------------------------
+[TR819]
+Name = TR819
+NamePlural = TR819s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = TERASTARSTORM
+Description = When used by Terapagos in its Stellar Form, this move damages all opposing Pokémon.
+#-------------------------------
+[TR820]
+Name = TR820
+NamePlural = TR820s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = FICKLEBEAM
+Description = Sometimes all of the user's heads shoot beams in unison, doubling this move's power.
+#-------------------------------
+[TR821]
+Name = TR821
+NamePlural = TR821s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = BURNINGBULWARK
+Description = Protects the user from attacks. Also burns any attacker that makes contact with the user.
+#-------------------------------
+[TR822]
+Name = TR822
+NamePlural = TR822s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = THUNDERCLAP
+Description = This move enables the user to attack first. It fails if the target is not readying an attack, however.
+#-------------------------------
+[TR823]
+Name = TR823
+NamePlural = TR823s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = MIGHTYCLEAVE
+Description = The user cleaves the target. This move hits even if the target protects itself.
+#-------------------------------
+[TR824]
+Name = TR824
+NamePlural = TR824s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = TACHYONCUTTER
+Description = The user attacks by launching particle blades at the target twice in a row. This attack never misses.
+#-------------------------------
+[TR825]
+Name = TR825
+NamePlural = TR825s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = HARDPRESS
+Description = The target is crushed with great force. The attack is more powerful the more HP the target has left.
+#-------------------------------
+[TR826]
+Name = TR826
+NamePlural = TR826s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = DRAGONCHEER
+Description = The user raises its allies’ critical hit ratio with a draconic cry. This rouses Dragon types more.
+#-------------------------------
+[TR827]
+Name = TR827
+NamePlural = TR827s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = ALLURINGVOICE
+Description = Attacks using an angelic voice. This confuses the target if its stats have been raised this turn.
+#-------------------------------
+[TR828]
+Name = TR828
+NamePlural = TR828s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = TEMPERFLARE
+Description = The user attacks driven by frustration. Power increases if the user's previous move failed.
+#-------------------------------
+[TR829]
+Name = TR829
+NamePlural = TR829s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = SUPERCELLSLAM
+Description = The user drops onto the target with its electrified body. If it misses, the user is hurt instead.
+#-------------------------------
+[TR830]
+Name = TR830
+NamePlural = TR830s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = PSYCHICNOISE
+Description = Attacks the target with unpleasant sound waves. Prevents the target from healing for two turns.
+#-------------------------------
+[TR831]
+Name = TR831
+NamePlural = TR831s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = UPPERHAND
+Description = An attack that hits first and makes the target flinch. Fails if the target isn't using a high priority move.
+#-------------------------------
+[TR832]
+Name = TR832
+NamePlural = TR832s
+Pocket = 4
+Price = 3000
+BPPrice = 32
+FieldUse = TR
+Flags = Fling_90
+Move = MALIGNANTCHAIN
+Description = Wraps the target in a toxic, corrosive chain. This may also leave the target badly poisoned.

@@ -68,12 +68,32 @@ class Battle
   def pbCanSwitch?(idxBattler, idxParty = -1, partyScene = nil)
     ret = paldea_pbCanSwitch?(idxBattler, idxParty, partyScene)
     if ret && @battlers[idxBattler].effects[PBEffects::Commander]
-      partyScene&.pbDisplay(_INTL("{1} can't be switched out!", battler.pbThis))
+      partyScene&.pbDisplay(_INTL("{1} can't be switched out!", @battlers[idxBattler].pbThis))
       return false
     end
     return ret
   end
-  
+
+  #-----------------------------------------------------------------------------
+  # Aliased to ensure Pokemon affected by Commander cannot shift positions.
+  #-----------------------------------------------------------------------------
+  alias paldea_pbCanShift? pbCanShift?
+  def pbCanShift?(idxBattler)
+    ret = paldea_pbCanShift?(idxBattler)
+    if ret
+      idxOther = -1
+      case pbSideSize(idxBattler)
+      when 2
+        idxOther = (idxBattler + 2) % 4
+      when 3
+        idxOther = (idxBattler.even?) ? 2 : 3
+      end
+      return false if @battlers[idxBattler].effects[PBEffects::Commander] || 
+                      @battlers[idxOther].effects[PBEffects::Commander]
+    end
+    return ret
+  end
+
   #-----------------------------------------------------------------------------
   # Counts down the remaining turns of the Splinter effect until its reset.
   #-----------------------------------------------------------------------------
@@ -87,7 +107,7 @@ class Battle
   end
 
   #-----------------------------------------------------------------------------
-  # Aliased to add Syrupy effect
+  # Aliased to add Syrupy effect.
   #-----------------------------------------------------------------------------
   alias paldea_pbEOREndBattlerSelfEffects pbEOREndBattlerSelfEffects
   def pbEOREndBattlerSelfEffects(battler)
@@ -136,7 +156,8 @@ class Battle
   def pbEndOfRoundPhase
     paldea_pbEndOfRoundPhase
     allBattlers.each_with_index do |battler, i|
-	  battler.effects[PBEffects::AllySwitch]  = false
+	  battler.effects[PBEffects::AllySwitch]     = false
+	  battler.effects[PBEffects::BurningBulwark] = false
       if Settings::MECHANICS_GENERATION >= 9
         battler.effects[PBEffects::Charge]   += 1 if battler.effects[PBEffects::Charge]     > 0
       end
@@ -206,6 +227,21 @@ class Battle::Move
       if user.hasActiveAbility?(:MINDSEYE) && defType == :GHOST
         ret = Effectiveness::NORMAL_EFFECTIVE_MULTIPLIER
       end
+    end
+    return ret
+  end
+
+  #-----------------------------------------------------------------------------
+  # Aliased to add Tera Shell effect.
+  #-----------------------------------------------------------------------------  
+  alias paldea_pbCalcTypeMod pbCalcTypeMod
+  def pbCalcTypeMod(moveType, user, target)
+    ret = Effectiveness::NORMAL_EFFECTIVE_MULTIPLIER
+    return ret if !moveType
+    ret = paldea_pbCalcTypeMod(moveType, user, target)
+    if target.abilityActive?
+      ret = Battle::AbilityEffects.triggerModifyTypeEffectiveness(
+	    target.ability, user, target, self, @battle, ret)
     end
     return ret
   end
@@ -294,19 +330,24 @@ class Battle::Move
   #-----------------------------------------------------------------------------
   alias paldea_pbCalcDamageMultipliers pbCalcDamageMultipliers
   def pbCalcDamageMultipliers(user, target, numTargets, type, baseDmg, multipliers)
-    [:TABLETSOFRUIN, :SWORDOFRUIN, :VESSELOFRUIN, :BEADSOFRUIN].each_with_index do |abil, i|
+    # "of Ruin" abilities
+    [:TABLETSOFRUIN, :SWORDOFRUIN, :VESSELOFRUIN, :BEADSOFRUIN].each_with_index do |ability, i|
+      next if !@battle.pbCheckGlobalAbility(ability)
       category = (i < 2) ? physicalMove? : specialMove?
       category = !category if i.odd? && @battle.field.effects[PBEffects::WonderRoom] > 0
-      mult = (i.even?) ? multipliers[:attack_multiplier] : multipliers[:defense_multiplier]
-      mult *= 0.75 if @battle.pbCheckGlobalAbility(abil) && !user.hasActiveAbility?(abil) && category
+      if i.even? && !user.hasActiveAbility?(ability)
+        multipliers[:attack_multiplier] *= 0.75 if category
+      elsif i.odd? && !target.hasActiveAbility?(ability)
+        multipliers[:defense_multiplier] *= 0.75 if category
+      end
     end
     if @battle.field.terrain == :Electric && user.affectedByTerrain? &&
-       @function_code == "IncreasePowerWhileElectricTerrain"
+       @function_code == "IncreasePowerInElectricTerrain"
       multipliers[:power_multiplier] *= 1.5 if type != :ELECTRIC
     end
     case user.effectiveWeather
     when :Sun, :HarshSun
-      if @function_code = "IncreasePowerInSunWeather"
+      if @function_code == "IncreasePowerInSunWeather"
         multipliers[:final_damage_multiplier] *= (type == :FIRE) ? 1 : (type == :WATER) ? 3 : 1.5
       end
     when :Hail
@@ -315,12 +356,15 @@ class Battle::Move
         multipliers[:defense_multiplier] *= 1.5
       end
     end
+    # Frostbite
     if user.status == :FROSTBITE && specialMove?
       multipliers[:final_damage_multiplier] /= 2
     end
+    # Drowsy
     if target.status == :DROWSY
       multipliers[:final_damage_multiplier] *= 4 / 3.0
     end
+    # Glaive Rush
     multipliers[:final_damage_multiplier] *= 2 if target.effects[PBEffects::GlaiveRush] > 0
     paldea_pbCalcDamageMultipliers(user, target, numTargets, type, baseDmg, multipliers)
   end
@@ -393,5 +437,20 @@ class Battle::Scene
     target = target[0] if target.is_a?(Array)
     return if target && target.isCommander?
     paldea_pbCommonAnimation(animName, user, target)  
+  end
+end
+
+################################################################################
+# 
+# Battle::DamageState class changes.
+# 
+################################################################################
+class Battle::DamageState
+  attr_accessor :terashell # Tera Shell ability used
+
+  alias paldea_reset reset
+  def reset
+    @terashell = false
+    paldea_reset
   end
 end

@@ -59,12 +59,12 @@ class Battle
     when :HeavyRain   then pbDisplay(_INTL("It is raining heavily."))
     when :StrongWinds then pbDisplay(_INTL("The wind is strong."))
     when :ShadowSky   then pbDisplay(_INTL("The sky is shadowy."))
-	when :Hail
-	  if Settings::HAIL_WEATHER_TYPE == 1
-	    pbDisplay(_INTL("Snow is falling."))
-	  else
-	    pbDisplay(_INTL("Hail is falling."))
-	  end
+    when :Hail
+      if Settings::HAIL_WEATHER_TYPE == 1
+        pbDisplay(_INTL("Snow is falling."))
+      else
+        pbDisplay(_INTL("Hail is falling."))
+      end
     end
   end
   
@@ -90,7 +90,7 @@ class Battle
     pbStartBattleSendOut(sendOuts)
     weather_data = GameData::BattleWeather.try_get(@field.weather)
     pbCommonAnimation(weather_data.animation) if weather_data
-	pbWeatherStartMessage
+    pbWeatherStartMessage
     terrain_data = GameData::BattleTerrain.try_get(@field.terrain)
     pbCommonAnimation(terrain_data.animation) if terrain_data
     pbTerrainStartMessage
@@ -416,10 +416,13 @@ class Battle::Battler
         end
       end
       PBDebug.log("[Status change] #{pbThis}'s drowsy count is #{newStatusCount}") if newStatus == :DROWSY
+      # Form change check
       pbCheckFormOnStatusChange
+      # Synchronize
       if abilityActive?
         Battle::AbilityEffects.triggerOnStatusInflicted(self.ability, self, user, newStatus)
       end
+      # Status cures
       pbItemStatusCureCheck
       pbAbilityStatusCureCheck
     else

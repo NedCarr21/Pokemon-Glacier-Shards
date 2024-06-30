@@ -48,3 +48,21 @@ Battle::AI::Handlers::AbilityRanking.add(:HADRONENGINE,
     next score - 1
   }
 )
+
+Battle::AI::Handlers::AbilityRanking.add(:POISONPUPPETEER,
+  proc { |ability, score, battler, ai|
+    next score if battler.check_for_move do |m|
+      m.is_a?(Battle::Move::PoisonTarget) ||
+      m.is_a?(Battle::Move::BadPoisonTarget) ||
+      m.is_a?(Battle::Move::PoisonTargetLowerTargetSpeed1) ||                # Toxic Thread
+      m.is_a?(Battle::Move::CategoryDependsOnHigherDamagePoisonTarget) ||    # Shell Side Arm
+      m.is_a?(Battle::Move::HitTwoTimesPoisonTarget) ||                      # Twin Needle
+      m.is_a?(Battle::Move::DoublePowerIfTargetPoisonedPoisonTarget) ||      # Barb Barrage
+      m.is_a?(Battle::Move::RemoveUserBindingAndEntryHazardsPoisonTarget) || # Mortal Spin
+      m.is_a?(Battle::Move::StarmobilePoisonTarget) ||                       # Noxious Torque
+      m.is_a?(Battle::Move::ProtectUserBanefulBunker) ||                     # Baneful Bunker
+      m.is_a?(Battle::Move::PoisonParalyzeOrSleepTarget)                     # Dire Claw
+    end
+    next 0
+  }
+)

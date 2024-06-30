@@ -1,3 +1,4 @@
+﻿# See the documentation on the wiki to learn how to edit this file.
 #-------------------------------
 [ARCANINE,1]
 BackSprite = 0,42
@@ -60,8 +61,8 @@ ShadowX = 0
 ShadowSize = 3
 #-------------------------------
 [SAMUROTT,1]
-BackSprite = -5,46
-FrontSprite = 4,12
+BackSprite = -6,45
+FrontSprite = 2,13
 ShadowX = 0
 ShadowSize = 3
 #-------------------------------
@@ -134,12 +135,6 @@ ShadowSize = 3
 [BASCULEGION]
 BackSprite = 0,38
 FrontSprite = 5,14
-ShadowX = 0
-ShadowSize = 2
-#-------------------------------
-[BASCULEGION,1]
-BackSprite = 0,38
-FrontSprite = 0,17
 ShadowX = 0
 ShadowSize = 2
 #-------------------------------
@@ -703,7 +698,7 @@ ShadowSize = 2
 #-------------------------------
 [SANDYSHOCKS]
 BackSprite = 0,46
-FrontSprite = -2,7
+FrontSprite = -3,10
 ShadowX = 0
 ShadowSize = 2
 #-------------------------------
@@ -799,13 +794,13 @@ ShadowSize = 3
 #-------------------------------
 [CHIYU]
 BackSprite = 0,30
-FrontSprite = 0,0
+FrontSprite = 0,10
 ShadowX = 0
 ShadowSize = 1
 #-------------------------------
 [ROARINGMOON]
 BackSprite = -4,49
-FrontSprite = -6,5
+FrontSprite = -6,12
 ShadowX = 0
 ShadowSize = 3
 #-------------------------------
@@ -847,13 +842,13 @@ ShadowSize = 0
 #-------------------------------
 [POLTCHAGEIST]
 BackSprite = 0,36
-FrontSprite = 0,0
+FrontSprite = 0,9
 ShadowX = 0
 ShadowSize = 1
 #-------------------------------
 [SINISTCHA]
 BackSprite = 0,49
-FrontSprite = 0,0
+FrontSprite = 0,10
 ShadowX = 0
 ShadowSize = 2
 #-------------------------------
@@ -870,7 +865,7 @@ ShadowX = 0
 ShadowSize = 1
 #-------------------------------
 [FEZANDIPITI]
-BackSprite = -14,69
+BackSprite = -25,67
 FrontSprite = 1,12
 ShadowX = 0
 ShadowSize = 2
@@ -901,6 +896,66 @@ ShadowSize = 2
 #-------------------------------
 [OGERPON,11]
 BackSprite = 0,58
+FrontSprite = 0,7
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[ARCHALUDON]
+BackSprite = 0,58
+FrontSprite = 0,10
+ShadowX = 0
+ShadowSize = 3
+#-------------------------------
+[HYDRAPPLE]
+BackSprite = 0,50
+FrontSprite = 2,12
+ShadowX = 0
+ShadowSize = 3
+#-------------------------------
+[GOUGINGFIRE]
+BackSprite = 0,62
+FrontSprite = 4,16
+ShadowX = 0
+ShadowSize = 3
+#-------------------------------
+[RAGINGBOLT]
+BackSprite = 0,55
+FrontSprite = -5,10
+ShadowX = 0
+ShadowSize = 3
+#-------------------------------
+[IRONBOULDER]
+BackSprite = 0,68
+FrontSprite = -4,20
+ShadowX = 0
+ShadowSize = 3
+#-------------------------------
+[IRONCROWN]
+BackSprite = 0,64
+FrontSprite = 0,10
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[TERAPAGOS]
+BackSprite = 0,58
+FrontSprite = 0,16
+ShadowX = 0
+ShadowSize = 2
+#-------------------------------
+[TERAPAGOS,1]
+BackSprite = -9,91
+FrontSprite = 1,13
+ShadowX = 0
+ShadowSize = 3
+#-------------------------------
+[TERAPAGOS,2]
+BackSprite = 0,53
+FrontSprite = 0,4
+ShadowX = 0
+ShadowSize = 3
+#-------------------------------
+[PECHARUNT]
+BackSprite = 0,50
 FrontSprite = 0,7
 ShadowX = 0
 ShadowSize = 2

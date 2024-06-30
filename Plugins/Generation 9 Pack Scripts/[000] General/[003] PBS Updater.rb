@@ -89,7 +89,7 @@ module Compiler
       end
       process_pbs_file_message_end
       game_data.save
-	  case data_type
+      case data_type
       when :Ability then Compiler.write_abilities
       when :Item    then Compiler.write_items
       when :Move    then Compiler.write_moves
@@ -264,8 +264,15 @@ module GameData
         :pbs_file_suffix  => data.pbs_file_suffix,
       }
     end
+	
+    def get_property_for_PBS(key)
+      ret = __orig__get_property_for_PBS(key)
+      ret = nil if ["Power", "Priority", "EffectChance"].include?(key) && ret == 0
+      ret = ["Physical", "Special", "Status"][@category] if key == "Category"
+      return ret
+    end
   end
-  
+    
   class Species
     def self.initialize_from(id)
       data = self.get(id)
@@ -287,8 +294,8 @@ module GameData
         :catch_rate         => data.catch_rate,
         :happiness          => data.happiness,
         :moves              => data.moves,
-        :tutor_moves        => data.tutor_moves,
-        :egg_moves          => data.egg_moves,
+        :tutor_moves        => data.tutor_moves.sort,
+        :egg_moves          => data.egg_moves.sort,
         :abilities          => data.abilities,
         :hidden_abilities   => data.hidden_abilities,
         :wild_item_common   => data.wild_item_common,

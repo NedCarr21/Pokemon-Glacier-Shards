@@ -227,6 +227,7 @@ class Battle::Move::RaiseUserSpAtkSpDef1CureStatus < Battle::Move::MultiStatUpMo
   end
   
   def pbEffectGeneral(user)
+    super
     user.pbCureStatus if user.pbHasAnyStatus?
   end 
 end
@@ -240,6 +241,41 @@ class Battle::Move::RecoilHalfOfTotalHP < Battle::Move::RecoilMove
   end
 end
 
+#===============================================================================
+# Lowers the target's Speed by 1 stage. Skips accuracy check in rain. 
+# (Bleakwind Storm)
+#===============================================================================
+class Battle::Move::LowerTargetSpeed1AlwaysHitsInRain < Battle::Move::TargetStatDownMove
+  def initialize(battle, move)
+    super
+    @statDown = [:SPEED, 1]
+  end
+  
+  def pbBaseAccuracy(user, target)
+    return 0 if [:Rain, :HeavyRain].include?(target.effectiveWeather)
+    return super
+  end
+end
+
+#===============================================================================
+# May paralyze targets. Skips accuracy check in rain. (Wildbolt Storm)
+#===============================================================================
+class Battle::Move::ParalyzeTargetAlwaysHitsInRain < Battle::Move::ParalyzeTarget
+  def pbBaseAccuracy(user, target)
+    return 0 if [:Rain, :HeavyRain].include?(target.effectiveWeather)
+    return super
+  end
+end
+
+#===============================================================================
+# May burn targets. Skips accuracy check in rain. (Sandsear Storm)
+#===============================================================================
+class Battle::Move::BurnTargetAlwaysHitsInRain < Battle::Move::BurnTarget
+  def pbBaseAccuracy(user, target)
+    return 0 if [:Rain, :HeavyRain].include?(target.effectiveWeather)
+    return super
+  end
+end
 
 ################################################################################
 # 
@@ -387,12 +423,30 @@ end
 #===============================================================================
 # Lowers the user's Sp.Atk by 1 stage. Also scatters coins to be picked up.
 #-------------------------------------------------------------------------------
-class Battle::Move::AddMoneyGainedFromBattleLowerUserSpAtk1 < Battle::Move::LowerUserSpAtk1
-  def pbEffectGeneral(user)
-    if user.pbOwnedByPlayer?
+class Battle::Move::AddMoneyGainedFromBattleLowerUserSpAtk1 < Battle::Move
+  attr_reader :statDown
+  def initialize(battle, move)
+    super
+    @statDown = [:SPECIAL_ATTACK, 1]
+  end
+  
+  def pbEndOfMoveUsageEffect(user, targets, numHits, switchedBattlers)
+    return if @battle.pbAllFainted?(user.idxOpposingSide)
+    hit_target = false
+    targets.each do |b|
+      next if b.damageState.missed
+      next if b.damageState.protected
+      next if b.damageState.unaffected
+      hit_target = true
+      # Money modifier
+      next if !user.pbOwnedByPlayer?
       @battle.field.effects[PBEffects::PayDay] += 5 * user.level
     end
-    @battle.pbDisplay(_INTL("Coins were scattered everywhere!"))
+    @battle.pbDisplay(_INTL("Coins were scattered everywhere!")) if hit_target
+    # Stats modifier
+    if user.pbCanLowerStatStage?(@statDown[0], user, self) && hit_target
+      user.pbLowerStatStage(@statDown[0], @statDown[1], user)
+    end
   end
 end
 
@@ -491,6 +545,7 @@ end
 # Decreases the target's Defense by 2 stages.
 #-------------------------------------------------------------------------------
 class Battle::Move::RaiseTargetAtkLowerTargetDef2 < Battle::Move
+  attr_reader :statUp, :statDown
   def canMagicCoat?; return true; end
 
   def initialize(battle, move)
@@ -696,6 +751,7 @@ end
 #-------------------------------------------------------------------------------
 class Battle::Move::RemoveTerrainIceSpinner < Battle::Move
   def pbEffectGeneral(user)
+    return if user.fainted?
     return if @battle.field.terrain == :None
     case @battle.field.terrain
     when :Electric
@@ -865,4 +921,44 @@ class Battle::Move::RevivePokemonHalfHP < Battle::Move
     return if user.fainted? || @numFainted == 0
     @battle.pbReviveInParty(user.index)
   end
+end
+
+#===============================================================================
+# Blazing Torque
+#===============================================================================
+# Burns the target.
+#-------------------------------------------------------------------------------
+class Battle::Move::StarmobileBurnTarget < Battle::Move::BurnTarget
+end
+
+#===============================================================================
+# Noxious Torque
+#===============================================================================
+# Poisons the target.
+#-------------------------------------------------------------------------------
+class Battle::Move::StarmobilePoisonTarget < Battle::Move::PoisonTarget
+end
+
+#===============================================================================
+# Combat Torque
+#===============================================================================
+# Paralyzes the target.
+#-------------------------------------------------------------------------------
+class Battle::Move::StarmobileParalyzeTarget < Battle::Move::ParalyzeTarget
+end
+
+#===============================================================================
+# Wicked Torque
+#===============================================================================
+# Puts the target to sleep.
+#-------------------------------------------------------------------------------
+class Battle::Move::StarmobileSleepTarget < Battle::Move::SleepTarget
+end
+
+#===============================================================================
+# Magical Torque
+#===============================================================================
+# Confuses the target.
+#-------------------------------------------------------------------------------
+class Battle::Move::StarmobileConfuseTarget < Battle::Move::ConfuseTarget
 end

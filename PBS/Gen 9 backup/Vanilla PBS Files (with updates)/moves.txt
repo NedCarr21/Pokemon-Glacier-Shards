@@ -257,7 +257,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = RaiseUserDefSpDef1
-Flags = ZPower_DEFENSE_1
 Description = The user calls out its underlings to shield its body, raising its Defense and Sp. Def stats.
 #-------------------------------
 [HEALORDER]
@@ -268,7 +267,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = HealUserHalfOfTotalHP
-Flags = ZPower_ResetStats
 Description = The user calls out its underlings to heal it. The user regains up to half of its max HP.
 #-------------------------------
 [POWDER]
@@ -279,7 +277,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = TargetNextFireMoveDamagesTarget
-Flags = CanProtect,CanMirrorMove,Powder,ZPower_SPECIAL_DEFENSE_2
+Flags = CanProtect,CanMirrorMove,Powder
 Description = The target is covered in a powder that explodes and damages it if it uses a Fire-type move.
 #-------------------------------
 [QUIVERDANCE]
@@ -290,7 +288,7 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserSpAtkSpDefSpd1
-Flags = Dance,ZPower_ResetStats
+Flags = Dance
 Description = The user performs a beautiful dance. It boosts the user's Sp. Atk, Sp. Def, and Speed stats.
 #-------------------------------
 [RAGEPOWDER]
@@ -302,7 +300,7 @@ TotalPP = 20
 Target = User
 Priority = 2
 FunctionCode = RedirectAllMovesToUser
-Flags = Powder,ZPower_ResetStats
+Flags = Powder
 Description = The user scatters irritating powder to draw attention to itself. Opponents aim only at the user.
 #-------------------------------
 [SPIDERWEB]
@@ -313,7 +311,7 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = TrapTargetInBattle
-Flags = CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanMirrorMove
 Description = The user ensnares the target with thin, gooey silk so it can't flee from battle.
 #-------------------------------
 [STICKYWEB]
@@ -324,7 +322,6 @@ Accuracy = 0
 TotalPP = 20
 Target = FoeSide
 FunctionCode = AddStickyWebToFoeSide
-Flags = ZPower_SPEED_1
 Description = Weaves a sticky net around the opposing team, which lowers their Speed stats upon switching in.
 #-------------------------------
 [STRINGSHOT]
@@ -335,7 +332,7 @@ Accuracy = 95
 TotalPP = 40
 Target = AllNearFoes
 FunctionCode = LowerTargetSpeed2
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The foe is bound with silk blown from the user's mouth. This silk reduces the target's Speed.
 #-------------------------------
 [TAILGLOW]
@@ -346,7 +343,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserSpAtk3
-Flags = ZPower_ResetStats
 Description = The user stares at flashing lights to focus its mind, drastically raising its Sp. Atk stat.
 #-------------------------------
 [HYPERSPACEFURY]
@@ -689,7 +685,7 @@ Accuracy = 50
 TotalPP = 10
 Target = AllNearFoes
 FunctionCode = SleepTargetIfUserDarkrai
-Flags = CanProtect,CanMirrorMove,ZPower_ResetStats
+Flags = CanProtect,CanMirrorMove
 Description = Opposing Pokémon are dragged into a world of total darkness that makes them sleep.
 #-------------------------------
 [EMBARGO]
@@ -700,7 +696,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = StartTargetCannotUseItem
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = It prevents the target from using its held item. Its Trainer is also prevented from using items on it.
 #-------------------------------
 [FAKETEARS]
@@ -711,7 +707,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = LowerTargetSpDef2
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = The user feigns crying to fluster the target, harshly lowering its Sp. Def stat.
 #-------------------------------
 [FLATTER]
@@ -722,7 +718,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = RaiseTargetSpAtk1ConfuseTarget
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = Flattery is used to confuse the target. However, it also raises the target's Sp. Atk stat.
 #-------------------------------
 [HONECLAWS]
@@ -733,7 +729,6 @@ Accuracy = 0
 TotalPP = 15
 Target = User
 FunctionCode = RaiseUserAtkAcc1
-Flags = ZPower_ATTACK_1
 Description = The user sharpens its claws to boost its Attack stat and accuracy.
 #-------------------------------
 [MEMENTO]
@@ -744,7 +739,7 @@ Accuracy = 100
 TotalPP = 10
 Target = NearOther
 FunctionCode = UserFaintsLowerTargetAtkSpAtk2
-Flags = CanProtect,CanMirrorMove,ZPower_HealSwitch
+Flags = CanProtect,CanMirrorMove
 Description = The user faints when using this move. In return, it harshly lowers the target's Attack and Sp. Atk.
 #-------------------------------
 [NASTYPLOT]
@@ -755,7 +750,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserSpAtk2
-Flags = ZPower_ResetStats
 Description = The user stimulates its brain by thinking bad thoughts. It sharply raises the user's Sp. Atk.
 #-------------------------------
 [OBSTRUCT]
@@ -767,7 +761,6 @@ TotalPP = 10
 Target = User
 Priority = 4
 FunctionCode = ProtectUserFromDamagingMovesObstruct
-Flags = ZPower_ResetStats
 Description = The user protects itself from all attacks. Direct contact lowers the attacker's Defense.
 #-------------------------------
 [PARTINGSHOT]
@@ -778,7 +771,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = LowerTargetAtkSpAtk1SwitchOutUser
-Flags = CanProtect,CanMirrorMove,Sound,ZPower_HealSwitch
+Flags = CanProtect,CanMirrorMove,Sound
 Description = With a parting threat, the user lowers the target's Attack and Sp. Atk stats. Then it switches out.
 #-------------------------------
 [QUASH]
@@ -789,7 +782,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = TargetActsLast
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The user suppresses the target and makes its move go last.
 #-------------------------------
 [SNATCH]
@@ -801,7 +794,6 @@ TotalPP = 10
 Target = User
 Priority = 4
 FunctionCode = StealAndUseBeneficialStatusMove
-Flags = ZPower_SPEED_2
 Description = The user steals the effects of any healing or stat-changing move the foe attempts to use.
 #-------------------------------
 [SWITCHEROO]
@@ -812,7 +804,7 @@ Accuracy = 100
 TotalPP = 10
 Target = NearOther
 FunctionCode = UserTargetSwapItems
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_2
+Flags = CanProtect,CanMirrorMove
 Description = The user trades held items with the target faster than the eye can follow.
 #-------------------------------
 [TAUNT]
@@ -823,7 +815,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = DisableTargetStatusMoves
-Flags = CanProtect,CanMirrorMove,ZPower_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = The target is taunted into a rage that allows it to use only attack moves for three turns.
 #-------------------------------
 [TOPSYTURVY]
@@ -834,7 +826,7 @@ Accuracy = 0
 TotalPP = 20
 Target = NearOther
 FunctionCode = InvertTargetStatStages
-Flags = CanProtect,CanMirrorMove,ZPower_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = All stat changes affecting the target turn topsy-turvy and become the opposite of what they were.
 #-------------------------------
 [TORMENT]
@@ -845,7 +837,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = DisableTargetUsingSameMoveConsecutively
-Flags = CanProtect,CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = The user torments and enrages the foe, making it incapable of using the same move twice in a row.
 #-------------------------------
 [ETERNABEAM]
@@ -953,7 +945,7 @@ Power = 100
 Accuracy = 100
 TotalPP = 5
 Target = NearOther
-FunctionCode = DoubleDamageOnDynamaxTargets
+FunctionCode = None
 Flags = CanProtect,CannotMetronome
 Description = The user unleashes a strong beam from its core.
 #-------------------------------
@@ -1113,7 +1105,7 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = RaiseUserMainStats1LoseThirdOfTotalHP
-Flags = Sound,CannotMetronome,Dance,ZPower_HealUser
+Flags = Sound,CannotMetronome,Dance
 Description = The user raises all its stats by using some of its HP.
 #-------------------------------
 [DRAGONDANCE]
@@ -1124,7 +1116,7 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserAtkSpd1
-Flags = Dance,ZPower_ResetStats
+Flags = Dance
 Description = The user vigorously performs a mystic, powerful dance that boosts its Attack and Speed stats.
 #-------------------------------
 [BOLTSTRIKE]
@@ -1462,7 +1454,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserSpDef1PowerUpElectricMove
-Flags = ZPower_SPECIAL_DEFENSE_1
 Description = The user boosts the power of the Electric move it uses next. It also raises the user's Sp. Def stat.
 #-------------------------------
 [EERIEIMPULSE]
@@ -1473,7 +1464,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = LowerTargetSpAtk2
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = The user's body generates an eerie impulse. Harshly lowers the target's Sp. Atk stat.
 #-------------------------------
 [ELECTRICTERRAIN]
@@ -1484,7 +1475,6 @@ Accuracy = 0
 TotalPP = 10
 Target = BothSides
 FunctionCode = StartElectricTerrain
-Flags = ZPower_SPEED_1
 Description = The user electrifies the ground for five turns. Pokémon on the ground no longer fall asleep.
 #-------------------------------
 [ELECTRIFY]
@@ -1495,7 +1485,7 @@ Accuracy = 0
 TotalPP = 20
 Target = NearOther
 FunctionCode = TargetMovesBecomeElectric
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = If the target uses a move after being electrified, that move becomes Electric-type.
 #-------------------------------
 [IONDELUGE]
@@ -1507,7 +1497,6 @@ TotalPP = 25
 Target = BothSides
 Priority = 1
 FunctionCode = NormalMovesBecomeElectric
-Flags = ZPower_SPECIAL_ATTACK_1
 Description = The user disperses electrically charged particles. Normal-type moves become Electric-type.
 #-------------------------------
 [MAGNETRISE]
@@ -1518,7 +1507,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = StartUserAirborne
-Flags = ZPower_EVASION_1
 Description = The user levitates using electrically generated magnetism for five turns.
 #-------------------------------
 [MAGNETICFLUX]
@@ -1529,7 +1517,6 @@ Accuracy = 0
 TotalPP = 20
 Target = UserAndAllies
 FunctionCode = RaisePlusMinusUserAndAlliesDefSpDef1
-Flags = ZPower_SPECIAL_DEFENSE_1
 Description = Manipulates magnetic fields to raise the Defense and Sp. Def stats of allies with Plus or Minus Abilities.
 #-------------------------------
 [THUNDERWAVE]
@@ -1540,7 +1527,7 @@ Accuracy = 90
 TotalPP = 20
 Target = NearOther
 FunctionCode = ParalyzeTargetIfNotTypeImmune
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = A weak electric charge is launched at the target. It causes paralysis if it hits.
 #-------------------------------
 [LIGHTOFRUIN]
@@ -1699,7 +1686,6 @@ Accuracy = 0
 TotalPP = 20
 Target = NearAlly
 FunctionCode = RaiseTargetSpDef1
-Flags = ZPower_SPECIAL_DEFENSE_2
 Description = The user raises the Sp. Def stat of an ally Pokémon by using a mysterious aroma.
 #-------------------------------
 [BABYDOLLEYES]
@@ -1711,7 +1697,7 @@ TotalPP = 30
 Target = NearOther
 Priority = 1
 FunctionCode = LowerTargetAttack1
-Flags = CanProtect,CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = The user stares with its baby-doll eyes, which lowers the target's Attack stat. Always goes first.
 #-------------------------------
 [CHARM]
@@ -1722,7 +1708,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = LowerTargetAttack2
-Flags = CanProtect,CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = The user charmingly gazes at the foe, making it less wary. The target's Attack is harshly lowered.
 #-------------------------------
 [CRAFTYSHIELD]
@@ -1734,7 +1720,6 @@ TotalPP = 10
 Target = UserSide
 Priority = 3
 FunctionCode = ProtectUserSideFromStatusMoves
-Flags = ZPower_SPECIAL_DEFENSE_1
 Description = The user protects itself and its allies from status moves with a mysterious power.
 #-------------------------------
 [DECORATE]
@@ -1745,7 +1730,7 @@ Accuracy = 0
 TotalPP = 15
 Target = NearOther
 FunctionCode = RaiseTargetAtkSpAtk2
-Flags = CannotMetronome,ZPower_SPECIAL_DEFENSE_1
+Flags = CannotMetronome
 Description = The user sharply raises the target's Attack and Sp. Atk stats by decorating the target.
 #-------------------------------
 [FAIRYLOCK]
@@ -1756,7 +1741,7 @@ Accuracy = 0
 TotalPP = 10
 Target = BothSides
 FunctionCode = TrapAllBattlersInBattleForOneTurn
-Flags = CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanMirrorMove
 Description = By locking down the battlefield, the user keeps all Pokémon from fleeing during the next turn.
 #-------------------------------
 [FLORALHEALING]
@@ -1767,7 +1752,7 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = HealTargetDependingOnGrassyTerrain
-Flags = CanProtect,ZPower_ResetStats
+Flags = CanProtect
 Description = The user restores the target's HP by up to half of its max HP. It restores more HP when the terrain is grass.
 #-------------------------------
 [FLOWERSHIELD]
@@ -1778,7 +1763,6 @@ Accuracy = 0
 TotalPP = 10
 Target = AllBattlers
 FunctionCode = RaiseGrassBattlersDef1
-Flags = ZPower_DEFENSE_1
 Description = The user raises the Defense stats of all Grass-type Pokémon in battle with a mysterious power.
 #-------------------------------
 [GEOMANCY]
@@ -1789,7 +1773,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = TwoTurnAttackRaiseUserSpAtkSpDefSpd2
-Flags = ZPower_AllStats_1
 Description = The user absorbs energy and sharply raises its Sp. Atk, Sp. Def, and Speed stats on the next turn.
 #-------------------------------
 [MISTYTERRAIN]
@@ -1800,7 +1783,6 @@ Accuracy = 0
 TotalPP = 10
 Target = BothSides
 FunctionCode = StartMistyTerrain
-Flags = ZPower_SPECIAL_DEFENSE_1
 Description = The user covers the ground with mist for five turns. Grounded Pokémon can't gain status conditions.
 #-------------------------------
 [MOONLIGHT]
@@ -1811,7 +1793,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = HealUserDependingOnWeather
-Flags = ZPower_ResetStats
 Description = The user restores its own HP. The amount of HP regained varies with the weather.
 #-------------------------------
 [SWEETKISS]
@@ -1822,7 +1803,7 @@ Accuracy = 75
 TotalPP = 10
 Target = NearOther
 FunctionCode = ConfuseTarget
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = The user kisses the target with a sweet, angelic cuteness that causes confusion.
 #-------------------------------
 [FOCUSPUNCH]
@@ -2340,7 +2321,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserAtkDef1
-Flags = ZPower_ATTACK_1
 Description = The user tenses its muscles to bulk up its body, boosting both its Attack and Defense stats.
 #-------------------------------
 [COACHING]
@@ -2351,7 +2331,7 @@ Accuracy = 0
 TotalPP = 10
 Target = AllAllies
 FunctionCode = RaiseAlliesAtkDef1
-Flags = CanMirrorMove,ZPower_ATTACK_1
+Flags = CanMirrorMove
 Description = The user properly coaches its ally Pokémon, boosting their Attack and Defense stats.
 #-------------------------------
 [DETECT]
@@ -2363,7 +2343,6 @@ TotalPP = 5
 Target = User
 Priority = 4
 FunctionCode = ProtectUser
-Flags = ZPower_EVASION_1
 Description = It enables the user to evade all attacks. Its chance of failing rises if it is used in succession.
 #-------------------------------
 [MATBLOCK]
@@ -2374,7 +2353,6 @@ Accuracy = 0
 TotalPP = 10
 Target = UserSide
 FunctionCode = ProtectUserSideFromDamagingMovesIfUserFirstTurn
-Flags = ZPower_DEFENSE_1
 Description = Using a pulled-up mat as a shield, the user protects itself and its allies from damaging moves.
 #-------------------------------
 [NORETREAT]
@@ -2385,7 +2363,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = RaiseUserMainStats1TrapUserInBattle
-Flags = ZPower_HealUser
 Description = This move raises all the user's stats but prevents the user from switching out or fleeing.
 #-------------------------------
 [OCTOLOCK]
@@ -2396,7 +2373,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = TrapTargetInBattleLowerTargetDefSpDef1EachTurn
-Flags = CanProtect,CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = Locks the target in and prevents it from fleeing. Also lowers the target's Defense and Sp. Def each turn.
 #-------------------------------
 [QUICKGUARD]
@@ -2408,7 +2385,6 @@ TotalPP = 15
 Target = UserSide
 Priority = 3
 FunctionCode = ProtectUserSideFromPriorityMoves
-Flags = ZPower_DEFENSE_1
 Description = The user protects itself and its allies from priority moves. If may fail if used in succession.
 #-------------------------------
 [VCREATE]
@@ -2848,7 +2824,6 @@ Accuracy = 0
 TotalPP = 5
 Target = BothSides
 FunctionCode = StartSunWeather
-Flags = ZPower_SPEED_1
 Description = The user intensifies the sun for five turns, powering up Fire-type moves.
 #-------------------------------
 [WILLOWISP]
@@ -2859,7 +2834,7 @@ Accuracy = 85
 TotalPP = 15
 Target = NearOther
 FunctionCode = BurnTarget
-Flags = CanProtect,CanMirrorMove,ZPower_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = The user shoots a sinister, bluish-white flame at the target to inflict a burn.
 #-------------------------------
 [SKYATTACK]
@@ -3128,7 +3103,7 @@ Accuracy = 0
 TotalPP = 15
 Target = NearOther
 FunctionCode = LowerTargetEvasion1RemoveSideEffects
-Flags = CanProtect,CanMirrorMove,ZPower_ACCURACY_1
+Flags = CanProtect,CanMirrorMove
 Description = A strong wind blows away the foe's obstacles such as Light Screen. It also lowers their evasion.
 #-------------------------------
 [FEATHERDANCE]
@@ -3139,7 +3114,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = LowerTargetAttack2
-Flags = CanProtect,CanMirrorMove,Dance,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove,Dance
 Description = The user covers the target's body with a mass of down that harshly lowers its Attack stat.
 #-------------------------------
 [MIRRORMOVE]
@@ -3150,7 +3125,6 @@ Accuracy = 0
 TotalPP = 20
 Target = NearOther
 FunctionCode = UseLastMoveUsedByTarget
-Flags = ZPower_ATTACK_2
 Description = The user counters the target by mimicking the target's last move.
 #-------------------------------
 [ROOST]
@@ -3161,7 +3135,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = HealUserHalfOfTotalHPLoseFlyingTypeThisTurn
-Flags = ZPower_ResetStats
 Description = The user lands and rests its body. It restores the user's HP by up to half of its max HP.
 #-------------------------------
 [TAILWIND]
@@ -3394,7 +3367,7 @@ Accuracy = 100
 TotalPP = 10
 Target = NearOther
 FunctionCode = ConfuseTarget
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = The target is exposed to a sinister ray that triggers confusion.
 #-------------------------------
 [CURSE]
@@ -3405,7 +3378,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = CurseTargetOrLowerUserSpd1RaiseUserAtkDef1
-Flags = ZPower_ATTACK_1
 Description = A move that works differently for the Ghost type than for all the other types.
 #-------------------------------
 [DESTINYBOND]
@@ -3416,7 +3388,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = AttackerFaintsIfUserFaints
-Flags = ZPower_FollowMe
 Description = When this move is used, if the user faints, the foe that landed the knockout hit also faints.
 #-------------------------------
 [GRUDGE]
@@ -3427,7 +3398,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = SetAttackerMovePPTo0IfUserFaints
-Flags = ZPower_FollowMe
 Description = If the user faints, the user's grudge fully depletes the PP of the foe's move that knocked it out.
 #-------------------------------
 [NIGHTMARE]
@@ -3438,7 +3408,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = StartDamageTargetEachTurnIfTargetAsleep
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = A sleeping target sees a nightmare that inflicts some damage every turn.
 #-------------------------------
 [SPITE]
@@ -3449,7 +3419,7 @@ Accuracy = 100
 TotalPP = 10
 Target = NearOther
 FunctionCode = LowerPPOfTargetLastMoveBy4
-Flags = CanProtect,CanMirrorMove,ZPower_HealUser
+Flags = CanProtect,CanMirrorMove
 Description = The user unleashes its grudge on the move last used by the target by cutting 4 PP from it.
 #-------------------------------
 [TRICKORTREAT]
@@ -3460,7 +3430,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = AddGhostTypeToTarget
-Flags = CanProtect,CanMirrorMove,ZPower_AllStats_1
+Flags = CanProtect,CanMirrorMove
 Description = The user takes the target trick-or-treating. This adds Ghost type to the target's type.
 #-------------------------------
 [FRENZYPLANT]
@@ -3863,7 +3833,6 @@ Accuracy = 0
 TotalPP = 5
 Target = UserAndAllies
 FunctionCode = CureUserPartyStatus
-Flags = ZPower_HealUser
 Description = The user releases a soothing scent that heals all status problems affecting the user's party.
 #-------------------------------
 [COTTONGUARD]
@@ -3874,7 +3843,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = RaiseUserDefense3
-Flags = ZPower_ResetStats
 Description = The user protects itself by wrapping its body in soft cotton, drastically raising its Defense stat.
 #-------------------------------
 [COTTONSPORE]
@@ -3885,7 +3853,7 @@ Accuracy = 100
 TotalPP = 40
 Target = AllNearFoes
 FunctionCode = LowerTargetSpeed2
-Flags = CanProtect,CanMirrorMove,Powder,ZPower_ResetStats
+Flags = CanProtect,CanMirrorMove,Powder
 Description = The user releases cotton-like spores that cling to the foe, harshly reducing its Speed stat.
 #-------------------------------
 [FORESTSCURSE]
@@ -3896,7 +3864,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = AddGrassTypeToTarget
-Flags = CanProtect,CanMirrorMove,ZPower_AllStats_1
+Flags = CanProtect,CanMirrorMove
 Description = The user puts a forest curse on the target. The target is now Grass type as well.
 #-------------------------------
 [GRASSWHISTLE]
@@ -3907,7 +3875,7 @@ Accuracy = 55
 TotalPP = 15
 Target = NearOther
 FunctionCode = SleepTarget
-Flags = CanProtect,CanMirrorMove,Sound,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove,Sound
 Description = The user plays a pleasant melody that lulls the target into a deep sleep.
 #-------------------------------
 [GRASSYTERRAIN]
@@ -3918,7 +3886,6 @@ Accuracy = 0
 TotalPP = 10
 Target = BothSides
 FunctionCode = StartGrassyTerrain
-Flags = ZPower_DEFENSE_1
 Description = The user turns the ground to grass for five turns. Grounded Pokémon restore a little HP every turn.
 #-------------------------------
 [INGRAIN]
@@ -3929,7 +3896,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = StartHealUserEachTurnTrapUserInBattle
-Flags = ZPower_SPECIAL_DEFENSE_1
 Description = The user lays roots that restore its HP on every turn. Because it is rooted, it can't switch out.
 #-------------------------------
 [JUNGLEHEALING]
@@ -3940,7 +3906,7 @@ Accuracy = 0
 TotalPP = 10
 Target = UserAndAllies
 FunctionCode = HealUserAndAlliesQuarterOfTotalHPCureStatus
-Flags = CannotMetronome,ZPower_ResetStats
+Flags = CannotMetronome
 Description = The user becomes one with the jungle, and restores HP and cures status conditions of itself and allies.
 #-------------------------------
 [LEECHSEED]
@@ -3951,7 +3917,7 @@ Accuracy = 90
 TotalPP = 10
 Target = NearOther
 FunctionCode = StartLeechSeedTarget
-Flags = CanProtect,CanMirrorMove,ZPower_ResetStats
+Flags = CanProtect,CanMirrorMove
 Description = A seed is planted on the target. It steals some HP from the target every turn.
 #-------------------------------
 [SLEEPPOWDER]
@@ -3962,7 +3928,7 @@ Accuracy = 75
 TotalPP = 15
 Target = NearOther
 FunctionCode = SleepTarget
-Flags = CanProtect,CanMirrorMove,Powder,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove,Powder
 Description = The user scatters a big cloud of sleep-inducing dust around the target.
 #-------------------------------
 [SPIKYSHIELD]
@@ -3974,7 +3940,6 @@ TotalPP = 10
 Target = User
 Priority = 4
 FunctionCode = ProtectUserFromTargetingMovesSpikyShield
-Flags = ZPower_DEFENSE_1
 Description = Protects the user from attacks. Also damages attackers that make contact with the user.
 #-------------------------------
 [SPORE]
@@ -3985,7 +3950,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = SleepTarget
-Flags = CanProtect,CanMirrorMove,Powder,ZPower_ResetStats
+Flags = CanProtect,CanMirrorMove,Powder
 Description = The user scatters bursts of spores that induce sleep.
 #-------------------------------
 [STRENGTHSAP]
@@ -3996,7 +3961,7 @@ Accuracy = 100
 TotalPP = 10
 Target = NearOther
 FunctionCode = HealUserByTargetAttackLowerTargetAttack1
-Flags = CanProtect,CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = The user restores its HP by the target's Attack stat amount. Then lowers the target's Attack stat.
 #-------------------------------
 [STUNSPORE]
@@ -4007,7 +3972,7 @@ Accuracy = 75
 TotalPP = 30
 Target = NearOther
 FunctionCode = ParalyzeTarget
-Flags = CanProtect,CanMirrorMove,Powder,ZPower_SPECIAL_DEFENSE_1
+Flags = CanProtect,CanMirrorMove,Powder
 Description = The user scatters a cloud of paralyzing powder. It may leave the target with paralysis.
 #-------------------------------
 [SYNTHESIS]
@@ -4018,7 +3983,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = HealUserDependingOnWeather
-Flags = ZPower_ResetStats
 Description = The user restores its own HP. The amount of HP regained varies with the weather.
 #-------------------------------
 [WORRYSEED]
@@ -4029,7 +3993,7 @@ Accuracy = 100
 TotalPP = 10
 Target = NearOther
 FunctionCode = SetTargetAbilityToInsomnia
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = A seed that causes worry is planted on the foe. It prevents sleep by making its Ability Insomnia.
 #-------------------------------
 [PRECIPICEBLADES]
@@ -4299,7 +4263,6 @@ Accuracy = 0
 TotalPP = 15
 Target = BothSides
 FunctionCode = StartWeakenElectricMoves
-Flags = ZPower_SPECIAL_DEFENSE_1
 Description = The user covers itself with mud. It weakens Electric-type moves while the user is in the battle.
 #-------------------------------
 [ROTOTILLER]
@@ -4310,7 +4273,6 @@ Accuracy = 0
 TotalPP = 10
 Target = AllBattlers
 FunctionCode = RaiseGroundedGrassBattlersAtkSpAtk1
-Flags = ZPower_ATTACK_1
 Description = The user tills the soil to encourage plant growth. This raises the Attack and Sp. Atk of Grass types.
 #-------------------------------
 [SANDATTACK]
@@ -4321,7 +4283,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = LowerTargetAccuracy1
-Flags = CanProtect,CanMirrorMove,ZPower_EVASION_1
+Flags = CanProtect,CanMirrorMove
 Description = Sand is hurled in the target's face, reducing its accuracy.
 #-------------------------------
 [SHOREUP]
@@ -4332,7 +4294,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = HealUserDependingOnSandstorm
-Flags = ZPower_ResetStats
 Description = The user regains up to half of its max HP. It restores more HP in a sandstorm.
 #-------------------------------
 [SPIKES]
@@ -4343,7 +4304,6 @@ Accuracy = 0
 TotalPP = 20
 Target = FoeSide
 FunctionCode = AddSpikesToFoeSide
-Flags = ZPower_DEFENSE_1
 Description = The user lays a trap of spikes at the foe's feet. The trap hurts foes that switch into battle.
 #-------------------------------
 [FREEZESHOCK]
@@ -4620,7 +4580,6 @@ Accuracy = 0
 TotalPP = 20
 Target = UserSide
 FunctionCode = StartWeakenDamageAgainstUserSideIfHail
-Flags = ZPower_SPEED_1
 Description = This move reduces damage from attacks for five turns. This can be used only in a hailstorm.
 #-------------------------------
 [HAIL]
@@ -4631,7 +4590,6 @@ Accuracy = 0
 TotalPP = 10
 Target = BothSides
 FunctionCode = StartHailWeather
-Flags = ZPower_SPEED_1
 Description = The user summons a hail storm lasting five turns. It damages all Pokémon except the Ice type.
 #-------------------------------
 [HAZE]
@@ -4642,7 +4600,6 @@ Accuracy = 0
 TotalPP = 30
 Target = BothSides
 FunctionCode = ResetAllBattlersStatStages
-Flags = ZPower_HealUser
 Description = The user creates a haze that eliminates every stat change among all the Pokémon engaged in battle.
 #-------------------------------
 [MIST]
@@ -4653,7 +4610,6 @@ Accuracy = 0
 TotalPP = 30
 Target = UserSide
 FunctionCode = StartUserSideImmunityToStatStageLowering
-Flags = ZPower_HealUser
 Description = The user cloaks its body with a white mist that prevents any of its stats from being cut for five turns.
 #-------------------------------
 [EXPLOSION]
@@ -5727,7 +5683,6 @@ Accuracy = 0
 TotalPP = 30
 Target = UserOrNearAlly
 FunctionCode = RaiseTargetRandomStat2
-Flags = ZPower_CriticalHit
 Description = The user applies pressure to stress points, sharply boosting one of its stats.
 #-------------------------------
 [AFTERYOU]
@@ -5738,7 +5693,6 @@ Accuracy = 0
 TotalPP = 15
 Target = NearOther
 FunctionCode = TargetActsNext
-Flags = ZPower_SPEED_1
 Description = The user helps the target and makes it use its move right after the user.
 #-------------------------------
 [ASSIST]
@@ -5759,7 +5713,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = AttractTarget
-Flags = CanProtect,CanMirrorMove,ZPower_ResetStats
+Flags = CanProtect,CanMirrorMove
 Description = If it is the opposite gender of the user, the target becomes infatuated and less likely to attack.
 #-------------------------------
 [BATONPASS]
@@ -5770,7 +5724,6 @@ Accuracy = 0
 TotalPP = 40
 Target = User
 FunctionCode = SwitchOutUserPassOnEffects
-Flags = ZPower_ResetStats
 Description = The user switches places with a party Pokémon in waiting, passing along any stat changes.
 #-------------------------------
 [BELLYDRUM]
@@ -5781,7 +5734,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = MaxUserAttackLoseHalfOfTotalHP
-Flags = ZPower_HealUser
 Description = The user maximizes its Attack stat in exchange for HP equal to half its max HP.
 #-------------------------------
 [BESTOW]
@@ -5792,7 +5744,7 @@ Accuracy = 0
 TotalPP = 15
 Target = NearOther
 FunctionCode = TargetTakesUserItem
-Flags = CanMirrorMove,ZPower_SPEED_2
+Flags = CanMirrorMove
 Description = The user passes its held item to the target when the target isn't holding an item.
 #-------------------------------
 [BLOCK]
@@ -5803,7 +5755,7 @@ Accuracy = 0
 TotalPP = 5
 Target = NearOther
 FunctionCode = TrapTargetInBattle
-Flags = CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanMirrorMove
 Description = The user blocks the target's way with arms spread wide to prevent escape.
 #-------------------------------
 [CAMOUFLAGE]
@@ -5814,7 +5766,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = SetUserTypesBasedOnEnvironment
-Flags = ZPower_EVASION_1
 Description = The user's type is changed depending on its environment, such as at water's edge, in grass, or in a cave.
 #-------------------------------
 [CAPTIVATE]
@@ -5825,7 +5776,7 @@ Accuracy = 100
 TotalPP = 20
 Target = AllNearFoes
 FunctionCode = LowerTargetSpAtk2IfCanAttract
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_DEFENSE_2
+Flags = CanProtect,CanMirrorMove
 Description = If it is the opposite gender of the user, the target is charmed into harshly lowering its Sp. Atk stat.
 #-------------------------------
 [CELEBRATE]
@@ -5836,7 +5787,6 @@ Accuracy = 0
 TotalPP = 40
 Target = User
 FunctionCode = DoesNothingCongratulations
-Flags = ZPower_AllStats_1
 Description = The Pokémon congratulates you on your special day!
 #-------------------------------
 [CONFIDE]
@@ -5847,7 +5797,7 @@ Accuracy = 0
 TotalPP = 20
 Target = NearOther
 FunctionCode = LowerTargetSpAtk1
-Flags = CanMirrorMove,Sound,ZPower_SPECIAL_DEFENSE_1
+Flags = CanMirrorMove,Sound
 Description = The user tells the target a secret. The target loses focus and its Sp. Atk stat is lowered.
 #-------------------------------
 [CONVERSION]
@@ -5858,7 +5808,6 @@ Accuracy = 0
 TotalPP = 30
 Target = User
 FunctionCode = SetUserTypesToUserMoveType
-Flags = ZPower_AllStats_1
 Description = The user changes its type to become the same type as one of its moves.
 #-------------------------------
 [CONVERSION2]
@@ -5869,7 +5818,6 @@ Accuracy = 0
 TotalPP = 30
 Target = NearOther
 FunctionCode = SetUserTypesToResistLastAttack
-Flags = ZPower_HealUser
 Description = The user changes its type to make itself resistant to the type of the attack the opponent used last.
 #-------------------------------
 [COPYCAT]
@@ -5880,7 +5828,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = UseLastMoveUsed
-Flags = ZPower_ACCURACY_1
 Description = The user mimics the move used immediately before it. The move fails if no other move has been used yet.
 #-------------------------------
 [COURTCHANGE]
@@ -5891,7 +5838,7 @@ Accuracy = 0
 TotalPP = 10
 Target = BothSides
 FunctionCode = SwapSideEffects
-Flags = CanMirrorMove,ZPower_SPEED_1
+Flags = CanMirrorMove
 Description = With its mysterious power, the user swaps the effects on either side of the field.
 #-------------------------------
 [DEFENSECURL]
@@ -5902,7 +5849,6 @@ Accuracy = 0
 TotalPP = 40
 Target = User
 FunctionCode = RaiseUserDefense1CurlUpUser
-Flags = ZPower_ACCURACY_1
 Description = The user curls up to conceal weak spots and raise its Defense stat.
 #-------------------------------
 [DISABLE]
@@ -5913,7 +5859,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = DisableTargetLastMoveUsed
-Flags = CanProtect,CanMirrorMove,ZPower_ResetStats
+Flags = CanProtect,CanMirrorMove
 Description = For four turns, this move prevents the target from using the move it last used.
 #-------------------------------
 [DOUBLETEAM]
@@ -5924,7 +5870,6 @@ Accuracy = 0
 TotalPP = 15
 Target = User
 FunctionCode = RaiseUserEvasion1
-Flags = ZPower_ResetStats
 Description = By moving rapidly, the user makes illusory copies of itself to raise its evasiveness.
 #-------------------------------
 [ENCORE]
@@ -5935,7 +5880,7 @@ Accuracy = 100
 TotalPP = 5
 Target = NearOther
 FunctionCode = DisableTargetUsingDifferentMove
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The user compels the target to keep using only the move it last used for three turns.
 #-------------------------------
 [ENDURE]
@@ -5947,7 +5892,6 @@ TotalPP = 10
 Target = User
 Priority = 4
 FunctionCode = UserEnduresFaintingThisTurn
-Flags = ZPower_ResetStats
 Description = The user endures any attack with at least 1 HP. Its chance of failing rises if it is used in succession.
 #-------------------------------
 [ENTRAINMENT]
@@ -5958,7 +5902,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = SetTargetAbilityToUserAbility
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = The user dances to compel the target to mimic it, making the target's Ability the same as the user's.
 #-------------------------------
 [FLASH]
@@ -5969,7 +5913,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = LowerTargetAccuracy1
-Flags = CanProtect,CanMirrorMove,ZPower_EVASION_1
+Flags = CanProtect,CanMirrorMove
 Description = The user flashes a light that cuts the target's accuracy. It can also be used to illuminate caves.
 #-------------------------------
 [FOCUSENERGY]
@@ -5980,7 +5924,6 @@ Accuracy = 0
 TotalPP = 30
 Target = User
 FunctionCode = RaiseUserCriticalHitRate2
-Flags = ZPower_ACCURACY_1
 Description = The user takes a deep breath and focuses so that critical hits land more easily.
 #-------------------------------
 [FOLLOWME]
@@ -5992,7 +5935,6 @@ TotalPP = 20
 Target = User
 Priority = 2
 FunctionCode = RedirectAllMovesToUser
-Flags = ZPower_ResetStats
 Description = The user draws attention to itself, making all targets take aim only at the user.
 #-------------------------------
 [FORESIGHT]
@@ -6003,7 +5945,7 @@ Accuracy = 0
 TotalPP = 40
 Target = NearOther
 FunctionCode = StartNegateTargetEvasionStatStageAndGhostImmunity
-Flags = CanProtect,CanMirrorMove,ZPower_CriticalHit
+Flags = CanProtect,CanMirrorMove
 Description = Enables the user to hit a Ghost type with any kind of move. It also enables the user to hit an evasive foe.
 #-------------------------------
 [GLARE]
@@ -6014,7 +5956,7 @@ Accuracy = 100
 TotalPP = 30
 Target = NearOther
 FunctionCode = ParalyzeTarget
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = The user intimidates the target with the pattern on its belly to cause paralysis.
 #-------------------------------
 [GROWL]
@@ -6025,7 +5967,7 @@ Accuracy = 100
 TotalPP = 40
 Target = AllNearFoes
 FunctionCode = LowerTargetAttack1
-Flags = CanProtect,CanMirrorMove,Sound,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove,Sound
 Description = The user growls in an endearing way, making the foe less wary. The foe's Attack stat is lowered.
 #-------------------------------
 [GROWTH]
@@ -6036,7 +5978,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserAtkSpAtk1Or2InSun
-Flags = ZPower_SPECIAL_ATTACK_1
 Description = The user's body grows all at once, raising the Atk and Sp. Atk stats.
 #-------------------------------
 [HAPPYHOUR]
@@ -6047,7 +5988,6 @@ Accuracy = 0
 TotalPP = 30
 Target = UserSide
 FunctionCode = DoubleMoneyGainedFromBattle
-Flags = ZPower_AllStats_1
 Description = Using Happy Hour doubles the amount of prize money received after battle.
 #-------------------------------
 [HARDEN]
@@ -6058,7 +5998,6 @@ Accuracy = 0
 TotalPP = 30
 Target = User
 FunctionCode = RaiseUserDefense1
-Flags = ZPower_DEFENSE_1
 Description = The user stiffens all the muscles in its body to raise its Defense stat.
 #-------------------------------
 [HEALBELL]
@@ -6069,7 +6008,7 @@ Accuracy = 0
 TotalPP = 5
 Target = UserAndAllies
 FunctionCode = CureUserPartyStatus
-Flags = Sound,ZPower_HealUser
+Flags = Sound
 Description = The user makes a soothing bell chime to heal the status problems of all the party Pokémon.
 #-------------------------------
 [HELPINGHAND]
@@ -6081,7 +6020,6 @@ TotalPP = 20
 Target = NearAlly
 Priority = 5
 FunctionCode = PowerUpAllyMove
-Flags = ZPower_ResetStats
 Description = The user assists an ally by boosting the power of its attack.
 #-------------------------------
 [HOLDHANDS]
@@ -6092,7 +6030,6 @@ Accuracy = 0
 TotalPP = 40
 Target = NearAlly
 FunctionCode = DoesNothingFailsIfNoAlly
-Flags = ZPower_AllStats_1
 Description = The user and an ally hold hands. This makes them very happy.
 #-------------------------------
 [HOWL]
@@ -6103,7 +6040,7 @@ Accuracy = 0
 TotalPP = 40
 Target = UserAndAllies
 FunctionCode = RaiseTargetAttack1
-Flags = Sound,ZPower_ATTACK_1
+Flags = Sound
 Description = The user howls loudly to raise the spirit of itself and allies, boosting their Attack stats.
 #-------------------------------
 [LASERFOCUS]
@@ -6114,7 +6051,6 @@ Accuracy = 0
 TotalPP = 30
 Target = User
 FunctionCode = EnsureNextCriticalHit
-Flags = ZPower_ATTACK_1
 Description = The user focuses intensely. The attack on the next turn always results in a critical hit.
 #-------------------------------
 [LEER]
@@ -6125,7 +6061,7 @@ Accuracy = 100
 TotalPP = 30
 Target = AllNearFoes
 FunctionCode = LowerTargetDefense1
-Flags = CanProtect,CanMirrorMove,ZPower_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = The user gains an intimidating leer with sharp eyes. The target's Defense stat is reduced.
 #-------------------------------
 [LOCKON]
@@ -6136,7 +6072,7 @@ Accuracy = 0
 TotalPP = 5
 Target = NearOther
 FunctionCode = EnsureNextMoveAlwaysHits
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The user takes sure aim at the target. It ensures the next attack does not fail to hit the target.
 #-------------------------------
 [LOVELYKISS]
@@ -6147,7 +6083,7 @@ Accuracy = 75
 TotalPP = 10
 Target = NearOther
 FunctionCode = SleepTarget
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = With a scary face, the user tries to force a kiss on the target. If it suceeds, the target falls asleep.
 #-------------------------------
 [LUCKYCHANT]
@@ -6158,7 +6094,6 @@ Accuracy = 0
 TotalPP = 30
 Target = UserSide
 FunctionCode = StartPreventCriticalHitsAgainstUserSide
-Flags = ZPower_EVASION_1
 Description = The user chants an incantation toward the sky, preventing the foe from landing critical hits.
 #-------------------------------
 [MEFIRST]
@@ -6169,7 +6104,7 @@ Accuracy = 0
 TotalPP = 20
 Target = NearFoe
 FunctionCode = UseMoveTargetIsAboutToUse
-Flags = CanProtect,ZPower_SPEED_2
+Flags = CanProtect
 Description = The user tries to cut ahead of the foe to steal and use the foe's intended move with greater power.
 #-------------------------------
 [MEANLOOK]
@@ -6180,7 +6115,7 @@ Accuracy = 0
 TotalPP = 5
 Target = NearOther
 FunctionCode = TrapTargetInBattle
-Flags = CanMirrorMove,ZPower_SPECIAL_DEFENSE_1
+Flags = CanMirrorMove
 Description = The user pins the target with a dark, arresting look. The target becomes unable to flee.
 #-------------------------------
 [METRONOME]
@@ -6201,7 +6136,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = HealUserHalfOfTotalHP
-Flags = ZPower_ResetStats
 Description = The user restores its own HP by up to half of its maximum HP. May also be used in the field to heal HP.
 #-------------------------------
 [MIMIC]
@@ -6212,7 +6146,7 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = ReplaceMoveThisBattleWithTargetLastMoveUsed
-Flags = CanProtect,ZPower_ACCURACY_1
+Flags = CanProtect
 Description = The user copies the move last used by the foe. The move can be used until the user is switched out.
 #-------------------------------
 [MINDREADER]
@@ -6223,7 +6157,7 @@ Accuracy = 0
 TotalPP = 5
 Target = NearOther
 FunctionCode = EnsureNextMoveAlwaysHits
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = The user senses the foe's movements with its mind to ensure its next attack does not miss the foe.
 #-------------------------------
 [MINIMIZE]
@@ -6234,7 +6168,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = RaiseUserEvasion2MinimizeUser
-Flags = ZPower_ResetStats
 Description = The user compresses its body to make itself look smaller, which sharply raises its evasiveness.
 #-------------------------------
 [MORNINGSUN]
@@ -6245,7 +6178,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = HealUserDependingOnWeather
-Flags = ZPower_ResetStats
 Description = The user restores its own HP. The amount of HP regained varies with the weather.
 #-------------------------------
 [NATUREPOWER]
@@ -6266,7 +6198,7 @@ Accuracy = 0
 TotalPP = 30
 Target = NearOther
 FunctionCode = LowerTargetAtkSpAtk1
-Flags = CanProtect,CanMirrorMove,Sound,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove,Sound
 Description = Letting out a noble roar, the user intimidates the target and lowers its Attack and Sp. Atk.
 #-------------------------------
 [ODORSLEUTH]
@@ -6277,7 +6209,7 @@ Accuracy = 0
 TotalPP = 40
 Target = NearOther
 FunctionCode = StartNegateTargetEvasionStatStageAndGhostImmunity
-Flags = CanProtect,CanMirrorMove,ZPower_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = Enables the user to hit a Ghost type with any type of move. It also enables the user to hit an evasive foe.
 #-------------------------------
 [PAINSPLIT]
@@ -6288,7 +6220,7 @@ Accuracy = 0
 TotalPP = 20
 Target = NearOther
 FunctionCode = UserTargetAverageHP
-Flags = CanProtect,CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = The user adds its HP to the target's HP, then equally shares the combined HP with the target.
 #-------------------------------
 [PERISHSONG]
@@ -6299,7 +6231,7 @@ Accuracy = 0
 TotalPP = 5
 Target = AllBattlers
 FunctionCode = StartPerishCountsForAllBattlers
-Flags = Sound,ZPower_ResetStats
+Flags = Sound
 Description = Any Pokémon that hears this song faints in three turns, unless it switches out of battle.
 #-------------------------------
 [PLAYNICE]
@@ -6310,7 +6242,7 @@ Accuracy = 0
 TotalPP = 20
 Target = NearOther
 FunctionCode = LowerTargetAttack1BypassSubstitute
-Flags = CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanMirrorMove
 Description = The user and target become friends. The target loses its will to fight, lowering its Attack stat.
 #-------------------------------
 [PROTECT]
@@ -6322,7 +6254,6 @@ TotalPP = 10
 Target = User
 Priority = 4
 FunctionCode = ProtectUser
-Flags = ZPower_ResetStats
 Description = It enables the user to evade all attacks. Its chance of failing rises if it is used in succession.
 #-------------------------------
 [PSYCHUP]
@@ -6333,7 +6264,6 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = UserCopyTargetStatStages
-Flags = ZPower_HealUser
 Description = The user hypnotizes itself into copying any stat change made by the target.
 #-------------------------------
 [RECOVER]
@@ -6344,7 +6274,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = HealUserHalfOfTotalHP
-Flags = ZPower_ResetStats
 Description = Restoring its own cells, the user restores its own HP by half of its max HP.
 #-------------------------------
 [RECYCLE]
@@ -6355,7 +6284,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = RestoreUserConsumedItem
-Flags = ZPower_SPEED_2
 Description = The user recycles a held item that has been used in battle so it can be used again.
 #-------------------------------
 [REFLECTTYPE]
@@ -6366,7 +6294,7 @@ Accuracy = 0
 TotalPP = 15
 Target = NearOther
 FunctionCode = SetUserTypesToTargetTypes
-Flags = CanProtect,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect
 Description = The user reflects the target's type, making it the same type as the target.
 #-------------------------------
 [REFRESH]
@@ -6377,7 +6305,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = CureUserBurnPoisonParalysis
-Flags = ZPower_HealUser
 Description = The user rests to cure itself of a poisoning, burn, or paralysis.
 #-------------------------------
 [ROAR]
@@ -6389,7 +6316,7 @@ TotalPP = 20
 Target = NearOther
 Priority = -6
 FunctionCode = SwitchOutTargetStatusMove
-Flags = CanMirrorMove,Sound,ZPower_DEFENSE_1
+Flags = CanMirrorMove,Sound
 Description = The target is scared off and replaced by another Pokémon in its party. In the wild, the battle ends.
 #-------------------------------
 [SAFEGUARD]
@@ -6400,7 +6327,6 @@ Accuracy = 0
 TotalPP = 25
 Target = UserSide
 FunctionCode = StartUserSideImmunityToInflictedStatus
-Flags = ZPower_SPEED_1
 Description = The user creates a protective field that prevents status problems for five turns.
 #-------------------------------
 [SCARYFACE]
@@ -6411,7 +6337,7 @@ Accuracy = 100
 TotalPP = 10
 Target = NearOther
 FunctionCode = LowerTargetSpeed2
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The user frightens the target with a scary face to harshly reduce its Speed stat.
 #-------------------------------
 [SCREECH]
@@ -6422,7 +6348,7 @@ Accuracy = 85
 TotalPP = 40
 Target = NearOther
 FunctionCode = LowerTargetDefense2
-Flags = CanProtect,CanMirrorMove,Sound,ZPower_ATTACK_1
+Flags = CanProtect,CanMirrorMove,Sound
 Description = An earsplitting screech harshly reduces the target's Defense stat.
 #-------------------------------
 [SHARPEN]
@@ -6433,7 +6359,6 @@ Accuracy = 0
 TotalPP = 30
 Target = User
 FunctionCode = RaiseUserAttack1
-Flags = ZPower_ATTACK_1
 Description = The user reduces its polygon count to make itself more jagged, raising the Attack stat.
 #-------------------------------
 [SHELLSMASH]
@@ -6444,7 +6369,6 @@ Accuracy = 0
 TotalPP = 15
 Target = User
 FunctionCode = LowerUserDefSpDef1RaiseUserAtkSpAtkSpd2
-Flags = ZPower_ResetStats
 Description = The user breaks its shell, lowering its defenses but sharply raising attacking and Speed stats.
 #-------------------------------
 [SIMPLEBEAM]
@@ -6455,7 +6379,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = SetTargetAbilityToSimple
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = The user's mysterious psychic wave changes the target's Ability to Simple.
 #-------------------------------
 [SING]
@@ -6466,7 +6390,7 @@ Accuracy = 55
 TotalPP = 15
 Target = NearOther
 FunctionCode = SleepTarget
-Flags = CanProtect,CanMirrorMove,Sound,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove,Sound
 Description = A soothing lullaby is sung in a calming voice that puts the target into a deep slumber.
 #-------------------------------
 [SKETCH]
@@ -6477,7 +6401,6 @@ Accuracy = 0
 TotalPP = 1
 Target = NearOther
 FunctionCode = ReplaceMoveWithTargetLastMoveUsed
-Flags = ZPower_AllStats_1
 Description = It enables the user to permanently learn the move last used by the foe. Once used, Sketch disappears.
 #-------------------------------
 [SLACKOFF]
@@ -6488,7 +6411,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = HealUserHalfOfTotalHP
-Flags = ZPower_ResetStats
 Description = The user slacks off, restoring its own HP by up to half of its maximum HP.
 #-------------------------------
 [SLEEPTALK]
@@ -6499,7 +6421,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = UseRandomUserMoveIfAsleep
-Flags = ZPower_CriticalHit
 Description = While it is asleep, the user randomly uses one of the moves it knows.
 #-------------------------------
 [SMOKESCREEN]
@@ -6510,7 +6431,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = LowerTargetAccuracy1
-Flags = CanProtect,CanMirrorMove,ZPower_EVASION_1
+Flags = CanProtect,CanMirrorMove
 Description = The user releases an obscuring cloud of smoke or ink. It reduces the target's accuracy.
 #-------------------------------
 [SOFTBOILED]
@@ -6521,7 +6442,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = HealUserHalfOfTotalHP
-Flags = ZPower_ResetStats
 Description = The user restores its own HP by up to half of its maximum HP. May also be used in the field to heal HP.
 #-------------------------------
 [SPLASH]
@@ -6532,7 +6452,6 @@ Accuracy = 0
 TotalPP = 40
 Target = User
 FunctionCode = DoesNothingUnusableInGravity
-Flags = ZPower_ATTACK_3
 Description = The user just flops and splashes around to no effect at all...
 #-------------------------------
 [SPOTLIGHT]
@@ -6544,7 +6463,7 @@ TotalPP = 15
 Target = NearOther
 Priority = 3
 FunctionCode = RedirectAllMovesToTarget
-Flags = CanProtect,ZPower_SPECIAL_DEFENSE_1
+Flags = CanProtect
 Description = The user shines a spotlight on the target so that only it will be attacked during the turn.
 #-------------------------------
 [STOCKPILE]
@@ -6555,7 +6474,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = UserAddStockpileRaiseDefSpDef1
-Flags = ZPower_HealUser
 Description = The user charges up power and raises both its Defense and Sp. Def. The move can be used three times.
 #-------------------------------
 [STUFFCHEEKS]
@@ -6566,7 +6484,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = UserConsumeBerryRaiseDefense2
-Flags = ZPower_HealUser
 Description = The user eats its held Berry, then sharply raises its Defense stat.
 #-------------------------------
 [SUBSTITUTE]
@@ -6577,7 +6494,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = UserMakeSubstitute
-Flags = ZPower_ResetStats
 Description = The user makes a copy of itself using some of its HP. The copy serves as the user's decoy.
 #-------------------------------
 [SUPERSONIC]
@@ -6588,7 +6504,7 @@ Accuracy = 55
 TotalPP = 20
 Target = NearOther
 FunctionCode = ConfuseTarget
-Flags = CanProtect,CanMirrorMove,Sound,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove,Sound
 Description = The user generates odd sound waves from its body. It may confuse the target.
 #-------------------------------
 [SWAGGER]
@@ -6599,7 +6515,7 @@ Accuracy = 85
 TotalPP = 15
 Target = NearOther
 FunctionCode = RaiseTargetAttack2ConfuseTarget
-Flags = CanProtect,CanMirrorMove,ZPower_ResetStats
+Flags = CanProtect,CanMirrorMove
 Description = The user enrages and confuses the target. However, it also sharply raises the target's Attack stat.
 #-------------------------------
 [SWALLOW]
@@ -6610,7 +6526,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = HealUserDependingOnUserStockpile
-Flags = ZPower_ResetStats
 Description = The power stored using the move Stockpile is absorbed by the user to heal its HP.
 #-------------------------------
 [SWEETSCENT]
@@ -6621,7 +6536,7 @@ Accuracy = 100
 TotalPP = 20
 Target = AllNearFoes
 FunctionCode = LowerTargetEvasion2
-Flags = CanProtect,CanMirrorMove,ZPower_ACCURACY_1
+Flags = CanProtect,CanMirrorMove
 Description = A sweet scent that lowers the foe's evasiveness. It also lures wild Pokémon if used in grass, etc.
 #-------------------------------
 [SWORDSDANCE]
@@ -6632,7 +6547,7 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = RaiseUserAttack2
-Flags = Dance,ZPower_ResetStats
+Flags = Dance
 Description = A frenetic dance to uplift the fighting spirit. It sharply raises the user's Attack stat.
 #-------------------------------
 [TAILWHIP]
@@ -6643,7 +6558,7 @@ Accuracy = 100
 TotalPP = 30
 Target = AllNearFoes
 FunctionCode = LowerTargetDefense1
-Flags = CanProtect,CanMirrorMove,ZPower_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = The user wags its tail cutely, making opposing Pokémon less wary and lowering their Defense stat.
 #-------------------------------
 [TEARFULLOOK]
@@ -6654,7 +6569,7 @@ Accuracy = 0
 TotalPP = 20
 Target = NearOther
 FunctionCode = LowerTargetAtkSpAtk1
-Flags = CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanMirrorMove
 Description = Gets teary eyed to make the target lose its will to fight. Lowers the target's Attack and Sp. Atk.
 #-------------------------------
 [TEATIME]
@@ -6665,7 +6580,6 @@ Accuracy = 0
 TotalPP = 10
 Target = AllBattlers
 FunctionCode = AllBattlersConsumeBerry
-Flags = ZPower_AllStats_1
 Description = The user has teatime with all the Pokémon in the battle. Each Pokémon eats its held Berry.
 #-------------------------------
 [TEETERDANCE]
@@ -6676,7 +6590,7 @@ Accuracy = 100
 TotalPP = 20
 Target = AllNearOthers
 FunctionCode = ConfuseTarget
-Flags = CanProtect,CanMirrorMove,Dance,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove,Dance
 Description = The user performs a wobbly dance that confuses the Pokémon around it.
 #-------------------------------
 [TICKLE]
@@ -6687,7 +6601,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = LowerTargetAtkDef1
-Flags = CanProtect,CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = The user tickles the target into laughing, reducing its Attack and Defense stats.
 #-------------------------------
 [TRANSFORM]
@@ -6698,7 +6612,6 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = TransformUserIntoTarget
-Flags = ZPower_HealUser
 Description = The user transforms into a copy of the target right down to having the same move set.
 #-------------------------------
 [WHIRLWIND]
@@ -6721,7 +6634,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = HealUserPositionNextTurn
-Flags = ZPower_SPECIAL_DEFENSE_1
 Description = One turn after this move is used, the target's HP is restored by half the user's maximum HP.
 #-------------------------------
 [WORKUP]
@@ -6732,7 +6644,6 @@ Accuracy = 0
 TotalPP = 30
 Target = User
 FunctionCode = RaiseUserAtkSpAtk1
-Flags = ZPower_ATTACK_1
 Description = The user is roused, and its Attack and Sp. Atk stats increase.
 #-------------------------------
 [YAWN]
@@ -6743,7 +6654,7 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = SleepTargetNextTurn
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The user lets loose a huge yawn that lulls the target into falling asleep on the next turn.
 #-------------------------------
 [BELCH]
@@ -6959,7 +6870,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserDefense2
-Flags = ZPower_ResetStats
 Description = The user alters its cellular structure to liquefy itself, sharply raising its Defense stat.
 #-------------------------------
 [BANEFULBUNKER]
@@ -6971,7 +6881,6 @@ TotalPP = 10
 Target = User
 Priority = 4
 FunctionCode = ProtectUserBanefulBunker
-Flags = ZPower_DEFENSE_1
 Description = Protects the user from attacks. Also poisons any attacker that makes contact with the user.
 #-------------------------------
 [COIL]
@@ -6982,7 +6891,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserAtkDefAcc1
-Flags = ZPower_ResetStats
 Description = The user coils up and concentrates. This raises its Attack and Defense stats as well as its accuracy.
 #-------------------------------
 [CORROSIVEGAS]
@@ -6993,7 +6901,7 @@ Accuracy = 100
 TotalPP = 40
 Target = AllNearOthers
 FunctionCode = CorrodeTargetItem
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = The user surrounds everything around it with highly acidic gas and melts away items they hold.
 #-------------------------------
 [GASTROACID]
@@ -7004,7 +6912,7 @@ Accuracy = 100
 TotalPP = 10
 Target = NearOther
 FunctionCode = NegateTargetAbility
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The user hurls up its stomach acids on the foe. The fluid negates the effect of the target's Ability.
 #-------------------------------
 [POISONGAS]
@@ -7015,7 +6923,7 @@ Accuracy = 90
 TotalPP = 40
 Target = AllNearFoes
 FunctionCode = PoisonTarget
-Flags = CanProtect,CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = A cloud of poison gas is sprayed in the face of opposing Pokémon. It may poison those hit.
 #-------------------------------
 [POISONPOWDER]
@@ -7026,7 +6934,7 @@ Accuracy = 75
 TotalPP = 35
 Target = NearOther
 FunctionCode = PoisonTarget
-Flags = CanProtect,CanMirrorMove,Powder,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove,Powder
 Description = The user scatters a cloud of poisonous dust on the target. It may poison the target.
 #-------------------------------
 [PURIFY]
@@ -7037,7 +6945,7 @@ Accuracy = 0
 TotalPP = 20
 Target = NearOther
 FunctionCode = CureTargetStatusHealUserHalfOfTotalHP
-Flags = CanProtect,CanMirrorMove,ZPower_AllStats_1
+Flags = CanProtect,CanMirrorMove
 Description = The user heals the target's status condition. If so, it also restores the user's own HP.
 #-------------------------------
 [TOXIC]
@@ -7048,7 +6956,7 @@ Accuracy = 90
 TotalPP = 10
 Target = NearOther
 FunctionCode = BadPoisonTarget
-Flags = CanProtect,CanMirrorMove,ZPower_DEFENSE_1
+Flags = CanProtect,CanMirrorMove
 Description = A move that leaves the target badly poisoned. Its poison damage worsens every turn.
 #-------------------------------
 [TOXICSPIKES]
@@ -7059,7 +6967,6 @@ Accuracy = 0
 TotalPP = 20
 Target = FoeSide
 FunctionCode = AddToxicSpikesToFoeSide
-Flags = ZPower_DEFENSE_1
 Description = The user lays a trap of poison spikes at the foe's feet. They poison foes that switch into battle.
 #-------------------------------
 [TOXICTHREAD]
@@ -7070,7 +6977,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = PoisonTargetLowerTargetSpeed1
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The user shoots poisonous threads to poison the target and lower the target's Speed stat.
 #-------------------------------
 [VENOMDRENCH]
@@ -7081,7 +6988,7 @@ Accuracy = 100
 TotalPP = 20
 Target = AllNearFoes
 FunctionCode = LowerPoisonedTargetAtkSpAtkSpd1
-Flags = CanProtect,ZPower_DEFENSE_1
+Flags = CanProtect
 Description = Foes are drenched in an odd liquid that lowers the Attack, Sp. Atk, and Speed of poisoned Pokémon.
 #-------------------------------
 [PRISMATICLASER]
@@ -7284,7 +7191,7 @@ Description = The user focuses its willpower to its head and attacks the foe. It
 Name = Luster Purge
 Type = PSYCHIC
 Category = Special
-Power = 70
+Power = 95
 Accuracy = 100
 TotalPP = 5
 Target = NearOther
@@ -7297,7 +7204,7 @@ Description = The user lets loose a damaging burst of light. It may also reduce 
 Name = Mist Ball
 Type = PSYCHIC
 Category = Special
-Power = 70
+Power = 95
 Accuracy = 100
 TotalPP = 5
 Target = NearOther
@@ -7402,7 +7309,6 @@ Accuracy = 0
 TotalPP = 30
 Target = User
 FunctionCode = RaiseUserSpeed2
-Flags = ZPower_ResetStats
 Description = The user relaxes and lightens its body to move faster. It sharply boosts the Speed stat.
 #-------------------------------
 [ALLYSWITCH]
@@ -7414,7 +7320,6 @@ TotalPP = 15
 Target = User
 Priority = 2
 FunctionCode = UserSwapsPositionsWithAlly
-Flags = ZPower_SPEED_2
 Description = The user switches places with an ally. This move's chance of failing rises if it is used in succession.
 #-------------------------------
 [AMNESIA]
@@ -7425,7 +7330,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserSpDef2
-Flags = ZPower_ResetStats
 Description = The user temporarily empties its mind to forget its concerns. It sharply raises the user's Sp. Def stat.
 #-------------------------------
 [BARRIER]
@@ -7436,7 +7340,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserDefense2
-Flags = ZPower_ResetStats
 Description = The user throws up a sturdy wall that sharply raises its Defense stat.
 #-------------------------------
 [CALMMIND]
@@ -7447,7 +7350,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserSpAtkSpDef1
-Flags = ZPower_ResetStats
 Description = The user quietly focuses its mind and calms its spirit to raise its Sp. Atk and Sp. Def stats.
 #-------------------------------
 [COSMICPOWER]
@@ -7458,7 +7360,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserDefSpDef1
-Flags = ZPower_SPECIAL_DEFENSE_1
 Description = The user absorbs a mystical power from space to raise its Defense and Sp. Def stats.
 #-------------------------------
 [GRAVITY]
@@ -7469,7 +7370,6 @@ Accuracy = 0
 TotalPP = 5
 Target = BothSides
 FunctionCode = StartGravity
-Flags = ZPower_SPECIAL_ATTACK_1
 Description = Gravity is intensified for five turns, making moves involving flying unusable and negating Levitation.
 #-------------------------------
 [GUARDSPLIT]
@@ -7480,7 +7380,7 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = UserTargetAverageBaseDefSpDef
-Flags = CanProtect,ZPower_SPEED_1
+Flags = CanProtect
 Description = The user employs its psychic power to average its Defense and Sp. Def stats with those of its target.
 #-------------------------------
 [GUARDSWAP]
@@ -7491,7 +7391,7 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = UserTargetSwapDefSpDefStages
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The user employs its psychic power to switch changes to its Defense and Sp. Def with the target.
 #-------------------------------
 [HEALBLOCK]
@@ -7502,7 +7402,7 @@ Accuracy = 100
 TotalPP = 15
 Target = AllNearFoes
 FunctionCode = DisableTargetHealingMoves
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_2
+Flags = CanProtect,CanMirrorMove
 Description = For five turns, the foe is prevented from using any moves, Abilities, or held items that recover HP.
 #-------------------------------
 [HEALPULSE]
@@ -7513,7 +7413,7 @@ Accuracy = 0
 TotalPP = 10
 Target = Other
 FunctionCode = HealTargetHalfOfTotalHP
-Flags = CanProtect,Pulse,ZPower_ResetStats
+Flags = CanProtect,Pulse
 Description = The user emits a healing pulse which restores the target's HP by up to half of its max HP.
 #-------------------------------
 [HEALINGWISH]
@@ -7534,7 +7434,7 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = UserTargetSwapStatStages
-Flags = CanProtect,CanMirrorMove,ZPower_CriticalHit
+Flags = CanProtect,CanMirrorMove
 Description = The user employs its psychic power to switch stat changes with the target.
 #-------------------------------
 [HYPNOSIS]
@@ -7545,7 +7445,7 @@ Accuracy = 60
 TotalPP = 20
 Target = NearOther
 FunctionCode = SleepTarget
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The user employs hypnotic suggestion to make the target fall into a deep sleep.
 #-------------------------------
 [IMPRISON]
@@ -7556,7 +7456,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = DisableTargetMovesKnownByUser
-Flags = ZPower_SPECIAL_DEFENSE_2
 Description = If the foe knows any move also known by the user, the foe is prevented from using it.
 #-------------------------------
 [INSTRUCT]
@@ -7567,7 +7466,7 @@ Accuracy = 0
 TotalPP = 15
 Target = NearOther
 FunctionCode = TargetUsesItsLastUsedMoveAgain
-Flags = CanProtect,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect
 Description = The user instructs the target to use the target's last move again.
 #-------------------------------
 [KINESIS]
@@ -7578,7 +7477,7 @@ Accuracy = 80
 TotalPP = 15
 Target = NearOther
 FunctionCode = LowerTargetAccuracy1
-Flags = CanProtect,CanMirrorMove,ZPower_EVASION_1
+Flags = CanProtect,CanMirrorMove
 Description = The user distracts the target by bending a spoon. It lowers the target's accuracy.
 #-------------------------------
 [LIGHTSCREEN]
@@ -7589,7 +7488,6 @@ Accuracy = 0
 TotalPP = 30
 Target = UserSide
 FunctionCode = StartWeakenSpecialDamageAgainstUserSide
-Flags = ZPower_SPECIAL_DEFENSE_1
 Description = A wondrous wall of light is put up to suppress damage from special attacks for five turns.
 #-------------------------------
 [LUNARDANCE]
@@ -7612,7 +7510,6 @@ TotalPP = 15
 Target = User
 Priority = 4
 FunctionCode = BounceBackProblemCausingStatusMoves
-Flags = ZPower_SPECIAL_DEFENSE_2
 Description = A barrier reflects back to the target moves like Leech Seed and moves that damage status.
 #-------------------------------
 [MAGICPOWDER]
@@ -7623,7 +7520,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = SetTargetTypesToPsychic
-Flags = CanProtect,CanMirrorMove,Powder,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove,Powder
 Description = The user scatters a cloud of magic powder that changes the target to Psychic type.
 #-------------------------------
 [MAGICROOM]
@@ -7634,7 +7531,7 @@ Accuracy = 0
 TotalPP = 10
 Target = BothSides
 FunctionCode = StartNegateHeldItems
-Flags = CanMirrorMove,ZPower_SPECIAL_DEFENSE_1
+Flags = CanMirrorMove
 Description = The user creates a bizarre area in which Pokémon's held items lose their effects for five turns.
 #-------------------------------
 [MEDITATE]
@@ -7645,7 +7542,6 @@ Accuracy = 0
 TotalPP = 40
 Target = User
 FunctionCode = RaiseUserAttack1
-Flags = ZPower_ATTACK_1
 Description = The user meditates to awaken the power deep within its body and raise its Attack stat.
 #-------------------------------
 [MIRACLEEYE]
@@ -7656,7 +7552,7 @@ Accuracy = 0
 TotalPP = 40
 Target = NearOther
 FunctionCode = StartNegateTargetEvasionStatStageAndDarkImmunity
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = Enables the user to hit a Dark type with any type of move. It also enables the user to hit an evasive foe.
 #-------------------------------
 [POWERSPLIT]
@@ -7667,7 +7563,7 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = UserTargetAverageBaseAtkSpAtk
-Flags = CanProtect,ZPower_SPEED_1
+Flags = CanProtect
 Description = The user employs its psychic power to average its Attack and Sp. Atk stats with those of the target.
 #-------------------------------
 [POWERSWAP]
@@ -7678,7 +7574,7 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = UserTargetSwapAtkSpAtkStages
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The user employs its psychic power to switch changes to its Attack and Sp. Atk with the target.
 #-------------------------------
 [POWERTRICK]
@@ -7689,7 +7585,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = UserSwapBaseAtkDef
-Flags = ZPower_ATTACK_1
 Description = The user employs its psychic power to switch its Attack with its Defense stat.
 #-------------------------------
 [PSYCHICTERRAIN]
@@ -7700,7 +7595,6 @@ Accuracy = 0
 TotalPP = 10
 Target = BothSides
 FunctionCode = StartPsychicTerrain
-Flags = ZPower_SPECIAL_ATTACK_1
 Description = Protects grounded Pokémon from priority moves and powers up Psychic-type moves for five turns.
 #-------------------------------
 [PSYCHOSHIFT]
@@ -7711,7 +7605,7 @@ Accuracy = 100
 TotalPP = 10
 Target = NearOther
 FunctionCode = GiveUserStatusToTarget
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_2
+Flags = CanProtect,CanMirrorMove
 Description = Using its psychic power of suggestion, the user transfers its status problems to the target.
 #-------------------------------
 [REFLECT]
@@ -7722,7 +7616,6 @@ Accuracy = 0
 TotalPP = 20
 Target = UserSide
 FunctionCode = StartWeakenPhysicalDamageAgainstUserSide
-Flags = ZPower_DEFENSE_1
 Description = A wondrous wall of light is put up to suppress damage from physical attacks for five turns.
 #-------------------------------
 [REST]
@@ -7733,7 +7626,6 @@ Accuracy = 0
 TotalPP = 5
 Target = User
 FunctionCode = HealUserFullyAndFallAsleep
-Flags = ZPower_ResetStats
 Description = The user goes to sleep for two turns. It fully restores the user's HP and heals any status problem.
 #-------------------------------
 [ROLEPLAY]
@@ -7744,7 +7636,6 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = SetUserAbilityToTargetAbility
-Flags = ZPower_SPEED_1
 Description = The user mimics the target completely, copying the target's natural Ability.
 #-------------------------------
 [SKILLSWAP]
@@ -7755,7 +7646,7 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = UserTargetSwapAbilities
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The user employs its psychic power to exchange Abilities with the target.
 #-------------------------------
 [SPEEDSWAP]
@@ -7766,7 +7657,7 @@ Accuracy = 0
 TotalPP = 10
 Target = NearOther
 FunctionCode = UserTargetSwapBaseSpeed
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = The user exchanges Speed stats with the target.
 #-------------------------------
 [TELEKINESIS]
@@ -7777,7 +7668,7 @@ Accuracy = 0
 TotalPP = 15
 Target = NearOther
 FunctionCode = StartTargetAirborneAndAlwaysHitByMoves
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = The user makes the target float with its psychic power. The target is easier to hit for three turns.
 #-------------------------------
 [TELEPORT]
@@ -7789,7 +7680,6 @@ TotalPP = 20
 Target = User
 Priority = -6
 FunctionCode = SwitchOutUserStatusMove
-Flags = ZPower_HealUser
 Description = The user switches place with a party Pokémon. Also warps to the last Pokémon Center visited.
 #-------------------------------
 [TRICK]
@@ -7800,7 +7690,7 @@ Accuracy = 100
 TotalPP = 10
 Target = NearOther
 FunctionCode = UserTargetSwapItems
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_2
+Flags = CanProtect,CanMirrorMove
 Description = The user catches the target off guard and swaps its held item with its own.
 #-------------------------------
 [TRICKROOM]
@@ -7812,7 +7702,7 @@ TotalPP = 5
 Target = BothSides
 Priority = -7
 FunctionCode = StartSlowerBattlersActFirst
-Flags = CanMirrorMove,ZPower_ACCURACY_1
+Flags = CanMirrorMove
 Description = The user creates a bizarre area in which slower Pokémon get to move first for five turns.
 #-------------------------------
 [WONDERROOM]
@@ -7824,7 +7714,7 @@ TotalPP = 10
 Target = BothSides
 Priority = -7
 FunctionCode = StartSwapAllBattlersBaseDefensiveStats
-Flags = CanMirrorMove,ZPower_SPECIAL_DEFENSE_1
+Flags = CanMirrorMove
 Description = The user creates a bizarre area in which Pokémon's Defense and Sp. Def stats are swapped for 5 turns.
 #-------------------------------
 [HEADSMASH]
@@ -8008,7 +7898,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = RaiseUserSpeed2
-Flags = ZPower_ResetStats
 Description = The user polishes its body to reduce drag. It can sharply raise the Speed stat.
 #-------------------------------
 [SANDSTORM]
@@ -8030,7 +7919,6 @@ Accuracy = 0
 TotalPP = 20
 Target = FoeSide
 FunctionCode = AddStealthRocksToFoeSide
-Flags = ZPower_DEFENSE_1
 Description = The user lays a trap of levitating stones around the foe. The trap hurts foes that switch into battle.
 #-------------------------------
 [TARSHOT]
@@ -8041,7 +7929,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = LowerTargetSpeed1MakeTargetWeakerToFire
-Flags = CanProtect,CanMirrorMove,ZPower_SPEED_1
+Flags = CanProtect,CanMirrorMove
 Description = Pours sticky tar over the target, lowering its Speed and making it weaker to Fire-type moves.
 #-------------------------------
 [WIDEGUARD]
@@ -8053,7 +7941,6 @@ TotalPP = 10
 Target = UserSide
 Priority = 3
 FunctionCode = ProtectUserSideFromMultiTargetDamagingMoves
-Flags = ZPower_DEFENSE_1
 Description = The user and its allies are protected from wide-ranging attacks for a turn. May fail if used in succession.
 #-------------------------------
 [DOOMDESIRE]
@@ -8099,7 +7986,7 @@ Power = 100
 Accuracy = 100
 TotalPP = 5
 Target = NearOther
-FunctionCode = DoubleDamageOnDynamaxTargets
+FunctionCode = None
 Flags = Contact,CanProtect,CanMirrorMove,CannotMetronome
 Description = The user becomes a gigantic shield and slams into the target.
 #-------------------------------
@@ -8111,7 +7998,7 @@ Power = 100
 Accuracy = 100
 TotalPP = 5
 Target = NearOther
-FunctionCode = DoubleDamageOnDynamaxTargets
+FunctionCode = None
 Flags = Contact,CanProtect,CanMirrorMove,CannotMetronome,Slicing
 Description = The user becomes a gigantic sword and cuts the target.
 #-------------------------------
@@ -8337,7 +8224,6 @@ Accuracy = 0
 TotalPP = 15
 Target = User
 FunctionCode = RaiseUserSpeed2LowerUserWeight
-Flags = ZPower_ResetStats
 Description = The user sheds part of its body to make itself lighter and sharply raise its Speed stat.
 #-------------------------------
 [GEARUP]
@@ -8348,7 +8234,6 @@ Accuracy = 0
 TotalPP = 20
 Target = UserAndAllies
 FunctionCode = RaisePlusMinusUserAndAlliesAtkSpAtk1
-Flags = ZPower_SPECIAL_ATTACK_1
 Description = The user engages its gears to raise the Attack and Sp. Atk of allies with the Plus or Minus Ability.
 #-------------------------------
 [IRONDEFENSE]
@@ -8359,7 +8244,6 @@ Accuracy = 0
 TotalPP = 15
 Target = User
 FunctionCode = RaiseUserDefense2
-Flags = ZPower_ResetStats
 Description = The user hardens its body's surface like iron, sharply raising its Defense stat.
 #-------------------------------
 [KINGSSHIELD]
@@ -8371,7 +8255,6 @@ TotalPP = 10
 Target = User
 Priority = 4
 FunctionCode = ProtectUserFromDamagingMovesKingsShield
-Flags = ZPower_ResetStats
 Description = Protects itself from damage. It also harshly lowers the Attack of attackers that make contact.
 #-------------------------------
 [METALSOUND]
@@ -8382,7 +8265,7 @@ Accuracy = 85
 TotalPP = 40
 Target = NearOther
 FunctionCode = LowerTargetSpDef2
-Flags = CanProtect,CanMirrorMove,Sound,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove,Sound
 Description = A horrible sound like scraping metal harshly reduces the target's Sp. Def stat.
 #-------------------------------
 [SHIFTGEAR]
@@ -8393,7 +8276,6 @@ Accuracy = 0
 TotalPP = 10
 Target = User
 FunctionCode = RaiseUserAtk1Spd2
-Flags = ZPower_ResetStats
 Description = The user rotates its gears, raising its Attack and sharply raising its Speed.
 #-------------------------------
 [HYDROCANNON]
@@ -8777,7 +8659,6 @@ Accuracy = 0
 TotalPP = 20
 Target = User
 FunctionCode = StartHealUserEachTurn
-Flags = ZPower_DEFENSE_1
 Description = The user envelops itself in a veil made of water. It regains some HP on every turn.
 #-------------------------------
 [LIFEDEW]
@@ -8788,7 +8669,7 @@ Accuracy = 0
 TotalPP = 10
 Target = UserAndAllies
 FunctionCode = HealUserAndAlliesQuarterOfTotalHP
-Flags = CannotMetronome,ZPower_ResetStats
+Flags = CannotMetronome
 Description = The user scatters mysterious water around and restores the HP of itself and its allies.
 #-------------------------------
 [RAINDANCE]
@@ -8799,7 +8680,6 @@ Accuracy = 0
 TotalPP = 5
 Target = BothSides
 FunctionCode = StartRainWeather
-Flags = ZPower_SPEED_1
 Description = The user summons a heavy rain that falls for five turns, powering up Water-type moves.
 #-------------------------------
 [SOAK]
@@ -8810,7 +8690,7 @@ Accuracy = 100
 TotalPP = 20
 Target = NearOther
 FunctionCode = SetTargetTypesToWater
-Flags = CanProtect,CanMirrorMove,ZPower_SPECIAL_ATTACK_1
+Flags = CanProtect,CanMirrorMove
 Description = The user shoots a torrent of water at the target and changes the target's type to Water.
 #-------------------------------
 [WATERSPORT]
@@ -8821,7 +8701,6 @@ Accuracy = 0
 TotalPP = 15
 Target = BothSides
 FunctionCode = StartWeakenFireMoves
-Flags = ZPower_SPECIAL_DEFENSE_1
 Description = The user soaks itself with water. The move weakens Fire-type moves while the user is in the battle.
 #-------------------------------
 [WITHDRAW]
@@ -8832,5 +8711,4 @@ Accuracy = 0
 TotalPP = 40
 Target = User
 FunctionCode = RaiseUserDefense1
-Flags = ZPower_DEFENSE_1
 Description = The user withdraws its body into its hard shell, raising its Defense stat.

@@ -6,8 +6,16 @@
 
 
 module Battle::AbilityEffects
-  OnTypeChange       = AbilityHandlerHash.new  # Protean, Libero
-  OnOpposingStatGain = AbilityHandlerHash.new  # Opportunist
+  OnTypeChange            = AbilityHandlerHash.new  # Protean, Libero
+  OnOpposingStatGain      = AbilityHandlerHash.new  # Opportunist
+  ModifyTypeEffectiveness = AbilityHandlerHash.new  # Tera Shell (damage)
+  OnMoveSuccessCheck      = AbilityHandlerHash.new  # Tera Shell (display)
+  OnInflictingStatus      = AbilityHandlerHash.new  # Poison Puppeteer
+
+  def self.triggerOnStatusInflicted(ability, battler, user, status)
+    OnInflictingStatus.trigger(user.ability, user, battler, status) if user && user.abilityActive? # Poison Puppeteer
+    OnStatusInflicted.trigger(ability, battler, user, status)
+  end
   
   def self.triggerOnSwitchIn(ability, battler, battle, switch_in = false)
     OnSwitchIn.trigger(ability, battler, battle, switch_in)
@@ -24,6 +32,18 @@ module Battle::AbilityEffects
 
   def self.triggerOnOpposingStatGain(ability, battler, battle, statUps)
     OnOpposingStatGain.trigger(ability, battler, battle, statUps)
+  end
+  
+  def self.triggerModifyTypeEffectiveness(ability, user, target, move, battle, effectiveness)
+    return trigger(ModifyTypeEffectiveness, ability, user, target, move, battle, effectiveness, ret: effectiveness)
+  end
+  
+  def self.triggerOnMoveSuccessCheck(ability, user, target, move, battle)
+    OnMoveSuccessCheck.trigger(ability, user, target, move, battle)
+  end
+
+  def self.triggerOnInflictingStatus(ability, battler, user, status)
+    OnInflictingStatus.trigger(ability, battler, user, status)
   end
 end
 
@@ -256,6 +276,7 @@ Battle::AbilityEffects::OnStatusInflicted.add(:SYNCHRONIZE,
 #-------------------------------------------------------------------------------
 Battle::AbilityEffects::OnDealingHit.add(:POISONTOUCH,
   proc { |ability, user, target, move, battle|
+    next if target.fainted?
     next if !move.contactMove?
     next if battle.pbRandom(100) >= 30
     next if target.hasActiveItem?(:COVERTCLOAK)
@@ -308,7 +329,7 @@ Battle::AbilityEffects::OnBeingHit.add(:MUMMY,
     next if !move.pbContactMove?(user)
     next if user.fainted?
     next if user.unstoppableAbility?
-    next if [:MUMMY, :LINGERINGAROMA].include?(user.ability)
+    next if [:MUMMY, :LINGERINGAROMA].include?(user.ability_id)
     next if user.hasActiveItem?(:ABILITYSHIELD)
     oldAbil = nil
     battle.pbShowAbilitySplash(target) if user.opposes?(target)
@@ -319,11 +340,11 @@ Battle::AbilityEffects::OnBeingHit.add(:MUMMY,
       battle.pbReplaceAbilitySplash(user) if user.opposes?(target)
       if Battle::Scene::USE_ABILITY_SPLASH
 	    case ability
-		when :MUMMY
-		  msg = _INTL("{1}'s Ability became {2}!", user.pbThis, user.abilityName)
-		when :LINGERINGAROMA
-		  msg = _INTL("A lingering aroma clings to {1}!", user.pbThis(true))
-		end
+        when :MUMMY
+          msg = _INTL("{1}'s Ability became {2}!", user.pbThis, user.abilityName)
+        when :LINGERINGAROMA
+          msg = _INTL("A lingering aroma clings to {1}!", user.pbThis(true))
+        end
         battle.pbDisplay(msg)
       else
         battle.pbDisplay(_INTL("{1}'s Ability became {2} because of {3}!",
@@ -391,7 +412,7 @@ Battle::AbilityEffects::OnSwitchIn.add(:NEUTRALIZINGGAS,
     battle.pbDisplay(_INTL("Neutralizing gas filled the area!"))
     battle.allBattlers.each do |b|
       if b.hasActiveItem?(:ABILITYSHIELD)
-        itemname = GameData::Item.get(target.item).name
+        itemname = GameData::Item.get(b.item).name
         @battle.pbDisplay(_INTL("{1}'s Ability is protected by the effects of its {2}!",b.pbThis,itemname))
         next
       end
@@ -425,6 +446,7 @@ Battle::AbilityEffects::OnSwitchIn.add(:NEUTRALIZINGGAS,
 #-------------------------------------------------------------------------------
 Battle::AbilityEffects::OnSwitchIn.add(:INTIMIDATE,
   proc { |ability, battler, battle, switch_in|
+    next if battler.effects[PBEffects::OneUseAbility] == ability
     battle.pbShowAbilitySplash(battler)
     battle.allOtherSideBattlers(battler.index).each do |b|
       next if !b.near?(battler)
@@ -439,6 +461,7 @@ Battle::AbilityEffects::OnSwitchIn.add(:INTIMIDATE,
       b.pbItemOnIntimidatedCheck if check_item
     end
     battle.pbHideAbilitySplash(battler)
+    battler.effects[PBEffects::OneUseAbility] = ability
   }
 )
 

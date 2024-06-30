@@ -9,7 +9,7 @@ Accuracy = 100
 TotalPP = 15
 Target = NearOther
 FunctionCode = PoisonParalyzeOrSleepTarget
-Flags = Contact,CanProtect,CanMirrorMove,HighCriticalHitRate
+Flags = Contact,CanProtect,CanMirrorMove
 EffectChance = 50
 Description = The user may critically hit with its ruinous claws. May also leave the target poisoned, paralyzed, or asleep.
 #-------------------------------
@@ -124,7 +124,7 @@ TotalPP = 10
 Target = NearOther
 FunctionCode = LowerTargetAttack1
 Flags = CanProtect,CanMirrorMove
-EffectChance = 30
+EffectChance = 100
 Description = The user attacks the target with spine-chilling resentment. This also lowers the target’s Attack stat.
 #-------------------------------
 [TRIPLEARROWS]
@@ -148,7 +148,7 @@ Power = 100
 Accuracy = 80
 TotalPP = 10
 Target = AllNearFoes
-FunctionCode = LowerTargetSpeed1
+FunctionCode = LowerTargetSpeed1AlwaysHitsInRain
 Flags = CanProtect,CanMirrorMove,Wind
 EffectChance = 30
 Description = The user attacks with cold winds that cause opposing Pokémon to tremble. This may lower their Speed stats.
@@ -161,7 +161,7 @@ Power = 100
 Accuracy = 80
 TotalPP = 10
 Target = AllNearFoes
-FunctionCode = ParalyzeTarget
+FunctionCode = ParalyzeTargetAlwaysHitsInRain
 Flags = CanProtect,CanMirrorMove,Wind
 EffectChance = 20
 Description = The user attacks opposing Pokémon with a thunderous tempest. This may also leave them paralyzed.
@@ -174,7 +174,7 @@ Power = 100
 Accuracy = 80
 TotalPP = 10
 Target = AllNearFoes
-FunctionCode = BurnTarget
+FunctionCode = BurnTargetAlwaysHitsInRain
 Flags = CanProtect,CanMirrorMove,Wind
 EffectChance = 20
 Description = The user wraps fierce winds and hot sand around opponents. This may leave them with a burn.
@@ -222,9 +222,9 @@ Accuracy = 90
 TotalPP = 15
 Target = NearOther
 FunctionCode = SplintersTargetGen8AddStealthRocksGen9
-Flags = Contact,CanProtect,CanMirrorMove,HighCriticalHitRate,Slicing
+Flags = Contact,CanProtect,CanMirrorMove,Slicing
 EffectChance = 100
-Description = The user swings its stone axes, easily landing a critical hit. Leaves floating rocks around the target.
+Description = The user swings at the opponent with its stone axes. May leave floating rocks around the target.
 #-------------------------------
 [MYSTICALPOWER]
 Name = Mystical Power
@@ -282,9 +282,9 @@ Accuracy = 90
 TotalPP = 15
 Target = NearOther
 FunctionCode = SplintersTargetGen8AddSpikesGen9
-Flags = Contact,CanProtect,CanMirrorMove,HighCriticalHitRate,Slicing
+Flags = Contact,CanProtect,CanMirrorMove,Slicing
 EffectChance = 100
-Description = The user slashes its shell blade, easily landing a critical hit. Leaves spikes around the target.
+Description = The user slashes the opponent with its shell blade. May leave spikes around the target.
 #-------------------------------
 [TAKEHEART]
 Name = Take Heart
@@ -367,7 +367,7 @@ Power = 80
 Accuracy = 100
 TotalPP = 10
 Target = NearOther
-FunctionCode = BurnTarget
+FunctionCode = StarmobileBurnTarget
 Flags = CanProtect,CannotMetronome
 EffectChance = 30
 Description = This move is only used by a Starmobile. It may leave the target with a burn.
@@ -392,7 +392,7 @@ Category = Status
 Accuracy = 0
 TotalPP = 10
 Target = BothSides
-FunctionCode = StartHailWeatherSwitchOutUser
+FunctionCode = SwitchOutUserStartHailWeather
 Flags = CannotMetronome
 Description = The user tells a chillingly bad joke and switches out. This summons a snowstorm lasting five turns.
 #-------------------------------
@@ -416,7 +416,7 @@ Power = 100
 Accuracy = 100
 TotalPP = 10
 Target = NearOther
-FunctionCode = ParalyzeTarget
+FunctionCode = StarmobileParalyzeTarget
 Flags = CanProtect,CannotMetronome
 EffectChance = 30
 Description = This move is only used by a Starmobile. It may paralyze the target.
@@ -475,7 +475,7 @@ Category = Status
 Accuracy = 0
 TotalPP = 10
 Target = NearOther
-FunctionCode = RaiseUserAtk2SpAtk2Speed2LoseHalfOfTotalHP
+FunctionCode = RaiseUserAtkSpAtkSpeed2LoseHalfOfTotalHP
 Flags = CannotMetronome
 Description = The user sharply boosts its Attack, Sp. Atk, and Speed stats by using its own HP.
 #-------------------------------
@@ -597,7 +597,7 @@ Power = 100
 Accuracy = 100
 TotalPP = 10
 Target = NearOther
-FunctionCode = ConfuseTarget
+FunctionCode = StarmobileConfuseTarget
 Flags = CanProtect,CannotMetronome
 EffectChance = 30
 Description = This move is only used by a Starmobile. It may confuse the target.
@@ -635,7 +635,7 @@ Power = 100
 Accuracy = 100
 TotalPP = 10
 Target = NearOther
-FunctionCode = PoisonTarget
+FunctionCode = StarmobilePoisonTarget
 Flags = CanProtect,CannotMetronome
 EffectChance = 30
 Description = This move is only used by a Starmobile. It may poison the target.
@@ -650,6 +650,7 @@ TotalPP = 10
 Target = NearOther
 FunctionCode = RaiseUserStat1Commander
 Flags = CanProtect,CannotMetronome
+EffectChance = 100
 Description = If used when the user has a Tatsugiri in its mouth, a boost occurs based on its form.
 #-------------------------------
 [POPULATIONBOMB]
@@ -800,7 +801,7 @@ Type = NORMAL
 Category = Status
 Accuracy = 0
 TotalPP = 10
-Target = NearOther
+Target = User
 FunctionCode = RaiseUserAtkSpd1RemoveHazardsSubstitutes
 Flags = CannotMetronome
 EffectChance = 100
@@ -864,7 +865,7 @@ Power = 80
 Accuracy = 100
 TotalPP = 10
 Target = NearOther
-FunctionCode = SleepTarget
+FunctionCode = StarmobileSleepTarget
 Flags = CanProtect,CannotMetronome
 EffectChance = 10
 Description = This move is only used by a Starmobile. It may put the target to sleep.
@@ -891,7 +892,6 @@ TotalPP = 15
 Target = NearOther
 FunctionCode = IncreasePowerInElectricTerrain
 Flags = Contact,CanProtect,CanMirrorMove,Slicing
-EffectChance = 10
 Description = The user rends the target with an ethereal blade whose power is boosted on Electric Terrain.
 #-------------------------------
 [BLOODMOON]
@@ -943,3 +943,187 @@ Target = NearOther
 FunctionCode = TypeIsUserSecondType
 Flags = CanProtect,CanMirrorMove,HighCriticalHitRate
 Description = An ivy-wrapped cudgel strike with a high critical-hit ratio. Type changes based on the user's Mask.
+#-------------------------------
+[ELECTROSHOT]
+Name = Electro Shot
+Type = ELECTRIC
+Category = Special
+Power = 130
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = TwoTurnAttackOneTurnInRainRaiseUserSpAtk1
+Flags = CanProtect,CanMirrorMove
+EffectChance = 100
+Description = A two-turn attack. The user boosts its Sp. Atk and then fires a high-voltage shot.
+#-------------------------------
+[TERASTARSTORM]
+Name = Tera Starstorm
+Type = NORMAL
+Category = Special
+Power = 120
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = TerapagosCategoryDependsOnHigherDamage
+Flags = CanProtect,CanMirrorMove,CannotMetronome
+Description = When used by Terapagos in its Stellar Form, this move damages all opposing Pokémon.
+#-------------------------------
+[FICKLEBEAM]
+Name = Fickle Beam
+Type = DRAGON
+Category = Special
+Power = 80
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = RandomlyDealsDoubleDamage
+Flags = CanProtect,CanMirrorMove
+Description = Sometimes all of the user's heads shoot beams in unison, doubling this move's power.
+#-------------------------------
+[BURNINGBULWARK]
+Name = Burning Bulwark
+Type = FIRE
+Category = Status
+Accuracy = 0
+TotalPP = 10
+Target = User
+Priority = 4
+FunctionCode = ProtectUserBurningBulwark
+Description = Protects the user from attacks. Also burns any attacker that makes contact with the user.
+#-------------------------------
+[THUNDERCLAP]
+Name = Thunderclap
+Type = ELECTRIC
+Category = Special
+Power = 70
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+Priority = 1
+FunctionCode = FailsIfTargetActed
+Flags = CanProtect,CanMirrorMove
+Description = This move enables the user to attack first. It fails if the target is not readying an attack, however.
+#-------------------------------
+[MIGHTYCLEAVE]
+Name = Mighty Cleave
+Type = ROCK
+Category = Physical
+Power = 95
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = None
+Flags = Contact,CanMirrorMove,Slicing
+Description = The user cleaves the target. This move hits even if the target protects itself.
+#-------------------------------
+[TACHYONCUTTER]
+Name = Tachyon Cutter
+Type = STEEL
+Category = Special
+Power = 50
+Accuracy = 0
+TotalPP = 10
+Target = NearOther
+FunctionCode = HitTwoTimes
+Flags = CanProtect,CanMirrorMove,Slicing
+Description = The user attacks by launching particle blades at the target twice in a row. This attack never misses.
+#-------------------------------
+[HARDPRESS]
+Name = Hard Press
+Type = STEEL
+Category = Physical
+Power = 1
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = PowerHigherWithTargetHP100PowerRange
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The target is crushed with great force. The attack is more powerful the more HP the target has left.
+#-------------------------------
+[DRAGONCHEER]
+Name = Dragon Cheer
+Type = DRAGON
+Category = Status
+Accuracy = 0
+TotalPP = 15
+Target = AllAllies
+FunctionCode = RaiseAlliesCriticalHitRate1DragonTypes2
+Description = The user raises its allies’ critical hit ratio with a draconic cry. This rouses Dragon types more.
+#-------------------------------
+[ALLURINGVOICE]
+Name = Alluring Voice
+Type = FAIRY
+Category = Special
+Power = 80
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = ConfuseTargetIfTargetStatsRaisedThisTurn
+Flags = Sound,CanProtect,CanMirrorMove
+EffectChance = 100
+Description = Attacks using an angelic voice. This confuses the target if its stats have been raised this turn.
+#-------------------------------
+[TEMPERFLARE]
+Name = Temper Flare
+Type = FIRE
+Category = Physical
+Power = 75
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = DoublePowerIfUserLastMoveFailed
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The user attacks driven by frustration. Power increases if the user's previous move failed.
+#-------------------------------
+[SUPERCELLSLAM]
+Name = Supercell Slam
+Type = ELECTRIC
+Category = Physical
+Power = 100
+Accuracy = 95
+TotalPP = 15
+Target = NearOther
+FunctionCode = CrashDamageIfFails
+Flags = Contact,CanProtect,CanMirrorMove
+Description = The user drops onto the target with its electrified body. If it misses, the user is hurt instead.
+#-------------------------------
+[PSYCHICNOISE]
+Name = Psychic Noise
+Type = PSYCHIC
+Category = Special
+Power = 75
+Accuracy = 100
+TotalPP = 10
+Target = NearOther
+FunctionCode = DisableTargetHealingMoves2Turns
+Flags = Sound,CanProtect,CanMirrorMove
+EffectChance = 100
+Description = Attacks the target with unpleasant sound waves. Prevents the target from healing for two turns.
+#-------------------------------
+[UPPERHAND]
+Name = Upper Hand
+Type = FIGHTING
+Category = Physical
+Power = 65
+Accuracy = 100
+TotalPP = 15
+Target = NearOther
+Priority = 3
+FunctionCode = FlinchTargetFailsIfTargetNotUsingPriorityMove
+Flags = Contact,CanProtect,CanMirrorMove
+EffectChance = 100
+Description = An attack that hits first and makes the target flinch. Fails if the target isn't using a high priority move.
+#-------------------------------
+[MALIGNANTCHAIN]
+Name = Malignant Chain
+Type = POISON
+Category = Special
+Power = 100
+Accuracy = 100
+TotalPP = 5
+Target = NearOther
+FunctionCode = BadPoisonTarget
+Flags = CanProtect,CanMirrorMove
+EffectChance = 50
+Description = Wraps the target in a toxic, corrosive chain. This may also leave the target badly poisoned.

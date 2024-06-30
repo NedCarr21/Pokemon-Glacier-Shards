@@ -65,9 +65,9 @@ class Battle
   # Checks if the target is immune to a given type by its typing, ability, or effect.
   #-----------------------------------------------------------------------------
   def pbTargetHasTypeImmunity?(user, target, move, type, target_types)
-	  return true if type == :FIRE  && target.effectiveWeather == :HeavyRain
+    return true if type == :FIRE  && target.effectiveWeather == :HeavyRain
     return true if type == :WATER && target.effectiveWeather == :HarshSun
-	  return true if move.pbCalcTypeMod(type, user, target) == Effectiveness::INEFFECTIVE
+    return true if move.pbCalcTypeMod(type, user, target) == Effectiveness::INEFFECTIVE
     if target.abilityActive? && !@moldBreaker
       return true if Battle::AbilityEffects.triggerMoveImmunity(
         target.ability, user, target, move, type, self, false)

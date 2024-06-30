@@ -245,9 +245,9 @@ Battle::ItemEffects::StatusCure.add(:LUMBERRY,
         battle.pbDisplay(_INTL("{1}'s {2} cured its paralysis!", battler.pbThis, itemName))
       when :FROZEN
         battle.pbDisplay(_INTL("{1}'s {2} defrosted it!", battler.pbThis, itemName))
-	  when :DROWSY
+      when :DROWSY
         battle.pbDisplay(_INTL("{1}'s {2} made it alert again!", battler.pbThis, itemName))
-	  when :FROSTBITE
+      when :FROSTBITE
         battle.pbDisplay(_INTL("{1}'s {2} healed its frostbite!", battler.pbThis, itemName))
       end
       if oldConfusion

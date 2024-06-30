@@ -4,6 +4,7 @@
 # 
 ################################################################################
 
+############################## Teal Mask DLC ###################################
 
 #===============================================================================
 # Supersweet Syrup
@@ -30,11 +31,11 @@ Battle::AbilityEffects::OnSwitchIn.add(:SUPERSWEETSYRUP,
 #===============================================================================
 Battle::AbilityEffects::OnSwitchIn.add(:HOSPITALITY,
   proc { |ability, battler, battle, switch_in|
-    next if battler.allAllies.none? { |b| b.hp < b.totalhp }
+    next if battler.allAllies.none? { |b| b.canHeal? }
     battle.pbShowAbilitySplash(battler)
     battler.allAllies.each do |b|
-      next if b.hp == b.totalhp
-	    amt = (b.totalhp / 4).floor
+      next if !b.canHeal?
+      amt = (b.totalhp / 4).floor
       b.pbRecoverHP(amt)
       battle.pbDisplay(_INTL("{1} drank down all the matcha that {2} made!", b.pbThis, battler.pbThis(true)))
     end
@@ -47,6 +48,7 @@ Battle::AbilityEffects::OnSwitchIn.add(:HOSPITALITY,
 #===============================================================================
 Battle::AbilityEffects::OnDealingHit.add(:TOXICCHAIN,
   proc { |ability, user, target, move, battle|
+    next if target.fainted?
     next if battle.pbRandom(100) >= 30
     next if target.hasActiveItem?(:COVERTCLOAK)
     battle.pbShowAbilitySplash(user)
@@ -117,5 +119,99 @@ Battle::AbilityEffects::OnSwitchIn.add(:EMBODYASPECT_3,
     battle.pbDisplay(_INTL("The {1} worn by {2} shone brilliantly!", mask, battler.pbThis(true)))
     battler.pbRaiseStatStageByAbility(:DEFENSE, 1, battler)
     battler.effects[PBEffects::OneUseAbility] = ability
+  }
+)
+
+
+############################# Indigo Disk DLC ##################################
+
+#===============================================================================
+# Tera Shell
+#===============================================================================
+Battle::AbilityEffects::ModifyTypeEffectiveness.add(:TERASHELL,
+  proc { |ability, user, target, move, battle, effectiveness|
+    next if !move.damagingMove?
+    next if user.hasMoldBreaker?
+    next if target.hp < target.totalhp
+    next if effectiveness < Effectiveness::NORMAL_EFFECTIVE_MULTIPLIER
+    target.damageState.terashell = true
+    next Effectiveness::NOT_VERY_EFFECTIVE_MULTIPLIER
+  }
+)
+
+Battle::AbilityEffects::OnMoveSuccessCheck.add(:TERASHELL,
+  proc { |ability, user, target, move, battle|
+    next if !target.damageState.terashell
+    battle.pbShowAbilitySplash(target)
+    battle.pbDisplay(_INTL("{1} made its shell gleam! It's distorting type matchups!", target.pbThis))
+    battle.pbHideAbilitySplash(target)
+  }
+)
+
+#===============================================================================
+# Teraform Zero
+#===============================================================================
+Battle::AbilityEffects::OnSwitchIn.add(:TERAFORMZERO,
+  proc { |ability, battler, battle, switch_in|
+    next if battler.ability_triggered?
+    battle.pbSetAbilityTrigger(battler)
+    weather = battle.field.weather
+    terrain = battle.field.terrain
+    next if weather == :None && terrain == :None
+    showSplash = false
+    if weather != :None && battle.field.defaultWeather == :None
+	  showSplash = true
+      battle.pbShowAbilitySplash(battler)
+      battle.field.weather = :None
+      battle.field.weatherDuration = 0
+      case weather
+      when :Sun         then battle.pbDisplay(_INTL("The sunlight faded."))
+      when :Rain        then battle.pbDisplay(_INTL("The rain stopped."))
+      when :Sandstorm   then battle.pbDisplay(_INTL("The sandstorm subsided."))
+      when :Hail
+        case Settings::HAIL_WEATHER_TYPE
+        when 0 then battle.pbDisplay(_INTL("The hail stopped."))
+        when 1 then battle.pbDisplay(_INTL("The snow stopped."))
+        when 2 then battle.pbDisplay(_INTL("The hailstorm ended."))
+        end
+      when :HarshSun    then battle.pbDisplay(_INTL("The harsh sunlight faded!"))
+      when :HeavyRain   then battle.pbDisplay(_INTL("The heavy rain has lifted!"))
+      when :StrongWinds then battle.pbDisplay(_INTL("The mysterious air current has dissipated!"))
+      else
+        battle.pbDisplay(_INTL("The weather returned to normal."))
+      end
+    end
+    if terrain != :None && battle.field.defaultTerrain == :None
+      battle.pbShowAbilitySplash(battler) if !showSplash
+      battle.field.terrain = :None
+      battle.field.terrainDuration = 0
+      case terrain
+      when :Electric then battle.pbDisplay(_INTL("The electric current disappeared from the battlefield!"))
+      when :Grassy   then battle.pbDisplay(_INTL("The grass disappeared from the battlefield!"))
+      when :Psychic  then battle.pbDisplay(_INTL("The mist disappeared from the battlefield!"))
+      when :Misty    then battle.pbDisplay(_INTL("The weirdness disappeared from the battlefield!"))
+      else
+        battle.pbDisplay(_INTL("The battlefield returned to normal."))
+      end
+    end
+    next if !showSplash
+    battle.pbHideAbilitySplash(battler)
+    battle.allBattlers.each { |b| b.pbCheckFormOnWeatherChange }
+    battle.allBattlers.each { |b| b.pbAbilityOnTerrainChange }
+    battle.allBattlers.each { |b| b.pbItemTerrainStatBoostCheck }
+  }
+)
+
+#===============================================================================
+# Poison Puppeteer
+#===============================================================================
+Battle::AbilityEffects::OnInflictingStatus.add(:POISONPUPPETEER,
+  proc { |ability, user, battler, status|
+    next if !user || user.index == battler.index
+    next if status != :POISON
+    next if battler.effects[PBEffects::Confusion] > 0
+    user.battle.pbShowAbilitySplash(user)
+    battler.pbConfuse if battler.pbCanConfuse?(user, false, nil)
+    user.battle.pbHideAbilitySplash(user)
   }
 )

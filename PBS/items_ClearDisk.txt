@@ -1,0 +1,7 @@
+#-------------------------------
+[CLEARDISK]
+Name = Clear Disk
+NamePlural = Clear Disks
+Pocket = 1
+Price = 10000
+Description = An empty disk that might record and save the last move used by the pokemon it's equipped to.

@@ -469,3 +469,57 @@ Pocket = 8
 Price = 0
 Flags = KeyItem,Fling_60
 Description = A teal mask patterned after the face of an ogre. Dropped by Ogerpon after visiting the Festival of Masks.
+#-------------------------------
+[METALALLOY]
+Name = Metal Alloy
+NamePlural = Metal Alloys
+PortionName = hunk of Metal Alloy
+PortionNamePlural = hunks of Metal Alloy
+Pocket = 1
+Price = 3000
+SellPrice = 1500
+BPPrice = 8
+FieldUse = OnPokemon
+Flags = EvolutionStone,Fling_30
+Description = A peculiar metal that can make certain species of Pokémon evolve. It is composed of many layers.
+#-------------------------------
+[INDIGODISK]
+Name = Indigo Disk
+NamePlural = Indigo Disks
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A mysterious disk with an indigo shine to it, given by the Top Champion. It seems to be tied to Area Zero.
+#-------------------------------
+[MYTHICALPECHABERRY]
+Name = Mythical Pecha Berry
+NamePlural = Mythical Pecha Berries
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A Pecha Berry of the highest quality. It's one of every a few years berry that carefully tended by an expert.
+#-------------------------------
+[SYNCHROMACHINE]
+Name = Synchro Machine
+NamePlural = Synchro Machines
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A device that synchronizes your mind and feelings with your Pokémon's as one. It's still a prototype—hence.
+#-------------------------------
+[METEORITE]
+Name = Meteorite
+NamePlural = Meteorites
+Pocket = 8
+Price = 0
+FieldUse = OnPokemon
+Flags = KeyItem
+Description = A rock that fell to earth from space. It allows a certain species of Pokémon to change forms.
+#-------------------------------
+[BRIARSBOOK]
+Name = Briar's Book
+NamePlural = Briar's Books
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A proof copy of the exploration notes, along with Briar's thoughts covering the Area Zero Underdepths.

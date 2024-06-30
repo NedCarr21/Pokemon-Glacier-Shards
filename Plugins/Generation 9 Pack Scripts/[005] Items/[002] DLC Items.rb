@@ -69,3 +69,36 @@ Battle::ItemEffects::DamageCalcFromUser.add(:WELLSPRINGMASK,
 )
 
 Battle::ItemEffects::DamageCalcFromUser.copy(:WELLSPRINGMASK, :HEARTHFLAMEMASK, :CORNERSTONEMASK)
+
+
+#===============================================================================
+# Meteorite
+#===============================================================================
+ItemHandlers::UseOnPokemon.add(:METEORITE, proc { |item, qty, pkmn, scene|
+  if !pkmn.isSpecies?(:DEOXYS)
+    scene.pbDisplay(_INTL("It had no effect."))
+    next false
+  elsif pkmn.fainted?
+    scene.pbDisplay(_INTL("This can't be used on the fainted Pokémon."))
+    next false
+  end
+  choices = [
+    _INTL("Normal Forme"),
+    _INTL("Attack Forme"),
+    _INTL("Defense Forme"),
+    _INTL("Speed Forme"),
+    _INTL("Cancel")
+  ]
+  new_form = scene.pbShowCommands(_INTL("Which form should {1} change into?", pkmn.name), choices, pkmn.form)
+  if new_form == pkmn.form
+    scene.pbDisplay(_INTL("It won't have any effect."))
+    next false
+  elsif new_form > -1 && new_form < choices.length - 1
+    pkmn.setForm(new_form) do
+      scene.pbRefresh
+      scene.pbDisplay(_INTL("{1} transformed!", pkmn.name))
+    end
+    next true
+  end
+  next false
+})
