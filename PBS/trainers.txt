@@ -393,11 +393,15 @@ Pokemon = BLAZIKEN,43
 #-------------------------------End of Brisk Caverns, Rock Smash
 [PKMN_THEO,Theo,1]
 LoseText = "That was a good battle, next time it won't be so easy."
-Pokemon = SNOVER,10
-Pokemon = ONIX,10
-Pokemon = CHARMANDER,12
+Pokemon = GASTLY,9
+    Form = 1
+    Moves = LICK,HAIL,BITE,HAIL
+Pokemon = ONIX,9
+    Moves = ROCKPOLISH,TACKLE,BIND,ROLLOUT
+Pokemon = CHARMANDER,11
     Gender = male
     Item = CHARCOAL
+    Moves = SCRATCH,GROWL,FIREPLEDGE,SUNNYDAY
     Ace = yes
 #-------------------------------Blizmoor Town, Avalance/Cave-In
 [PKMN_THEO,Theo,2]
