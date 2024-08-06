@@ -21,12 +21,15 @@ module VisibleEncounterSettings
   # >0   - equals maximum of wild encounters on all maps (that are not listed as exceptions in MAP_MAX_SPAWN below)
 
   MAP_MAX_SPAWN = [
-    [9, 8],             # - means the maximal spawn limit is 5 on map with map_id 4
     #[map_id, limit],   # - add your specific map limits here. Don't forget to use a comma between your pairs.
-    [48,5],
-    [77,5],
-    [33,5],
-    [42,5]
+    [48,4],  # Brisk Caverns
+    [77,4],  # Brisk Caverns BF1
+    [33,4],  # Passway Cave
+    [42,3],  # Passway Cafe BF1
+    [83,3],  # Apex Cavern
+    [84,3],  # Apex Cavern BF1
+    [111,5], # Apex Cavern BF2
+    [112,3]  # Apex Cavern BF3
   ]
   # MAP_MAX_SPAWN is a parameter that contains pairs of the form [map_id, limit], where each pair consists of the map_id of a map and the corresponding spawn limit of that map.
   # example: [ [4,5], [6,0] ]   means   "map with id 4 has spawn limit of 5 pokemons and map with id 6 has no spawn limit".

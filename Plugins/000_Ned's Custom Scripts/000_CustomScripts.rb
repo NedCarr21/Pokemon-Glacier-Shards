@@ -359,17 +359,9 @@ Battle::PokeBallEffects::ModifyCatchRate.add(:LUCKBALL, proc { |ball, catchRate,
 # Rock Climb
 #-------------------------------------------------------------------------------
 
-def check_rockclimb_length # retunrs a number of how many rock climb events exist
-    facingEvent = $game_player.pbFacingEvent
-    height = 0
-    if facingEvent.name[/rockclimb\((\d+)\)/i]
-      height = $~[1].to_i
-    end
-    Console.echo_li _INTL("{1}", height) if $DEBUG
-    return height + 1
-end
 
-def gsRockClimb
+
+def gsRockClimb(length = 1)
   move = :ROCKCLIMB
   movefinder = $player.get_pokemon_with_move(move)
   if !$DEBUG && !movefinder
@@ -381,7 +373,7 @@ def gsRockClimb
     speciesname = (movefinder) ? movefinder.name : $player.name
     pbMessage(_INTL("{1} used {2}!", speciesname, GameData::Move.get(move).name))
     pbHiddenMoveAnimation(movefinder)
-    h = check_rockclimb_length
+    h = length
     if $game_player.direction = 8 # facing UP
       # move the player UP the rocks
       pbMoveRoute($game_player,[PBMoveRoute::THROUGH_ON,
