@@ -1,5 +1,5 @@
 ﻿Name       = v21.1 Hotfixes
-Version    = 1.0.6
+Version    = 1.0.9
 Essentials = 21.1
 Conflicts  = v19 Hotfixes
 Conflicts  = v19.1 Updates
@@ -68,11 +68,35 @@ Credits    = Maruno
 # - Fixed the default battle weather being a primal weather causing an
 #   endless loop of that weather starting and ending.
 #
+# 1.0.7:
+#
+# - Fixed the AI thinking it will take End of Round damage when it
+#   won't, and switching because of that.
+# - Fixed the AI wanting to trigger a target's ability/item instead of
+#   not wanting to.
+# - Fixed an event's reflection not disappearing if its page is
+#   changed to one without a graphic.
+#
+# 1.0.8:
+#
+# - Fixed bad conversion of old phone data in an old save file.
+# - Fixed events with an even width/height that approach the player
+#   shuffling back and forth endlessly in front of them.
+# - Fixed Event Touch events on a connected map triggering themselves
+#   by moving around.
+# - Properly fixed previous fix relating to Cramorant's form changing.
+# - Fixed a replacement Pokémon being invisible if its predecessor
+#   fainted and used the same sprite as it.
+#
+# 1.0.9:
+#
+# - Fixed the previous version of this plugin so it actually works.
+#
 #=====================================================================
 #
 # Also included in this plugin is an updated copy of townmapgen.html,
-# which you should put in your game's main folder. It is now able to
-# find map images again, which were moved into a different folder in
-# Essentials v21.
+# now called "Town Map Generator.html", which you should put in your
+# game's main folder. It is now able to find map images again, which
+# were moved into a different folder in Essentials v21.
 #
 #=====================================================================
