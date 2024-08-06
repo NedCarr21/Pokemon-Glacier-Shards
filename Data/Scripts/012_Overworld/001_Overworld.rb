@@ -734,8 +734,10 @@ def pbReceiveItem(item, quantity = 1)
       return true
     end
   else
-    pbNotify(_INTL("Item got!"), _INTL("{1} {2}", quantity, (quantity > 1 ? GameData::Item.try_get(item).name_plural : GameData::Item.try_get(item).name)), 1, [GameData::Item.icon_filename(item),256,20])
-    return true
+    if $bag.add(item, quantity)
+      pbNotify(_INTL("Item got!"), _INTL("{1} {2}", quantity, (quantity > 1 ? GameData::Item.try_get(item).name_plural : GameData::Item.try_get(item).name)), 1, [GameData::Item.icon_filename(item),256,20])
+      return true
+    end
   end
   return false   # Can't add the item
 end

@@ -5,7 +5,7 @@ module Settings
   DEX_SHOWS_FOOTPRINTS          = false
 
   # The scale to zoom the front sprite of a Pokemon. (1 for no scaling)
-  FRONT_BATTLER_SPRITE_SCALE    = 2
+  FRONT_BATTLER_SPRITE_SCALE    = 1
   # The scale to zoom the back sprite of a Pokemon. (1 for no scaling)
-  BACK_BATTLER_SPRITE_SCALE     = 3
+  BACK_BATTLER_SPRITE_SCALE     = 1
 end
