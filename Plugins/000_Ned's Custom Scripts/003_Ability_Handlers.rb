@@ -94,3 +94,39 @@ Battle::AbilityEffects::DamageCalcFromUser.add(:GETAWAY,
     end
   }
 )
+
+Battle::AbilityEffects::DamageCalcFromUser.add(:PERMAFROST,
+  proc { |ability, user, target, move, mults, power, type|
+    mults[:power_multiplier] *= 1.25 if type == :ICE
+  }
+)
+
+Battle::AbilityEffects::MoveImmunity.add(:PERMAFROST,
+  proc { |ability, user, target, move, type, battle, show_message|
+    next target.pbMoveImmunityHealingAbility(user, move, type, :FIRE, show_message)
+  }
+)
+
+Battle::AbilityEffects::DamageCalcFromUser.add(:GRANITEBODY,
+  proc { |ability, user, target, move, mults, power, type|
+    mults[:power_multiplier] *= 1.25 if type == :ROCK
+  }
+)
+
+Battle::AbilityEffects::MoveImmunity.add(:GRANITEBODY,
+  proc { |ability, user, target, move, type, battle, show_message|
+    next target.pbMoveImmunityHealingAbility(user, move, type, :WATER, show_message)
+  }
+)
+
+Battle::AbilityEffects::DamageCalcFromUser.add(:REINFORCED,
+  proc { |ability, user, target, move, mults, power, type|
+    mults[:power_multiplier] *= 1.25 if type == :FIGHTING
+  }
+)
+
+Battle::AbilityEffects::MoveImmunity.add(:REINFORCED,
+  proc { |ability, user, target, move, type, battle, show_message|
+    next target.pbMoveImmunityHealingAbility(user, move, type, :FIGHTING, show_message)
+  }
+)

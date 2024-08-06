@@ -29,6 +29,18 @@ Description = Summons hail when the Pokémon enters the battle, boosts all offen
 Name = Getaway
 Description = Doubles the power of switching moves.
 #-------------------------------
+[PERMAFROST]
+Name = Permafrost
+Description = Immunity to Fire. Buffs Ice-Type attacks by 25%.
+#-------------------------------
+[GRANITEBODY]
+Name = Granite Body
+Description = Immunity to Water. Buffs Rock-Type attacks by 25%.
+#-------------------------------
+[REINFORCED]
+Name = Reinforced
+Description = Immunity to Fighting. Buffs Steel-Type attacks by 25%.
+#-------------------------------
 #-------UNKNOWN-STARTERS--------
 #-------------------------------
 [THORNYWILDS]
