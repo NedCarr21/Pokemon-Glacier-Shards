@@ -1,14 +1,45 @@
 #-------------------------------
-[TM01]
-Name = TM01
-NamePlural = TM01s
+[TM001]
+Name = TM001
+NamePlural = TM001s
 Pocket = 4
 Price = 3000
 FieldUse = TM
 Flags = Fling_80
 Move = TAKEDOWN
 Description =
+#-------------------------------
+[TM002]
+Name = TM002
+NamePlural = TM002s
+Pocket = 4
+Price = 3000
+FieldUse = TM
+Flags = Fling_80
+Move = CHARM
+Description =
 
+#-------------------------------
+[TM034]
+Name = TM034
+NamePlural = TM034s
+Pocket = 4
+Price = 3000
+FieldUse = TM
+Flags = Fling_80
+Move = ICYWIND
+Description =
+
+#-------------------------------
+[TM047]
+Name = TM047
+NamePlural = TM047s
+Pocket = 4
+Price = 3000
+FieldUse = TM
+Flags = Fling_80
+Move = ENDURE
+Description =
 #-------------------------------
 #-------------------------------
 #-------------------------------

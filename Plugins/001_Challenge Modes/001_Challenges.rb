@@ -69,8 +69,9 @@ class Battle::Battler
   end
 end
 
-ItemHandlers::UseOnPokemon.add(:REVIVE, proc { |item, pokemon, scene|
-  if pokemon.hp > 0 || pokemon.perma_faint
+=begin
+ItemHandlers::UseOnPokemon.add(:REVIVE, proc { |item, qty, pokemon, scene|
+  if pokemon.hp > 0 # || pokemon.perma_faint
     scene.pbDisplay(_INTL("It won't have any effect."))
     next false
   else
@@ -82,8 +83,8 @@ ItemHandlers::UseOnPokemon.add(:REVIVE, proc { |item, pokemon, scene|
   end
 })
 
-ItemHandlers::UseOnPokemon.add(:MAXREVIVE, proc { |item, pokemon, scene|
-  if pokemon.hp > 0 || pokemon.perma_faint
+ItemHandlers::UseOnPokemon.add(:MAXREVIVE, proc { |item, qty, pokemon, scene|
+  if pokemon.hp > 0 # || pokemon.perma_faint
     scene.pbDisplay(_INTL("It won't have any effect."))
     next false
   else
@@ -95,8 +96,8 @@ ItemHandlers::UseOnPokemon.add(:MAXREVIVE, proc { |item, pokemon, scene|
   end
 })
 
-ItemHandlers::UseOnPokemon.add(:REVIVALHERB, proc{ |item, pokemon, scene|
-  if pokemon.hp > 0 || pokemon.perma_faint
+ItemHandlers::UseOnPokemon.add(:REVIVALHERB, proc{ |item, qty, pokemon, scene|
+  if pokemon.hp > 0 # || pokemon.perma_faint
     scene.pbDisplay(_INTL("It won't have any effect."))
     next false
   else
@@ -203,7 +204,7 @@ ItemHandlers::BattleUseOnPokemon.add(:REVIVALHERB, proc { |item, pokemon, battle
     next true
   end
 })
-
+=end
 #-------------------------------------------------------------------------------
 # Add Game Over methods
 #-------------------------------------------------------------------------------

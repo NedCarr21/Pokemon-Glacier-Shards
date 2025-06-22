@@ -273,6 +273,7 @@ class PokemonSummary_Scene
   end
 
   def pbStartForgetScene(party, partyindex, move_to_learn)
+    @summary_update = 0
     @viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
     @viewport.z = 99999
     @party      = party

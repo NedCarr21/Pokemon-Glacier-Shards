@@ -898,11 +898,15 @@ class PokemonParty_Scene
   end
 
   def update
-    pbUpdateSpriteHash(@sprites)
-    @sprites["partybg"].ox = 0 if @sprites["partybg"].ox == -42
-    @sprites["partybg"].oy = 0 if @sprites["partybg"].ox == -48
-    @sprites["partybg"].ox -= 1
-    @sprites["partybg"].oy -= 1
+    @party_update += 1
+    if (@party_update >= 3)
+      @party_update -= 3
+      @sprites["partybg"].ox = 0 if @sprites["partybg"].ox == -42 && @sprites["partybg"].visible == true
+      @sprites["partybg"].oy = 0 if @sprites["partybg"].ox == -48 && @sprites["partybg"].visible == true
+      @sprites["partybg"].ox -= 1 if @sprites["partybg"].visible == true
+      @sprites["partybg"].oy -= 1 if @sprites["partybg"].visible == true
+      pbUpdateSpriteHash(@sprites)
+    end
   end
 end
 
