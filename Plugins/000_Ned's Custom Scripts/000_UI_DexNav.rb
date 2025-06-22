@@ -77,7 +77,7 @@ class PokeNav_Scene
 
     @sprites["online"] = IconSprite.new(0, 0, @viewport)
     @sprites["online"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
-    @sprites["online"].setBitmap("Graphics/Pictures/PokeNav/online_icon") if $player.has_poke_nav_online
+    @sprites["online"].setBitmap("Graphics/Pictures/PokeNav/online_icon") if ($player.tutornet || $player.has_poke_nav_tutor)
     @sprites["online"].x = 200
     @sprites["online"].y = 204
     @sprites["online"].z = 1
@@ -172,9 +172,13 @@ class PokeNav_Scene
               screen.pbStartScreen
             }
           end
-          # Online -----------------------------------------------------------------------
-          if(@nav_selected == 5 && $player.has_poke_nav_online)
-            pbCableClub
+          # Tutor.Net --------------------------------------------------------------------
+          if(@nav_selected == 5 && $player.has_poke_nav_tutor)
+            pbFadeOutIn {
+              scene = PokemonTutorNet_Scene.new
+              screen = PokemonTutorNetScreen.new(scene)
+              screen.pbStartScreen
+            }
           end
           # Wonder Trade -----------------------------------------------------------------
           if(@nav_selected == 6 && $player.has_poke_nav_wonder)
@@ -250,7 +254,6 @@ EventHandlers.add(:on_player_step_taken, :dex_nav_create,
         Kernel.echo("Standing on tile...")
 
         $game_temp.force_single_battle
-
 
         pkmn = Pokemon.new($dexnav_encounter[0], $dexnav_encounter[1])
         pkmn.shiny = true if (rand(65536/Settings::SHINY_POKEMON_CHANCE) < 4)

@@ -180,7 +180,7 @@ ITEMARR = [ #[:ITEM,MAXQUANTITY,WEIGHT]
 
 EventHandlers.add(:on_wild_pokemon_created, :gs_randomizer,
   proc { |pkmn|
-    if $game_switches[61] || ChallengeModes.on?(:RANDOMIZER) # if randomizer
+    if ($game_switches[61] || ChallengeModes.on?(:RANDOMIZER)) # if randomizer
       gsRegionalArray = pbAllRegionalSpecies(0)
       pkmn.species = gsRegionalArray.sample
       if Settings::GS_ALTERNATE_FORMS.include?(pkmn)

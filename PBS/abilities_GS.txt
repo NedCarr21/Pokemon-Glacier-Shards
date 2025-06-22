@@ -41,6 +41,10 @@ Description = Immunity to Water. Buffs Rock-Type attacks by 25%.
 Name = Reinforced
 Description = Immunity to Fighting. Buffs Steel-Type attacks by 25%.
 #-------------------------------
+[FLAMEGUARD]
+Name = Flame Guard
+Description = Protects the user, and boosts Defense, against Fire-type attacks.
+#-------------------------------
 #-------UNKNOWN-STARTERS--------
 #-------------------------------
 [THORNYWILDS]

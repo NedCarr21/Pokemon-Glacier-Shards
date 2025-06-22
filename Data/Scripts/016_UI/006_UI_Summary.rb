@@ -110,15 +110,26 @@ class PokemonSummary_Scene
   BLACK_TEXT_BASE   = Color.new(64, 64, 64)
   BLACK_TEXT_SHADOW = Color.new(176, 176, 176)
 
+
+
   def pbUpdate
-    @sprites["bg"].ox = 0 if @sprites["bg"].ox == -42 && @sprites["bg"].visible == true
-    @sprites["bg"].oy = 0 if @sprites["bg"].ox == -50 && @sprites["bg"].visible == true
-    @sprites["bg"].ox -= 1 if @sprites["bg"].visible == true
-    @sprites["bg"].oy -= 1 if @sprites["bg"].visible == true
-    pbUpdateSpriteHash(@sprites)
+    @summary_update += 1
+
+    if (@summary_update >= 3)
+      @summary_update -= 3
+      @sprites["bg"].ox = 0 if @sprites["bg"].ox == -42 && @sprites["bg"].visible == true
+      @sprites["bg"].oy = 0 if @sprites["bg"].ox == -50 && @sprites["bg"].visible == true
+      @sprites["bg"].ox -= 1 if @sprites["bg"].visible == true
+      @sprites["bg"].oy -= 1 if @sprites["bg"].visible == true
+      pbUpdateSpriteHash(@sprites)
+    end
+
+
+
   end
 
   def pbStartScene(party, partyindex, inbattle = false)
+    @summary_update = 0
     @viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
     @viewport.z = 99999
     @party      = party
@@ -806,7 +817,7 @@ class PokemonSummary_Scene
           [sprintf("%d", @pokemon.iv[:SPECIAL_DEFENSE]), 248, y_IVs, :center, base, shadow, true],
           [sprintf("%d", @pokemon.iv[:SPEED]), 302, y_IVs, :center, base, shadow, true],
 
-          [sprintf("%d", 100 * totaliv / (iv_id.length * Pokemon::IV_STAT_LIMIT)), 308, 169, :right, base, shadow, true],
+          [sprintf("%d", 100 * totaliv / (iv_id.length * Pokemon::IV_STAT_LIMIT)), 308, 143, :right, base, shadow, true],
 
           [_INTL(""), 224, 290, 0, base, shadow]
         ]
@@ -814,7 +825,7 @@ class PokemonSummary_Scene
     ability = @pokemon.ability
     if ability
       textpos.push([ability.name, 14, 224, :left, base, shadow, true])
-      drawTextEx(overlay, 12, 256, 238, 4, ability.description, shadow, base)
+      drawFormattedTextEx(overlay, 12, 256, 238, shadowc3tag(BLACK_TEXT_BASE, BLACK_TEXT_SHADOW) + ability.description)
     end
     # Draw all text
     pbDrawTextPositions(overlay, textpos)

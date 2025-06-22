@@ -2379,3 +2379,24 @@ Color = Purple
 Category = Fire Mage
 Pokedex = With its mind heightened, it has the power over every source of fire, bending any flame to its will.
 #-------------------------------
+[SWINUB,1]
+FormName = Glaciet
+Types = FIRE,GROUND
+BaseStats = 50,70,40,45,25,30
+Abilities = OVERCOAT,THICKFAT
+HiddenAbilities = FLAMEGUARD
+Moves = 1,TACKLE,1,DIRTKICK,7,EMBER,10,FLAIL,15,FIRESPIN,20,SMOKESCREEN,25,ENDURE,30,FLAMECHARGE,35,AMNESIA,40,TAKEDOWN,45,EARTHQUAKE,50,FIREBLAST
+TutorMoves = AMNESIA,AVALANCHE,BODYSLAM,BULLDOZE,CHARM,DIG,EARTHPOWER,EARTHQUAKE,ENDURE,FACADE,FIREFANG,FLAMETHROWER,FIREBLAST,FIRESPIN,ERUPTION,HAZE,HIGHHORSEPOWER,MUDSHOT,MUDSLAP,PROTECT,RAINDANCE,REST,REVERSAL,ROAR,ROCKSLIDE,ROCKTOMB,SANDSTORM,SANDTOMB,SCARYFACE,SLEEPTALK,SMACKDOWN,STEALTHROCK,STOMPINGTANTRUM,STONEEDGE,SUBSTITUTE,TAKEDOWN,TRAILBLAZE
+EggMoves = ANCIENTPOWER,BITE,CURSE,DOUBLEEDGE,FISSURE,ERUPTION,WILLOWISP
+EggGroups = Field
+HatchSteps = 5120
+Height = 0.4
+Weight = 6.5
+Color = Brown
+Shape = Quadruped
+Habitat = Cave
+Category = Pig
+Pokedex = It roots for food by rubbing its snout against the ground. Its favorite food is a mushroom that grows under dried grass. It occasionally roots out hot springs.
+Generation = 2
+Evolutions = PILOSWINE,Level,33
+#-------------------------------

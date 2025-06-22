@@ -29,7 +29,7 @@ class Player < Trainer
   # @return [Boolean] whether the PokéNav has been obtained and the Map attachment has been obtained.
   attr_accessor :has_poke_nav_map
   # @return [Boolean] whether the PokéNav has been obtained and the Online attachment has been obtained.
-  attr_accessor :has_poke_nav_online
+  attr_accessor :has_poke_nav_tutor
   # @return [Boolean] whether the PokéNav has been obtained and the Quests attachment has been obtained.
   attr_accessor :has_poke_nav_quests
   # @return [Boolean] whether the PokéNav has been obtained and the Wonder attachment has been obtained.

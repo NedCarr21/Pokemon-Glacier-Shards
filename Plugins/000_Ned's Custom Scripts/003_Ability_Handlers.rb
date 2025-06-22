@@ -45,6 +45,13 @@ Battle::AbilityEffects::MoveImmunity.add(:ROUGHWAVES,
   }
 )
 
+Battle::AbilityEffects::MoveImmunity.add(:FLAMEGUARD,
+  proc { |ability, user, target, move, type, battle, show_message|
+    next target.pbMoveImmunityStatRaisingAbility(user, move, type,
+      :FIRE, :ATTACK, 1, show_message)
+  }
+)
+
 Battle::AbilityEffects::OnSwitchIn.add(:ROOMOFDOOM,
   proc { |ability, battler, battle, switch_in|
     battle.pbShowAbilitySplash(battler)
