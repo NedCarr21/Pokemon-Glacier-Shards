@@ -477,6 +477,7 @@ end
 #===============================================================================
 class PokemonParty_Scene
   def pbStartScene(party, starthelptext, annotations = nil, multiselect = false, can_access_storage = false)
+    @party_update = 0
     @sprites = {}
     @party = party
     @viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
