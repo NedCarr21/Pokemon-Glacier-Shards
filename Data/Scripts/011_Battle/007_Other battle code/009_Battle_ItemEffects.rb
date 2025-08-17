@@ -1851,8 +1851,11 @@ Battle::ItemEffects::EndOfRoundHealing.add(:BLACKSLUDGE,
 Battle::ItemEffects::EndOfRoundHealing.add(:LEFTOVERS,
   proc { |item, battler, battle|
     next if !battler.canHeal?
+    amt = 16
+    amt = 8 if battler.likeditem.include?(:LEFTOVERS)
+    amt = 32 if battler.dislikeditem.include?(:LEFTOVERS)
     battle.pbCommonAnimation("UseItem", battler)
-    battler.pbRecoverHP(battler.totalhp / 16)
+    battler.pbRecoverHP(battler.totalhp / amt)
     battle.pbDisplay(_INTL("{1} restored a little HP using its {2}!",
        battler.pbThis, battler.itemName))
   }

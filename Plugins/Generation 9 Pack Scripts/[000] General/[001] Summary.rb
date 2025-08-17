@@ -1,9 +1,9 @@
 ################################################################################
-# 
+#
 # Pokemon Summary changes.
-# 
+#
 ################################################################################
-
+=begin
 
 class PokemonSummary_Scene
   #-----------------------------------------------------------------------------
@@ -23,10 +23,7 @@ class PokemonSummary_Scene
         pbPlayCloseMenuSE
         break
       elsif Input.trigger?(Input::USE)
-        if @page == 5
-          pbPlayDecisionSE
-          pbRibbonSelection
-          dorefresh = true
+        if (@page == 5
         elsif !@inbattle
           pbPlayDecisionSE
           dorefresh = pbOptions
@@ -77,7 +74,7 @@ class PokemonSummary_Scene
 
   #-----------------------------------------------------------------------------
   # -Edited to add Nickname prompt in the Summary options.
-  # -Edited to allow the use TM's, and to relearn/forget moves on the moves page. 
+  # -Edited to allow the use TM's, and to relearn/forget moves on the moves page.
   #-----------------------------------------------------------------------------
   def pbOptions
     dorefresh = false
@@ -155,7 +152,7 @@ class PokemonSummary_Scene
         scene  = PokemonBag_Scene.new
         screen = PokemonBagScreen.new(scene, $bag)
         item = screen.pbChooseItemScreen(Proc.new{ |itm|
-          move = GameData::Item.get(itm).move  
+          move = GameData::Item.get(itm).move
           next false if !move || @pokemon.hasMove?(move) || !@pokemon.compatible_with_move?(move)
           next true
         })
@@ -168,3 +165,4 @@ class PokemonSummary_Scene
     return dorefresh
   end
 end
+=end

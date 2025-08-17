@@ -353,18 +353,30 @@ class Battle
     return if !@internalBattle || !@moneyGain
     # Money rewarded from opposing trainers
     if trainerBattle?
+      tCoins = 0
       tMoney = 0
       @opponent.each_with_index do |t, i|
         tMoney += pbMaxLevelInTeam(1, i) * t.base_money
       end
       tMoney *= 2 if @field.effects[PBEffects::AmuletCoin]
       tMoney *= 2 if @field.effects[PBEffects::HappyHour]
-      oldMoney = pbPlayer.money
-      pbPlayer.money += tMoney
-      moneyGained = pbPlayer.money - oldMoney
-      if moneyGained > 0
-        $stats.battle_money_gained += moneyGained
-        pbDisplayPaused(_INTL("You got ${1} for winning!", moneyGained.to_s_formatted))
+      tCoins = tMoney
+      if !$game_switches[65]
+        oldMoney = pbPlayer.money
+        pbPlayer.money += tMoney
+        moneyGained = pbPlayer.money - oldMoney
+        if moneyGained > 0
+          $stats.battle_money_gained += moneyGained
+          pbDisplayPaused(_INTL("You got ${1} for winning!", moneyGained.to_s_formatted))
+        end
+      else
+        oldCoins = pbPlayer.coins
+        pbPlayer.coins += tCoins
+        coinsGained = pbPlayer.coins - oldCoins
+        if coinsGained > 0
+          $stats.battle_money_gained += coinsGained
+          pbDisplayPaused(_INTL("You got {1} coins for winning!", coinsGained.to_s_formatted))
+        end
       end
     end
     # Pick up money scattered by Pay Day
@@ -408,6 +420,8 @@ class Battle
     case oldDecision
     ##### WIN #####
     when 1
+      @battlers.each { |b| b.pokemon.modify_achievement(:battles_won, 1) }
+      @battlers.each { |b| b.pokemon.increment_mastery_progress(:BattleParticipation) }
       PBDebug.log("")
       PBDebug.log_header("===== Player won =====")
       PBDebug.log("")

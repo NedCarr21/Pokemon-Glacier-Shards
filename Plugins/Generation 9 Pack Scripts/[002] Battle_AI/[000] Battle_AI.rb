@@ -33,11 +33,11 @@ class Battle::AI
     2  => [:CLEARAMULET],
   }
 
-#===============================================================================
-# Battle_AI
-#===============================================================================
-# Used to allow an AI trainer to select a Pokemon in the party to revive.
-#-----------------------------------------------------------------------------
+  #===============================================================================
+  # Battle_AI
+  #===============================================================================
+  # Used to allow an AI trainer to select a Pokemon in the party to revive.
+  #-----------------------------------------------------------------------------
   def choose_best_revive_pokemon(idxBattler, party)
     reserves = []
     idxPartyStart, idxPartyEnd = @battle.pbTeamIndexRangeFromBattlerIndex(idxBattler)
@@ -54,11 +54,11 @@ class Battle::AI
     return reserves[0][0]
   end
   
-#===============================================================================
-# AI_Utilities
-#===============================================================================
-# Aliased so AI trainers can recognize immunities from Gen 9 abilities.
-#-------------------------------------------------------------------------------
+  #===============================================================================
+  # AI_Utilities
+  #===============================================================================
+  # Aliased so AI trainers can recognize immunities from Gen 9 abilities.
+  #-------------------------------------------------------------------------------
   alias paldea_pokemon_can_absorb_move? pokemon_can_absorb_move?
   def pokemon_can_absorb_move?(pkmn, move, move_type)
     return false if pkmn.is_a?(Battle::AI::AIBattler) && !pkmn.ability_active?
@@ -76,12 +76,12 @@ class Battle::AI
     return paldea_pokemon_can_absorb_move?(pkmn, move, move_type)
   end
 
-#===============================================================================
-# AI_ChooseMove
-#===============================================================================
-# Returns whether the move will definitely fail against the target (assuming
-# no battle conditions change between now and using the move).
-#-------------------------------------------------------------------------------
+  #===============================================================================
+  # AI_ChooseMove
+  #===============================================================================
+  # Returns whether the move will definitely fail against the target (assuming
+  # no battle conditions change between now and using the move).
+  #-------------------------------------------------------------------------------
   alias paldea_pbPredictMoveFailureAgainstTarget pbPredictMoveFailureAgainstTarget
   def pbPredictMoveFailureAgainstTarget
     ret = paldea_pbPredictMoveFailureAgainstTarget
@@ -101,9 +101,9 @@ class Battle::AI
     return ret
   end
 
-#===============================================================================
-# AI_ChooseMove_GenericEffects
-#===============================================================================
+  #===============================================================================
+  # AI_ChooseMove_GenericEffects
+  #===============================================================================
   # Aliased to adds score modifier for the Gen 9 abilities and moves.
   #-------------------------------------------------------------------------------
   alias paldea_get_score_for_weather get_score_for_weather
@@ -112,6 +112,10 @@ class Battle::AI
                 @battle.pbCheckGlobalAbility(:CLOUDNINE)
     ret = paldea_get_score_for_weather(weather, move_user, starting)
     each_battler do |b, i|
+      # +Def for Ice types in Snow
+      if weather == :Hail && Settings::HAIL_WEATHER_TYPE > 0 && b.has_type?(:ICE)
+        ret += (b.opposes?(move_user)) ? -10 : 10
+      end
       # Check each battler's abilities/other moves affected by the new weather
       if @trainer.medium_skill? && !b.has_active_item?(:UTILITYUMBRELLA)
         # Abilities
@@ -246,6 +250,24 @@ class Battle::AI::AIBattler
       }
     end
     return paldea_wants_ability?(ability)
+  end
+
+  # Added Frostbite and Drowsy
+  alias paldea_get_score_change_for_consuming_item get_score_change_for_consuming_item
+  def get_score_change_for_consuming_item(item, try_preserving_item = false)
+    ret = 0
+    case item
+    when :ASPEARBERRY, :CHESTOBERRY
+      # Status cure
+      cured_status = {
+        :ASPEARBERRY => [:FROZEN, :FROSTBITE],
+        :CHESTOBERRY => [:SLEEP, :DROWSY]
+      }[item]
+      ret += (cured_status && cured_status.include?(status)) ? 6 : -6
+    end
+    ret = paldea_get_score_change_for_consuming_item(item, try_preserving_item) if ret < 0
+    ret = 0 if ret < 0 && !try_preserving_item
+    return ret
   end
 end
 
@@ -614,6 +636,67 @@ end
 ################################################################################
 # ShouldSwitch
 #-------------------------------------------------------------------------------
+# Adds Frostbite and Drowsy as a status that could be healed by abilities with 
+# an OnSwitchOut AbilityEffects handler.
+#===============================================================================
+Battle::AI::Handlers::ShouldSwitch.add(:cure_status_problem_by_switching_out,
+  proc { |battler, reserves, ai, battle|
+    next false if !battler.ability_active?
+    # Don't try to cure a status problem/heal a bit of HP if entry hazards will
+    # KO the battler if it switches back in
+    entry_hazard_damage = ai.calculate_entry_hazard_damage(battler.pokemon, battler.side)
+    next false if entry_hazard_damage >= battler.hp
+    # Check specific abilities
+    single_status_cure = {
+      :IMMUNITY    => [:POISON],
+      :INSOMNIA    => [:SLEEP],
+      :LIMBER      => [:PARALYSIS],
+      :MAGMAARMOR  => [:FROZEN, :FROSTBITE],
+      :VITALSPIRIT => [:SLEEP, :DROWSY],
+      :WATERBUBBLE => [:BURN],
+      :WATERVEIL   => [:BURN]
+    }[battler.ability_id]
+    if battler.ability == :NATURALCURE || (single_status_cure && single_status_cure.include?(battler.status))
+      # Cures status problem
+      next false if battler.wants_status_problem?(battler.status)
+      next false if battler.status == :SLEEP && battler.statusCount == 1   # Will wake up this round anyway
+      next false if entry_hazard_damage >= battler.totalhp / 4
+      # Don't bother curing a poisoning if Toxic Spikes will just re-poison the
+      # battler when it switches back in
+      if battler.status == :POISON && reserves.none? { |pkmn| pkmn.hasType?(:POISON) }
+        next false if battle.field.effects[PBEffects::ToxicSpikes] == 2
+        next false if battle.field.effects[PBEffects::ToxicSpikes] == 1 && battler.statusCount == 0
+      end
+      # Not worth curing status problems that still allow actions if at high HP
+      next false if battler.hp >= battler.totalhp / 2 && ![:SLEEP, :FROZEN].include?(battler.status)
+      if ai.pbAIRandom(100) < 70
+        PBDebug.log_ai("#{battler.name} wants to switch to cure its status problem with #{battler.ability.name}")
+        next true
+      end
+    elsif battler.ability == :REGENERATOR
+      # Not worth healing if battler would lose more HP from switching back in later
+      next false if entry_hazard_damage >= battler.totalhp / 3
+      # Not worth healing HP if already at high HP
+      next false if battler.hp >= battler.totalhp / 2
+      # Don't bother if a foe is at low HP and could be knocked out instead
+      if battler.check_for_move { |m| m.damagingMove? }
+        weak_foe = false
+        ai.each_foe_battler(battler.side) do |b, i|
+          weak_foe = true if b.hp < b.totalhp / 3
+          break if weak_foe
+        end
+        next false if weak_foe
+      end
+      if ai.pbAIRandom(100) < 70
+        PBDebug.log_ai("#{battler.name} wants to switch to heal with #{battler.ability.name}")
+        next true
+      end
+    end
+    next false
+  }
+)
+
+#-------------------------------------------------------------------------------
 # Handler to encourage AI trainers to switch out to trigger Zero to Hero.
 #===============================================================================
 Battle::AI::Handlers::ShouldSwitch.add(:zero_to_hero_ability,
@@ -642,5 +725,81 @@ Battle::AI::Handlers::ShouldSwitch.add(:zero_to_hero_ability,
     end
     next true if !hasSwitchMove && (ai.trainer.high_skill? || ai.pbAIRandom(100) < 70)
     next false
+  }
+)
+
+#===============================================================================
+# GeneralMoveScore
+#===============================================================================
+# If user is frozen or frostbitten, prefer a move that can thaw the user.
+#===============================================================================
+Battle::AI::Handlers::GeneralMoveScore.add(:thawing_move_when_frozen,
+  proc { |score, move, user, ai, battle|
+    if ai.trainer.medium_skill? && [:FROZEN, :FROSTBITE].include?(user.status)
+      old_score = score
+      if move.move.thawsUser?
+        score += 20
+        PBDebug.log_score_change(score - old_score, "move will thaw the user")
+      elsif user.check_for_move { |m| m.thawsUser? }
+        score -= 20   # Don't prefer this move if user knows another move that thaws
+        PBDebug.log_score_change(score - old_score, "user knows another move will thaw it")
+      end
+    end
+    next score
+  }
+)
+
+#===============================================================================
+# If user is drowsy, prefer a move that can electrocute the user.
+#===============================================================================
+Battle::AI::Handlers::GeneralMoveScore.add(:electrocuting_move_when_drowsy,
+  proc { |score, move, user, ai, battle|
+    if ai.trainer.medium_skill? && user.status == :DROWSY
+      old_score = score
+      if move.move.electrocuteUser?
+        score += 20
+        PBDebug.log_score_change(score - old_score, "move will electrocute the user")
+      elsif user.check_for_move { |m| m.electrocuteUser? }
+        score -= 20   # Don't prefer this move if user knows another move that thaws
+        PBDebug.log_score_change(score - old_score, "user knows another move will electrocute it")
+      end
+    end
+    next score
+  }
+)
+
+#===============================================================================
+# GeneralMoveAgainstTargetScore
+#===============================================================================
+# If target is frozen or frostbitten, don't prefer moves that could thaw them.
+#===============================================================================
+Battle::AI::Handlers::GeneralMoveAgainstTargetScore.add(:thawing_move_against_frozen_target,
+  proc { |score, move, user, target, ai, battle|
+    if ai.trainer.medium_skill? && [:FROZEN, :FROSTBITE].include?(user.status)
+      if move.rough_type == :FIRE || (Settings::MECHANICS_GENERATION >= 6 && move.move.thawsUser?)
+        old_score = score
+        score -= 20
+        PBDebug.log_score_change(score - old_score, "thaws the target")
+      end
+    end
+    next score
+  }
+)
+
+#===============================================================================
+# If target is drowsy or sleep, don't prefer moves that could electrocute them.
+#===============================================================================
+Battle::AI::Handlers::GeneralMoveAgainstTargetScore.add(:electrocuting_move_against_drowsy_target,
+  proc { |score, move, user, target, ai, battle|
+    drowsy_statuses = [:DROWSY]
+    drowsy_statuses.push(:SLEEP) if Settings::ELECTROCUTE_MOVES_CURE_SLEEP
+    if ai.trainer.medium_skill? && drowsy_statuses.include?(user.status)
+      if move.move.electrocuteUser? 
+        old_score = score
+        score -= 20
+        PBDebug.log_score_change(score - old_score, "electrocutes the target")
+      end
+    end
+    next score
   }
 )

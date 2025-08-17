@@ -449,6 +449,10 @@ class Battle
     return @battlers.select { |b| b && !b.fainted? }
   end
 
+  def battlers
+    return @battlers
+  end
+
   # Unused
   def eachSameSideBattler(idxBattler = 0)
     idxBattler = idxBattler.index if idxBattler.respond_to?("index")

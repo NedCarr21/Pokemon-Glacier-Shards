@@ -23,12 +23,8 @@ end
 #-------------------------------------------------------------------------------
 
 def rareDexEval
-  seen = 0
-  owned = 0
-  seen = $player.pokedex.seen_count(1)
-  $game_variables[91] = seen
-  owned = $player.pokedex.owned_count(1)
-  $game_variables[92] = owned
+  $game_variables[91] = $player.pokedex.seen_count(1)
+  $game_variables[92] = $player.pokedex.owned_count(1)
 end
 
 def pkmn_in_party_location(pkmn1,map_id)
@@ -139,8 +135,28 @@ ITEMARR = [ #[:ITEM,MAXQUANTITY,WEIGHT]
     end
 
 #-------------------------------------------------------------------------------
+# Finding Money
+#-------------------------------------------------------------------------------
+
+    def gs_findCurrency(type, amount)
+      validate amount => Integer
+      if (type == :money)
+        $player.money += amount
+        $game_variables[85] += amount
+        text = ["Money Found!", "$"]
+      elsif (type == :coins)
+        $player.coins += amount
+        text = ["Coins Found!", ""]
+      else
+        text = ["", ""]
+      end
+      pbNotify(text[0], _INTL("{1}{2}", text[1], amount.to_s), 1, ["Graphics/UI/money_bag",266,28])
+    end
+
+#-------------------------------------------------------------------------------
 # Give the player if they don't have many of this item.
 #-------------------------------------------------------------------------------
+
     def notEnough(item=:ORANBERRY, count=5, enoughText="")
       if !$bag.has?(item, count)
         pbMessage(_INTL("Oh no, you don't seem to have many {1}, here, you can have some of mine!", item.name_plural))
@@ -180,16 +196,11 @@ ITEMARR = [ #[:ITEM,MAXQUANTITY,WEIGHT]
 
 EventHandlers.add(:on_wild_pokemon_created, :gs_randomizer,
   proc { |pkmn|
-    if ($game_switches[61] || ChallengeModes.on?(:RANDOMIZER)) # if randomizer
+    if ($game_switches[61]) # if randomizer
       gsRegionalArray = pbAllRegionalSpecies(0)
       pkmn.species = gsRegionalArray.sample
-      if Settings::GS_ALTERNATE_FORMS.include?(pkmn)
-        pkmn.form = rand(0..1)
-      else
-        pkmn.form = 0
-      end
+      pkmn.form = rand(0..1) if Settings::GS_ALTERNATE_FORMS.include?(pkmn)
       pkmn.ability = gsRandomabil if $game_switches[61]
-
       pkmn.calc_stats
       pkmn.reset_moves
     end
@@ -198,17 +209,12 @@ EventHandlers.add(:on_wild_pokemon_created, :gs_randomizer,
 
 EventHandlers.add(:on_trainer_load, :gs_randomizer,
   proc { |trainer|
-    if trainer && ($game_switches[61] || ChallengeModes.on?(:RANDOMIZER)) # if randomizer
+    if trainer && ($game_switches[61]) # if randomizer
       gsRegionalArray = pbAllRegionalSpecies(0)
       trainer.party.each { |pkmn|
         pkmn.species = gsRegionalArray.sample
-        if Settings::GS_ALTERNATE_FORMS.include?(pkmn)
-          pkmn.form = rand(0..1)
-        else
-          pkmn.form = 0
-        end
+        pkmn.form = rand(0..1) if Settings::GS_ALTERNATE_FORMS.include?(pkmn)
         pkmn.ability = gsRandomabil if $game_switches[61]
-
         pkmn.calc_stats
         pkmn.reset_moves
         for pokemon in trainer.party do
@@ -223,26 +229,18 @@ def gsRandompkmn
   pkmn = Pokemon.new(:BULBASAUR,5)
   gsRegionalArray = pbAllRegionalSpecies(0)
   pkmn.species = gsRegionalArray.sample
-  if Settings::GS_ALTERNATE_FORMS.include?(pkmn)
-    pkmn.form = rand(0..1)
-  else
-    pkmn.form = 0
-  end
+  pkmn.form = rand(0..1) if Settings::GS_ALTERNATE_FORMS.include?(pkmn)
   pkmn.calc_stats
   pkmn.reset_moves
   return pkmn
 end
 
 def gsRandomabil
-  ability = :INTIMIDATE
   abils = []
-
   GameData::Ability.each do |ability|
     abils.push(ability.id)
   end
-  ability = abils.sample
-
-  return ability
+  return abils.sample
 end
 
 #-------------------------------------------------------------------------------
@@ -272,47 +270,19 @@ EventHandlers.add(:on_wild_pokemon_created, :gs_wild_held_berries,
 #-------------------------------------------------------------------------------
 EventHandlers.add(:on_trainer_load, :gs_difficulty,
   proc { |trainer|
-    if trainer && $game_variables[84] == 2 # hard
+    if trainer
       trainer.party.each { |pkmn|
-
-        pkmn.nature = Settings::SPECIALNATURES.sample if rand(16)==0
-
-        temp_stats = Settings::STATS.sample(2)
-        pkmn.iv[temp_stats[0]] = rand(21..31)
-        pkmn.iv[temp_stats[1]] = rand(21..31)
-
+        pkmn.nature = Settings::SPECIALNATURES.sample if rand(10) == 0
+        GameData::Stat.each_main do |s|
+          pkmn.iv[s.id] += rand(2..5)
+        end
         pkmn.calc_stats
-      for pokemon in trainer.party do
-        pokemon = pkmn
-      end
-
-      Console.echo_li _INTL("{1} {2}", pkmn.species, pkmn.iv) if $DEBUG
-
+        for pokemon in trainer.party do
+          pokemon = pkmn
+        end
       }
     end
-
-    if trainer && $game_variables[84] == 3 # challenge
-      trainer.party.each { |pkmn|
-
-        pkmn.nature = Settings::SPECIALNATURES.sample if rand(8)==0
-
-        temp_stats = Settings::STATS.sample(4)
-        pkmn.iv[temp_stats[0]] = rand(21..31)
-        pkmn.iv[temp_stats[1]] = rand(21..31)
-        pkmn.iv[temp_stats[2]] = rand(21..31)
-        pkmn.iv[temp_stats[3]] = rand(21..31)
-
-        pkmn.calc_stats
-      for pokemon in trainer.party do
-        pokemon = pkmn
-      end
-
-      Console.echo_li _INTL("{1} {2}", pkmn.species, pkmn.iv) if $DEBUG
-
-      }
-    end
-  }
-)
+})
 #-------------------------------------------------------------------------------
 # Ball Handlers / Catch Rates for Custom Pokeballs
 #-------------------------------------------------------------------------------
@@ -470,7 +440,7 @@ GameData::Nature.register({
 # Player Coordinate Check
 #-------------------------------------------------------------------------------
 
-EventHandlers.add(:on_frame_Update, :player_x_y,
+EventHandlers.add(:on_frame_update, :player_x_y,
   proc {
     if $game_player
       $game_variables[51] = $game_player.x
@@ -480,26 +450,18 @@ EventHandlers.add(:on_frame_Update, :player_x_y,
 )
 
 def gsCheckX(x)
-  if x == $game_variables[51]
-    return true
-  else
-    return false
-  end
+  return (x == $game_variables[51])
 end
 
 def gsCheckY(y)
-  if y == $game_variables[52]
-    return true
-  else
-    return false
-  end
+  return (y == $game_variables[52])
 end
 
 #-------------------------------------------------------------------------------
 # Shiny Chance based on Guild Tier
 #-------------------------------------------------------------------------------
 
-EventHandlers.add(:on_frame_Update, :shiny_chance_guild_tier,
+EventHandlers.add(:on_frame_update, :shiny_chance_guild_tier,
   proc {
     case $game_variables[90]
       when 0; Settings::SHINY_POKEMON_CHANCE = 16 # No Tier       = 1/4096     (with charm 1/2048)
@@ -537,3 +499,159 @@ EventHandlers.add(:on_frame_update, :glitch_title,
   }
 )
 =end
+
+GS_TEXT = { # starting x value (top left), width of character
+  "A" => [0, 14],
+  "B" => [16, 14],
+  "C" => [32, 14],
+  "D" => [48, 14],
+  "E" => [64, 14],
+  "F" => [80, 14],
+  "G" => [96, 14],
+  "H" => [112, 14],
+  "I" => [128, 6],
+  "J" => [136, 14],
+  "K" => [152, 14],
+  "L" => [168, 12],
+  "M" => [182, 14],
+  "N" => [198, 16],
+  "O" => [216, 14],
+  "P" => [232, 14],
+  "Q" => [248, 14],
+  "R" => [264, 14],
+  "S" => [280, 14],
+  "T" => [296, 14],
+  "U" => [312, 14],
+  "V" => [328, 14],
+  "W" => [344, 14],
+  "X" => [360, 14],
+  "Y" => [376, 14],
+  "Z" => [392, 14],
+  "a" => [408, 14],
+  "b" => [424, 14],
+  "c" => [440, 14],
+  "d" => [456, 14],
+  "e" => [472, 14],
+  "f" => [488, 14],
+  "g" => [504, 14],
+  "h" => [520, 14],
+  "i" => [536, 6],
+  "j" => [544, 10],
+  "k" => [556, 14],
+  "l" => [572, 6],
+  "m" => [580, 18],
+  "n" => [600, 14],
+  "o" => [616, 14],
+  "p" => [632, 14],
+  "q" => [648, 14],
+  "r" => [664, 12],
+  "s" => [678, 14],
+  "t" => [694, 12],
+  "u" => [708, 14],
+  "v" => [724, 14],
+  "w" => [740, 14],
+  "x" => [756, 14],
+  "y" => [772, 14],
+  "z" => [788, 14],
+  "1" => [804, 14],
+  "2" => [820, 14],
+  "3" => [836, 14],
+  "4" => [852, 14],
+  "5" => [868, 14],
+  "6" => [884, 14],
+  "7" => [900, 14],
+  "8" => [916, 14],
+  "9" => [932, 14],
+  "0" => [948, 14],
+  ":" => [962, 10],
+  "(" => [972, 8],
+  "/" => [982, 10],
+  ")" => [994, 8],
+  "é" => [1004, 14],
+  "+" => [1020, 14],
+  "-" => [1036, 14],
+  "=" => [1052, 14],
+  "*" => [1068, 14],
+  "_" => [1084, 14],
+  "▲" => [1100, 14],
+  "▼" => [1116, 14],
+  "%" => [1130, 16],
+  "." => [1146, 10],
+  "$" => [1156, 16]
+}
+
+GS_FILE = _INTL("Graphics/UI/gs_text")
+
+def gs_drawText(string, start_x, start_y, bitmap, width = 512)
+  thisLine_x = start_x
+  thisLine_y = start_y
+  lines = []
+  # get file bitmap
+  file_bitmap = AnimatedBitmap.new(pbBitmapName(GS_FILE))
+  # split up string into array of words
+  str_array = string.split(" ")
+  string_array = str_array.reject { |str| str.strip.empty? }
+  # start loop through string
+  string_array.length.times do |i|
+    word = str_array[i]
+    word_width = 0
+    # start loop through each word
+    word.each_char do |char|
+      next unless GS_TEXT.key?(char)
+      text_arr = GS_TEXT[char]
+      # get length of word in pixels
+      word_width += (text_arr[1] - 2)
+      word_width = 0 if word_width < 0
+    # end loop of each word
+    end
+    # check if length of word can be displayed on current line, if not increment line, and reset thisLine_x
+    if (thisLine_x + word_width > width) # can not be displayed
+      thisLine_y += 32 # increment the line, reset the thisLine_x
+      thisLine_x = start_x
+    end
+    word.each_char do |char| # display word into the bitmap
+      next unless GS_TEXT.key?(char)
+      text_arr = GS_TEXT[char]
+      char_rect = Rect.new(text_arr[0], 0, text_arr[1], 26)
+      bitmap.blt(thisLine_x, thisLine_y, file_bitmap.bitmap, char_rect)
+      thisLine_x += (text_arr[1] - 2)
+    end
+    thisLine_x += 6 # account for " " spaces in text
+    #thisLine_x += word_width
+  end
+end
+
+def demo_claw_machine(pokemon = $player.party[0])
+  result = ClawMachineSystem.perform_claw_pull($player, pokemon)
+  if result[:success]
+    puts "Claw Machine pull successful! You got #{result[:reward]}"
+    puts "The reward was shiny!" if result[:shiny_reward]
+    puts "Coins spent: #{result[:cost]}"
+  else
+    puts "Claw Machine pull failed: #{result[:error]}"
+  end
+end
+
+
+def demo_iv_numbers(input = 6, guild_level = $player.guild_data[:level], iv_stat_limit = 61)
+  # generate return hash
+  ret = {}
+  procd = 0
+  for a in 0..input do
+    num = (rand(iv_stat_limit - 10)) / 7.floor
+    for i in 1..guild_level do
+      break if num >= iv_stat_limit
+      next unless [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19].include?(rand(1..35))
+      num += 1
+      procd += 1
+    end
+    ret[a] = [[num, iv_stat_limit].min, 0].max
+  end
+  # amount of each iv number
+  amt_of_each_num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  ret.each do |key, value|
+    amt_of_each_num[value] += 1
+  end
+  arr = amt_of_each_num #.reject { |n| n == 0 }
+  puts "#{arr} => #{arr.length - 1} : procd: #{procd}"
+end

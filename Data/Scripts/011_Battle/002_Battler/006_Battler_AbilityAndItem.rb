@@ -404,8 +404,6 @@ class Battle::Battler
       amt *= 2
       ripening = true
     end
-    amt *= 2 if [:AGUAVBERRY, :ENIGMABERRY, :FIGYBERRY, :IAPAPABERRY, :MAGOBERRY, :POMEGBERRY, :WIKIBERRY].include?(pbThus.likeditem)
-    amt /= 2 if [:AGUAVBERRY, :ENIGMABERRY, :FIGYBERRY, :IAPAPABERRY, :MAGOBERRY, :POMEGBERRY, :WIKIBERRY].include?(pbThus.dislikeditem)
     @battle.pbCommonAnimation("EatBerry", self) if !forced
     @battle.pbHideAbilitySplash(self) if ripening
     amt = pbRecoverHP(amt)

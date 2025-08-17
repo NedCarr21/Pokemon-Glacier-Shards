@@ -133,7 +133,7 @@ end
 MenuHandlers.add(:pause_menu, :pokedex, {
   "name"      => _INTL("Pokédex"),
   "order"     => 10,
-  "condition" => proc { next $player.has_pokedex && $player.pokedex.accessible_dexes.length > 0 && !$player.has_poke_nav },
+  "condition" => proc { next $player.has_pokedex && $player.pokedex.accessible_dexes.length > 0 && !$player.pokenav? },
   "effect"    => proc { |menu|
     pbPlayDecisionSE
     if Settings::USE_CURRENT_REGION_DEX

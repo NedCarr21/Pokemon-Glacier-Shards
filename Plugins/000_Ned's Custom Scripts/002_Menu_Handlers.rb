@@ -17,7 +17,7 @@ MenuHandlers.add(:pause_menu, :quests, {
 MenuHandlers.add(:pause_menu, :pokenav, {
   "name"      => _INTL("PokéNav"),
   "order"     => 8,
-  "condition" => proc { next $player.has_poke_nav },
+  "condition" => proc { next $player.pokenav? },
   "effect"    => proc { |menu|
     pbPlayDecisionSE
     menu.pbHideMenu
@@ -60,11 +60,11 @@ MenuHandlers.add(:debug_menu, :play_mining_game, {
   }
 })
 
-MenuHandlers.add(:debug_menu, :play_mining_game, {
-  "name"        => _INTL("Mining Minigame"),
+MenuHandlers.add(:debug_menu, :reset_quest_board, {
+  "name"        => _INTL("Reset Quest Board"),
   "parent"      => :field_menu,
-  "description" => _INTL("Starts a mining minigame."),
+  "description" => _INTL("Resets all the Quest Board quests."),
   "effect"      => proc {
-
+    $player.reset_all_quests
   }
 })

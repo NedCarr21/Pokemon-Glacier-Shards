@@ -899,6 +899,7 @@ class PokemonParty_Scene
   end
 
   def update
+    @sprites["partybg"].setBitmap("Graphics/UI/Backgrounds/" + Settings::MENU_BGSTYLES[$PokemonSystem.get_bg_style])
     @party_update += 1
     if (@party_update >= 3)
       @party_update -= 3
@@ -906,8 +907,8 @@ class PokemonParty_Scene
       @sprites["partybg"].oy = 0 if @sprites["partybg"].ox == -48 && @sprites["partybg"].visible == true
       @sprites["partybg"].ox -= 1 if @sprites["partybg"].visible == true
       @sprites["partybg"].oy -= 1 if @sprites["partybg"].visible == true
-      pbUpdateSpriteHash(@sprites)
     end
+    pbUpdateSpriteHash(@sprites)
   end
 end
 

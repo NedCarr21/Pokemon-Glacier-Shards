@@ -184,7 +184,12 @@ module GameData
     def is_gem?;             return has_flag?("TypeGem"); end
     def is_mulch?;           return has_flag?("Mulch"); end
     def is_mega_stone?;      return has_flag?("MegaStone"); end   # Does NOT include Red Orb/Blue Orb
-    def is_scent?;           return has_flag?("Scent"); end
+    def is_medicine?;        return has_flag?("Medicine"); end
+    def is_candy?;           return has_flag?("Candy"); end
+    def is_stat_item?;       return has_flag?("Stats"); end
+    def is_battle_item?;     return has_flag?("Battle"); end
+    def is_quest_item?;      return has_flag?("Quest"); end
+    def is_material?;        return has_flag?("CraftingMaterial"); end
 
     def is_important?
       return true if is_key_item? || is_HM? || is_TM?

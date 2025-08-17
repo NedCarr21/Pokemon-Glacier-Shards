@@ -45,7 +45,7 @@ class Battle
   # Compiles an array of all possible midbattle triggers.
   #-----------------------------------------------------------------------------
   def pbDeluxeTriggers(idxBattler, idxTarget, *triggers)
-    return if !@midbattleScript
+    return if !@midbattleScript && !MidbattleHandlers.has_any?(:midbattle_global)
     return if @midbattleFailSafe
     idxBattler = idxBattler.index if idxBattler.respond_to?("index")
     turnCount = (triggers[0].include?("Turn")) ? @battlers[idxBattler].turnCount : @turnCount + 1
@@ -133,6 +133,8 @@ class Battle
         trigger_array.push(trigger + "_repeat_every")
       end
     end
+    trigger_array.push("VariableOver_")
+    trigger_array.push("VariableUnder_")
     return trigger_array
   end
   
@@ -147,6 +149,9 @@ class Battle
       @midbattleChoices.clear
       @midbattleDecision = nil
       oldVar = @midbattleVariable
+      trigger_array.each do |trigger|
+        MidbattleHandlers.trigger_each(:midbattle_global, self, idxBattler, idxTarget, trigger)
+      end
       case midbattle
       when Hash
         user = idxBattler
@@ -182,6 +187,7 @@ class Battle
           else
             next if !trigger_array.include?(trigger)
           end
+          PBDebug.log("[Midbattle Script] '#{trigger}' triggered by #{@battlers[user].pbThis(true)} (#{user})...")
           case midbattle[trigger]
           when String, Array
             MidbattleHandlers.trigger(:midbattle_triggers, "speech", self, user, target, midbattle[trigger])
@@ -202,6 +208,7 @@ class Battle
             end
             user = old_user
           end
+          PBDebug.log("[Midbattle Script] '#{trigger}' effects ended")
           next if trigger.include?("_repeat")
           midbattle.delete(trigger)
         end
@@ -235,25 +242,71 @@ class Battle
   #-----------------------------------------------------------------------------
   # Midbattle triggers upon a trainer using an item.
   #-----------------------------------------------------------------------------
-  alias dx_pbUseItemOnPokemon pbUseItemOnPokemon
   def pbUseItemOnPokemon(item, idxParty, userBattler)
     pbDeluxeTriggers(userBattler, nil, "BeforeItemUse", item)
-    dx_pbUseItemOnPokemon(item, idxParty, userBattler)
-    pbDeluxeTriggers(userBattler, nil, "AfterItemUse", item)
-  end
-
-  alias dx_pbUseItemOnBattler pbUseItemOnBattler
-  def pbUseItemOnBattler(item, idxParty, userBattler)
-    pbDeluxeTriggers(userBattler, nil, "BeforeItemUse", item)
-    dx_pbUseItemOnBattler(item, idxParty, userBattler)
-    pbDeluxeTriggers(userBattler, nil, "AfterItemUse", item)
+    trainerName = pbGetOwnerName(userBattler.index)
+    pkmn = pbParty(userBattler.index)[idxParty]
+    battler = pbFindBattler(idxParty, userBattler.index)
+    pbUseItemMessage(item, trainerName, (battler || pkmn))
+    ch = @choices[userBattler.index]
+    args = [item, pkmn, battler, ch[3], true, self, @scene, false]
+    args.push(userBattler.index) if launcherBattle?
+    if ItemHandlers.triggerCanUseInBattle(*args)
+      (battler) ? @scene.pbItemUseAnimation(battler.index) : pbSEPlay("Use item in party")
+      ItemHandlers.triggerBattleUseOnPokemon(item, pkmn, battler, ch, @scene)
+      pbDeluxeTriggers(userBattler, nil, "AfterItemUse", item)
+      pbReduceLauncherPoints(userBattler, item, true)
+      ch[1] = nil
+      return
+    end
+    pbDisplay(_INTL("But it had no effect!"))
+    pbReturnUnusedItemToBag(item, userBattler.index)
   end
   
-  alias dx_pbUseItemInBattle pbUseItemInBattle
+  def pbUseItemOnBattler(item, idxParty, userBattler)
+    pbDeluxeTriggers(userBattler, nil, "BeforeItemUse", item)
+    trainerName = pbGetOwnerName(userBattler.index)
+    battler = pbFindBattler(idxParty, userBattler.index)
+    pbUseItemMessage(item, trainerName, battler)
+    ch = @choices[userBattler.index]
+    if battler
+      args = [item, battler.pokemon, battler, ch[3], true, self, @scene, false]
+      args.push(userBattler.index) if launcherBattle?
+      if ItemHandlers.triggerCanUseInBattle(*args)
+        @scene.pbItemUseAnimation(battler.index)
+        ItemHandlers.triggerBattleUseOnBattler(item, battler, @scene)
+        ch[1] = nil
+        battler.pbItemOnStatDropped
+        pbDeluxeTriggers(userBattler, nil, "AfterItemUse", item)
+        pbReduceLauncherPoints(userBattler, item, true)
+        return
+      else
+        pbDisplay(_INTL("But it had no effect!"))
+      end
+    else
+      pbDisplay(_INTL("But it's not where this item can be used!"))
+    end
+    pbReturnUnusedItemToBag(item, userBattler.index)
+  end
+  
   def pbUseItemInBattle(item, idxBattler, userBattler)
     pbDeluxeTriggers(userBattler, idxBattler, "BeforeItemUse", item)
-    dx_pbUseItemInBattle(item, idxBattler, userBattler)
-    pbDeluxeTriggers(userBattler, idxBattler, "AfterItemUse", item)
+    trainerName = pbGetOwnerName(userBattler.index)
+    battler = (idxBattler < 0) ? userBattler : @battlers[idxBattler]
+    pbUseItemMessage(item, trainerName, battler)
+    pkmn = battler.pokemon
+    ch = @choices[userBattler.index]
+    args = [item, pkmn, battler, ch[3], true, self, @scene, false]
+    args.push(userBattler.index) if launcherBattle?
+    if ItemHandlers.triggerCanUseInBattle(*args)
+      ItemHandlers.triggerUseInBattle(item, battler, self)
+      pbDeluxeTriggers(userBattler, idxBattler, "AfterItemUse", item)
+      pbReduceLauncherPoints(userBattler, item, true)
+      ch[1] = nil
+      return
+    end
+    pbDisplay(_INTL("But it had no effect!"))
+    pbReturnUnusedItemToBag(item, userBattler.index)
   end
   
   #-----------------------------------------------------------------------------
@@ -411,7 +464,6 @@ class Battle
   end
 end
 
-
 #===============================================================================
 # Adds midbattle triggers to the capture process.
 #===============================================================================
@@ -487,13 +539,14 @@ class Battle::Battler
         @battle.pbDeluxeTriggers(user, b.index, *triggers)
         next if b.damageState.unaffected || b.damageState.substitute
         next if b.damageState.calcDamage == 0
-        next if b.damageThreshold == 0
-        next if b.hp > b.hpThreshold
-        next if b.effects[PBEffects::Endure] && b.hpThreshold == 1
+        next if !b.damageThreshold
+        hpThreshold = (b.totalhp * (b.damageThreshold / 100.0)).round
+        hpThreshold = 1 if hpThreshold < 1
+        next if b.hp > hpThreshold
+        next if b.effects[PBEffects::Endure] && hpThreshold == 1
         targ_indecies.push(b.index)
         targ_triggers.push("BattlerReachedHPCap", b.species, *b.pokemon.types)
-        b.hpThreshold = 0
-        b.damageThreshold = 0
+        b.damageThreshold = nil
       end
       targ_indecies.each do |i|
         @battle.pbDeluxeTriggers(i, user.index, *targ_triggers)
@@ -536,7 +589,7 @@ class Battle::Battler
   end
   
   #-----------------------------------------------------------------------------
-  # Midbattle triggers upon a status condition being inflicted.
+  # Midbattle triggers upon a status condition being inflicted or removed.
   #-----------------------------------------------------------------------------
   alias dx_pbInflictStatus pbInflictStatus 
   def pbInflictStatus(*args)
@@ -546,6 +599,72 @@ class Battle::Battler
     if ![:NONE, oldStatus].include?(self.status)
       @battle.pbDeluxeTriggers(self, nil, "BattlerStatusChange", self.status, @species, @pokemon.types)
     end
+  end
+  
+  alias dx_pbCureStatus pbCureStatus
+  def pbCureStatus(showMessages = true)
+    oldStatus = status
+    dx_pbCureStatus(showMessages)
+    if oldStatus != :NONE
+      @battle.pbDeluxeTriggers(self, nil, "BattlerStatusCured", oldStatus, @species, @pokemon.types)
+    end
+  end
+  
+  alias dx_pbConfuse pbConfuse
+  def pbConfuse(msg = nil)
+    oldEffect = @effects[PBEffects::Confusion]
+    dx_pbConfuse(msg)
+    if @effects[PBEffects::Confusion] > oldEffect && oldEffect == 0
+      @battle.pbDeluxeTriggers(self, nil, "BattlerConfusionStart", @species, @pokemon.types)
+    end
+  end
+  
+  alias dx_pbCureConfusion pbCureConfusion
+  def pbCureConfusion
+    oldEffect = @effects[PBEffects::Confusion]
+    dx_pbCureConfusion
+    if @effects[PBEffects::Confusion] == 0 && oldEffect > 0
+      @battle.pbDeluxeTriggers(self, nil, "BattlerConfusionEnd", @species, @pokemon.types)
+    end
+  end
+  
+  alias dx_pbAttract pbAttract
+  def pbAttract(user, msg = nil)
+    oldEffect = @effects[PBEffects::Attract]
+    dx_pbAttract(user, msg)
+    if @effects[PBEffects::Attract] > oldEffect && oldEffect == -1
+      @battle.pbDeluxeTriggers(self, nil, "BattlerAttractStart", @species, @pokemon.types)
+    end
+  end
+  
+  alias dx_pbCureAttract pbCureAttract
+  def pbCureAttract
+    oldEffect = @effects[PBEffects::Attract]
+    dx_pbCureAttract
+    if @effects[PBEffects::Attract] == -1 && oldEffect >= 0
+      @battle.pbDeluxeTriggers(self, nil, "BattlerAttractEnd", @species, @pokemon.types)
+    end
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Midbattle triggers upon a battler fainting.
+  #-----------------------------------------------------------------------------
+  alias dx_pbAbilitiesOnFainting pbAbilitiesOnFainting
+  def pbAbilitiesOnFainting
+    dx_pbAbilitiesOnFainting
+    triggers = ["BattlerFainted", @species, *@pokemon.types]
+    if @battle.pbAllFainted?(@index)
+      lastBattler = true
+      owner = @battle.pbGetOwnerFromBattlerIndex(@index)
+      @battle.battlers.each do |b|
+        next if !b || b.opposes?(@index) || !b.fainted? || b.fainted
+        thisOwner = @battle.pbGetOwnerFromBattlerIndex(b.index)
+        next if thisOwner != owner
+        lastBattler = false
+      end
+      triggers.push("LastBattlerFainted", @species, *@pokemon.types) if lastBattler
+    end
+    @battle.pbDeluxeTriggers(@index, nil, *triggers)
   end
   
   #-----------------------------------------------------------------------------
@@ -633,18 +752,21 @@ class Battle::Move
   #-----------------------------------------------------------------------------
   alias dx_pbEffectivenessMessage pbEffectivenessMessage
   def pbEffectivenessMessage(user, target, numTargets = 1)
-    return if self.is_a?(Battle::Move::FixedDamageMove)
     return if target.damageState.disguise || target.damageState.iceFace
     dx_pbEffectivenessMessage(user, target, numTargets)
     return if target.damageState.substitute || target.fainted?
     @battler_triggers[:user].push("UserDealtDamage", @id, @type, user.species)
     @battler_triggers[:targ].push("TargetTookDamage", @id, @type, target.species)
+    return if self.is_a?(Battle::Move::FixedDamageMove)
     if Effectiveness.super_effective?(target.damageState.typeMod)
       @battler_triggers[:user].push("UserMoveEffective", @id, @type, user.species)
       @battler_triggers[:targ].push("TargetWeakToMove", @id, @type, target.species)
     elsif Effectiveness.not_very_effective?(target.damageState.typeMod)
       @battler_triggers[:user].push("UserMoveResisted", @id, @type, user.species)
       @battler_triggers[:targ].push("TargetResistedMove", @id, @type, target.species)
+    end
+    if multiHitMove? || user.effects[PBEffects::ParentalBond] > 0
+      pbFinalizeMoveTriggers(user, target)
     end
   end
   
@@ -702,14 +824,67 @@ class Battle::Move
       when :targ then @battle.pbDeluxeTriggers(target, user.index, *triggers)
       end
     end
+    @battler_triggers[:user].clear
+    @battler_triggers[:targ].clear
   end
 end
 
 
 #===============================================================================
-# Adds midbattle triggers to the end of battle.
+# Adds midbattle triggers to HP animation for when a battler's HP changes.
+#===============================================================================
+class Battle::Scene::PokemonDataBox < Sprite
+  def update_hp_animation
+    return if !animating_hp?
+    @anim_hp_current = lerp(@anim_hp_start, @anim_hp_end, HP_BAR_CHANGE_TIME,
+                            @anim_hp_timer_start, System.uptime)
+    refresh_hp
+    if @anim_hp_current == @anim_hp_end
+      if @anim_hp_start > @anim_hp_end
+        triggers = ["BattlerHPReduced", @battler.species, *@battler.pokemon.types]
+        if !@battler.fainted? && @battler.hasLowHP?
+          triggers.push("BattlerHPCritical", @battler.species, *@battler.pokemon.types)
+        end
+        @battler.battle.pbDeluxeTriggers(@battler, nil, *triggers)
+      elsif @anim_hp_start < @anim_hp_end
+        triggers = ["BattlerHPRecovered", @battler.species, *@battler.pokemon.types]
+        if @battler.hp == @battler.totalhp
+          triggers.push("BattlerHPFull", @battler.species, *@battler.pokemon.types)
+        end
+        @battler.battle.pbDeluxeTriggers(@battler, nil, *triggers)
+      end
+      @anim_hp_start = nil
+      @anim_hp_end = nil
+      @anim_hp_timer_start = nil
+      @anim_hp_current = nil
+    end
+  end
+end
+
+
+#===============================================================================
+# Miscellaneous triggers.
 #===============================================================================
 class Battle::Scene
+  #-----------------------------------------------------------------------------
+  # Midbattle triggers upon sending out a Pokemon in battle.
+  # Functionally the same as "AfterSwitchIn", except this also triggers upon
+  # sending out a trainer's lead Pokemon at the start of battle.
+  #-----------------------------------------------------------------------------
+  alias dx_pbResetCommandsIndex pbResetCommandsIndex
+  def pbResetCommandsIndex(idxBattler)
+    dx_pbResetCommandsIndex(idxBattler)
+    battler = @battle.battlers[idxBattler]
+    triggers = ["AfterSendOut", battler.species, *battler.pokemon.types]
+    if @battle.pbAbleNonActiveCount(idxBattler) == 0
+      triggers.push("AfterLastSendOut", battler.species, *battler.pokemon.types)
+    end
+    @battle.pbDeluxeTriggers(idxBattler, nil, *triggers)
+  end
+
+  #-----------------------------------------------------------------------------
+  # Midbattle triggers upon the end of the battle.
+  #-----------------------------------------------------------------------------
   alias dx_pbEndBattle pbEndBattle
   def pbEndBattle(_result)
     if !pbInSafari? && !pbInBugContest?

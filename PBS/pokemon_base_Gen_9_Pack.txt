@@ -100,7 +100,7 @@ Habitat = Sea
 Category = Big Fish
 Pokedex = Clads itself in the souls of comrades that perished before fulfilling their goals of journeying upstream. No other species throughout other aquatic environments is Basculegion’s equal.
 Generation = 8
-Flags = DefaultForm_2,InheritFormWithEverStone
+Flags = DefaultForm_2,InheritFormWithEverStone,HasGenderedSprites
 WildItemUncommon = DEEPSEATOOTH
 #-------------------------------
 [SNEASLER]

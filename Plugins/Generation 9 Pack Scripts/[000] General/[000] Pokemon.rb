@@ -41,12 +41,19 @@ end
 
 class Pokemon
   alias paldea_initialize initialize
-  def initialize(*args)
-    paldea_initialize(*args)
+  def initialize(species, level, owner = $player, withMoves = true, recheck_form = true)
+    paldea_initialize(species, level, owner, withMoves, recheck_form)
     @evo_move_count   = {}
     @evo_crest_count  = {}
     @evo_recoil_count = 0
     @evo_step_count   = 0
+    if @species == :BASCULEGION && recheck_form
+      f = MultipleForms.call("getFormOnCreation", self)
+      if f
+        self.form = f
+        reset_moves if withMoves
+      end
+    end
   end
   
   #-----------------------------------------------------------------------------
@@ -400,6 +407,50 @@ MultipleForms.register(:SHAYMIN, {
 })
 
 #-------------------------------------------------------------------------------
+# Hoopa - Unbound form.
+#-------------------------------------------------------------------------------
+MultipleForms.register(:HOOPA, {
+  "getForm" => proc { |pkmn|
+    if Settings::MECHANICS_GENERATION < 9 && (!pkmn.time_form_set ||
+       pbGetTimeNow.to_i > pkmn.time_form_set.to_i + (60 * 60 * 24 * 3))   # 3 days
+      next 0
+    end
+  },
+  "onSetForm" => proc { |pkmn, form, oldForm|
+    pkmn.time_form_set = (form > 0) ? pbGetTimeNow.to_i : nil if Settings::MECHANICS_GENERATION < 9
+    # Move Change
+    form_moves = [
+      :HYPERSPACEHOLE,    # Confined form
+      :HYPERSPACEFURY,    # Unbound form
+    ]
+    # Find a known move that should be forgotten
+    old_move_index = -1
+    pkmn.moves.each_with_index do |move, i|
+      next if !form_moves.include?(move.id)
+      old_move_index = i
+      break
+    end
+    # Determine which new move to learn (if any)
+    new_move_id = form_moves[form]
+    new_move_id = nil if !GameData::Move.exists?(new_move_id)
+    new_move_id = nil if pkmn.hasMove?(new_move_id)
+    # Forget a known move (if relevant) and learn a new move (if relevant)
+    if old_move_index >= 0
+      old_move_name = pkmn.moves[old_move_index].name
+      if new_move_id.nil?
+        # Just forget the old move
+        pkmn.forget_move_at_index(old_move_index)
+      else
+        # Replace the old move with the new move (keeps the same index)
+        pkmn.moves[old_move_index].id = new_move_id
+        new_move_name = pkmn.moves[old_move_index].name
+        pbMessage("\\se[]" + _INTL("{1} learned {2}!", pkmn.name, new_move_name) + "\\se[Pkmn move learnt]")
+      end
+    end
+  }
+})
+
+#-------------------------------------------------------------------------------
 # Basculegion - Gender forms.
 #-------------------------------------------------------------------------------
 MultipleForms.register(:BASCULEGION, {
@@ -451,6 +502,15 @@ MultipleForms.register(:SQUAWKABILLY, {
 MultipleForms.register(:PALAFIN, {
   "getFormOnLeavingBattle" => proc { |pkmn, battle, usedInBattle, endBattle|
     next 0 if endBattle
+  }
+})
+
+#-------------------------------------------------------------------------------
+# Tatsugiri - Multiple Forms.
+#-------------------------------------------------------------------------------
+MultipleForms.register(:TATSUGIRI, {
+  "getFormOnCreation" => proc { |pkmn|
+    next rand(3)
   }
 })
 

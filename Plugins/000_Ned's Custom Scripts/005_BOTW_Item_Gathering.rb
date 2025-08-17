@@ -144,6 +144,8 @@ def pbNotify(top_text, bottom_text = "", darker = 0, image_data = [])
     image = Bitmap.new(image_data[0])
     bitmap.blt(image_data[1], image_data[2], image, Rect.new(0, 0, image.width, image.height))
   end
-  pbDrawTextPositions(bitmap,textpos)
+  # pbDrawTextPositions(bitmap,textpos)
+  gs_drawText(top_text, 12, 24, bitmap)
+  gs_drawText(bottom_text, 12, 56, bitmap)
   $scene.addSprite(-bitmap.width,224,bitmap)
 end

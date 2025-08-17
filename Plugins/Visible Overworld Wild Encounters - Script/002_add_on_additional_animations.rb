@@ -202,7 +202,7 @@ module VisibleEncounterSettings
             for anim in VisibleEncounterSettings::ENV_DESPAWN_ANIMATIONS
                 anim_tag_id = anim[0]
                 anim_id = anim[1]
-                if tile_terrain_tag.id == anim_tag_id && $data_animations[anim_id]
+                if (tile_terrain_tag.id == anim_tag_id) && ($data_animations[anim_id]) && !($scene.is_a?(Scene_DebugIntro))
                     $scene.spriteset.addUserAnimation(anim_id,x,y,true,1)
                     default_anim = false
                 end

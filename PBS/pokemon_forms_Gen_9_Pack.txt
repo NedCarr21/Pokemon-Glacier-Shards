@@ -146,7 +146,7 @@ Color = Gray
 Habitat = Mountain
 Pokedex = Its sturdy, curved claws are ideal for traversing precipitous cliffs. From the tips of these claws drips a venom that infiltrates the nerves of any prey caught in Sneasel's grasp.
 Generation = 8
-Flags = InheritFormWithEverStone
+Flags = InheritFormWithEverStone,HasGenderedSprites
 Evolutions = SNEASLER,DayHoldItem,RAZORCLAW
 #-------------------------------
 [DIALGA,1]
@@ -304,6 +304,7 @@ Generation = 9
 [BASCULEGION,1]
 FormName = Female
 BaseStats = 120,92,65,78,100,75
+Flags = DefaultForm_2,InheritFormWithEverStone
 #-------------------------------
 [ENAMORUS,1]
 FormName = Therian Form
@@ -489,7 +490,6 @@ Height = 0.3
 Weight = 16.0
 Shape = Head
 Pokedex = The shell is made of crystallized Terastal energy. When struck by a move, this shell absorbs the move’s energy and transfers it to Terapagos.
-Flags = Legendary,TeraType_STELLAR
 #-------------------------------
 [TERAPAGOS,2]
 FormName = Stellar Form
@@ -500,4 +500,3 @@ Height = 1.7
 Weight = 77.0
 Shape = Head
 Pokedex = In this form, Terapagos resembles the world as the ancients saw it, and its Terastal energy is abnormally amplified.
-Flags = Legendary,TeraType_STELLAR

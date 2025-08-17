@@ -33,9 +33,11 @@ class Battle
     return if !battler.hasPrimal? || battler.primal?
     $stats.primal_reversion_count += 1 if battler.pbOwnedByPlayer?
     pbDeluxeTriggers(idxBattler, nil, "BeforePrimalReversion", battler.species, *battler.pokemon.types)
+    @scene.pbAnimateSubstitute(idxBattler, :hide)
     pbAnimatePrimalReversion(battler)
     pbDisplay(_INTL("{1}'s Primal Reversion!\nIt reverted to its primal form!", battler.pbThis))
     pbDeluxeTriggers(idxBattler, nil, "AfterPrimalReversion", battler.species, *battler.pokemon.types)
+    @scene.pbAnimateSubstitute(idxBattler, :show)
   end
   
   def pbAnimatePrimalReversion(battler)
@@ -43,17 +45,17 @@ class Battle
     if @scene.pbCommonAnimationExists?(anim)
       pbCommonAnimation(anim, battler)
       battler.pokemon.makePrimal
-      battler.form_update
+      battler.form_update(true)
       pbCommonAnimation(anim + "2", battler)
     else 
       if Settings::SHOW_PRIMAL_ANIM && $PokemonSystem.battlescene == 0
         @scene.pbShowPrimalReversion(battler.index)
         battler.pokemon.makePrimal
-        battler.form_update
+        battler.form_update(true)
       else
         @scene.pbRevertBattlerStart(battler.index)
         battler.pokemon.makePrimal
-        battler.form_update
+        battler.form_update(true)
         @scene.pbRevertBattlerEnd
       end
     end
@@ -87,8 +89,16 @@ class Battle::Scene::Animation::BattlerPrimalReversion < Battle::Scene::Animatio
     @battler = @battle.battlers[idxBattler]
     @opposes = @battle.opposes?(idxBattler)
     @pkmn = @battler.pokemon
-    @primal = [@pkmn.species, @pkmn.gender, @pkmn.getPrimalForm, @pkmn.shiny?, @pkmn.shadowPokemon?]
-    @cry_file = GameData::Species.cry_filename(@primal[0], @primal[2])
+    @primal = {
+      :pokemon => @pkmn,
+      :species => @pkmn.species,
+      :gender  => @pkmn.gender,
+      :form    => @pkmn.getPrimalForm,
+      :shiny   => @pkmn.shiny?,
+      :shadow  => @pkmn.shadowPokemon?,
+      :hue     => @pkmn.super_shiny_hue
+    }
+    @cry_file = GameData::Species.cry_filename(@primal[:species], @primal[:form])
     case @pkmn.species
     when :GROUDON then @bg_color = Color.new(255, 0, 0, 180)
     when :KYOGRE  then @bg_color = Color.new(0, 0, 255, 180)
@@ -127,7 +137,7 @@ class Battle::Scene::Animation::BattlerPrimalReversion < Battle::Scene::Animatio
     picPOKE, sprPOKE = pokeData[0], pokeData[1]
     #---------------------------------------------------------------------------
     # Animation objects.
-    orbData = dxSetSprite(@path + "Primal/orb_" + @pkmn.species.to_s, delay, center_x, center_y, false, 0, 0)
+    orbData = dxSetSprite(@path + "Primal/orb_" + @pkmn.species.to_s, delay, center_x, center_y, PictureOrigin::CENTER, 0, 0)
     picORB, sprORB = orbData[0], orbData[1]
     shineData = dxSetSprite(@path + "shine", delay, center_x, center_y)
     picSHINE, sprSHINE = shineData[0], shineData[1]
@@ -137,12 +147,12 @@ class Battle::Scene::Animation::BattlerPrimalReversion < Battle::Scene::Animatio
     arrPOKE.last[0].setColor(delay, Color.white)
     #---------------------------------------------------------------------------
     # Sets up Primal icon.
-    iconData = dxSetSprite(@path + "Primal/icon_" + @pkmn.species.to_s, delay, center_x, center_y, false, 0)
+    iconData = dxSetSprite(@path + "Primal/icon_" + @pkmn.species.to_s, delay, center_x, center_y, PictureOrigin::CENTER, 0)
     picORB2, sprORB2 = iconData[0], iconData[1]
     #---------------------------------------------------------------------------
     # Animation objects.
     arrPARTICLES = dxSetParticles(@path + "particle", delay, center_x, center_y, 200)
-    pulseData = dxSetSprite(@path + "pulse", delay, center_x, center_y, false, 100, 50)
+    pulseData = dxSetSprite(@path + "pulse", delay, center_x, center_y, PictureOrigin::CENTER, 100, 50)
     picPULSE, sprPULSE = pulseData[0], pulseData[1]
     #---------------------------------------------------------------------------
     # Sets up skip button & fade out.
@@ -159,8 +169,8 @@ class Battle::Scene::Animation::BattlerPrimalReversion < Battle::Scene::Animatio
     picPOKE.setVisible(delay, true)
     picFADE.moveOpacity(delay, 8, 0)
     delay = picFADE.totalDuration
-    picBUTTON.moveXY(delay, 6, 0, Graphics.height - 38)
-    picBUTTON.moveXY(delay + 36, 6, 0, Graphics.height)
+    picBUTTON.moveDelta(delay, 6, 0, -38)
+    picBUTTON.moveDelta(delay + 36, 6, 0, 38)
     #---------------------------------------------------------------------------
     # Darkens background/base tone; brightens Pokemon to white.
     picPOKE.setSE(delay, "DX Action")

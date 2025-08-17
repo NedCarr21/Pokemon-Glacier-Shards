@@ -225,3 +225,95 @@ EventHandlers.add(:on_new_spriteset_map, :add_light_effects,
     end
   }
 )
+=begin
+  @sprites["t_left"]
+  @sprites["t_right"]
+  @sprites["b_left"]
+  @sprites["b_right"]
+=end
+class RemovableEffect
+  def initialize(event, viewport = nil, map = nil, filename = nil)
+
+    @sprites = {}
+    @update = 0
+
+    @event = event
+    @map = $game_map
+    @disposed = false
+
+    @sprites["t_left"] = IconSprite.new(0, 0, viewport)
+    @sprites["t_right"] = IconSprite.new(0, 0, viewport)
+    @sprites["b_left"] = IconSprite.new(0, 0, viewport)
+    @sprites["b_right"] = IconSprite.new(0, 0, viewport)
+
+    @sprites["t_left"].setBitmap("Graphics/Pictures/remove_ow_tl")
+    @sprites["t_right"].setBitmap("Graphics/Pictures/remove_ow_tr")
+    @sprites["b_left"].setBitmap("Graphics/Pictures/remove_ow_bl")
+    @sprites["b_right"].setBitmap("Graphics/Pictures/remove_ow_br")
+
+    @sprites["t_left"].z = 500
+    @sprites["t_right"].z = 500
+    @sprites["b_left"].z = 500
+    @sprites["b_right"].z = 500
+
+    @sprites["t_left"].x = @event.x * 16
+    @sprites["t_left"].y = @event.y * 16
+    @sprites["t_right"].x = @event.width * 16
+    @sprites["t_right"].y = @event.y * 16
+    @sprites["b_left"].x = @event.x * 16
+    @sprites["b_left"].y = @event.height * 16
+    @sprites["b_right"].x = @event.width * 16
+    @sprites["b_right"].y = @event.height * 16
+
+  end
+
+  def disposed?
+    return @disposed
+  end
+
+  def dispose
+    @sprites["t_left"].dispose
+    @sprites["t_right"].dispose
+    @sprites["b_left"].dispose
+    @sprites["b_right"].dispose
+    @map = nil
+    @event = nil
+    @disposed = true
+  end
+
+  def update
+    @update += 1
+    if @update == 60
+      @sprites["t_left"].x -= 2
+      @sprites["t_left"].y -= 2
+      @sprites["t_right"].x += 2
+      @sprites["t_right"].y -= 2
+      @sprites["b_left"].x -= 2
+      @sprites["b_left"].y += 2
+      @sprites["b_right"].x += 2
+      @sprites["b_right"].y += 2
+    elsif @update >= 120
+      @sprites["t_left"].x += 2
+      @sprites["t_left"].y += 2
+      @sprites["t_right"].x -= 2
+      @sprites["t_right"].y += 2
+      @sprites["b_left"].x += 2
+      @sprites["b_left"].y -= 2
+      @sprites["b_right"].x -= 2
+      @sprites["b_right"].y -= 2
+      @update = 0
+    end
+  end
+end
+
+EventHandlers.add(:on_new_spriteset_map, :add_removable_effect,
+  proc { |spriteset, viewport|
+    map = $game_map   # Map associated with the spriteset (not necessarily the current map)
+    map.events.each_key do |i|
+      if map.events[i].name[/removable_overworld$/i]
+        filename = $~[1].to_s
+        spriteset.addUserSprite(RemovableEffect.new(map.events[i], viewport, map, filename))
+      end
+    end
+  }
+)

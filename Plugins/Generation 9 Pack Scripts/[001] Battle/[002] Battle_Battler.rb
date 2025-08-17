@@ -287,7 +287,10 @@ class Battle::Battler
   end
   
   #-----------------------------------------------------------------------------
-  # Aliased for new continuous ability checks.
+  # - Edited to trigger Commander ability
+  # - Edited to reset protean trigger
+  # - Edited to reset Judgement type
+  # - Edited to trigger skip Trace ability an Pokémon that has Ability Shield
   #-----------------------------------------------------------------------------
   def pbContinualAbilityChecks(onSwitchIn = false)
     @battle.pbEndPrimordialWeather
@@ -447,17 +450,17 @@ class Battle::Battler
   
   
   #-----------------------------------------------------------------------------
-  # -Aliased so the Charge effect ends only after using an Electric-type move.
+  # -Aliased so the Charge effect ends only after using an Electric-type damaging move.
   # -Moves that cause electrocution heals Drowsiness.
   # -Moves that cause thawing heals Frostbite.
   #-----------------------------------------------------------------------------
   alias paldea_pbEffectsAfterMove pbEffectsAfterMove
   def pbEffectsAfterMove(user, targets, move, numHits)
     if Settings::MECHANICS_GENERATION >= 9
-      user.effects[PBEffects::Charge] = 0 if move.calcType == :ELECTRIC
+      user.effects[PBEffects::Charge] = 0 if move.damagingMove? && move.calcType == :ELECTRIC
     end
     if move.damagingMove?
-      if user.status == :DROWSY && move.electrocuteUser?
+      if move.electrocuteUser? && user.status == :DROWSY
         user.pbCureStatus(false)
         @battle.pbDisplay(_INTL("{1} was shocked wide awake!", user.pbThis))
       end
@@ -468,6 +471,7 @@ class Battle::Battler
       targets.each do |b|
         next if b.damageState.unaffected || b.damageState.substitute
         b.pbCureStatus if b.status == :DROWSY && move.electrocuteUser?
+        b.pbCureStatus if b.status == :SLEEP && Settings::ELECTROCUTE_MOVES_CURE_SLEEP && move.electrocuteUser?
         b.pbCureStatus if b.status == :FROSTBITE && move.thawsUser?  
       end
     end

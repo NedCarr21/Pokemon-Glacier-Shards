@@ -534,6 +534,14 @@ def pbWait(duration)
   end
 end
 
+def pbRealWait(numFrames)
+  numFrames.times do
+    Graphics.update
+    Input.update
+    pbUpdateSceneMap
+  end
+end
+
 #===============================================================================
 # Player/event movement in the field
 #===============================================================================
@@ -735,7 +743,7 @@ def pbReceiveItem(item, quantity = 1)
     end
   else
     if $bag.add(item, quantity)
-      pbNotify(_INTL("Item got!"), _INTL("{1} {2}", quantity, (quantity > 1 ? GameData::Item.try_get(item).name_plural : GameData::Item.try_get(item).name)), 1, [GameData::Item.icon_filename(item),256,20])
+      pbNotify(_INTL("Item got!"), _INTL("{1} {2}", quantity, (quantity > 1 ? GameData::Item.try_get(item).name_plural : GameData::Item.try_get(item).name)), 1, [GameData::Item.icon_filename(item),266,28])
       return true
     end
   end

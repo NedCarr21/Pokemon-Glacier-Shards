@@ -3,11 +3,15 @@
 class PokeNav_Scene
 
   def pbUpdate
-    pbUpdateSpriteHash(@sprites)
-    @sprites["bg"].ox = 0 if @sprites["bg"].ox == -42 && @sprites["bg"].visible == true
-    @sprites["bg"].oy = 0 if @sprites["bg"].ox == -50 && @sprites["bg"].visible == true
-    @sprites["bg"].ox -= 1 if @sprites["bg"].visible == true
-    @sprites["bg"].oy -= 1 if @sprites["bg"].visible == true
+    @sprites["bg"].setBitmap("Graphics/UI/Backgrounds/" + Settings::MENU_BGSTYLES[$PokemonSystem.get_bg_style])
+    @update += 1
+    if (@update >= 3)
+      @update -= 3
+      @sprites["bg"].ox = 0 if @sprites["bg"].ox == -42 && @sprites["bg"].visible == true
+      @sprites["bg"].oy = 0 if @sprites["bg"].ox == -48 && @sprites["bg"].visible == true
+      @sprites["bg"].ox -= 1 if @sprites["bg"].visible == true
+      @sprites["bg"].oy -= 1 if @sprites["bg"].visible == true
+    end
 
     @sprites["sel"].x = (128 * (@nav_selected - 1) + 72)
     @sprites["sel"].x -= 384 if @nav_selected > 3
@@ -30,11 +34,13 @@ class PokeNav_Scene
       else
         @sprites["weather"].setBitmap("Graphics/Pictures/PokeNav/weather_sun")
     end
+    pbUpdateSpriteHash(@sprites)
   end
 
   def pbStartScene()
     @viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
     @viewport.z = 99999
+    @update = 0
 
     @sprites = {}
     addBackgroundPlane(@sprites, "bg", "Summary/bg", @viewport)
@@ -49,42 +55,42 @@ class PokeNav_Scene
 
     @sprites["dex"] = IconSprite.new(0, 0, @viewport)
     @sprites["dex"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
-    @sprites["dex"].setBitmap("Graphics/Pictures/PokeNav/dex_icon") if $player.has_poke_nav_pokedex
+    @sprites["dex"].setBitmap("Graphics/Pictures/PokeNav/dex_icon") if $player.pokenav[:pokedex]
     @sprites["dex"].x = 72
     @sprites["dex"].y = 96
     @sprites["dex"].z = 1
 
     @sprites["map"] = IconSprite.new(0, 0, @viewport)
     @sprites["map"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
-    @sprites["map"].setBitmap("Graphics/Pictures/PokeNav/map_icon") if $player.has_poke_nav_map
+    @sprites["map"].setBitmap("Graphics/Pictures/PokeNav/map_icon") if $player.pokenav[:townmap]
     @sprites["map"].x = 200
     @sprites["map"].y = 96
     @sprites["map"].z = 1
 
     @sprites["nav"] = IconSprite.new(0, 0, @viewport)
     @sprites["nav"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
-    @sprites["nav"].setBitmap("Graphics/Pictures/PokeNav/nav_icon") if $player.has_poke_nav_dex_nav
+    @sprites["nav"].setBitmap("Graphics/Pictures/PokeNav/nav_icon") if $player.pokenav[:dexnav]
     @sprites["nav"].x = 328
     @sprites["nav"].y = 96
     @sprites["nav"].z = 1
 
     @sprites["quests"] = IconSprite.new(0, 0, @viewport)
     @sprites["quests"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
-    @sprites["quests"].setBitmap("Graphics/Pictures/PokeNav/quest_icon") if $player.has_poke_nav_quests
+    @sprites["quests"].setBitmap("Graphics/Pictures/PokeNav/quest_icon") if $player.pokenav[:quests]
     @sprites["quests"].x = 72
     @sprites["quests"].y = 204
     @sprites["quests"].z = 1
 
     @sprites["online"] = IconSprite.new(0, 0, @viewport)
     @sprites["online"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
-    @sprites["online"].setBitmap("Graphics/Pictures/PokeNav/online_icon") if ($player.tutornet || $player.has_poke_nav_tutor)
+    @sprites["online"].setBitmap("Graphics/Pictures/PokeNav/online_icon") if ($player.tutornet || $player.pokenav[:tutornet])
     @sprites["online"].x = 200
     @sprites["online"].y = 204
     @sprites["online"].z = 1
 
     @sprites["wonder"] = IconSprite.new(0, 0, @viewport)
     @sprites["wonder"].setBitmap("Graphics/Pictures/PokeNav/nil_icon")
-    @sprites["wonder"].setBitmap("Graphics/Pictures/PokeNav/wonder_icon") if $player.has_poke_nav_wonder
+    @sprites["wonder"].setBitmap("Graphics/Pictures/PokeNav/wonder_icon") if $player.pokenav[:wondertrade]
     @sprites["wonder"].x = 328
     @sprites["wonder"].y = 204
     @sprites["wonder"].z = 1
@@ -112,7 +118,7 @@ class PokeNav_Scene
       if(Input.trigger?(Input::ACTION) || Input.trigger?(Input::USE))
         pbPlayDecisionSE
           # Pokedex ----------------------------------------------------------------------
-          if(@nav_selected == 1 && $player.has_poke_nav_pokedex)
+          if(@nav_selected == 1 && $player.pokenav[:pokedex])
             pbFadeOutIn {
               scene = PokemonPokedexMenu_Scene.new
               screen = PokemonPokedexMenuScreen.new(scene)
@@ -120,7 +126,7 @@ class PokeNav_Scene
             }
           end
           # Town Map ---------------------------------------------------------------------
-          if(@nav_selected == 2 && $player.has_poke_nav_map)
+          if(@nav_selected == 2 && $player.pokenav[:townmap])
             pbFadeOutIn {
               scene = PokemonRegionMap_Scene.new(-1, false)
               screen = PokemonRegionMapScreen.new(scene)
@@ -130,7 +136,7 @@ class PokeNav_Scene
             }
           end
           # Dex Nav ----------------------------------------------------------------------
-          if(@nav_selected == 3 && $player.has_poke_nav_dex_nav)
+          if(@nav_selected == 3 && $player.pokenav[:dexnav])
             place = $game_map.map_id
             range = []
             pbMessage(_INTL("Searching for nearby Pokémon..."))
@@ -165,15 +171,11 @@ class PokeNav_Scene
             end
           end
           # Quests -----------------------------------------------------------------------
-          if(@nav_selected == 4 && $player.has_poke_nav_quests)
-            pbFadeOutIn {
-              scene = QuestList_Scene.new
-              screen = QuestList_Screen.new(scene)
-              screen.pbStartScreen
-            }
+          if(@nav_selected == 4 && $player.pokenav[:quests])
+            show_adventure_log
           end
           # Tutor.Net --------------------------------------------------------------------
-          if(@nav_selected == 5 && $player.has_poke_nav_tutor)
+          if(@nav_selected == 5 && $player.pokenav[:tutornet])
             pbFadeOutIn {
               scene = PokemonTutorNet_Scene.new
               screen = PokemonTutorNetScreen.new(scene)
@@ -181,7 +183,7 @@ class PokeNav_Scene
             }
           end
           # Wonder Trade -----------------------------------------------------------------
-          if(@nav_selected == 6 && $player.has_poke_nav_wonder)
+          if(@nav_selected == 6 && $player.pokenav[:wondertrade])
             pbWonderTrade
           end
       elsif Input.trigger?(Input::BACK)
@@ -221,9 +223,7 @@ class PokeNav_Scene
       [pbGetTimeNow.hour.to_s, 72, 318, 2, base, shadow, true],
       [pbGetTimeNow.min.to_s, 100, 318, 2, base, shadow, true]
     ]
-
       pbDrawTextPositions(overlay, textpos)
-
   end
 
 end

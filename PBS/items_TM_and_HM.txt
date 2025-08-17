@@ -18,7 +18,6 @@ FieldUse = TM
 Flags = Fling_80
 Move = CHARM
 Description =
-
 #-------------------------------
 [TM034]
 Name = TM034
@@ -29,7 +28,6 @@ FieldUse = TM
 Flags = Fling_80
 Move = ICYWIND
 Description =
-
 #-------------------------------
 [TM047]
 Name = TM047

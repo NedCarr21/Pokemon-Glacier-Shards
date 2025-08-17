@@ -120,6 +120,7 @@ Battle::AbilityEffects::DamageCalcFromUser.add(:GORILLATACTICS,
 Battle::AbilityEffects::OnSwitchIn.add(:IMPOSTER,
   proc { |ability, battler, battle, switch_in|
     next if !switch_in || battler.effects[PBEffects::Transform]
+    next if battler.tera? && battler.tera_type == :STELLAR
     choice = battler.pbDirectOpposing
     next if choice.fainted?
     next if choice.effects[PBEffects::Transform] ||
@@ -134,10 +135,13 @@ Battle::AbilityEffects::OnSwitchIn.add(:IMPOSTER,
     next if battler.dynamax? && !choice.dynamax_able?
     battle.pbShowAbilitySplash(battler, true)
     battle.pbHideAbilitySplash(battler)
+    battle.scene.pbAnimateSubstitute(battler, :hide)
     battler.effects[PBEffects::TransformPokemon] = choice.pokemon
     battle.pbAnimation(:TRANSFORM, battler, choice)
+    battler.battlerSprite.prepare_mosaic = true if defined?(battler.battlerSprite)
     battle.scene.pbChangePokemon(battler, choice.pokemon)
     battler.pbTransform(choice)
+    battle.scene.pbAnimateSubstitute(battler, :show)
   }
 )
 
@@ -154,12 +158,12 @@ Battle::AbilityEffects::OnSwitchIn.add(:FOREWARN,
     battle.allOtherSideBattlers(battler.index).each do |b|
       b.eachMoveWithIndex do |m, i|
         m = b.baseMoves[i] if b.baseMoves[i]
-        power = m.baseDamage
-        power = 160 if ["OHKO", "OHKOIce", "OHKOHitsUndergroundTarget"].include?(m.function)
-        power = 150 if ["PowerHigherWithUserHP"].include?(m.function)
+        power = m.power
+        power = 160 if ["OHKO", "OHKOIce", "OHKOHitsUndergroundTarget"].include?(m.function_code)
+        power = 150 if ["PowerHigherWithUserHP"].include?(m.function_code)
         power = 120 if ["CounterPhysicalDamage",
                         "CounterSpecialDamage",
-                        "CounterDamagePlusHalf"].include?(m.function)
+                        "CounterDamagePlusHalf"].include?(m.function_code)
         power = 80 if ["FixedDamage20",
                        "FixedDamage40",
                        "FixedDamageUserLevel",
@@ -172,8 +176,8 @@ Battle::AbilityEffects::OnSwitchIn.add(:FOREWARN,
                        "TypeAndPowerDependOnUserBerry",
                        "PowerHigherWithLessPP",
                        "PowerLowerWithUserHP",
-                       "PowerHigherWithTargetWeight"].include?(m.function)
-        power = 80 if Settings::MECHANICS_GENERATION <= 5 && m.function == "TypeDependsOnUserIVs"
+                       "PowerHigherWithTargetWeight"].include?(m.function_code)
+        power = 80 if Settings::MECHANICS_GENERATION <= 5 && m.function_code == "TypeDependsOnUserIVs"
         next if power < highestPower
         forewarnMoves = [] if power > highestPower
         forewarnMoves.push(m.name)
@@ -323,18 +327,18 @@ class Battle::Move::UserTargetAverageHP < Battle::Move
   def pbEffectAgainstTarget(user,target)
     newHP = (user.real_hp + target.real_hp) / 2
     if user.real_hp > newHP
-	  user.stopBoostedHPScaling = true
-	  user.pbReduceHP(user.real_hp - newHP, false, false)
+      user.stopBoostedHPScaling = true
+      user.pbReduceHP(user.real_hp - newHP, false, false)
     elsif user.real_hp < newHP
-	  user.stopBoostedHPScaling = true
-	  user.pbRecoverHP(newHP - user.real_hp, false)
+      user.stopBoostedHPScaling = true
+      user.pbRecoverHP(newHP - user.real_hp, false)
     end
     if target.real_hp > newHP
-	  target.stopBoostedHPScaling = true
-	  target.pbReduceHP(target.real_hp - newHP, false, false)
+      target.stopBoostedHPScaling = true
+      target.pbReduceHP(target.real_hp - newHP, false, false)
     elsif target.real_hp < newHP
-	  target.stopBoostedHPScaling = true
-	  target.pbRecoverHP(newHP - target.real_hp, false)
+      target.stopBoostedHPScaling = true
+      target.pbRecoverHP(newHP - target.real_hp, false)
     end
     @battle.pbDisplay(_INTL("The battlers shared their pain!"))
     user.pbItemHPHealCheck
@@ -472,8 +476,10 @@ end
 #-------------------------------------------------------------------------------
 class Battle::Move::LowerPPOfTargetLastMoveBy4 < Battle::Move
   def pbFailsAgainstTarget?(user, target, show_message)
-    return true if target.pokemon.immunities.include?(:PPLOSS)
-    return true if !target.lastRegularMoveUsed
+    if !target.lastRegularMoveUsed || target.pokemon.immunities.include?(:PPLOSS)
+      @battle.pbDisplay(_INTL("But it failed!")) if show_message
+      return true
+    end
     if target.powerMoveIndex >= 0
       last_move = target.moves[target.powerMoveIndex]
     else
@@ -520,8 +526,8 @@ end
 #-------------------------------------------------------------------------------
 class Battle::Move::LowerPPOfTargetLastMoveBy3 < Battle::Move
   def pbAdditionalEffect(user, target)
-    return if target.pokemon.immunities.include?(:PPLOSS)
     return if target.fainted? || target.damageState.substitute
+    return if target.pokemon.immunities.include?(:PPLOSS)
     return if !target.lastRegularMoveUsed
     showMsg = false
     if target.powerMoveIndex >= 0
@@ -557,7 +563,7 @@ end
 class Battle::Move::DisableTargetSoundMoves < Battle::Move
   alias dx_pbAdditionalEffect pbAdditionalEffect
   def pbAdditionalEffect(user, target)
-    return if target.pokemon.immunities.include?(:DISABLE)
+    return if !target.fainted? && target.pokemon.immunities.include?(:DISABLE)
     dx_pbAdditionalEffect(user, target)
   end
 end
@@ -571,9 +577,9 @@ end
 # Saves data for Transform target prior to transforming.
 #-------------------------------------------------------------------------------
 class Battle::Move::TransformUserIntoTarget < Battle::Move
-  alias tera_pbMoveFailed? pbMoveFailed?
+  alias dx_pbMoveFailed? pbMoveFailed?
   def pbMoveFailed?(user, targets)
-    if user.tera_form?
+    if user.tera_form? || (user.tera? && user.tera_type == :STELLAR)
       @battle.pbDisplay(_INTL("But it failed!"))
       return true
     end
@@ -581,7 +587,7 @@ class Battle::Move::TransformUserIntoTarget < Battle::Move
       @battle.pbDisplay(_INTL("But it failed!"))
       return true
     end
-    return tera_pbMoveFailed?(user, targets)
+    return dx_pbMoveFailed?(user, targets)
   end
 
   alias dx_pbFailsAgainstTarget? pbFailsAgainstTarget?
@@ -601,10 +607,18 @@ class Battle::Move::TransformUserIntoTarget < Battle::Move
     return dx_pbFailsAgainstTarget?(user, target, show_message)
   end
   
+  alias dx_pbEffectAgainstTarget pbEffectAgainstTarget
+  def pbEffectAgainstTarget(user, target)
+    @battle.scene.pbAnimateSubstitute(user, :hide)
+    dx_pbEffectAgainstTarget(user, target)
+  end
+  
   def pbShowAnimation(id, user, targets, hitNum = 0, showAnimation = true)
     super
     user.effects[PBEffects::TransformPokemon] = targets[0].pokemon
+    user.battlerSprite.prepare_mosaic = true if defined?(user.battlerSprite)
     @battle.scene.pbChangePokemon(user, targets[0].pokemon)
+    @battle.scene.pbAnimateSubstitute(user, :show)
   end
 end
 
@@ -905,6 +919,9 @@ class Battle::Move::UserConsumeTargetBerry < Battle::Move
     itemName = target.itemName
     user.setBelched
     target.pbRemoveItem
+    if defined?(target.stolenItemData) && target.initialItem == item
+      @battle.initialItems[target.index & 1][target.pokemonIndex] = nil
+    end
     @battle.pbDisplay(_INTL("{1} stole and ate its target's {2}!", user.pbThis, itemName))
     user.pbHeldItemTriggerCheck(item.id, false)
     user.pbSymbiosis
@@ -969,14 +986,13 @@ class Battle::Move::TwoTurnMove < Battle::Move
     @chargingTurn = false
     @damagingTurn = true
     if !user.effects[PBEffects::TwoTurnAttack]
-      if user.isRaidBoss? &&
-         ["TwoTurnAttackInvulnerableInSky",
-          "TwoTurnAttackInvulnerableUnderground",
-          "TwoTurnAttackInvulnerableUnderwater",
-          "TwoTurnAttackInvulnerableInSkyParalyzeTarget",
-          "TwoTurnAttackInvulnerableRemoveProtections",
-          "TwoTurnAttackInvulnerableInSkyTargetCannotAct"].include?(@function)
-        @chargingTurn = true
+      if user.isRaidBoss? && [
+         "TwoTurnAttackInvulnerableInSky",
+         "TwoTurnAttackInvulnerableUnderground",
+         "TwoTurnAttackInvulnerableUnderwater",
+         "TwoTurnAttackInvulnerableInSkyParalyzeTarget",
+         "TwoTurnAttackInvulnerableRemoveProtections",
+         "TwoTurnAttackInvulnerableInSkyTargetCannotAct"].include?(@function_code)
         @damagingTurn = true
       else
         @powerHerb = user.hasActiveItem?(:POWERHERB)
@@ -991,12 +1007,12 @@ end
 #===============================================================================
 # Sky Drop
 #===============================================================================
-# Fails to work on Dynamax targets or Raid bosses.
+# Fails to work on Dynamax targets or if a Raid Boss is on the field.
 #-------------------------------------------------------------------------------
 class Battle::Move::TwoTurnAttackInvulnerableInSkyTargetCannotAct < Battle::Move::TwoTurnMove
   alias dx_pbFailsAgainstTarget? pbFailsAgainstTarget?
   def pbFailsAgainstTarget?(user, target, show_message)
-    if target.dynamax? || target.isRaidBoss?
+    if target.dynamax? || @battle.raidBattle?
       @battle.pbDisplay(_INTL("But it failed!")) if show_message
       return true
     end

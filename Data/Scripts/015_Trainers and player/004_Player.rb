@@ -20,20 +20,6 @@ class Player < Trainer
   attr_reader   :pokedex
   # @return [Boolean] whether the Pokédex has been obtained
   attr_accessor :has_pokedex
-  # @return [Boolean] whether the PokéNav has been obtained
-  attr_accessor :has_poke_nav
-  # @return [Boolean] whether the PokéNav has been obtained and the Pokédex attachment has been obtained.
-  attr_accessor :has_poke_nav_pokedex
-  # @return [Boolean] whether the PokéNav has been obtained and the Dex Nav attachment has been obtained.
-  attr_accessor :has_poke_nav_dex_nav
-  # @return [Boolean] whether the PokéNav has been obtained and the Map attachment has been obtained.
-  attr_accessor :has_poke_nav_map
-  # @return [Boolean] whether the PokéNav has been obtained and the Online attachment has been obtained.
-  attr_accessor :has_poke_nav_tutor
-  # @return [Boolean] whether the PokéNav has been obtained and the Quests attachment has been obtained.
-  attr_accessor :has_poke_nav_quests
-  # @return [Boolean] whether the PokéNav has been obtained and the Wonder attachment has been obtained.
-  attr_accessor :has_poke_nav_wonder
   # @return [Boolean] whether the Pokégear has been obtained
   attr_accessor :has_pokegear
   # @return [Boolean] whether the player has running shoes (i.e. can run)
@@ -49,6 +35,16 @@ class Player < Trainer
   # @return [Array<Array>] downloaded Mystery Gift data
   attr_accessor :mystery_gifts
 
+  attr_writer :minigames
+
+  attr_writer :quest_data
+
+  attr_writer :pokenav
+
+  attr_writer :qb_quests
+
+  attr_writer :guild_data
+
   def initialize(name, trainer_type)
     super
     @character_ID          = 0
@@ -60,7 +56,6 @@ class Player < Trainer
     @soot                  = 0
     @pokedex               = Pokedex.new
     @has_pokedex           = false
-    @has_poke_nav          = false
     @has_pokegear          = false
     @has_running_shoes     = false
     @has_box_link          = false
@@ -68,9 +63,69 @@ class Player < Trainer
     @has_exp_all           = false
     @mystery_gift_unlocked = false
     @mystery_gifts         = []
+    @minigames             = {}
+    @quest_data            = {}
+    @qb_quests             = []
+    @guild_data            = {:tier => "none", :level => 1, :xp => 0}
+    @pokenav               = {:pokedex => false, :townmap => false, :dexnav => false, :quests => false, :tutornet => false, :wondertrade => false}
   end
 
   #=============================================================================
+
+  def pokenav_unlock(sym)
+    message = "error..."
+    case sym
+    when :pokedex
+      message = "The Pokédex App was loaded into the Poké Nav..."
+    when :townmap
+      message = "The Town Map App was loaded into the Poké Nav..."
+    when :dexnav
+      message = "The Dex Nav App was loaded into the Poké Nav..."
+    when :quests
+      message = "Your Adventure Log was loaded into the Poké Nav..."
+    when :tutornet
+      message = "The Move Tutor App was loaded into the Poké Nav..."
+    when :wondertrade
+      message = "The Wonder Trading System was loaded into the Poké Nav..."
+    end
+    pbMessage(_INTL(message))
+    (0..2).each do
+      pbSEPlay("Battle ball shake", 70, 140)
+      pbWait(0.5)
+    end
+    @pokenav[sym] = true
+  end
+
+  def pokenav?
+    return !$game_switches[91]
+  end
+
+  def pokenav
+    return @pokenav
+  end
+
+  def qb_quests
+    return @qb_quests
+  end
+
+  def reset_all_quests
+    (0..2).each do |n|
+      $player.qb_quests[n] = generateQuest
+    end
+  end
+
+  def guild_data
+    return @guild_data
+  end
+
+  def set_guild_data(sym, val)
+    puts "Set Guild Data: #{sym} to #{val}"
+    @guild_data[sym] = val
+  end
+
+  def minigames
+    return @minigames
+  end
 
   def character_ID=(value)
     return if @character_ID == value

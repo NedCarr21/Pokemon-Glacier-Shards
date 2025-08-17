@@ -47,6 +47,7 @@ class Battle::Battler
       return false
     end
     # Use the move
+
     PBDebug.log("[Use move] #{pbThis} (#{@index}) used #{choice[2].name}")
     PBDebug.logonerr { pbUseMove(choice, choice[2] == @battle.struggle) }
     @battle.pbJudge
@@ -109,7 +110,11 @@ class Battle::Battler
     @effects[PBEffects::Charge]      = 0 if @effects[PBEffects::Charge] == 1
     @effects[PBEffects::GemConsumed] = nil
     @effects[PBEffects::ShellTrap]   = false
-    @battle.allBattlers.each { |b| b.pbContinualAbilityChecks }   # Trace, end primordial weathers
+
+    @battle.allBattlers.each do |b|
+      b.pbContinualAbilityChecks # Trace, end primordial weathers
+      b.pokemon.modify_achievement(:moves_used, 1)  if !@lastMoveFailed
+    end
   end
 
   def pbConfusionDamage(msg)

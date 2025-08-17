@@ -1,5 +1,0 @@
-Name       = Voltseon's Multiplayer Solution
-Version    = 1.0
-Requires   = rainefallUtils
-Essentials = 21.1, 21
-Credits    = Voltseon

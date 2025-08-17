@@ -46,6 +46,8 @@ class Game_Temp
   attr_accessor :memorized_bgm_position   # set when trainer intro BGM is played
   attr_accessor :darkness_sprite          # DarknessSprite or nil
   attr_accessor :mart_prices
+  #glacier shards
+  attr_accessor :wild_battle_candy_drops
 
   #-----------------------------------------------------------------------------
   # * Object Initialization

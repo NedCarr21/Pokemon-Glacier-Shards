@@ -778,6 +778,14 @@ class Battle::Move::SwitchOutUserStartHailWeather < Battle::Move::StartHailWeath
     @battle.pbDisplayBrief(_INTL("{1} is preparing to tell a chillingly bad joke!", user.pbThis))
     super
   end
+
+  def pbMoveFailed?(user, targets)
+    # The user will still switch out even if there is already snow on the field when the move is used. 
+    # If there are no other teammates to switch to, it will only change the weather to snow.
+    cannot_switch = !@battle.pbCanChooseNonActive?(user.index)
+    return super if cannot_switch
+    return false
+  end
   
   def pbEndOfMoveUsageEffect(user, targets, numHits, switchedBattlers)
     return if user.fainted? || numHits == 0

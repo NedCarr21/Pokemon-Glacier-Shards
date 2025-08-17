@@ -8,16 +8,19 @@ class Battle::Scene::FightMenu < Battle::Scene::MenuBase
     super(viewport)
     self.x = 0
     self.y = Graphics.height - 96
-    @battler   = nil
+    @battler = nil
     resetMenuToggles
+    @customUI = PluginManager.installed?("Customizable Battle UI")
+    folder = @customUI ? "#{$game_variables[53]}/" : ""
+    path = "Graphics/UI/Battle/" + folder
     if USE_GRAPHICS
-      @buttonBitmap  = AnimatedBitmap.new(_INTL("Graphics/UI/Battle/cursor_fight"))
+      @buttonBitmap  = AnimatedBitmap.new(_INTL(path + "cursor_fight"))
       @typeBitmap    = AnimatedBitmap.new(_INTL("Graphics/UI/types"))
-      @shiftBitmap   = AnimatedBitmap.new(_INTL("Graphics/UI/Battle/cursor_shift"))
+      @shiftBitmap   = AnimatedBitmap.new(_INTL(path + "cursor_shift"))
       @actionButtonBitmap = {}
-      addSpecialActionButtons
+      addSpecialActionButtons(path)
       background = IconSprite.new(0, Graphics.height - 96, viewport)
-      background.setBitmap("Graphics/UI/Battle/overlay_fight")
+      background.setBitmap(path + "overlay_fight")
       addSprite("background", background)
       @buttons = Array.new(Pokemon::MAX_MOVES) do |i|
         button = Sprite.new(viewport)
@@ -28,6 +31,10 @@ class Battle::Scene::FightMenu < Battle::Scene::MenuBase
         button.y += (((i / 2) == 0) ? 0 : BUTTON_HEIGHT - 4)
         button.src_rect.width  = @buttonBitmap.width / 2
         button.src_rect.height = BUTTON_HEIGHT
+        if @customUI
+          button.x += (i.even? ? -2 : 2)
+          button.y -= 4
+        end
         addSprite("button_#{i}", button)
         next button
       end
@@ -58,8 +65,8 @@ class Battle::Scene::FightMenu < Battle::Scene::MenuBase
       @msgBox = Window_AdvancedTextPokemon.newWithSize(
         "", self.x + 320, self.y, Graphics.width - 320, Graphics.height - self.y, viewport
       )
-      @msgBox.baseColor   = TEXT_BASE_COLOR
-      @msgBox.shadowColor = TEXT_SHADOW_COLOR
+      @msgBox.baseColor   = @customUI ? @base_color   : TEXT_BASE_COLOR
+      @msgBox.shadowColor = @customUI ? @shadow_color : TEXT_SHADOW_COLOR
       pbSetNarrowFont(@msgBox.contents)
       addSprite("msgBox", @msgBox)
       @cmdWindow = Window_CommandPokemon.newWithSize(
@@ -123,7 +130,9 @@ class Battle::Scene::FightMenu < Battle::Scene::MenuBase
       if GET_MOVE_TEXT_COLOR_FROM_MOVE_BUTTON && moves[i].display_type(@battler)
         moveNameBase = button.bitmap.get_pixel(10, button.src_rect.y + 34)
       end
-      textPos.push([moves[i].short_name, x, y, :center, moveNameBase, TEXT_SHADOW_COLOR])
+      base   = @customUI ? @base_color   : moveNameBase
+      shadow = @customUI ? @shadow_color : TEXT_SHADOW_COLOR
+      textPos.push([moves[i].short_name, x, y, :center, base, shadow])
     end
     pbDrawTextPositions(@overlay.bitmap, textPos)
   end
@@ -138,11 +147,64 @@ class Battle::Scene::FightMenu < Battle::Scene::MenuBase
 end
 
 #===============================================================================
+# Other menus.
+#===============================================================================
+# Adds new options to the Command and Target menus.
+#-------------------------------------------------------------------------------
+class Battle::Scene::CommandMenu < Battle::Scene::MenuBase
+  MODES += [
+    [0, 2, 1, 10], # 5 = Fight, Bag, Pokemon, Cheer
+    [0, 11, 1, 3], # 6 = Fight, Launch, Pokemon, Run
+    [0, 11, 1, 9], # 7 = Fight, Launch, Pokemon, Cancel
+    [0, 11, 1, 4], # 8 = Fight, Launch, Pokemon, Call
+  ]
+end
+
+class Battle::Scene::TargetMenu < Battle::Scene::MenuBase
+  MODES += [
+    [0, 2, 1, 10], # 5 = Fight, Bag, Pokemon, Cheer
+    [0, 11, 1, 3], # 6 = Fight, Launch, Pokemon, Run
+    [0, 11, 1, 9], # 7 = Fight, Launch, Pokemon, Cancel
+    [0, 11, 1, 4], # 8 = Fight, Launch, Pokemon, Call
+  ]
+end
+
+#===============================================================================
 # Battle::Scene rewrites.
 #===============================================================================
-# Rewrites code related to the functionality of the fight menu.
-#-------------------------------------------------------------------------------
 class Battle::Scene
+  #-----------------------------------------------------------------------------
+  # Edited for command menu display.
+  #-----------------------------------------------------------------------------
+  def pbCommandMenu(idxBattler, firstAction)
+    bagCommand = _INTL("Bag")
+    shadowTrainer = (GameData::Type.exists?(:SHADOW) && @battle.trainerBattle?)
+    runCommand = (shadowTrainer) ? _INTL("Call") : (firstAction) ? _INTL("Run") : _INTL("Cancel")
+    hasCheer = defined?(@battle.cheerMode) && @battle.cheerMode
+    if hasCheer
+      runCommand = _INTL("Cheer")
+      mode = 5
+    elsif @battle.launcherBattle?
+      bagCommand = _INTL("Launch")
+      mode = (shadowTrainer) ? 8 : (firstAction) ? 6 : 7
+    else
+      mode = (shadowTrainer) ? 2 : (firstAction) ? 0 : 1
+    end
+    cmds = [
+      _INTL("What will\n{1} do?", @battle.battlers[idxBattler].name),
+      _INTL("Fight"), bagCommand,
+      _INTL("Pokémon"), runCommand
+    ]
+    ret = pbCommandMenuEx(idxBattler, cmds, mode)
+    ret = 4 if ret == 3 && (shadowTrainer || hasCheer)
+    ret = -1 if ret == 3 && (!firstAction && !hasCheer)
+    return 3 if ret > 3 && ($DEBUG && Input.press?(Input::CTRL))
+    return ret
+  end
+
+  #-----------------------------------------------------------------------------
+  # Edited for fight menu functionality.
+  #-----------------------------------------------------------------------------
   def pbFightMenu(idxBattler, specialAction = nil)
     battler = @battle.battlers[idxBattler]
     cw = @sprites["fightWindow"]
@@ -276,8 +338,13 @@ class Battle
       return false
     end
     if battler.effects[PBEffects::Encore] > 0
-      idxEncoredMove = battler.pbEncoredMoveIndex
-      return false if idxEncoredMove >= 0 && idxMove != idxEncoredMove
+      if !move.powerMove? && move.id != battler.effects[PBEffects::EncoreMove]
+        if showMessages
+          encoreMove = GameData::Move.get(battler.effects[PBEffects::EncoreMove]).name
+          pbDisplayPaused(_INTL("{1} can only use {2} due to its Encore!", battler.name, encoreMove))
+        end
+        return false
+      end
     end
     return battler.pbCanChooseMove?(move, true, showMessages, sleepTalk)
   end
@@ -383,6 +450,11 @@ class Battle::AI
       PBDebug.log("")
       return
     end
+    PBDebug.logonerr { ret = pbChooseToUseSpecialCommand }
+    if ret
+      PBDebug.log("")
+      return
+    end
     if @battle.pbAutoFightMenu(idxBattler)
       PBDebug.log("")
       return
@@ -425,7 +497,7 @@ class Battle::AI
       if @trainer.has_skill_flag?("PredictMoveFailure") && pbPredictMoveFailure
         PBDebug.log_ai("#{@user.name} is considering using #{orig_move.name}...")
         PBDebug.log_score_change(MOVE_FAIL_SCORE - MOVE_BASE_SCORE, "move will fail")
-        add_move_to_choices(choices, idxMove, MOVE_FAIL_SCORE, nil, orig_move)
+        add_move_to_choices(choices, idxMove, MOVE_FAIL_SCORE, -1, orig_move)
         next
       end
       target_data = @move.pbTarget(@user.battler)

@@ -286,12 +286,12 @@ Battle::AbilityEffects::OnOpposingStatGain.add(:OPPORTUNIST,
     showAnim = true
     battle.pbShowAbilitySplash(battler)
     statUps.each do |stat, increment|
-	  next if !battler.pbCanRaiseStatStage?(stat, battler)
+	    next if !battler.pbCanRaiseStatStage?(stat, battler)
       if battler.pbRaiseStatStage(stat, increment, battler, showAnim)
         showAnim = false
       end
     end
-    battle.pbDisplay(_INTL("{1}'s stats won't go any higher!", user.pbThis)) if showAnim
+    battle.pbDisplay(_INTL("{1}'s stats won't go any higher!", battler.pbThis)) if showAnim
     battle.pbHideAbilitySplash(battler)
     battler.pbItemOpposingStatGainCheck(statUps)
     # Mirror Herb can trigger off this ability.

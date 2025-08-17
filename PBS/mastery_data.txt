@@ -1,0 +1,95 @@
+#-------------------------------
+[_DEFAULT]
+Mastery1
+  Task = TypeDamageDealt,NORMAL,500
+  Reward = EXPCANDYS,5
+Mastery2
+  Task = BattleParticipation,25
+  Reward = POKEBALL,30
+Mastery3
+  Task = MoveDamageCategory,STATUS,40
+  Reward = EXPCANDYL,3
+Mastery4
+  Task = UseMoveType,NORMAL,200
+  Reward = ABILITYPATCH,1
+SpecialAbility = PLAIN
+#-------------------------------
+[SWINUB]
+Mastery1
+  Task = UseMoveType,ICE,40
+  Reward = EXPCANDYM,3
+Mastery2
+  Task = KnockoutsWithType,GROUND,25
+  Reward = EXPCANDYL,3
+Mastery3
+  Task = TypeDamageDealt,ICE,4000
+  Reward = TR017,1
+Mastery4
+  Task = SoloTypeWinInWeather,ICE,SUN,5
+  Reward = EXPCANDYXL,1
+SpecialAbility = PERMAFROST
+#-------------------------------
+[PILOSWINE]
+UseLine = SWINUB
+#-------------------------------
+[MAMOSWINE]
+UseLine = SWINUB
+#-------------------------------
+[PAWMI]
+Mastery1
+  Task = BattleParticipation,25
+  Reward = EXPCANDYS,5
+Mastery2
+  Task = KnockoutsWithType,ELECTRIC,25
+  Reward = EXPCANDYL,3
+Mastery3
+  Task = MoveDamageCategory,STATUS,50
+  Reward = TR050,1
+Mastery4
+  Task = SoloTypeWinInWeather,ELECTRIC,SUN,5
+  Reward = EXPCANDYXL,1
+SpecialAbility = NOGUARD
+#-------------------------------
+[PAWMO]
+  UseLine = PAWMI
+#-------------------------------
+[PAWMOT]
+  UseLine = PAWMI
+#-------------------------------
+[EEVEE]
+Mastery1
+  Task = TypeDamageDealt,NORMAL,800
+  Reward = EXPCANDYS,5
+Mastery2
+  Task = BattleParticipation,25
+  Reward = HEALBALL,5
+Mastery3
+  Task = MoveDamageCategory,STATUS,40
+  Reward = EXPCANDYL,3
+Mastery4
+  Task = UseMoveType,NORMAL,200
+  Reward = ABILITYPATCH,1
+SpecialAbility = NORMALIZE
+#-------------------------------
+[BULBASAUR]
+#-------------------------------
+[SPIRITOMB]
+Mastery1
+  Task = UseMoveType,GHOST,30
+  Reward = EXPCANDYM,3
+Mastery2
+  Task = KnockoutsWithType,DARK,5
+  Reward = EXPCANDYL,3
+Mastery3
+  Task = MoveDamageCategory,SPECIAL,40
+  Condition = IV,SPATK
+  Reward = TR017,1
+Mastery3
+  Task = UseMoveType,DARK,40
+  Reward = TR017,1
+Mastery4
+  Task = TypeDamageDealt,GHOST,10000
+  Reward = EXPCANDYXL,1
+SpecialAbility = SPIRITTRAIN
+
+[UNOWN_0]

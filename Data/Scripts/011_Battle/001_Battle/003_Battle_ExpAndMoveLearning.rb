@@ -37,6 +37,7 @@ class Battle
           next unless b.participants.include?(i) || expShare.include?(i)
           pbGainEVsOne(i, b)
           pbGainExpOne(i, b, numPartic, expShare, expAll, !pkmn.shadowPokemon?)
+          pkmn.modify_achievement(:pkmn_defeated, 1) if b.participants.include?(i)
         end
         # Gain EVs and Exp for all other Pokémon because of Exp All
         if expAll
@@ -57,6 +58,8 @@ class Battle
   end
 
   def pbGainEVsOne(idxParty, defeatedBattler)
+    StatCandyDropper.add_candy(idxParty, defeatedBattler)
+=begin
     pkmn = pbParty(0)[idxParty]   # The Pokémon gaining EVs from defeatedBattler
     evYield = defeatedBattler.pokemon.evYield
     # Num of effort points pkmn already has
@@ -87,6 +90,7 @@ class Battle
         evTotal += evGain
       end
     end
+=end
   end
 
   def pbGainExpOne(idxParty, defeatedBattler, numPartic, expShare, expAll, showMessages = true)
@@ -183,6 +187,7 @@ class Battle
       end
       return
     end
+    pkmn.modify_achievement(:exp_gained, expGained)
     $stats.total_exp_gained += expGained
     tempExp1 = pkmn.exp
     battler = pbFindBattler(idxParty)

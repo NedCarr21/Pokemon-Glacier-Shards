@@ -1,6 +1,10 @@
 #-------------------------------
 #---------GLACIER-SHARD---------
 #-------------------------------
+[PLAIN]
+Name = Plain
+Description = This ability does nothing.
+#-------------------------------
 [ICYGLARE]
 Name = Icy Glare
 Description = Lowers the foe's Speed stat.

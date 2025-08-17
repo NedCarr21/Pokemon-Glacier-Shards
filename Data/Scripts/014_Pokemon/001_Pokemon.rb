@@ -90,23 +90,65 @@ class Pokemon
   attr_accessor :dislikeditem
 
   # Max total IVs
-  IV_STAT_LIMIT = 31
+  IV_STAT_LIMIT = 61
   # Max total EVs
-  EV_LIMIT      = 510
+  EV_LIMIT      = 1020
   # Max EVs that a single stat can have
   EV_STAT_LIMIT = 252
   # Maximum length a Pokémon's nickname can be
-  MAX_NAME_SIZE = 10
+  MAX_NAME_SIZE = 12
   # Maximum number of moves a Pokémon can know at once
   MAX_MOVES     = 4
 
   LIKED_ITEMS = [
     :ORANBERRY, :SITRUSBERRY,
-    :AGUAVBERRY, :ENIGMABERRY, :FIGYBERRY, :IAPAPABERRY, :MAGOBERRY, :POMEGBERRY, :WIKIBERRY,
     :BERRYJUICE, :FRESHWATER, :SODAPOP, :LEMONADE, :MOOMOOMILK,
     :POTION, :SUPERPOTION, :HYPERPOTION,
-    :EXPCANDYXS, :EXPCANDYS, :EXPCANDYM, :EXPCANDYL, :EXPCANDYXL, :RARECANDY
+    :EXPCANDYS, :HP_CANDY_SMALL, :ATTACK_CANDY_SMALL, :DEFENSE_CANDY_SMALL, :SPECIAL_ATTACK_CANDY_SMALL, :SPECIAL_DEFENSE_CANDY_SMALL, :SPEED_CANDY_SMALL, :RARECANDY,
+    :LEFTOVERS
   ]
+
+  CANDIES = [
+    :EXPCANDYS, :HP_CANDY_SMALL, :ATTACK_CANDY_SMALL, :DEFENSE_CANDY_SMALL, :SPECIAL_ATTACK_CANDY_SMALL, :SPECIAL_DEFENSE_CANDY_SMALL, :SPEED_CANDY_SMALL
+  ]
+
+  #=============================================================================
+  # Liked and Disliked Items
+  #=============================================================================
+
+  def likeditem
+    return @likeditem
+  end
+
+  def dislikeditem
+    return @dislikeditem
+  end
+
+  def new_likable_item(value=LIKED_ITEMS.sample)
+    items = value
+    items = [value] if !value.is_a?(Array)
+    if CANDIES.include?(value)
+      case items
+      when [:EXPCANDYS]
+        items += [:EXPCANDYXS, :EXPCANDYM, :EXPCANDYL, :EXPCANDYXL]
+      when [:HP_CANDY_SMALL]
+        items += [:HP_CANDY_MEDIUM, :HP_CANDY_LARGE]
+      when [:ATTACK_CANDY_SMALL]
+        items += [:ATTACK_CANDY_MEDIUM, :ATTACK_CANDY_LARGE]
+      when [:DEFENSE_CANDY_SMALL]
+        items += [:DEFENSE_CANDY_MEDIUM, :DEFENSE_CANDY_LARGE]
+      when [:SPECIAL_ATTACK_CANDY_SMALL]
+        items += [:SPECIAL_ATTACK_CANDY_MEDIUM, :SPECIAL_ATTACK_CANDY_LARGE]
+      when [:SPECIAL_DEFENSE_CANDY_SMALL]
+        items += [:SPECIAL_DEFENSE_CANDY_MEDIUM, :SPECIAL_DEFENSE_CANDY_LARGE]
+      when [:SPEED_CANDY_SMALL]
+        items += [:SPEED_CANDY_MEDIUM, :SPEED_CANDY_LARGE]
+      end
+    end
+    return items
+  end
+
+  #=============================================================================
 
   def self.play_cry(species, form = 0, volume = 90, pitch = 100)
     GameData::Species.play_cry_from_species(species, form, volume, pitch)
@@ -1098,13 +1140,13 @@ class Pokemon
   def calcHP(base, level, iv, ev)
     return 1 if base == 1   # For Shedinja
     iv = ev = 0 if Settings::DISABLE_IVS_AND_EVS
-    return (((base * 2) + iv + (ev / 4)) * level / 100).floor + level + 10
+    return (((base * 2) + iv / 2 * 5) * level / 100).floor + level + 10
   end
 
   # @return [Integer] the specified stat of this Pokémon (not used for total HP)
   def calcStat(base, level, iv, ev, nat)
     iv = ev = 0 if Settings::DISABLE_IVS_AND_EVS
-    return (((((base * 2) + iv + (ev / 4)) * level / 100).floor + 5) * nat / 100).floor
+    return (((((base * 2) + iv / 2 * 5) * level / 100).floor + 5) * nat / 100).floor + 1
   end
 
   # Recalculates this Pokémon's stats.
@@ -1139,26 +1181,6 @@ class Pokemon
   end
 
   #=============================================================================
-  # Liked and Disliked Items
-  #=============================================================================
-
-  def likeditem
-    return @likeditem
-  end
-
-  def dislikeditem
-    return @dislikeditem
-  end
-
-  def likeditem=(value)
-    @likeditem = (value) ? GameData::Item.get(value).id : value
-  end
-
-  def dislikeditem=(value)
-    @dislikeditem = (value) ? GameData::Item.get(value).id : value
-  end
-
-  #=============================================================================
   # Pokémon creation
   #=============================================================================
 
@@ -1181,6 +1203,19 @@ class Pokemon
     ret.ribbons     = @ribbons.clone
     return ret
   end
+
+  def new_IV_num
+    num = (rand(IV_STAT_LIMIT - 10)) / 7.floor
+    guild_lvl = $player.guild_data[:level]
+    for i in 1..guild_lvl do
+      break if num >= (IV_STAT_LIMIT - 10)
+      next unless [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19].include?(rand(1..35))
+      num += 1
+    end
+    ret = [num, (IV_STAT_LIMIT - 10)].min
+    return ret
+  end
+
 
   # Creates a new Pokémon object.
   # @param species [Symbol, String, GameData::Species] Pokémon species
@@ -1224,9 +1259,10 @@ class Pokemon
     @ivMaxed          = {}
     @ev               = {}
     GameData::Stat.each_main do |s|
-      @iv[s.id]       = rand(IV_STAT_LIMIT + 1)
+      @iv[s.id]       = new_IV_num
       @ev[s.id]       = 0
     end
+    puts "Making Pokemon: #{species_data.id.to_s}|#{@iv[:HP]}|#{@iv[:ATTACK]}|#{@iv[:DEFENSE]}|#{@iv[:SPECIAL_ATTACK]}|#{@iv[:SPECIAL_DEFENSE]}|#{@iv[:SPEED]}|"
     case owner
     when Owner
       @owner = owner
@@ -1247,10 +1283,11 @@ class Pokemon
     @personalID       = rand(2**16) | (rand(2**16) << 16)
     @hp               = 1
     @totalhp          = 1
-    @likeditem        = GameData::Item.get(LIKED_ITEMS.sample)
-    @dislikeditem     = GameData::Item.get(LIKED_ITEMS.sample)
+    setup_mastery_data
+    @likeditem        = new_likable_item
+    @dislikeditem     = new_likable_item
     while (@likeditem == @dislikeditem)
-      @dislikeditem = GameData::Item.get(LIKED_ITEMS.sample)
+      @dislikeditem = new_likable_item
     end
     calc_stats
     if @form == 0 && recheck_form

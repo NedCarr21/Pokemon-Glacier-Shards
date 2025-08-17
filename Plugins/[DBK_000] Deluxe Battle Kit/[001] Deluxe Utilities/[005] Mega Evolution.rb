@@ -5,25 +5,24 @@
 #===============================================================================
 
 #-------------------------------------------------------------------------------
-# Adds a toggle for Mega Evolution in the debug menu.
+# Game stat tracking for wild Mega battles.
 #-------------------------------------------------------------------------------
-MenuHandlers.add(:debug_menu, :deluxe_plugins_menu, {
-  "name"        => _INTL("Deluxe battle settings..."),
-  "parent"      => :main,
-  "description" => _INTL("Settings added by the Deluxe Battle Kit and other supported plugins."),
-  "always_show" => false
-})
+class GameStats
+  alias mega_initialize initialize
+  def initialize
+    mega_initialize
+    @wild_mega_battles_won = 0
+  end
 
-MenuHandlers.add(:debug_menu, :deluxe_mega, {
-  "name"        => _INTL("Toggle Mega Evolution"),
-  "parent"      => :deluxe_plugins_menu,
-  "description" => _INTL("Toggles the availability of Mega Evolution functionality."),
-  "effect"      => proc {
-    $game_switches[Settings::NO_MEGA_EVOLUTION] = !$game_switches[Settings::NO_MEGA_EVOLUTION]
-    toggle = ($game_switches[Settings::NO_MEGA_EVOLUTION]) ? "disabled" : "enabled"
-    pbMessage(_INTL("Mega Evolution {1}.", toggle))
-  }
-})
+  def wild_mega_battles_won
+    return @wild_mega_battles_won || 0
+  end
+  
+  def wild_mega_battles_won=(value)
+    @wild_mega_battles_won = 0 if !@wild_mega_battles_won
+    @wild_mega_battles_won = value
+  end
+end
 
 #-------------------------------------------------------------------------------
 # Displays a held item icon for Mega Stones in the Party menu.
@@ -50,6 +49,8 @@ end
 # Updates to Mega Evolution battle scripts.
 #-------------------------------------------------------------------------------
 class Battle
+  attr_reader :mega_rings
+
   def pbAttackPhaseMegaEvolution
     pbPriority.each do |b|
       next unless @choices[b.index][0] == :UseMove && !b.fainted?
@@ -83,6 +84,7 @@ class Battle
     return if !battler.hasMega? || battler.mega?
     $stats.mega_evolution_count += 1 if battler.pbOwnedByPlayer?
     pbDeluxeTriggers(idxBattler, nil, "BeforeMegaEvolution", battler.species, *battler.pokemon.types)
+    @scene.pbAnimateSubstitute(idxBattler, :hide)
     old_ability = battler.ability_id
     if battler.hasActiveAbility?(:ILLUSION)
       Battle::AbilityEffects.triggerOnBeingHit(battler.ability, nil, battler, nil, self)
@@ -110,7 +112,6 @@ class Battle
     pbDisplay(_INTL("{1} has Mega Evolved into {2}!", battler.pbThis, megaName))
     side  = battler.idxOwnSide
     owner = pbGetOwnerIndexFromBattlerIndex(idxBattler)
-    @wildBattleMode = nil
     @megaEvolution[side][owner] = -2
     if battler.isSpecies?(:GENGAR) && battler.mega?
       battler.effects[PBEffects::Telekinesis] = 0
@@ -119,23 +120,24 @@ class Battle
     battler.pbTriggerAbilityOnGainingIt
     pbCalculatePriority(false, [idxBattler]) if Settings::RECALCULATE_TURN_ORDER_AFTER_MEGA_EVOLUTION
     pbDeluxeTriggers(idxBattler, nil, "AfterMegaEvolution", battler.species, *battler.pokemon.types)
+    @scene.pbAnimateSubstitute(idxBattler, :show)
   end
   
   def pbAnimateMegaEvolution(battler)
     if @scene.pbCommonAnimationExists?("MegaEvolution")
       pbCommonAnimation("MegaEvolution", battler)
       battler.pokemon.makeMega
-      battler.form_update
+      battler.form_update(true)
       pbCommonAnimation("MegaEvolution2", battler)
     else 
       if Settings::SHOW_MEGA_ANIM && $PokemonSystem.battlescene == 0
         @scene.pbShowMegaEvolution(battler.index)
         battler.pokemon.makeMega
-        battler.form_update
+        battler.form_update(true)
       else
         @scene.pbRevertBattlerStart(battler.index)
         battler.pokemon.makeMega
-        battler.form_update
+        battler.form_update(true)
         @scene.pbRevertBattlerEnd
       end
     end
@@ -149,9 +151,17 @@ class Battle::Battler
   def hasMega?
     return false if shadowPokemon? || @effects[PBEffects::Transform]
     return false if wild? && @battle.wildBattleMode != :mega
+    return false if @battle.raidBattle? && @battle.raidRules[:style] != :Basic
     return false if !getActiveState.nil?
     return false if hasEligibleAction?(:primal, :zmove, :ultra, :zodiac)
     return @pokemon&.hasMegaForm?
+  end
+  
+  def unMega
+    @battle.scene.pbRevertBattlerStart(@index)
+    @pokemon.makeUnmega if mega?
+    self.form_update(true)
+    @battle.scene.pbRevertBattlerEnd
   end
 end
 
@@ -161,7 +171,10 @@ end
 class Battle::Scene::PokemonDataBox < Sprite
   def draw_special_form_icon
     specialX = (@battler.opposes?(0)) ? 208 : -28
-    if @battler.mega?
+    if @battler.shadowPokemon? && @battler.inHyperMode?
+      specialY = 8
+      filename = "Graphics/UI/Battle/icon_hyper_mode"
+    elsif @battler.mega?
       specialY = 8
       base_file = "Graphics/UI/Battle/icon_mega"
       try_file = base_file + "_" + @battler.pokemon.speciesName
@@ -190,27 +203,34 @@ class Battle::Scene::Animation::BattlerMegaEvolve < Battle::Scene::Animation
     @battler = @battle.battlers[idxBattler]
     @opposes = @battle.opposes?(idxBattler)
     @pkmn = @battler.pokemon
-    @mega = [@pkmn.species, @pkmn.gender, @pkmn.getMegaForm, @pkmn.shiny?, @pkmn.shadowPokemon?]
-    @cry_file = GameData::Species.cry_filename(@mega[0], @mega[2])
+    @mega = {
+      :pokemon => @pkmn,
+      :species => @pkmn.species,
+      :gender  => @pkmn.gender,
+      :form    => @pkmn.getMegaForm,
+      :shiny   => @pkmn.shiny?,
+      :shadow  => @pkmn.shadowPokemon?,
+      :hue     => @pkmn.super_shiny_hue
+    }
+    @cry_file = GameData::Species.cry_filename(@mega[:species], @mega[:form])
     if @battler.item && @battler.item.is_mega_stone?
       @megastone_file = "Graphics/Items/" + @battler.item_id.to_s
     end
     #---------------------------------------------------------------------------
     # Gets trainer data from battler index (non-wild only).
     if !@battler.wild?
-      items = []
       trainer_item = :MEGARING
       trainer = @battle.pbGetOwnerFromBattlerIndex(idxBattler)
-      @trainer_file = GameData::TrainerType.front_sprite_filename(trainer.trainer_type)
-      GameData::Item.each { |item| items.push(item.id) if item.has_flag?("MegaRing") }
       if @battle.pbOwnedByPlayer?(idxBattler)
-        items.each do |item|
+        @trainer_file = GameData::TrainerType.player_front_sprite_filename(trainer.trainer_type)
+        @battle.mega_rings.each do |item|
           next if !$bag.has?(item)
           trainer_item = item
         end
       else
+	    @trainer_file = GameData::TrainerType.front_sprite_filename(trainer.trainer_type)
         trainer_items = @battle.pbGetOwnerItems(idxBattler)
-        items.each do |item|
+        @battle.mega_rings.each do |item|
           next if !trainer_items&.include?(item)
           trainer_item = item
         end
@@ -239,12 +259,12 @@ class Battle::Scene::Animation::BattlerMegaEvolve < Battle::Scene::Animation
     #---------------------------------------------------------------------------
     # Sets up bases.
     baseData = dxSetBases(@path + "Mega/base", @base_file, delay, center_x, center_y, !@battler.wild?)
-    arrBASES, tr_base_offset = baseData[0], baseData[1]
+    arrBASES, base_width = baseData[0], baseData[1]
     #---------------------------------------------------------------------------
     # Sets up trainer & Mega Ring                                          
     if !@battler.wild?
-      trData = dxSetTrainerWithItem(@trainer_file, @item_file, delay, !@opposes)
-      picTRAINER, trainer_end_x, trainer_y, arrITEM = trData[0], trData[1], trData[2], trData[3]
+      trData = dxSetTrainerWithItem(@trainer_file, @item_file, delay, !@opposes, base_width)
+      picTRAINER, arrITEM = trData[0], trData[1]
     end
     #---------------------------------------------------------------------------
     # Sets up overlay.
@@ -256,13 +276,15 @@ class Battle::Scene::Animation::BattlerMegaEvolve < Battle::Scene::Animation
     picPOKE, sprPOKE = pokeData[0], pokeData[1]
     #---------------------------------------------------------------------------
     # Sets up Mega Stone.
-    item_y = @pictureSprites[sprPOKE]. y - @pictureSprites[sprPOKE].bitmap.height
+    pkmnsprite = @pictureSprites[sprPOKE]
+    item_y = pkmnsprite.y - pkmnsprite.bitmap.height + findTop(pkmnsprite.bitmap)
     arrSTONE = dxSetSpriteWithOutline(@megastone_file, delay, center_x, item_y)
     #---------------------------------------------------------------------------
     # Animation objects.
-    orbData = dxSetSprite(@path + "Mega/orb_1", delay, center_x, center_y, !@battler.wild?, 0, 0)
+    offset_y = (@battler.wild?) ? center_y : center_y + 20
+    orbData = dxSetSprite(@path + "Mega/orb_1", delay, center_x, offset_y, PictureOrigin::CENTER, 0, 0)
     picORB, sprORB = orbData[0], orbData[1]
-    shineData = dxSetSprite(@path + "Mega/shine", delay, center_x, center_y, !@battler.wild?)
+    shineData = dxSetSprite(@path + "Mega/shine", delay, center_x, offset_y)
     picSHINE, sprSHINE = shineData[0], shineData[1]
     #---------------------------------------------------------------------------
     # Sets up Mega Pokemon.
@@ -270,15 +292,16 @@ class Battle::Scene::Animation::BattlerMegaEvolve < Battle::Scene::Animation
     arrPOKE.last[0].setColor(delay, Color.white)
     #---------------------------------------------------------------------------
     # Animation objects.
-    orb2Data = dxSetSprite(@path + "Mega/orb_2", delay, center_x, center_y, !@battler.wild?, 0)
+    orb2Data = dxSetSprite(@path + "Mega/orb_2", delay, center_x, offset_y, PictureOrigin::CENTER, 0)
     picORB2, sprORB2 = orb2Data[0], orb2Data[1]
     arrPARTICLES = dxSetParticles(@path + "particle", delay, center_x, center_y, 200)
-    pulseData = dxSetSprite(@path + "pulse", delay, center_x, center_y, !@battler.wild?, 100, 50)
+    pulseData = dxSetSprite(@path + "pulse", delay, center_x, offset_y, PictureOrigin::CENTER, 100, 50)
     picPULSE, sprPULSE = pulseData[0], pulseData[1]
     #---------------------------------------------------------------------------
     # Sets up Mega icon.
-    icon_y = @pictureSprites[arrPOKE.last[1]].y - @pictureSprites[arrPOKE.last[1]].bitmap.height - 20
-    iconData = dxSetSprite(@path + "Mega/icon", delay, center_x, icon_y, false, 0)
+    pkmnsprite = @pictureSprites[arrPOKE.last[1]]
+    icon_y = pkmnsprite.y - pkmnsprite.bitmap.height + findTop(pkmnsprite.bitmap) - 20
+    iconData = dxSetSprite(@path + "Mega/icon", delay, center_x, icon_y, PictureOrigin::BOTTOM, 0)
     picICON, sprICON = iconData[0], iconData[1]
     #---------------------------------------------------------------------------
     # Sets up skip button & fade out.
@@ -295,22 +318,24 @@ class Battle::Scene::Animation::BattlerMegaEvolve < Battle::Scene::Animation
     picPOKE.setVisible(delay, true)
     picFADE.moveOpacity(delay, 8, 0)
     delay = picFADE.totalDuration
-    picBUTTON.moveXY(delay, 6, 0, Graphics.height - 38)
-    picBUTTON.moveXY(delay + 36, 6, 0, Graphics.height)
+    picBUTTON.moveDelta(delay, 6, 0, -38)
+    picBUTTON.moveDelta(delay + 36, 6, 0, 38)
     #---------------------------------------------------------------------------
     # Slides trainer on screen with base (non-wild only).
     if !@battler.wild?
       picTRAINER.setVisible(delay + 4, true)
       arrBASES.first.setVisible(delay + 4, true)
-      picTRAINER.moveXY(delay + 4, 8, trainer_end_x, trainer_y)
-      arrBASES.first.moveXY(delay + 4, 8, trainer_end_x - tr_base_offset, center_y - 33)
+      delta = (base_width.to_f * 0.75).to_i
+      delta = -delta if @opposes
+      picTRAINER.moveDelta(delay + 4, 8, delta, 0)
+      arrBASES.first.moveDelta(delay + 4, 8, delta, 0)
       delay = picTRAINER.totalDuration + 1
       #-------------------------------------------------------------------------
       # Mega Ring appears with outline; slide upwards.
       picTRAINER.setSE(delay, "DX Action")
       arrITEM.each do |p, s| 
         p.setVisible(delay, true)
-        p.moveXY(delay, 15, @pictureSprites[s].x, @pictureSprites[s].y - 20)
+        p.moveDelta(delay, 15, 0, -20)
         p.moveOpacity(delay, 15, 255)
         p.moveOpacity(delay + 15, 8, 0)
       end
@@ -320,7 +345,7 @@ class Battle::Scene::Animation::BattlerMegaEvolve < Battle::Scene::Animation
     # Mega Stone appears with outline; slide upwards.
     arrSTONE.each do |p, s| 
       p.setVisible(delay, true)
-      p.moveXY(delay, 15, @pictureSprites[s].x, @pictureSprites[s].y - 20)
+      p.moveDelta(delay, 15, 0, -20)
       p.moveOpacity(delay, 15, 255)
       p.moveOpacity(delay + 15, 8, 0)
     end

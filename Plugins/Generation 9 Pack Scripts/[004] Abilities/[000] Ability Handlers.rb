@@ -78,6 +78,15 @@ Battle::AbilityEffects::StatusCure.add(:INSOMNIA,
 
 Battle::AbilityEffects::StatusCure.copy(:INSOMNIA, :VITALSPIRIT)
 
+Battle::AbilityEffects::OnSwitchOut.add(:INSOMNIA,
+  proc { |ability, battler, endOfBattle|
+    next if ![:SLEEP, :DROWSY].include?(battler.status)
+    PBDebug.log("[Ability triggered] #{battler.pbThis}'s #{battler.abilityName}")
+    battler.status = :NONE
+  }
+)
+
+Battle::AbilityEffects::OnSwitchOut.copy(:INSOMNIA, :VITALSPIRIT)
 
 #===============================================================================
 # Magma Armor
@@ -97,6 +106,14 @@ Battle::AbilityEffects::StatusCure.add(:MAGMAARMOR,
       battler.battle.pbDisplay(msg)
     end
     battler.battle.pbHideAbilitySplash(battler)
+  }
+)
+
+Battle::AbilityEffects::OnSwitchOut.add(:MAGMAARMOR,
+  proc { |ability, battler, endOfBattle|
+    next if ![:FROZEN, :FROSTBITE].include?(battler.status)
+    PBDebug.log("[Ability triggered] #{battler.pbThis}'s #{battler.abilityName}")
+    battler.status = :NONE
   }
 )
 
@@ -413,7 +430,7 @@ Battle::AbilityEffects::OnSwitchIn.add(:NEUTRALIZINGGAS,
     battle.allBattlers.each do |b|
       if b.hasActiveItem?(:ABILITYSHIELD)
         itemname = GameData::Item.get(b.item).name
-        @battle.pbDisplay(_INTL("{1}'s Ability is protected by the effects of its {2}!",b.pbThis,itemname))
+        battle.pbDisplay(_INTL("{1}'s Ability is protected by the effects of its {2}!",b.pbThis,itemname))
         next
       end
       b.effects[PBEffects::SlowStart] = 0

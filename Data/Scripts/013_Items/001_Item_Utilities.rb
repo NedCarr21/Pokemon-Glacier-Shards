@@ -691,11 +691,13 @@ def pbUseItem(bag, item, bagscene = nil)
       screen.pbEndScene
       bagscene&.pbRefresh
     end
+    pkmn.modify_achievement(:moves_used, 1) if ret == 1
     return (ret) ? 1 : 0
   elsif useType == 2 || itm.is_machine?   # Item is usable from Bag or teaches a move
     intret = ItemHandlers.triggerUseFromBag(item)
     if intret >= 0
       bag.remove(item) if intret == 1 && itm.consumed_after_use?
+      pkmn.modify_achievement(:items_used, 1) if inret == 1 && itm.consumed_after_use?
       return intret
     end
     pbMessage(_INTL("Can't use that here."))

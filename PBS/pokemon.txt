@@ -77,6 +77,7 @@ Habitat = Grassland
 Category = Seed
 Pokedex = Venusaur's flower is said to take on vivid colors if it gets plenty of nutrition and sunlight. The flower's aroma soothes the emotions of people.
 Generation = 1
+Flags = HasGenderedSprites
 #-------------------------------
 [CHARMANDER]
 Name = Charmander
@@ -309,6 +310,7 @@ Habitat = Forest
 Category = Butterfly
 Pokedex = It has a superior ability to search for delicious honey from flowers. It can seek, extract, and carry honey from flowers blooming over six miles away.
 Generation = 1
+Flags = HasGenderedSprites
 WildItemUncommon = SILVERPOWDER
 #-------------------------------
 [WEEDLE]
@@ -491,6 +493,7 @@ Habitat = Grassland
 Category = Mouse
 Pokedex = A Rattata is cautious in the extreme. Even while it is asleep, it constantly moves its ears and listens for danger. It will make its nest anywhere.
 Generation = 1
+Flags = HasGenderedSprites
 WildItemUncommon = CHILANBERRY
 Evolutions = RATICATE,Level,20
 #-------------------------------
@@ -518,6 +521,7 @@ Habitat = Grassland
 Category = Mouse
 Pokedex = A Raticate's sturdy fangs grow steadily. To keep them ground down, it gnaws on rocks and logs. It may even chew on the walls of houses.
 Generation = 1
+Flags = HasGenderedSprites
 WildItemUncommon = CHILANBERRY
 #-------------------------------
 [SPEAROW]
@@ -650,6 +654,7 @@ Habitat = Forest
 Category = Mouse
 Pokedex = It stores electricity in the electric sacs on its cheeks. When it releases pent-up energy in a burst, the electric power is equal to a lightning bolt.
 Generation = 1
+Flags = HasGenderedSprites
 WildItemUncommon = LIGHTBALL
 Evolutions = RAICHU,Item,THUNDERSTONE
 #-------------------------------
@@ -677,6 +682,7 @@ Habitat = Forest
 Category = Mouse
 Pokedex = If it stores too much electricity, its behavior turns aggressive. To avoid this, it occasionally discharges excess energy and calms itself down.
 Generation = 1
+Flags = HasGenderedSprites
 #-------------------------------
 [SANDSHREW]
 Name = Sandshrew
@@ -1075,6 +1081,7 @@ Habitat = Cave
 Category = Bat
 Pokedex = While living in pitch-black caverns, their eyes gradually grew shut and deprived them of vision. They use ultrasonic waves to detect obstacles.
 Generation = 1
+Flags = HasGenderedSprites
 Evolutions = GOLBAT,Level,22
 #-------------------------------
 [GOLBAT]
@@ -1101,6 +1108,7 @@ Habitat = Cave
 Category = Bat
 Pokedex = Its fangs easily puncture even thick animal hide. It loves to feast on the blood of people and Pokémon. It flits about in darkness and strikes from behind.
 Generation = 1
+Flags = HasGenderedSprites
 Evolutions = CROBAT,Happiness,
 #-------------------------------
 [ODDISH]
@@ -1155,6 +1163,7 @@ Habitat = Grassland
 Category = Weed
 Pokedex = A horribly noxious honey drools from its mouth. One whiff of the honey can result in memory loss. Some fans are said to enjoy this overwhelming stink, however.
 Generation = 1
+Flags = HasGenderedSprites
 WildItemUncommon = ABSORBBULB
 Evolutions = VILEPLUME,Item,LEAFSTONE,BELLOSSOM,Item,SUNSTONE
 #-------------------------------
@@ -1182,6 +1191,7 @@ Habitat = Grassland
 Category = Flower
 Pokedex = In seasons when it produces more pollen, the air around a Vileplume turns yellow with the powder as it walks. The pollen is highly toxic and causes paralysis.
 Generation = 1
+Flags = HasGenderedSprites
 WildItemUncommon = ABSORBBULB
 #-------------------------------
 [PARAS]
@@ -1690,6 +1700,7 @@ Habitat = Urban
 Category = Psi
 Pokedex = It is rumored that a boy with psychic abilities suddenly transformed into Kadabra while he was assisting research into extrasensory powers.
 Generation = 1
+Flags = HasGenderedSprites
 WildItemUncommon = TWISTEDSPOON
 Evolutions = ALAKAZAM,Trade,,ALAKAZAM,Item,LINKINGCORD
 #-------------------------------
@@ -1717,6 +1728,7 @@ Habitat = Urban
 Category = Psi
 Pokedex = While it has strong psychic abilities and high intelligence, an Alakazam's muscles are very weak. It uses psychic power to move its body.
 Generation = 1
+Flags = HasGenderedSprites
 WildItemUncommon = TWISTEDSPOON
 #-------------------------------
 [MACHOP]
@@ -2227,6 +2239,7 @@ Habitat = Grassland
 Category = Twin Bird
 Pokedex = Even while eating or sleeping, one of the heads remains always vigilant for any sign of danger. When threatened, it flees at over 60 miles per hour.
 Generation = 1
+Flags = HasGenderedSprites
 WildItemUncommon = SHARPBEAK
 Evolutions = DODRIO,Level,31
 #-------------------------------
@@ -2254,6 +2267,7 @@ Habitat = Grassland
 Category = Triple Bird
 Pokedex = A peculiar Pokémon species with three heads. It vigorously races across grassy plains even in arid seasons with little rainfall.
 Generation = 1
+Flags = HasGenderedSprites
 WildItemUncommon = SHARPBEAK
 #-------------------------------
 [SEEL]
@@ -2571,6 +2585,7 @@ Habitat = Grassland
 Category = Hypnosis
 Pokedex = The arcing movement and glitter of the pendulum in a Hypno's hand lull the foe into deep hypnosis. While searching for prey, it polishes the pendulum.
 Generation = 1
+Flags = HasGenderedSprites
 #-------------------------------
 [KRABBY]
 Name = Krabby
@@ -2940,6 +2955,7 @@ Habitat = RoughTerrain
 Category = Spikes
 Pokedex = Once it starts running, it doesn't stop. Its tiny brain makes it so stupid that it can't remember why it started running in the first place.
 Generation = 1
+Flags = HasGenderedSprites
 Evolutions = RHYDON,Level,42
 #-------------------------------
 [RHYDON]
@@ -2966,6 +2982,7 @@ Habitat = RoughTerrain
 Category = Drill
 Pokedex = Its horn, which rotates like a drill, destroys tall buildings with one strike. It stands on its hind legs, and its brain is well developed.
 Generation = 1
+Flags = HasGenderedSprites
 Evolutions = RHYPERIOR,TradeItem,PROTECTOR
 #-------------------------------
 [CHANSEY]
@@ -3128,6 +3145,7 @@ Habitat = WatersEdge
 Category = Goldfish
 Pokedex = In the springtime, schools of Goldeen can be seen swimming up falls and rivers. It metes out staggering damage with its single horn.
 Generation = 1
+Flags = HasGenderedSprites
 WildItemUncommon = MYSTICWATER
 Evolutions = SEAKING,Level,33
 #-------------------------------
@@ -3155,6 +3173,7 @@ Habitat = WatersEdge
 Category = Goldfish
 Pokedex = It punches holes in boulders on stream- beds. This is a clever innovation that prevents its eggs from being attacked or washed away by the current.
 Generation = 1
+Flags = HasGenderedSprites
 WildItemUncommon = MYSTICWATER
 #-------------------------------
 [STARYU]
@@ -3264,6 +3283,7 @@ Habitat = Grassland
 Category = Mantis
 Pokedex = Its blindingly fast speed adds to the sharpness of its twin forearm scythes. The scythes can slice through thick logs in one wicked stroke.
 Generation = 1
+Flags = HasGenderedSprites
 Evolutions = SCIZOR,TradeItem,METALCOAT,KLEAVOR,Item,BLACKAUGURITE
 #-------------------------------
 [JYNX]
@@ -3421,6 +3441,7 @@ Habitat = WatersEdge
 Category = Fish
 Pokedex = Its swimming muscles are weak, so it is easily washed away by currents. In places where water pools, you can see many Magikarp deposited there by the flow.
 Generation = 1
+Flags = HasGenderedSprites
 Evolutions = GYARADOS,Level,20
 #-------------------------------
 [GYARADOS]
@@ -3447,6 +3468,7 @@ Habitat = WatersEdge
 Category = Atrocious
 Pokedex = It is an extremely vicious and violent Pokémon. When humans begin to fight, it will appear and burn everything to the ground with intensely hot flames.
 Generation = 1
+Flags = HasGenderedSprites
 #-------------------------------
 [LAPRAS]
 Name = Lapras
@@ -4079,6 +4101,7 @@ Habitat = Grassland
 Category = Herb
 Pokedex = The fragrance of a Meganium's flower soothes and calms emotions. In battle, it gives off more of its becalming scent to blunt the foe's fighting spirit.
 Generation = 2
+Flags = HasGenderedSprites
 #-------------------------------
 [CYNDAQUIL]
 Name = Cyndaquil
@@ -4365,6 +4388,7 @@ Habitat = Forest
 Category = Five Star
 Pokedex = Ledyba communicate using a fluid that they secrete from where the legs join the body. They are said to convey feelings to others by altering the fluid's scent.
 Generation = 2
+Flags = HasGenderedSprites
 Evolutions = LEDIAN,Level,18
 #-------------------------------
 [LEDIAN]
@@ -4391,6 +4415,7 @@ Habitat = Forest
 Category = Five Star
 Pokedex = It is said that in lands with clean air, where the stars fill the sky, there live many Ledian. For good reason, they use the light of the stars as energy.
 Generation = 2
+Flags = HasGenderedSprites
 #-------------------------------
 [SPINARAK]
 Name = Spinarak
@@ -4709,6 +4734,7 @@ Habitat = Forest
 Category = Mystic
 Pokedex = It has the enigmatic power of foreseeing the future. Some people in different lands have long believed that Xatu are emissaries from another world.
 Generation = 2
+Flags = HasGenderedSprites
 #-------------------------------
 [MAREEP]
 Name = Mareep
@@ -4889,6 +4915,7 @@ Habitat = Forest
 Category = Imitation
 Pokedex = It mimics a tree to avoid being attacked by enemies. But since its forelegs remain green throughout the year, it is easily identified as a fake in the winter.
 Generation = 2
+Flags = HasGenderedSprites
 #-------------------------------
 [POLITOED]
 Name = Politoed
@@ -4914,6 +4941,7 @@ Habitat = WatersEdge
 Category = Frog
 Pokedex = The curled hair on its head proves its status as a king. It is said that the longer and curlier the hair, the more respect it earns from its peers.
 Generation = 2
+Flags = HasGenderedSprites
 WildItemUncommon = KINGSROCK
 #-------------------------------
 [HOPPIP]
@@ -5019,6 +5047,7 @@ Habitat = Forest
 Category = Long Tail
 Pokedex = Its tail ends with a dexterous, handlike appendage. However, because it uses the tail so much, Aipom's real hands have become rather clumsy.
 Generation = 2
+Flags = HasGenderedSprites
 Evolutions = AMBIPOM,HasMove,DOUBLEHIT
 #-------------------------------
 [SUNKERN]
@@ -5126,6 +5155,7 @@ Habitat = WatersEdge
 Category = Water Fish
 Pokedex = Wooper usually live in water but come out onto land seeking food occasionally. On land, they coat their bodies with a gooey, toxic film.
 Generation = 2
+Flags = HasGenderedSprites
 Evolutions = QUAGSIRE,Level,20,CLODSIRE,None,
 #-------------------------------
 [QUAGSIRE]
@@ -5152,6 +5182,7 @@ Habitat = WatersEdge
 Category = Water Fish
 Pokedex = A Quagsire hunts by leaving its mouth wide open in water and waiting for its prey to blunder in. Because it doesn't move, it does not get very hungry.
 Generation = 2
+Flags = HasGenderedSprites
 #-------------------------------
 [ESPEON]
 Name = Espeon
@@ -5228,6 +5259,7 @@ Habitat = Forest
 Category = Darkness
 Pokedex = Murkrow were feared as the alleged bearers of ill fortune. It shows strong interest in anything that sparkles. It will even try to steal rings from women.
 Generation = 2
+Flags = HasGenderedSprites
 Evolutions = HONCHKROW,Item,DUSKSTONE
 #-------------------------------
 [SLOWKING]
@@ -5331,6 +5363,7 @@ Habitat = Cave
 Category = Patient
 Pokedex = Usually docile, a Wobbuffet strikes back ferociously if its black tail is attacked. It makes its lair in caves where it waits for nightfall.
 Generation = 2
+Flags = HasGenderedSprites
 #-------------------------------
 [GIRAFARIG]
 Name = Girafarig
@@ -5357,6 +5390,7 @@ Habitat = Grassland
 Category = Long Neck
 Pokedex = A Girafarig is an herbivore--it eats grass and tree shoots. While it is eating, its tail makes chewing and swallowing motions as if it were also eating.
 Generation = 2
+Flags = HasGenderedSprites
 Evolutions = FARIGIRAF,HasMove,TWINBEAM
 #-------------------------------
 [PINECO]
@@ -5463,6 +5497,7 @@ Habitat = Mountain
 Category = Fly Scorpion
 Pokedex = It glides without making a single sound. It grasps the face of its foe using its hind and large front claws, then stabs with its poison barb.
 Generation = 2
+Flags = HasGenderedSprites
 Evolutions = GLISCOR,NightHoldItem,RAZORFANG
 #-------------------------------
 [STEELIX]
@@ -5489,6 +5524,7 @@ Habitat = Cave
 Category = Iron Snake
 Pokedex = Steelix live even further underground than Onix. This Pokémon is known to dig toward the earth's core, reaching a depth of over six-tenths of a mile underground.
 Generation = 2
+Flags = HasGenderedSprites
 WildItemUncommon = METALCOAT
 #-------------------------------
 [SNUBBULL]
@@ -5595,6 +5631,7 @@ Habitat = Grassland
 Category = Pincer
 Pokedex = A Scizor has a body with the hardness of steel. It is not easily fazed by ordinary sorts of attacks. It flaps its wings to regulate its body temperature.
 Generation = 2
+Flags = HasGenderedSprites
 #-------------------------------
 [SHUCKLE]
 Name = Shuckle
@@ -5650,6 +5687,7 @@ Habitat = Forest
 Category = Single Horn
 Pokedex = They gather in forests seeking the sweet sap of trees. It is completely clad in a steel-hard shell. It is proud of its horn, which it uses to fling foes.
 Generation = 2
+Flags = HasGenderedSprites
 #-------------------------------
 [SNEASEL]
 Name = Sneasel
@@ -5676,6 +5714,7 @@ Habitat = Forest
 Category = Sharp Claw
 Pokedex = A Sneasel scales trees by punching its hooked claws into the bark. It seeks out unguarded nests and steals eggs for food while the parents are away.
 Generation = 2
+Flags = HasGenderedSprites
 WildItemUncommon = QUICKCLAW
 Evolutions = WEAVILE,NightHoldItem,RAZORCLAW,SNEASLER,None,
 #-------------------------------
@@ -5730,6 +5769,7 @@ Habitat = Mountain
 Category = Hibernator
 Pokedex = In forests, it is said that there are many streams and towering trees where an Ursaring gathers food. It walks through its forest collecting food every day.
 Generation = 2
+Flags = HasGenderedSprites
 Evolutions = URSALUNA,ItemNight,PEATBLOCK
 #-------------------------------
 [SLUGMA]
@@ -5835,6 +5875,7 @@ Habitat = Cave
 Category = Swine
 Pokedex = A Piloswine is covered by a thick coat of long hair for enduring freezing cold. It uses its tusks to dig up food that has been buried under ice.
 Generation = 2
+Flags = HasGenderedSprites
 Evolutions = MAMOSWINE,HasMove,ANCIENTPOWER
 #-------------------------------
 [CORSOLA]
@@ -5916,6 +5957,7 @@ Habitat = Sea
 Category = Jet
 Pokedex = It ensnares its foe with its suction- cupped tentacles before delivering the finishing blow. If the foe turns out to be too strong, it spews ink to escape.
 Generation = 2
+Flags = HasGenderedSprites
 #-------------------------------
 [DELIBIRD]
 Name = Delibird
@@ -6047,6 +6089,7 @@ Habitat = RoughTerrain
 Category = Dark
 Pokedex = In a Houndoom pack, the one with its horns raked sharply back serves a leadership role. They choose their leader by fighting among themselves.
 Generation = 2
+Flags = HasGenderedSprites
 #-------------------------------
 [KINGDRA]
 Name = Kingdra
@@ -6125,6 +6168,7 @@ Habitat = RoughTerrain
 Category = Armor
 Pokedex = A Donphan is so strong it can easily haul a dump truck. Its hide has toughened to a rock-hard state. An ordinary sort of attack won't even leave a scratch.
 Generation = 2
+Flags = HasGenderedSprites
 #-------------------------------
 [PORYGON2]
 Name = Porygon2
@@ -6736,6 +6780,7 @@ Habitat = Grassland
 Category = Chick
 Pokedex = If attacked, it strikes back by spitting balls of fire it forms in its stomach. A Torchic dislikes darkness because it can't see its surroundings.
 Generation = 3
+Flags = HasGenderedSprites
 Evolutions = COMBUSKEN,Level,16
 #-------------------------------
 [COMBUSKEN]
@@ -6762,6 +6807,7 @@ Habitat = Grassland
 Category = Young Fowl
 Pokedex = It lashes out with 10 kicks per second. Its strong fighting instinct compels it to keep up its offensive until the opponent gives up.
 Generation = 3
+Flags = HasGenderedSprites
 Evolutions = BLAZIKEN,Level,36
 #-------------------------------
 [BLAZIKEN]
@@ -6788,6 +6834,7 @@ Habitat = Grassland
 Category = Blaze
 Pokedex = It learns martial arts that use punches and kicks. Every several years, its old feathers burn off, and new, supple feathers grow back in their place.
 Generation = 3
+Flags = HasGenderedSprites
 #-------------------------------
 [MUDKIP]
 Name = Mudkip
@@ -7053,6 +7100,7 @@ Habitat = Forest
 Category = Butterfly
 Pokedex = Its colorfully patterned wings are its most prominent feature. It flies through flower-covered fields collecting pollen. It attacks ferociously when angered.
 Generation = 3
+Flags = HasGenderedSprites
 WildItemUncommon = SHEDSHELL
 #-------------------------------
 [CASCOON]
@@ -7104,6 +7152,7 @@ Habitat = Forest
 Category = Poison Moth
 Pokedex = It is a nocturnal Pokémon that flies from fields and mountains to the attraction of streetlights at night. It looses highly toxic powder from its wings.
 Generation = 3
+Flags = HasGenderedSprites
 WildItemUncommon = SHEDSHELL
 #-------------------------------
 [LOTAD]
@@ -7185,6 +7234,7 @@ Habitat = WatersEdge
 Category = Carefree
 Pokedex = When it hears festive music, all the cells in its body become stimulated, and it begins moving in rhythm. It does not quail even when it faces a tough opponent.
 Generation = 3
+Flags = HasGenderedSprites
 WildItemUncommon = MENTALHERB
 #-------------------------------
 [SEEDOT]
@@ -7239,6 +7289,7 @@ Habitat = Forest
 Category = Wily
 Pokedex = A forest-dwelling Pokémon that is skilled at climbing trees. Its long and pointed nose is its weak point. It loses power if the nose is gripped.
 Generation = 3
+Flags = HasGenderedSprites
 WildItemUncommon = POWERHERB
 Evolutions = SHIFTRY,Item,LEAFSTONE
 #-------------------------------
@@ -7266,6 +7317,7 @@ Habitat = Forest
 Category = Wicked
 Pokedex = It is said to arrive on chilly, wintry winds. Feared from long ago as the guardian of forests, this Pokémon lives in a deep forest where people do not venture.
 Generation = 3
+Flags = HasGenderedSprites
 WildItemUncommon = POWERHERB
 #-------------------------------
 [TAILLOW]
@@ -8114,6 +8166,7 @@ Habitat = Mountain
 Category = Meditate
 Pokedex = It continually meditates for hours every day. As a result of rigorous and dedicated yoga training, it has tempered its spiritual power so much it can fly.
 Generation = 3
+Flags = HasGenderedSprites
 Evolutions = MEDICHAM,Level,37
 #-------------------------------
 [MEDICHAM]
@@ -8140,6 +8193,7 @@ Habitat = Mountain
 Category = Meditate
 Pokedex = Through crushingly harsh yoga training, it gained the power to foretell its foe's actions. It battles with elegant, dance- like movement.
 Generation = 3
+Flags = HasGenderedSprites
 #-------------------------------
 [ELECTRIKE]
 Name = Electrike
@@ -8328,6 +8382,7 @@ Habitat = Grassland
 Category = Thorn
 Pokedex = A Roselia that drinks nutritionally rich springwater blooms with lovely flowers. The fragrance of its flowers has the effect of making its foes careless.
 Generation = 3
+Flags = HasGenderedSprites
 WildItemUncommon = POISONBARB
 Evolutions = ROSERADE,Item,SHINYSTONE
 #-------------------------------
@@ -8356,6 +8411,7 @@ Habitat = Grassland
 Category = Stomach
 Pokedex = This Pokémon's stomach fluid can even digest scrap iron. In one gulp, it can swallow something that is as large as itself.
 Generation = 3
+Flags = HasGenderedSprites
 WildItemCommon = ORANBERRY
 WildItemUncommon = SITRUSBERRY
 Evolutions = SWALOT,Level,26
@@ -8384,6 +8440,7 @@ Habitat = Grassland
 Category = Poison Bag
 Pokedex = Its powerful stomach acid is capable of digesting almost anything. The one thing in the whole world a Swalot can't digest is its own stomach.
 Generation = 3
+Flags = HasGenderedSprites
 WildItemCommon = ORANBERRY
 WildItemUncommon = SITRUSBERRY
 #-------------------------------
@@ -8518,6 +8575,7 @@ Habitat = Mountain
 Category = Numb
 Pokedex = A Numel stores boiling magma in the hump on its back. It is a hardy Pokémon that can transport a 220-pound load. It has served humans at work since long ago.
 Generation = 3
+Flags = HasGenderedSprites
 Evolutions = CAMERUPT,Level,33
 #-------------------------------
 [CAMERUPT]
@@ -8544,6 +8602,7 @@ Habitat = Mountain
 Category = Eruption
 Pokedex = A Pokémon that lives in the crater of a volcano. Every 10 years, the volcanoes on its back erupt violently. Research is under way on the cause of eruption.
 Generation = 3
+Flags = HasGenderedSprites
 #-------------------------------
 [TORKOAL]
 Name = Torkoal
@@ -8779,6 +8838,7 @@ Habitat = RoughTerrain
 Category = Scarecrow
 Pokedex = After spending thousands of years in harsh deserts, its blood transformed into the same substances as sand. It is nocturnal, so it hunts at night.
 Generation = 3
+Flags = HasGenderedSprites
 WildItemUncommon = STICKYBARB
 #-------------------------------
 [SWABLU]
@@ -9250,6 +9310,7 @@ Habitat = WatersEdge
 Category = Tender
 Pokedex = It is said to live at the bottom of large lakes. Considered to be the most beautiful of all Pokémon, it has been depicted in paintings and statues.
 Generation = 3
+Flags = HasGenderedSprites
 #-------------------------------
 [CASTFORM]
 Name = Castform
@@ -9756,6 +9817,7 @@ Habitat = Sea
 Category = Longevity
 Pokedex = A Pokémon that was once believed to be extinct. The species has not changed its form for 100 million years. It walks on the seafloor using its pectoral fins.
 Generation = 3
+Flags = HasGenderedSprites
 WildItemUncommon = DEEPSEASCALE
 #-------------------------------
 [LUVDISC]
@@ -10462,6 +10524,7 @@ Habitat = Grassland
 Category = Starling
 Pokedex = They flock in great numbers. Though small, they flap their wings with great power.
 Generation = 4
+Flags = HasGenderedSprites
 Evolutions = STARAVIA,Level,14
 #-------------------------------
 [STARAVIA]
@@ -10488,6 +10551,7 @@ Habitat = Grassland
 Category = Starling
 Pokedex = It flies around forests and fields in search of bug Pokémon. It stays within a huge flock.
 Generation = 4
+Flags = HasGenderedSprites
 Evolutions = STARAPTOR,Level,34
 #-------------------------------
 [STARAPTOR]
@@ -10514,6 +10578,7 @@ Habitat = Grassland
 Category = Predator
 Pokedex = It has a savage nature. It will courageously challenge foes that are much larger.
 Generation = 4
+Flags = HasGenderedSprites
 #-------------------------------
 [BIDOOF]
 Name = Bidoof
@@ -10540,6 +10605,7 @@ Habitat = WatersEdge
 Category = Plump Mouse
 Pokedex = With nerves of steel, nothing can perturb it. It is more agile and active than it appears.
 Generation = 4
+Flags = HasGenderedSprites
 Evolutions = BIBAREL,Level,15
 #-------------------------------
 [BIBAREL]
@@ -10566,6 +10632,7 @@ Habitat = WatersEdge
 Category = Beaver
 Pokedex = It makes its nest by damming streams with bark and mud. It is known as an industrious worker.
 Generation = 4
+Flags = HasGenderedSprites
 #-------------------------------
 [KRICKETOT]
 Name = Kricketot
@@ -10591,6 +10658,7 @@ Habitat = Grassland
 Category = Cricket
 Pokedex = It shakes its head back to front, causing its antennae to hit each other and sound like a xylophone.
 Generation = 4
+Flags = HasGenderedSprites
 WildItemUncommon = METRONOME
 Evolutions = KRICKETUNE,Level,10
 #-------------------------------
@@ -10618,6 +10686,7 @@ Habitat = Grassland
 Category = Cricket
 Pokedex = It crosses its knifelike arms in front of its chest when it cries. It can compose melodies ad lib.
 Generation = 4
+Flags = HasGenderedSprites
 WildItemUncommon = METRONOME
 #-------------------------------
 [SHINX]
@@ -10645,6 +10714,7 @@ Habitat = Grassland
 Category = Flash
 Pokedex = All of its fur dazzles if danger is sensed. It flees while the foe is momentarily blinded.
 Generation = 4
+Flags = HasGenderedSprites
 Evolutions = LUXIO,Level,15
 #-------------------------------
 [LUXIO]
@@ -10671,6 +10741,7 @@ Habitat = Grassland
 Category = Spark
 Pokedex = Its claws loose electricity with enough amperage to cause fainting. They live in small groups.
 Generation = 4
+Flags = HasGenderedSprites
 Evolutions = LUXRAY,Level,30
 #-------------------------------
 [LUXRAY]
@@ -10697,6 +10768,7 @@ Habitat = Grassland
 Category = Gleam Eyes
 Pokedex = It has eyes that can see through anything. It spots and captures prey hiding behind objects.
 Generation = 4
+Flags = HasGenderedSprites
 #-------------------------------
 [BUDEW]
 Name = Budew
@@ -10751,6 +10823,7 @@ Habitat = Grassland
 Category = Bouquet
 Pokedex = It attracts prey with a sweet aroma, then downs it with thorny whips hidden in its arms.
 Generation = 4
+Flags = HasGenderedSprites
 WildItemUncommon = POISONBARB
 #-------------------------------
 [CRANIDOS]
@@ -10964,6 +11037,7 @@ Habitat = Forest
 Category = Tiny Bee
 Pokedex = A Pokémon formed by three others. It busily carries sweet floral honey to Vespiquen.
 Generation = 4
+Flags = HasGenderedSprites
 WildItemUncommon = HONEY
 Evolutions = VESPIQUEN,LevelFemale,21
 #-------------------------------
@@ -11018,6 +11092,7 @@ Habitat = Forest
 Category = EleSquirrel
 Pokedex = It makes fur balls that crackle with static electricity. It stores them with berries in tree holes.
 Generation = 4
+Flags = HasGenderedSprites
 #-------------------------------
 [BUIZEL]
 Name = Buizel
@@ -11044,6 +11119,7 @@ Habitat = WatersEdge
 Category = Sea Weasel
 Pokedex = It has a flotation sac that is like an inflatable collar. It floats on water with its head out.
 Generation = 4
+Flags = HasGenderedSprites
 Evolutions = FLOATZEL,Level,26
 #-------------------------------
 [FLOATZEL]
@@ -11070,6 +11146,7 @@ Habitat = WatersEdge
 Category = Sea Weasel
 Pokedex = It floats using its well-developed flotation sac. It assists in the rescues of drowning people.
 Generation = 4
+Flags = HasGenderedSprites
 #-------------------------------
 [CHERUBI]
 Name = Cherubi
@@ -11204,6 +11281,7 @@ Habitat = Forest
 Category = Long Tail
 Pokedex = To eat, it deftly shucks nuts with its two tails. It rarely uses its arms now.
 Generation = 4
+Flags = HasGenderedSprites
 #-------------------------------
 [DRIFLOON]
 Name = Drifloon
@@ -11707,6 +11785,7 @@ Habitat = Cave
 Category = Land Shark
 Pokedex = It nests in small, horizontal holes in cave walls. It pounces to catch prey that stray too close.
 Generation = 4
+Flags = HasGenderedSprites
 Evolutions = GABITE,Level,24
 #-------------------------------
 [GABITE]
@@ -11733,6 +11812,7 @@ Habitat = Cave
 Category = Cave
 Pokedex = There is a long-held belief that medicine made from its scales will heal even incurable illnesses.
 Generation = 4
+Flags = HasGenderedSprites
 Evolutions = GARCHOMP,Level,48
 #-------------------------------
 [GARCHOMP]
@@ -11759,6 +11839,7 @@ Habitat = Cave
 Category = Mach
 Pokedex = When it folds up its body and extends its wings, it looks like a jet plane. It flies at sonic speed.
 Generation = 4
+Flags = HasGenderedSprites
 #-------------------------------
 [MUNCHLAX]
 Name = Munchlax
@@ -11868,6 +11949,7 @@ Habitat = RoughTerrain
 Category = Hippo
 Pokedex = It lives in arid places. Instead of perspiration, it expels grainy sand from its body.
 Generation = 4
+Flags = HasGenderedSprites
 Evolutions = HIPPOWDON,Level,34
 #-------------------------------
 [HIPPOWDON]
@@ -11894,6 +11976,7 @@ Habitat = RoughTerrain
 Category = Heavyweight
 Pokedex = It blasts internally stored sand from ports on its body to create a towering twister for attack.
 Generation = 4
+Flags = HasGenderedSprites
 #-------------------------------
 [SKORUPI]
 Name = Skorupi
@@ -11974,6 +12057,7 @@ Habitat = Forest
 Category = Toxic Mouth
 Pokedex = Its cheeks hold poison sacs. It tries to catch foes off guard to jab them with toxic fingers.
 Generation = 4
+Flags = HasGenderedSprites
 WildItemUncommon = BLACKSLUDGE
 Evolutions = TOXICROAK,Level,37
 #-------------------------------
@@ -12001,6 +12085,7 @@ Habitat = Forest
 Category = Toxic Mouth
 Pokedex = Its knuckle claws secrete a toxin so vile that even a scratch could prove fatal.
 Generation = 4
+Flags = HasGenderedSprites
 WildItemUncommon = BLACKSLUDGE
 #-------------------------------
 [CARNIVINE]
@@ -12053,6 +12138,7 @@ Habitat = Sea
 Category = Wing Fish
 Pokedex = After long exposure to sunlight, the patterns on its tail fins shine vividly when darkness arrives.
 Generation = 4
+Flags = HasGenderedSprites
 Evolutions = LUMINEON,Level,31
 #-------------------------------
 [LUMINEON]
@@ -12079,6 +12165,7 @@ Habitat = Sea
 Category = Neon
 Pokedex = It lives on the deep-sea floor. It attracts prey by flashing the patterns on its four tail fins.
 Generation = 4
+Flags = HasGenderedSprites
 #-------------------------------
 [MANTYKE]
 Name = Mantyke
@@ -12133,6 +12220,7 @@ Habitat = Mountain
 Category = Frost Tree
 Pokedex = It lives on snowy mountains. Having had little contact with humans, it is boldly inquisitive.
 Generation = 4
+Flags = HasGenderedSprites
 WildItemUncommon = NEVERMELTICE
 Evolutions = ABOMASNOW,Level,40
 #-------------------------------
@@ -12160,6 +12248,7 @@ Habitat = Mountain
 Category = Frost Tree
 Pokedex = It whips up blizzards in mountains that are always buried in snow. It is the abominable snowman.
 Generation = 4
+Flags = HasGenderedSprites
 WildItemUncommon = NEVERMELTICE
 #-------------------------------
 [WEAVILE]
@@ -12186,6 +12275,7 @@ Habitat = Forest
 Category = Sharp Claw
 Pokedex = They live in cold regions, forming groups of four or five that hunt prey with impressive coordination.
 Generation = 4
+Flags = HasGenderedSprites
 WildItemUncommon = QUICKCLAW
 #-------------------------------
 [MAGNEZONE]
@@ -12264,6 +12354,7 @@ Habitat = RoughTerrain
 Category = Drill
 Pokedex = It puts rocks in holes in its palms and uses its muscles to shoot them. Geodude are shot at rare times.
 Generation = 4
+Flags = HasGenderedSprites
 #-------------------------------
 [TANGROWTH]
 Name = Tangrowth
@@ -12289,6 +12380,7 @@ Habitat = Grassland
 Category = Vine
 Pokedex = It ensnares prey by extending arms made of vines. Losing arms to predators does not trouble it.
 Generation = 4
+Flags = HasGenderedSprites
 #-------------------------------
 [ELECTIVIRE]
 Name = Electivire
@@ -12492,6 +12584,7 @@ Habitat = Cave
 Category = Twin Tusk
 Pokedex = Its impressive tusks are made of ice. The population thinned when it turned warm after the ice age.
 Generation = 4
+Flags = HasGenderedSprites
 #-------------------------------
 [PORYGONZ]
 Name = Porygon-Z
@@ -13732,6 +13825,7 @@ Habitat = Urban
 Category = Proud
 Pokedex = Males have plumage on their heads. They will never let themselves feel close to anyone other than their Trainers.
 Generation = 5
+Flags = HasGenderedSprites
 #-------------------------------
 [BLITZLE]
 Name = Blitzle
@@ -15617,6 +15711,7 @@ Habitat = Sea
 Category = Floating
 Pokedex = They paralyze prey with poison, then drag them down to their lairs, five miles below the surface.
 Generation = 5
+Flags = HasGenderedSprites
 Evolutions = JELLICENT,Level,40
 #-------------------------------
 [JELLICENT]
@@ -15643,6 +15738,7 @@ Habitat = Sea
 Category = Floating
 Pokedex = They propel themselves by expelling absorbed seawater from their bodies. Their favorite food is life energy.
 Generation = 5
+Flags = HasGenderedSprites
 #-------------------------------
 [ALOMOMOLA]
 Name = Alomomola
@@ -17595,6 +17691,7 @@ Habitat = Grassland
 Category = Royal
 Pokedex = With fiery breath of more than 6,000 degrees Celsius, they viciously threaten any challenger. The females protect the pride's cubs.
 Generation = 6
+Flags = HasGenderedSprites
 #-------------------------------
 [FLABEBE]
 Name = Flabébé
@@ -23033,6 +23130,7 @@ Habitat = Urban
 Category = Emotion
 Pokedex = It uses the horns on its head to sense the emotions of others. Males will act as valets for those they serve, looking after their every need.
 Generation = 8
+Flags = HasGenderedSprites
 #-------------------------------
 [MORPEKO]
 Name = Morpeko

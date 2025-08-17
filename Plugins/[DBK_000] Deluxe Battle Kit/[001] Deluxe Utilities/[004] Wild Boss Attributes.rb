@@ -7,8 +7,8 @@ class Pokemon
   #-----------------------------------------------------------------------------
   # HP utilities.
   #-----------------------------------------------------------------------------
-  def real_hp;      return @hp / hp_boost;      end
-  def real_totalhp; return @totalhp / hp_boost; end
+  def real_hp;      return (@hp / hp_boost).floor;      end
+  def real_totalhp; return (@totalhp / hp_boost).floor; end
   
   #-----------------------------------------------------------------------------
   # Immunities.
@@ -30,6 +30,7 @@ class Pokemon
   
   def calcHP(base, level, iv, ev)
     return 1 if base == 1
+    iv = ev = 0 if Settings::DISABLE_IVS_AND_EVS
     return ((((base * 2 + iv + (ev / 4)) * level / 100).floor + level + 10) * hp_boost).ceil
   end
 end
@@ -88,7 +89,9 @@ class Battle::Battler
   # Defines whether the battler is considered a raid boss.
   #-----------------------------------------------------------------------------
   def isRaidBoss?
-    return @pokemon.immunities.include?(:RAIDBOSS)
+    return false if self.idxOwnSide == 0
+    return false if @battle.pbSideBattlerCount(@index) > 1
+    return @pokemon&.immunities.include?(:RAIDBOSS)
   end
   
   #-----------------------------------------------------------------------------
@@ -97,7 +100,7 @@ class Battle::Battler
   alias dx_pbReducePP pbReducePP
   def pbReducePP(move)
     return true if @pokemon.immunities.include?(:PPLOSS)
-    if move.powerMove?
+    if move.powerMove? && @powerMoveIndex >= 0
       i = @powerMoveIndex
       pbSetPP(@baseMoves[i], @baseMoves[i].pp - 1)
     end
@@ -110,6 +113,7 @@ class Battle::Battler
   alias dx_pbCanInflictStatus? pbCanInflictStatus?
   def pbCanInflictStatus?(newStatus, user, showMessages, move = nil, ignoreStatus = false)
     return false if fainted?
+    return false if @battle.raidCaptureMode
     self_inflicted = (user && user.index == @index)
     immunities = @pokemon.immunities
     if (immunities.include?(:ALLSTATUS) || immunities.include?(newStatus)) && !self_inflicted && !ignoreStatus
@@ -130,6 +134,7 @@ class Battle::Battler
   
   alias dx_pbCanSynchronizeStatus? pbCanSynchronizeStatus?
   def pbCanSynchronizeStatus?(newStatus, user)
+    return false if @battle.raidCaptureMode
     return false if @pokemon.immunities.include?(:ALLSTATUS)
     return false if @pokemon.immunities.include?(newStatus)
     return dx_pbCanSynchronizeStatus?(newStatus, user)
@@ -137,6 +142,7 @@ class Battle::Battler
   
   alias dx_pbCanSleepYawn? pbCanSleepYawn?
   def pbCanSleepYawn?
+    return false if @battle.raidCaptureMode
     return false if @pokemon.immunities.include?(:ALLSTATUS)
     return false if @pokemon.immunities.include?(:SLEEP)
     return dx_pbCanSleepYawn?
@@ -148,6 +154,7 @@ class Battle::Battler
   alias dx_pbCanConfuse? pbCanConfuse?
   def pbCanConfuse?(*args)
     return false if fainted?
+    return false if @battle.raidCaptureMode
     immunities = @pokemon.immunities
     if immunities.include?(:ALLSTATUS) || immunities.include?(:CONFUSED)
       @battle.pbDisplay(_INTL("{1} is completely immune to confusion!", pbThis)) if args[1]
@@ -160,12 +167,13 @@ class Battle::Battler
   def pbCanAttract?(user, showMessages = true)
     return false if fainted?
     return false if !user || user.fainted?
+    return false if @battle.raidCaptureMode
     immunities = @pokemon.immunities
     if immunities.include?(:ALLSTATUS) || immunities.include?(:ATTRACT)
       @battle.pbDisplay(_INTL("{1} is completely immune to infatuation!", pbThis)) if showMessages
       return false
     end
-    return dx_pbCanConfuse?(user, showMessages)
+    return dx_pbCanAttract?(user, showMessages)
   end
   
   #-----------------------------------------------------------------------------
@@ -174,7 +182,7 @@ class Battle::Battler
   alias dx_pbFlinch pbFlinch
   def pbFlinch(_user = nil)
     return false if dynamax?
-    return false if @pokemon.immunities.include?(:FLINCH)
+    return false if @pokemon && @pokemon.immunities.include?(:FLINCH)
     return dx_pbFlinch(_user)
   end
   
@@ -184,6 +192,7 @@ class Battle::Battler
   alias dx_pbCanLowerStatStage? pbCanLowerStatStage?
   def pbCanLowerStatStage?(*args)
     return false if fainted?
+    return false if @battle.raidCaptureMode
     if (!args[1] || args[1].index != @index) && 
        @pokemon.immunities.include?(:STATDROPS) && !hasActiveAbility?(:CONTRARY)
       @battle.pbDisplay(_INTL("{1} is completely immune to having its stats lowered!", pbThis)) if args[3]
@@ -198,6 +207,7 @@ class Battle::Battler
   alias dx_canChangeType? canChangeType?
   def canChangeType?
     return false if tera?
+    return false if @battle.raidCaptureMode
     return false if @pokemon.immunities.include?(:TYPECHANGE)
     return dx_canChangeType?
   end
@@ -208,8 +218,9 @@ class Battle::Battler
   alias dx_takesIndirectDamage? takesIndirectDamage?
   def takesIndirectDamage?(showMsg = false)
     return false if fainted?
+    return false if @battle.raidCaptureMode
     if @pokemon.immunities.include?(:INDIRECT)
-      @battle.pbDisplay("{1} is completely immune to indirect damage!", pbThis) if showMsg
+      @battle.pbDisplay(_INTL("{1} is completely immune to indirect damage!", pbThis)) if showMsg
       return false
     end
     return dx_takesIndirectDamage?(showMsg)
@@ -238,6 +249,7 @@ class Battle::Battler
   #-----------------------------------------------------------------------------
   alias dx_unlosableItem? unlosableItem?
   def unlosableItem?(check_item)
+    return true if check_item && @battle.raidCaptureMode
     return true if check_item && @pokemon.immunities.include?(:ITEMREMOVAL)
     return dx_unlosableItem?(check_item)
   end
@@ -247,6 +259,7 @@ class Battle::Battler
   #-----------------------------------------------------------------------------
   alias dx_unstoppableAbility? unstoppableAbility?
   def unstoppableAbility?(abil = nil)
+    return true if @battle.raidCaptureMode
     return true if @pokemon.immunities.include?(:ABILITYREMOVAL)
     return dx_unstoppableAbility?(abil)
   end
@@ -270,7 +283,7 @@ class Battle
   #-----------------------------------------------------------------------------
   # Returns true if this battle is a raid battle.
   #-----------------------------------------------------------------------------
-  def pbRaidBattle?
+  def raidBattle?
     allOtherSideBattlers.each { |b| return true if b.isRaidBoss? }
     return false
   end

@@ -7,7 +7,7 @@ NamePlural = Quest Logs
 Pocket = 8
 Price = 0
 Flags = KeyItem
-Description = A log for documenting all current and completed quests.
+Description = UNUSED
 #-------------------------------
 [GOLDENBALL]
 Name = Golden Poké Ball
@@ -67,8 +67,8 @@ Flags = KeyItem
 Description = A specialized leaf that symbolizes the third tier of the Swine Exploration Guild.
 #-------------------------------
 [PLATINUMTIEREDLEAF]
-Name = Gold Tiered Leaf
-NamePlural = Gold Tiered Leaves
+Name = Platinum Tiered Leaf
+NamePlural = Platinum Tiered Leaves
 Pocket = 8
 Price = 0
 Flags = KeyItem
@@ -135,7 +135,7 @@ Pocket = 1
 Price = 3000
 FieldUse = OnPokemon
 Flags = EvolutionStone,Fling_30
-Description = A peculiar stone that makes certain species of Pokémon evolve. It works with pokemon that would normally need to be traded.
+Description = UNUSED
 #-------------------------------
 [EXPALL]
 Name = EXP All
@@ -194,7 +194,7 @@ Pocket = 5
 Price = 0
 FieldUse = OnPokemon
 BattleUse = OnPokemon
-Flags = Berry,Fling_60
+Flags = Berry, Fling_60
 Description = It may be used or held by a Pokémon. A rare berry used in cooking to enhance a Pokémon's attack stat.
 #-------------------------------
 [SNOWMULBERRY]
@@ -204,7 +204,7 @@ Pocket = 5
 Price = 0
 FieldUse = OnPokemon
 BattleUse = OnPokemon
-Flags = Berry,Fling_60
+Flags = Berry, Fling_60
 Description = It may be used or held by a Pokémon. A rare berry used in cooking to enhance a Pokémon's defense stat.
 #-------------------------------
 [FAIRYLILY]
@@ -214,7 +214,7 @@ Pocket = 5
 Price = 0
 FieldUse = OnPokemon
 BattleUse = OnPokemon
-Flags = Berry,Fling_60
+Flags = Berry, Fling_60
 Description = It may be used or held by a Pokémon. A rare berry used in cooking to enhance a Pokémon's special attack stat.
 #-------------------------------
 [INKBONNET]
@@ -224,7 +224,7 @@ Pocket = 5
 Price = 0
 FieldUse = OnPokemon
 BattleUse = OnPokemon
-Flags = Berry,Fling_60
+Flags = Berry, Fling_60
 Description = It may be used or held by a Pokémon. A rare berry used in cooking to enhance a Pokémon's special defense stat.
 #-------------------------------
 [SUNNYJOLTFRUIT]
@@ -234,7 +234,7 @@ Pocket = 5
 Price = 0
 FieldUse = OnPokemon
 BattleUse = OnPokemon
-Flags = Berry,Fling_60
+Flags = Berry, Fling_60
 Description = It may be used or held by a Pokémon. A rare berry used in cooking to enhance a Pokémon's speed stat.
 #-------------------------------
 [RAINBOWDRAGONFRUIT]
@@ -244,7 +244,7 @@ Pocket = 5
 Price = 0
 FieldUse = OnPokemon
 BattleUse = OnPokemon
-Flags = Berry,Fling_60
+Flags = Berry, Fling_60
 Description = It may be used or held by a Pokémon. A rare berry used in cooking to enhance all of a Pokémon's stats.
 #-------------------------------
 [MOLTENLONGJOHN]
@@ -306,4 +306,184 @@ FieldUse = OnPokemon
 BattleUse = OnPokemon
 Flags = Fling_60
 Description = It may be used or held by a Pokémon. A well-created candy used to enhance all of a Pokémon's stats.
+#-------------------------------
+[HP_CANDY_SMALL]
+Name = HP Candy S
+Plural = HP Candies S
+Pocket = 5
+Price = 60
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A small candy that boosts a Pokémon’s HP IVs (up to 20).
+#-------------------------------
+[HP_CANDY_MEDIUM]
+Name = HP Candy M
+Plural = HP Candies M
+Pocket = 5
+Price = 200
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A medium candy that boosts a Pokémon’s HP IVs (up to 40).
+#-------------------------------
+[HP_CANDY_LARGE]
+Name = HP Candy L
+Plural = HP Candies L
+Pocket = 5
+Price = 600
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A large candy that boosts a Pokémon’s HP IVs (up to 60).
+#-------------------------------
+[ATTACK_CANDY_SMALL]
+Name = Attack Candy S
+Plural = Attack Candies S
+Pocket = 5
+Price = 60
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A small candy that boosts a Pokémon’s Attack IVs (up to 20).
+#-------------------------------
+[ATTACK_CANDY_MEDIUM]
+Name = Attack Candy M
+Plural = Attack Candies M
+Pocket = 5
+Price = 200
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A medium candy that boosts a Pokémon’s Attack IVs (up to 40).
+#-------------------------------
+[ATTACK_CANDY_LARGE]
+Name = Attack Candy L
+Plural = Attack Candies L
+Pocket = 5
+Price = 600
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A large candy that boosts a Pokémon’s Attack IVs (up to 60).
+#-------------------------------
+[DEFENSE_CANDY_SMALL]
+Name = Defense Candy S
+Plural = Defense Candies S
+Pocket = 5
+Price = 60
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A small candy that boosts a Pokémon’s Defense IVs (up to 20).
+#-------------------------------
+[DEFENSE_CANDY_MEDIUM]
+Name = Defense Candy M
+Plural = Defense Candies M
+Pocket = 5
+Price = 200
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A medium candy that boosts a Pokémon’s Defense IVs (up to 40).
+#-------------------------------
+[DEFENSE_CANDY_LARGE]
+Name = Defense Candy L
+Plural = Defense Candies L
+Pocket = 5
+Price = 600
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A large candy that boosts a Pokémon’s Defense IVs (up to 60).
+#-------------------------------
+[SPECIAL_ATTACK_CANDY_SMALL]
+Name = Sp. Attack Candy S
+Plural = Sp. Attack Candies S
+Pocket = 5
+Price = 60
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A small candy that boosts a Pokémon’s Special Attack IVs (up to 20).
+#-------------------------------
+[SPECIAL_ATTACK_CANDY_MEDIUM]
+Name = Sp. Attack Candy M
+Plural = Sp. Attack Candies M
+Pocket = 5
+Price = 200
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A medium candy that boosts a Pokémon’s Special Attack IVs (up to 40).
+#-------------------------------
+[SPECIAL_ATTACK_CANDY_LARGE]
+Name = Sp. Attack Candy L
+Plural = Sp. Attack Candies L
+Pocket = 5
+Price = 600
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A large candy that boosts a Pokémon’s Special Attack IVs (up to 60).
+#-------------------------------
+[SPECIAL_DEFENSE_CANDY_SMALL]
+Name = Sp. Defense Candy S
+Plural = Sp. Defense Candies S
+Pocket = 5
+Price = 60
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A small candy that boosts a Pokémon’s Special Defense IVs (up to 20).
+#-------------------------------
+[SPECIAL_DEFENSE_CANDY_MEDIUM]
+Name = Sp. Defense Candy M
+Plural = Sp. Defense Candies M
+Pocket = 5
+Price = 200
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A medium candy that boosts a Pokémon’s Special Defense IVs (up to 40).
+#-------------------------------
+[SPECIAL_DEFENSE_CANDY_LARGE]
+Name = Sp. Defense Candy L
+Plural = Sp. Defense Candies L
+Pocket = 5
+Price = 600
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A large candy that boosts a Pokémon’s Special Defense IVs (up to 60).
+#-------------------------------
+[SPEED_CANDY_SMALL]
+Name = Speed Candy S
+Plural = Speed Candies S
+Pocket = 5
+Price = 60
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A small candy that boosts a Pokémon’s Speed IVs (up to 20).
+#-------------------------------
+[SPEED_CANDY_MEDIUM]
+Name = Speed Candy M
+Plural = Speed Candies M
+Pocket = 5
+Price = 200
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A medium candy that boosts a Pokémon’s Speed IVs (up to 40).
+#-------------------------------
+[SPEED_CANDY_LARGE]
+Name = Speed Candy L
+Plural = Speed Candies L
+Pocket = 5
+Price = 600
+FieldUse = OnPokemon
+BattleUse = OnPokemon
+Flags = Candy, Stats
+Description = A large candy that boosts a Pokémon’s Speed IVs (up to 60).
 #-------------------------------

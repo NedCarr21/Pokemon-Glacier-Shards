@@ -85,6 +85,7 @@ class Battle::Battler
     @pokemon.makeUnmega if mega?
     @pokemon.makeUnprimal if primal?
     # Do other things
+    @pokemon.modify_achievement(:times_fainted, 1)
     @battle.pbClearChoice(@index)   # Reset choice
     pbOwnSide.effects[PBEffects::LastRoundFainted] = @battle.turnCount
     if $game_temp.party_direct_damage_taken &&

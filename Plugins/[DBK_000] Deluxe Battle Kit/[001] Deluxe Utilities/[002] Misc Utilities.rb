@@ -6,7 +6,7 @@ module PBEffects
 end
 
 #===============================================================================
-# GameData::Species utilities.
+# GameData utilities.
 #===============================================================================
 module GameData
   class Species
@@ -16,6 +16,14 @@ module GameData
       ["getPrimalForm", "getUltraForm", "getEternamaxForm", "getTerastalForm"].each do |function|
         return true if MultipleForms.hasFunction?(@species, function)
       end
+      return false
+    end
+  end
+  
+  class Move
+    def powerMove?
+      return true if defined?(zMove?) && zMove?
+      return true if defined?(dynamaxMove?) && dynamaxMove?
       return false
     end
   end
@@ -40,9 +48,55 @@ class Battle::Move
   # Utility used for checking for Z-Moves/Dynamax moves, if any exist.
   #-----------------------------------------------------------------------------
   def powerMove?
-    return true if defined?(zMove?) && self.zMove?
-    return true if defined?(dynamaxMove?) && self.dynamaxMove?
+    return true if defined?(zMove?) && zMove?
+    return true if defined?(dynamaxMove?) && dynamaxMove?
     return false
+  end
+end
+
+#===============================================================================
+# Battle utilities.
+#===============================================================================
+class Battle
+  #-----------------------------------------------------------------------------
+  # Utility for checking if any battler on a particular side is at low HP.
+  #-----------------------------------------------------------------------------
+  def pbAnyBattlerLowHP?(idxBattler)
+    allSameSideBattlers(idxBattler).each { |b| return true if b.hasLowHP? }
+    return false
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Utility for checking if a trainer has any available Pokemon left in the party.
+  #-----------------------------------------------------------------------------
+  def pbTeamAllFainted?(idxSide, idxTrainer)
+    teamCount = 0
+    eachInTeam(idxSide, idxTrainer) { |pkmn, _i| teamCount += 1 if pkmn.able? }
+    return teamCount == 0
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Utility for returning an array of each battler owned by a particular trainer.
+  #-----------------------------------------------------------------------------
+  def allOwnedByTrainer(idxBattler)
+    idxTrainer = pbGetOwnerIndexFromBattlerIndex(idxBattler)
+    allies = allSameSideBattlers(idxBattler)
+    allies.select { |b| b && !b.fainted? && pbGetOwnerIndexFromBattlerIndex(b.index) == idxTrainer }
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Edits item messages for more descriptive use.
+  #-----------------------------------------------------------------------------
+  def pbUseItemMessage(item, trainerName, pkmn = nil)
+    item_data = GameData::Item.get(item)
+    itemName = item_data.portion_name
+    if pkmn.is_a?(Battle::Battler) && item_data.battle_use < 4
+      pbDisplayBrief(_INTL("{1} used the {2} on {3}.", trainerName, itemName, pkmn.pbThis(true)))
+    elsif pkmn.is_a?(Pokemon) && item_data.battle_use < 4
+      pbDisplayBrief(_INTL("{1} used the {2} on {3}.", trainerName, itemName, pkmn.name))
+    else
+      pbDisplayBrief(_INTL("{1} used the {2}.", trainerName, itemName))
+    end
   end
 end
 
@@ -52,7 +106,7 @@ end
 class Battle::Battler
   attr_accessor :baseMoves
   attr_accessor :powerMoveIndex
-  attr_accessor :hpThreshold, :damageThreshold
+  attr_accessor :damageThreshold
   attr_accessor :stopBoostedHPScaling
   
   #-----------------------------------------------------------------------------
@@ -62,20 +116,49 @@ class Battle::Battler
   def pbInitEffects(batonPass)
     @baseMoves            = []
     @powerMoveIndex       = -1
-    @hpThreshold          = 0
-    @damageThreshold      = 0
+    @damageThreshold      = nil
     @stopBoostedHPScaling = false
     dx_pbInitEffects(batonPass)
     @effects[PBEffects::TransformPokemon] = nil
   end
   
   #-----------------------------------------------------------------------------
-  # Sets the index of the selected move if selected move is a Z-Move/Dynamax move.
+  # Utility for getting the Pokemon a battler is displaying as.
   #-----------------------------------------------------------------------------
-  alias dx_pbUseMove pbUseMove
-  def pbUseMove(choice, specialUsage = false)
-    @powerMoveIndex = (choice[2].powerMove?) ? choice[1] : -1
-    dx_pbUseMove(choice, specialUsage)
+  def visiblePokemon
+    return @effects[PBEffects::TransformPokemon] if @effects[PBEffects::TransformPokemon]
+    return displayPokemon
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Utility for checking if the battler is at low HP.
+  #-----------------------------------------------------------------------------
+  def hasLowHP?
+    return false if fainted?
+    return @hp <= (@totalhp / 4).floor
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Aliased to update BGM when the HP of the player's battler updates.
+  #-----------------------------------------------------------------------------
+  alias dx_pbUpdate pbUpdate
+  def pbUpdate(fullChange = false)
+    dx_pbUpdate(fullChange)
+    pbUpdateLowHPMusic if @pokemon
+  end
+  
+  def pbUpdateLowHPMusic
+    return if !Settings::PLAY_LOW_HP_MUSIC
+    return if !pbOwnedByPlayer?
+    track = @battle.pbGetBattleLowHealthBGM
+    return if !track.is_a?(RPG::AudioFile)
+    if @battle.pbAnyBattlerLowHP?(@index)
+      if @battle.playing_bgm != track.name
+        @battle.pbPauseAndPlayBGM(track)
+      end
+    elsif @battle.playing_bgm == track.name
+      @battle.pbResumeBattleBGM
+    end
   end
   
   #-----------------------------------------------------------------------------
@@ -111,13 +194,13 @@ class Battle::Battler
   def hasEligibleAction?(*args)
     args.each do |arg|
       case arg
-      when :mega    then return true if hasMega?
+      when :mega    then return true if hasMega?    && @battle.pbHasMegaRing?(@index)
       when :primal  then return true if hasPrimal?
-      when :zmove   then return true if hasZMove?
-      when :ultra   then return true if hasUltra?
-      when :dynamax then return true if hasDynamax?
+      when :zmove   then return true if hasZMove?   && @battle.pbHasZRing?(@index)
+      when :ultra   then return true if hasUltra?   && @battle.pbHasZRing?(@index)
+      when :dynamax then return true if hasDynamax? && @battle.pbHasDynamaxBand?(@index)
       when :style   then return true if hasStyle?
-      when :tera    then return true if hasTera?
+      when :tera    then return true if hasTera?    && @battle.pbHasTeraOrb?(@index)
       when :zodiac  then return true if hasZodiacPower?
       end
     end
@@ -130,7 +213,6 @@ class Battle::Battler
   def form_update(fullupdate = false)
     if self.form != @pokemon.form
       self.form = @pokemon.form
-      fullupdate = true
     end
     pbUpdate(fullupdate)
     pkmn = @effects[PBEffects::TransformPokemon] || displayPokemon
@@ -139,10 +221,69 @@ class Battle::Battler
   end
   
   #-----------------------------------------------------------------------------
-  # Identical to pbChangeForm except it ignores learning new moves for certain species.
+  # Used to check if the battler is able to protect against a specified move.
+  #-----------------------------------------------------------------------------
+  def isProtected?(user, move)
+    return false if move.function_code == "IgnoreProtections"
+    return false if user.hasActiveAbility?(:UNSEENFIST) && move.contactMove?
+    return true if @damageState.protected
+    return true if pbOwnSide.effects[PBEffects::MatBlock]
+    return true if pbOwnSide.effects[PBEffects::WideGuard] && 
+                   GameData::Target.get(move.target).num_targets > 1
+    [:Protect, :KingsShield, :SpikyShield, :BanefulBunker, :Obstruct, 
+     :SilkTrap, :BurningBulwark].each do |id|
+      next if !PBEffects.const_defined?(id)
+      effect = PBEffects.const_get(id)
+      return true if @effects[effect]
+    end
+    return false
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Utility for evolving a Pokemon mid-battle.
+  #-----------------------------------------------------------------------------
+  def pbEvolveBattler(species, form = nil)
+    return false if fainted? || !getActiveState.nil?
+    return false if @effects[PBEffects::SkyDrop] >= 0 || semiInvulnerable?
+    @battle.scene.pbAnimateSubstitute(@index, :hide)
+    old_ability = @ability_id
+    if hasActiveAbility?(:ILLUSION)
+      Battle::AbilityEffects.triggerOnBeingHit(@ability, nil, self, nil, @battle)
+    end
+    pos = Audio.bgm_pos rescue 0
+    bgm = pbResolveAudioFile(@battle.playing_bgm)
+    path = canonicalize("Audio/BGM/" + bgm.name)
+    $game_system.bgm_fade(1.0)
+    @pokemon.form = form if form
+    pbFadeOutIn do
+      evo = PokemonEvolutionScene.new
+      evo.pbStartScreen(@pokemon, species)
+      evo.pbBattleEvolution(self)
+      evo.pbEndScreen
+      $game_system.bgm_play_internal2(path, bgm.volume, bgm.pitch, pos)
+      @species = species
+      pbUpdate(true)
+      self.name = GameData::Species.get(species).name if !@pokemon.nicknamed?
+      @battle.scene.pbRefreshOne(@index)
+      @battle.scene.pbChangePokemon(self, @pokemon)
+    end
+    pbOnLosingAbility(old_ability)
+    pbTriggerAbilityOnGainingIt
+    @battle.pbCalculatePriority(false, [@index])
+    @battle.scene.pbAnimateSubstitute(@index, :show)
+    return true
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Similar to pbChangeForm except it ignores learning new moves for certain species.
   #-----------------------------------------------------------------------------
   def pbSimpleFormChange(newForm, msg)
     return if fainted? || @effects[PBEffects::Transform] || @form == newForm
+    @battle.scene.pbAnimateSubstitute(self, :hide)
+    old_ability = @ability_id
+    if hasActiveAbility?(:ILLUSION)
+      Battle::AbilityEffects.triggerOnBeingHit(@ability, nil, self, nil, @battle)
+    end
     oldForm = @form
     oldDmg = @totalhp - @hp
     @form = newForm
@@ -150,11 +291,16 @@ class Battle::Battler
     pbUpdate(true)
     @hp = @totalhp - oldDmg
     @effects[PBEffects::WeightChange] = 0 if Settings::MECHANICS_GENERATION >= 6
+    @mosaicChange = true if defined?(@mosaicChange)
     @battle.scene.pbChangePokemon(self, @pokemon)
     @battle.scene.pbRefreshOne(@index)
     @battle.pbDisplay(msg) if msg && msg != ""
     PBDebug.log("[Form changed] #{pbThis} changed from form #{oldForm} to form #{newForm}")
     @battle.pbSetSeen(self)
+    pbOnLosingAbility(old_ability)
+    pbTriggerAbilityOnGainingIt
+    @battle.pbCalculatePriority(false, [@index]) if !movedThisRound?
+    @battle.scene.pbAnimateSubstitute(self, :show)
   end
   
   #-----------------------------------------------------------------------------
@@ -307,6 +453,49 @@ class Battle::Battler
 end
 
 #===============================================================================
+# Trainer battle call that has the player select a number of Pokemon for battle.
+#===============================================================================
+class TrainerBattle
+  def self.select_start(size, *args)
+	size = 1 if size < 1
+	size = Settings::MAX_PARTY_SIZE if size > Settings::MAX_PARTY_SIZE
+    gender = (args[0].is_a?(NPCTrainer)) ? args[0].gender : GameData::TrainerType.get(args[0]).gender
+    g = (gender == 0) ? "\\b" : (gender == 1) ? "\\r" : ""
+    if $player.able_pokemon_count < size
+      pbMessage(_INTL("#{g}You don't have enough Pokémon in your party that can participate..."))
+      pbMessage(_INTL("#{g}Come back when you have enough Pokémon to battle with."))
+      return nil
+    else
+      new_party = nil
+      ruleset = PokemonRuleSet.new
+      ruleset.setNumber(size)
+      ruleset.addPokemonRule(AblePokemonRestriction.new)
+      pbFadeOutIn {
+        scene = PokemonParty_Scene.new
+        screen = PokemonPartyScreen.new(scene, $player.party)
+        new_party = screen.pbPokemonMultipleEntryScreenEx(ruleset)
+      }
+      if new_party
+        reserve = []
+        $player.party.each do |pkmn|
+          pID = pkmn.personalID
+          next if new_party.any? { |p| p.personalID == pID }
+          reserve.push(pkmn)
+        end
+        $player.party = new_party
+        outcome = TrainerBattle.start_core(*args)
+        $player.party += reserve
+        return outcome == 1
+      else
+        pbMessage(_INTL("#{g}Huh? Changed your mind?"))
+        pbMessage(_INTL("#{g}Come back when you have the right Pokéméon you want to battle with."))
+        return nil
+      end
+    end
+  end
+end
+
+#===============================================================================
 # Battle::AI utilities.
 #===============================================================================
 class Battle::AI
@@ -354,6 +543,22 @@ class Battle::AI
       PBDebug.log_score_change(score - old_score, "score inverted (move targets ally but can target foe)")
     end
     return score
+  end
+end
+
+#===============================================================================
+# Battle::AI::Trainer
+#===============================================================================
+class Battle::AI::AITrainer
+  #-----------------------------------------------------------------------------
+  # Aliased to give wild Pokemon better AI when a wild battle mode is enabled.
+  #-----------------------------------------------------------------------------
+  alias dx_set_up_skill set_up_skill
+  def set_up_skill
+    dx_set_up_skill
+    if !@trainer && @skill == 0
+      @skill = 32 if !@ai.battle.wildBattleMode.nil?
+    end
   end
 end
 
@@ -419,5 +624,108 @@ class Battle::AI::AIBattler
       end
     end
     return true
+  end
+end
+
+#===============================================================================
+# Utilities for handling mid-battle evolutions.
+#===============================================================================
+class PokemonEvolutionScene
+  def pbBattleEvolution(battler)
+    pbBGMStop
+    pbMessageDisplay(@sprites["msgwindow"], "\\se[]" + _INTL("What?") + "\1") { pbUpdate }
+    pbPlayDecisionSE
+    @pokemon.play_cry
+    @sprites["msgwindow"].text = _INTL("{1} is evolving!", battler.pbThis)
+    timer_start = System.uptime
+    loop do
+      Graphics.update
+      Input.update
+      pbUpdate
+      break if System.uptime - timer_start >= 1
+    end
+    pbMEPlay("Evolution start")
+    pbBGMPlay("Evolution")
+    timer_start = System.uptime
+    loop do
+      pbUpdateNarrowScreen(timer_start)
+      @picture1.update
+      setPictureSprite(@sprites["rsprite1"], @picture1)
+      if @sprites["rsprite1"].zoom_x > 1.0
+        @sprites["rsprite1"].zoom_x = 1.0
+        @sprites["rsprite1"].zoom_y = 1.0
+      end
+      @picture2.update
+      setPictureSprite(@sprites["rsprite2"], @picture2)
+      if @sprites["rsprite2"].zoom_x > 1.0
+        @sprites["rsprite2"].zoom_x = 1.0
+        @sprites["rsprite2"].zoom_y = 1.0
+      end
+      Graphics.update
+      pbUpdate(true)
+      break if !@picture1.running? && !@picture2.running?
+    end
+    pbFlashInOut(false)
+    pbBattleEvolutionSuccess(battler)
+  end
+
+  def pbBattleEvolutionSuccess(battler)
+    cry_time = GameData::Species.cry_length(@newspecies, @pokemon.form)
+    Pokemon.play_cry(@newspecies, @pokemon.form)
+    timer_start = System.uptime
+    loop do
+      Graphics.update
+      pbUpdate
+      break if System.uptime - timer_start >= cry_time
+    end
+    pbBGMStop
+    pbMEPlay("Evolution success")
+    newspeciesname = GameData::Species.get(@newspecies).name
+    pbMessageDisplay(@sprites["msgwindow"],
+                     "\\se[]" + _INTL("{1} evolved into {2}!",
+                                      battler.pbThis, newspeciesname) + "\\wt[80]") { pbUpdate }
+    @sprites["msgwindow"].text = ""
+    @pokemon.species = @newspecies
+    @pokemon.calc_stats
+    moves_to_learn = []
+    movelist = @pokemon.getMoveList
+    movelist.each do |i|
+      next if i[0] != 0 && i[0] != @pokemon.level
+      moves_to_learn.push(i[1])
+    end
+    if battler.pbOwnedByPlayer?
+      pbBGMPlay("Evolution")
+      @pokemon.ready_to_evolve = false
+      was_owned = $player.owned?(@newspecies)
+      $player.pokedex.register(@pokemon) 
+      $player.pokedex.set_owned(@newspecies)
+      if Settings::SHOW_NEW_SPECIES_POKEDEX_ENTRY_MORE_OFTEN && !was_owned &&
+         $player.has_pokedex && $player.pokedex.species_in_unlocked_dex?(@pokemon.species)
+        pbMessageDisplay(@sprites["msgwindow"],
+                         _INTL("{1}'s data was added to the Pokédex.", newspeciesname)) { pbUpdate }
+        $player.pokedex.register_last_seen(@pokemon)
+        pbFadeOutIn do
+          scene = PokemonPokedexInfo_Scene.new
+          screen = PokemonPokedexInfoScreen.new(scene)
+          screen.pbDexEntry(@pokemon.species)
+          @sprites["msgwindow"].text = "" if moves_to_learn.length > 0
+          pbEndScreen(false) if moves_to_learn.length == 0
+        end
+      end
+    else
+      $player.pokedex.set_seen(@newspecies)
+    end
+    moves_to_learn.each do |move|
+      if battler.pbOwnedByPlayer?
+        pbLearnMove(@pokemon, move, true) { pbUpdate }
+      else
+        @pokemon.learn_move(move)
+      end
+    end
+    battler.moves.clear
+    @pokemon.moves.each_with_index do |m, i|
+      battler.moves[i] = Battle::Move.from_pokemon_move(battler.battle, m)
+    end
+    battler.pbInitEffects(true)
   end
 end

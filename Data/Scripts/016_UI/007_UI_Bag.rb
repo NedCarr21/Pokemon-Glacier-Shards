@@ -295,11 +295,6 @@ class PokemonBag_Scene
     itemlist = @sprites["itemlist"]
     overlay = @sprites["overlay"].bitmap
     overlay.clear
-    # Draw the pocket name
-    pbDrawTextPositions(
-      overlay,
-      [[PokemonBag.pocket_names[@bag.last_viewed_pocket - 1], 94, 186, :center, POCKETNAMEBASECOLOR, POCKETNAMESHADOWCOLOR]]
-    )
     # Draw slider arrows
     showslider = false
     if itemlist.top_row > 0
@@ -386,58 +381,19 @@ class PokemonBag_Scene
           end
         else   # Change pockets
           if Input.trigger?(Input::LEFT)
-            newpocket = itemwindow.pocket
-            loop do
-              newpocket = (newpocket == 1) ? PokemonBag.pocket_count : newpocket - 1
-              break if !@choosing || newpocket == itemwindow.pocket
-              if @filterlist
-                break if @filterlist[newpocket].length > 0
-              elsif @bag.pockets[newpocket].length > 0
-                break
-              end
-            end
-            if itemwindow.pocket != newpocket
-              itemwindow.pocket = newpocket
-              @bag.last_viewed_pocket = itemwindow.pocket
-              thispocket = @bag.pockets[itemwindow.pocket]
-              pbPlayCursorSE
-              pbRefresh
-            end
+            @selectingFilters = true
+            pbRefresh
           elsif Input.trigger?(Input::RIGHT)
-            newpocket = itemwindow.pocket
-            loop do
-              newpocket = (newpocket == PokemonBag.pocket_count) ? 1 : newpocket + 1
-              break if !@choosing || newpocket == itemwindow.pocket
-              if @filterlist
-                break if @filterlist[newpocket].length > 0
-              elsif @bag.pockets[newpocket].length > 0
-                break
+            @selectingFilters = false
+            pbRefresh
+          elsif Input.trigger?(Input::ACTION)  # Start switching the selected item
+            if !@selectingFilters
+              if !@choosing && thispocket.length > 1 && itemwindow.index < thispocket.length && !Settings::BAG_POCKET_AUTO_SORT[itemwindow.pocket - 1]
+                itemwindow.sorting = true
+                swapinitialpos = itemwindow.index
+                pbPlayDecisionSE
+                pbRefresh
               end
-            end
-            if itemwindow.pocket != newpocket
-              itemwindow.pocket = newpocket
-              @bag.last_viewed_pocket = itemwindow.pocket
-              thispocket = @bag.pockets[itemwindow.pocket]
-              pbPlayCursorSE
-              pbRefresh
-            end
-#          elsif Input.trigger?(Input::SPECIAL)   # Register/unregister selected item
-#            if !@choosing && itemwindow.index<thispocket.length
-#              if @bag.registered?(itemwindow.item)
-#                @bag.unregister(itemwindow.item)
-#              elsif pbCanRegisterItem?(itemwindow.item)
-#                @bag.register(itemwindow.item)
-#              end
-#              pbPlayDecisionSE
-#              pbRefresh
-#            end
-          elsif Input.trigger?(Input::ACTION)   # Start switching the selected item
-            if !@choosing && thispocket.length > 1 && itemwindow.index < thispocket.length &&
-               !Settings::BAG_POCKET_AUTO_SORT[itemwindow.pocket - 1]
-              itemwindow.sorting = true
-              swapinitialpos = itemwindow.index
-              pbPlayDecisionSE
-              pbRefresh
             end
           elsif Input.trigger?(Input::BACK)   # Cancel the item screen
             pbPlayCloseMenuSE
@@ -485,7 +441,7 @@ class PokemonBagScreen
         end
       end
       commands[cmdGive = commands.length]       = _INTL("Give") if $player.pokemon_party.length > 0 && itm.can_hold?
-      commands[cmdToss = commands.length]       = _INTL("Toss") if !itm.is_important? || $DEBUG
+      commands[cmdToss = commands.length]       = _INTL("Toss") if !itm.is_important?
       if @bag.registered?(item)
         commands[cmdRegister = commands.length] = _INTL("Deselect")
       elsif pbCanRegisterItem?(item)

@@ -15,6 +15,7 @@ class PokemonSystem
   attr_accessor :bgmvolume
   attr_accessor :sevolume
   attr_accessor :textinput
+  attr_accessor :bg_style
 
   def initialize
     @textspeed     = 2     # Text speed (0=slow, 1=medium, 2=fast, 3=instant)
@@ -30,6 +31,11 @@ class PokemonSystem
     @bgmvolume     = 80    # Volume of background music and ME
     @sevolume      = 100   # Volume of sound effects
     @textinput     = 1     # Text input mode (0=cursor, 1=keyboard)
+    @bg_style      = 0     # Default background style for UI elements, definined in UI/backgrounds
+  end
+
+  def get_bg_style
+    return @bg_style || 0
   end
 end
 
@@ -284,7 +290,8 @@ class PokemonOption_Scene
     @viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
     @viewport.z = 99999
     @sprites = {}
-    addBackgroundOrColoredPlane(@sprites, "bg", "optionsbg", Color.new(192, 200, 208), @viewport)
+    # addBackgroundOrColoredPlane(@sprites, "bg", "optionsbg", Color.new(192, 200, 208), @viewport)
+    addBackgroundPlane(@sprites, "bg", "Backgrounds/default", @viewport)
     @sprites["title"] = Window_UnformattedTextPokemon.newWithSize(
       _INTL("Options"), 0, -16, Graphics.width, 64, @viewport
     )
@@ -359,6 +366,7 @@ class PokemonOption_Scene
   end
 
   def pbUpdate
+    @sprites["bg"].setBitmap("Graphics/UI/Backgrounds/" + Settings::MENU_BGSTYLES[$PokemonSystem.get_bg_style])
     pbUpdateSpriteHash(@sprites)
   end
 end
@@ -540,5 +548,20 @@ MenuHandlers.add(:options_menu, :screen_size, {
     next if $PokemonSystem.screensize == value
     $PokemonSystem.screensize = value
     pbSetResizeFactor($PokemonSystem.screensize)
+  }
+})
+
+MenuHandlers.add(:options_menu, :bg_styles, {
+  "name"        => _INTL("BG Style"),
+  "order"       => 130,
+  "type"        => NumberOption,
+  "parameters"  => 1..Settings::MENU_BGSTYLES.length,
+  "description" => _INTL("Choose the style of background."),
+  "get_proc"    => proc { next $PokemonSystem.bg_style },
+  "set_proc"    => proc { |value, scene|
+    $PokemonSystem.bg_style = value
+    # ("UI/Backgrounds/" + Settings::MENU_BGSTYLES[value])
+    # Change the windowskin of the options text box to selected one
+    # scene.sprites["bg"].setBitmap("Graphics/UI/Backgrounds/" + Settings::MENU_BGSTYLES[value])
   }
 })
