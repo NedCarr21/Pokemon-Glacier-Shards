@@ -1,7 +1,7 @@
 MenuHandlers.add(:pause_menu, :quests, {
   "name"      =>  _INTL("Quests"),
   "order"     => 50,
-  "condition" => proc { next hasAnyQuests? && !$player.has_poke_nav },
+  "condition" => proc { next hasAnyQuests? && !$player.pokenav? },
   "effect"    => proc { |menu|
     pbPlayDecisionSE
     pbFadeOutIn {

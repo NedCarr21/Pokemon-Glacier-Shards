@@ -176,7 +176,7 @@ class PokemonBag_Scene
         end
       end
     end
-    @bag.last_viewed_pocket = lastpocket
+    @bag.last_viewed_pocket = 1
     @sliderbitmap = AnimatedBitmap.new("Graphics/UI/Bag/icon_slider")
     @pocketbitmap = AnimatedBitmap.new("Graphics/UI/Bag/icon_pocket")
     @sprites = {}
@@ -275,7 +275,7 @@ class PokemonBag_Scene
     @sprites["pocketicon"].bitmap.clear
     if @choosing && @filterlist
       (1...@bag.pockets.length).each do |i|
-        next if @filterlist[i].length > 0
+        # next if @filterlist[i].length > 0
         @sprites["pocketicon"].bitmap.blt(
           6 + ((i - 1) * 22), 6, @pocketbitmap.bitmap, Rect.new((i - 1) * 20, 28, 20, 20)
         )

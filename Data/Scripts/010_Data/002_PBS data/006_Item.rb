@@ -122,7 +122,7 @@ module GameData
       @real_name_plural         = hash[:real_name_plural] || "Unnamed"
       @real_portion_name        = hash[:real_portion_name]
       @real_portion_name_plural = hash[:real_portion_name_plural]
-      @pocket                   = hash[:pocket]           || 1
+      @pocket                   = 1
       @price                    = hash[:price]            || 0
       @sell_price               = hash[:sell_price]       || (@price / 2)
       @bp_price                 = hash[:bp_price]         || 1
